@@ -1,0 +1,10 @@
+Notizen:
+
+1. Zunächst einmal stellte sich die Herausforderungen, alle Module eines Frameworks zu erfassen. Gängige Python-Methoden geben zwar die Submodule aus, aber um sämtliche Konfiguratonsoptionen zu finden, müssen die auch noch durchlaufen werden. Hier war die Schwierigkeit einen Überblick zu behalten, da manche Methoden direkt aurufbar waren bspw. mflow.get_tracking_uri, die jedoch über den Pfad.
+2. Rausgefiltert werden dabei Methods mit single leading underscore _ (Name ist nur für interne Zwecke) und double leading underscore __ (wird genamemangled also textuell mit etwas anderem ersetzt) siehe https://stackoverflow.com/questions/1301346/what-is-the-meaning-of-single-and-double-underscore-before-an-object-name
+3. Problematisch sind ebenfalls die Dopplungen von Namen, so befindet sich bspw.
+	get_tracking_uri in mlflow und in mlflow.tracking
+	log_artifact in mlflow und mlflow.tracking.MlflowClient
+4. offen ist zudem wie die Config Optionen aus 3. in den echten Projekten dann auch getracket werden sollen. Möglichkeit: import mlflow und from mlflow Zeile untersuchen und dies zum Standard der Suche machen
+5. Schwierigkeit zudem wie ich die Config-Options von normalen Methoden unterscheiden. list_artifacts ist vermutlich keine Configuration Option. 
+6. Was ist zu dem mit den anderen dictioniairies etc.
