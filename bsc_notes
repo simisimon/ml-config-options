@@ -8,3 +8,4 @@ Notizen:
 4. offen ist zudem wie die Config Optionen aus 3. in den echten Projekten dann auch getracket werden sollen. Möglichkeit: import mlflow und from mlflow Zeile untersuchen und dies zum Standard der Suche machen
 5. Schwierigkeit zudem wie ich die Config-Options von normalen Methoden unterscheiden. list_artifacts ist vermutlich keine Configuration Option. 
 6. Was ist zu dem mit den anderen dictioniairies etc.
+7. Liste aller Methoden und Klassen mit for-Schleifen erwies sich als nicht zielführend, da Tiefe der for-Schleifen unbekannt -> Lösung: Baumstruktur mit Rekursion
