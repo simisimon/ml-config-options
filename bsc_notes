@@ -9,3 +9,31 @@ Notizen:
 5. Schwierigkeit zudem wie ich die Config-Options von normalen Methoden unterscheiden. list_artifacts ist vermutlich keine Configuration Option. 
 6. Was ist zu dem mit den anderen dictioniairies etc.
 7. Liste aller Methoden und Klassen mit for-Schleifen erwies sich als nicht zielführend, da Tiefe der for-Schleifen unbekannt -> Lösung: Baumstruktur mit Rekursion
+8. Problem: Methoden können auf mehreren Wegen erreicht werden z.B. mlflow.h2o.mlflow.h2o.mlflow -> Gefahr von endlosen Schleifen / Rekursion
+    Lösung: bei jedem Element wird geprüft ob es schon bereits im Baum vorhanden ist -> Verhindert Dopplungen, jedoch sind die Elemente dann an "falschen" Zweigen zugeordnet
+
+
+types:
+- module
+- type
+- method
+- property
+- builtin_function_or_method
+- NoneType
+- function
+- str
+- int
+- string._TemplateMetaclass
+- logging._StderrHandler
+- bool
+- logging.RootLogger
+- urllib3.util.retry._RetryMeta
+- typing._GenericAlias
+- dict
+- re.Pattern
+- method_descriptor
+- float
+- getset_descriptor
+- method_descriptor
+- yaml.YAMLObjectMetaclass
+- list

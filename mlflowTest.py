@@ -1,3 +1,5 @@
+import inspect
+
 import mlflow
 import pprint
 from mlflow import log_metric, log_param, log_artifacts
@@ -50,13 +52,49 @@ def GenerateXML(fileName):
 
 
 def GenerateXML1(fileName, framework):
-    root = gfg.Element(framework)
+    fwktree = [framework]
+    root = gfg.Element(framework) #+ '___' + str(type(eval(framework)))[8:-2])
 
-    mlflow1 = dir(mlflow)
-    mlflow1 = [x for x in mlflow1 if not x.startswith('_')]
-    for mlflowx in mlflow1:
-        m1 = gfg.Element(mlflowx)
-        root.append(m1)
+    levelone = dir(mlflow)
+    levelone = [x for x in levelone if not x.startswith('_')]
+    levelone = [x for x in levelone if x not in fwktree]   # to avoid duplicants and endless loops
+    fwktree.extend(levelone)
+
+    for eleone in levelone:
+        e1 = gfg.Element(eleone) # + '___' + str(type(eval(framework + '.' + eleone)))[8:-2])
+        root.append(e1)
+
+        leveltwo = dir(eval('mlflow.' + eleone))  #eval gibt direkt den Pfad an, ansonsten wäre es ein String
+        leveltwo = [x for x in leveltwo if not x.startswith('_')]
+        leveltwo = [x for x in leveltwo if x not in fwktree]
+        fwktree.extend(leveltwo)
+
+        for eletwo in leveltwo:
+            e2 = gfg.SubElement(e1, eletwo) # + '___' + str(type(eval(framework + '.' + eleone + '.' + eletwo)))[8:-2])
+
+            levelthree = dir(eval(('mlflow.' + eleone + '.' + eletwo)))
+            levelthree = [x for x in levelthree if not x.startswith('_')]
+            levelthree = [x for x in levelthree if x not in fwktree]
+            fwktree.extend(levelthree)
+
+            for elethree in levelthree:
+                e3 = gfg.SubElement(e2, elethree) # + '___' + str(type(eval(framework + '.' + eleone + '.' + eletwo + '.' + elethree)))[8:-2])
+
+                levelfour = dir(eval(('mlflow.' + eleone + '.' + eletwo + '.' + elethree)))
+                levelfour = [x for x in levelfour if not x.startswith('_')]
+                levelfour = [x for x in levelfour if x not in fwktree]
+                fwktree.extend(levelfour)
+
+                for elefour in levelfour:
+                    e4 = gfg.SubElement(e3, elefour) #+ '___' + str(type(eval(framework + '.' + eleone + '.' + eletwo + '.' + elethree + '.' + elefour)))[8:-2])
+
+                    levelfive = dir(eval(('mlflow.' + eleone + '.' + eletwo + '.' + elethree + '.' + elefour)))
+                    levelfive = [x for x in levelfive if not x.startswith('_')]
+                    levelfive = [x for x in levelfive if x not in fwktree]
+                    fwktree.extend(levelfive)
+
+                    for elefive in levelfive:
+                        e5 = gfg.SubElement(e4, elefive)
 
     tree = gfg.ElementTree(root)
 
@@ -71,6 +109,13 @@ dom = xml.dom.minidom.parse('mlflow.xml') # or xml.dom.minidom.parseString(xml_s
 pretty_xml_as_string = dom.toprettyxml()
 print(pretty_xml_as_string)
 
+object_methods = [method_name for method_name in dir(mlflow.h2o)
+                  if callable(getattr(mlflow.h2o, method_name))]
+
+object_methods = [x for x in object_methods if not x.startswith('_')]
+
+object_methods = [method_name for method_name in dir(mlflow)
+                  if callable(getattr(mlflow, method_name))]
 
 """"
 mlflow1 = dir(mlflow)
