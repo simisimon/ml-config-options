@@ -27,18 +27,12 @@ url = "https://pytorch.org/docs/stable/torch.html"
 html = urlopen(url)
 soup = BeautifulSoup(html, "html.parser")
 
+tables = soup.find_all('table')
+torch_dict = {}
+for table in tables:
+    for row in table.find_all('tr'):
+        row_cut = row.get_text()[:-1]
+        k = row_cut.split("\n")
+        torch_dict[k[0]] = k[1]
 
-title = soup.title
-titleText = title.get_text()
-
-body = soup.find('torch', class_='pytorch-body')
-
-section = soup.find('section', class_="css-1r7ky0e")
-for elem in section:
-    div1 = elem.findAll('div')
-    for x in div1:
-        div2 = elem.findAll('div')
-        for i in div2:
-            text = i.find('p').get_text()
-            print (text)
-            print("----------")
+print(torch_dict)
