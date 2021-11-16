@@ -37,3 +37,10 @@ types:
 - method_descriptor
 - yaml.YAMLObjectMetaclass
 - list
+
+- Lösung:
+    Doku der Packages werden auf der Website durchsucht. Dafür wird beautfilsoup als Scraper verwendet.
+    Das ganze wird an PyTorch getestet. Dabei werden zunächst die ganzen Links der einzelnen Module gescrapt.
+    In einer for-Schleife werden diese Links durchlaufen und in einem nested Dictionairy gespeichert mit dem Aufbau (module, (Function, Beschreibung))
+    Vorteil ist das man auf Basis der Beschreibungen der Funktion sehr gut erkennen kann, welche Funktionen was machen. Beschreibungen die mit "Return" oder "" anfangen, kann man direkt aussortieren, Beschreibungen die mit Set anfangen sind potentielle Optionen.
+    PRoblem: Die Beschreibungen werden tabellarisch in der Doku gespeichert. Leider sind nicht alle Seiten gleich aufgebaut, sodass bei einigen Modulen nichts gefunden wird oder die falsche Tabelle ausgelesen wird. Das muss händisch noch überprüft werden

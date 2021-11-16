@@ -1,6 +1,7 @@
 import pprint
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import torch
 
 def extract_doc(url_suffix):
     # Open the HTML
@@ -42,8 +43,13 @@ def get_torch_url(url):
 url = "https://pytorch.org/docs/stable/"
 url_suffix = get_torch_url(url)
 torch_dict = extract_doc(url_suffix)
-pprint.pprint(torch_dict)
 
+def dict_helper(torch_dict):
+    pprint.pprint((torch_dict.keys()))
+    #for k in torch_dict.keys():
+    #    print(len(torch_dict[k]))
+    pprint.pprint((torch_dict['autograd']))
 
+dict_helper(torch_dict)
 
 
