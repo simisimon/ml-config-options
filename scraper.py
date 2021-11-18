@@ -43,13 +43,5 @@ def get_torch_url(url):
 url = "https://pytorch.org/docs/stable/"
 url_suffix = get_torch_url(url)
 torch_dict = extract_doc(url_suffix)
-
-def dict_helper(torch_dict):
-    pprint.pprint((torch_dict.keys()))
-    #for k in torch_dict.keys():
-    #    print(len(torch_dict[k]))
-    pprint.pprint((torch_dict['autograd']))
-
-dict_helper(torch_dict)
-
+pprint.pprint(torch_dict.keys())
 
