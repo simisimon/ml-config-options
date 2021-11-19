@@ -3,7 +3,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from pprint import pprint
 
-import sklearn, mlflow #torch #tensorflow
+import sklearn, mlflow, tensorflow as tf #torch
 
 def get_dir(ml_lib):
     lib_dir = dir(ml_lib)
@@ -55,8 +55,16 @@ mlflow_modules = get_mlflow_modules()
 #pprint(mlflow_func)
 #pprint(mlflow_modules)
 
+tf_func = get_func(tf)
+#pprint(tf_func)
 
+link = "https://www.tensorflow.org/api_docs/python/tf"
+html = urlopen(link)
+soup = BeautifulSoup(html, "html.parser")
+tf_list = soup.find("li", {"class": "devsite-nav-item devsite-nav-expandable"})
+modules = []
+for m in tf_list.find_all("li"):
+    a = m.find('a')
+    modules.append(a.text)
 
-
-
-
+pprint(modules)
