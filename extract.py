@@ -1,9 +1,11 @@
 from inspect import getmembers, isfunction
 from urllib.request import urlopen
+
+import bs4
 from bs4 import BeautifulSoup
 from pprint import pprint
 
-import sklearn, mlflow, tensorflow as tf #torch
+import sklearn, mlflow, tensorflow as tf #, torch
 
 def get_dir(ml_lib):
     lib_dir = dir(ml_lib)
@@ -15,6 +17,27 @@ def get_func(ml_lib):
     func_tuples = getmembers(ml_lib, isfunction)
     func = [f[0] for f in func_tuples]
     return func
+
+def get_tf_modules():
+    link = "https://www.tensorflow.org/api_docs/python/tf"
+    html = urlopen(link)
+    soup = BeautifulSoup(html, "html.parser")
+
+    modules = ["tf"]
+
+    for header in soup.find_all("h2", {"id": "modules_2"}):
+        nextNode = header
+        while True:
+            nextNode = nextNode.nextSibling
+            if nextNode is None:
+                break
+            if isinstance(nextNode, bs4.Tag):
+                if nextNode.name == "h2":
+                    break
+                module = nextNode.get_text(strip=True).strip().split(":")[0]
+                modules.append("tf." + module)
+
+    return modules
 
 def get_sklearn_modules():
     link = "https://scikit-learn.org/stable/modules/classes.html#"
@@ -45,10 +68,11 @@ def get_mlflow_modules():
 
 sklearn_func = get_func(sklearn)
 sklearn_modules = get_sklearn_modules()
-#print(sklearn_func)
-#print(sklearn_modules)
+#pprint(sklearn_func)
+#pprint(sklearn_modules)
 
 #torch_func = get_func(torch) #not working sufficiently
+#pprint(torch_func)
 
 mlflow_func = get_func(mlflow)
 mlflow_modules = get_mlflow_modules()
@@ -56,15 +80,7 @@ mlflow_modules = get_mlflow_modules()
 #pprint(mlflow_modules)
 
 tf_func = get_func(tf)
+tf_modules = get_tf_modules()
+#pprint(tf_modules)
 #pprint(tf_func)
 
-link = "https://www.tensorflow.org/api_docs/python/tf"
-html = urlopen(link)
-soup = BeautifulSoup(html, "html.parser")
-tf_list = soup.find("li", {"class": "devsite-nav-item devsite-nav-expandable"})
-modules = []
-for m in tf_list.find_all("li"):
-    a = m.find('a')
-    modules.append(a.text)
-
-pprint(modules)

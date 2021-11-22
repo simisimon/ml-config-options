@@ -46,3 +46,6 @@ types:
     PRoblem: Die Beschreibungen werden tabellarisch in der Doku gespeichert. Leider sind nicht alle Seiten gleich aufgebaut, sodass bei einigen Modulen nichts gefunden wird oder die falsche Tabelle ausgelesen wird. Das muss händisch noch überprüft werden
 
 - Neuer Ansatz: einfach dir() über Torch laufen lassen. Damit kann alles was über torch. aufgerufen wird angezeigt werden.
+
+
+- Statische Code Analyse (https://luminousmen.com/post/python-static-analysis-tools)
