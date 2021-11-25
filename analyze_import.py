@@ -5,13 +5,10 @@ def get_source_code(source_file):
         code = f.read()
     return code
 
-def get_import_lines(code):
+def get_import_lines(code, ml_lib):
     import_lines = [line for line in code.split('\n') if line.startswith("from") or line.startswith("import")]
+    import_lines = [line for line in import_lines if ml_lib in line]
     return import_lines
-
-def get_ml_lib_import_lines(import_lines, ml_lib):
-    ml_lib_import_lines = [line for line in import_lines if ml_lib in line]
-    return ml_lib_import_lines
 
 def get_search_words(ml_lib_import_lines, ml_lib):
     search_words = []
@@ -45,10 +42,9 @@ def modify_import_lines(ml_lib_import_lines, initial_word):
     return lines
 
 source_file = "test_projects/sklearn_lin_reg.py"
+ml_lib = "sklearn"
 code = get_source_code(source_file)
-import_lines = get_import_lines(code)
+import_lines = get_import_lines(code, ml_lib)
 pprint(import_lines)
-sklearn_import_lines = get_ml_lib_import_lines(import_lines, "sklearn")
-pprint(sklearn_import_lines)
-search_words = get_search_words(sklearn_import_lines, "sklearn")
+search_words = get_search_words(import_lines, ml_lib)
 pprint(search_words)
