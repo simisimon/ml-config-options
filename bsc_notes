@@ -49,3 +49,18 @@ types:
 
 
 - Statische Code Analyse (https://luminousmen.com/post/python-static-analysis-tools)
+
+- Zu Berücksichtigen:
+    - Kommentare mit # oder "" ausschließen!
+    - mehrere Zeilen zurückgeben, wenn über mehrere Zeilen verläuft
+    - import Zeile besondere Aufmerksamkeit schenken. Mögliche Fälle: 1. import tensorflow 2. import tensorflow as tf 3. from tensorflow import xx
+        1. Fall - Möglichkeiten:
+            import tensorflow
+            import tensorflow as tf
+            import tensorflow, xx
+            import tensorflow as tf, xx
+            import xx, tensorflow
+            import xx, tensorflow as tf
+            import xx, tensorflow, yy
+            import xx, tensorflow as tf, yy
+            Lösung: unterteilen in mehrere Strings: import rauscutten
