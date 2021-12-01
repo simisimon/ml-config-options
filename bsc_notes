@@ -64,3 +64,11 @@ types:
             import xx, tensorflow, yy
             import xx, tensorflow as tf, yy
             Lösung: unterteilen in mehrere Strings: import rauscutten
+            UPDATE: 1. Fall: Falls Klassen definiert werden, an dieser Stelle direkt rausfiltern
+            UPDATE: sklearn.base enthält as deshalb ändern
+            evtl. Test mit allen möglichen Konstellationen schreiben?!
+
+- UPDATE: nur noch Klassen rausfiltern. Klassen werden groß geschrieben, und von den Klassen nur noch die Parameter
+        möglich Parameter kann man mit clf.__dict__ ausgeben, wenn man die Attribute, die mit _ enden noch löscht
+
+- search_words ausdünnen, damit nicht jedes Mal eine spezifische Methode gesucht wird -> direkt eliminieren?
