@@ -59,3 +59,6 @@ print("Coefficient of determination: %.2f" % r2_score(diabetes_y_test, diabetes_
 #plt.yticks(())
 
 #plt.show()
+
+BBB
+

@@ -72,3 +72,27 @@ types:
         möglich Parameter kann man mit clf.__dict__ ausgeben, wenn man die Attribute, die mit _ enden noch löscht
 
 - search_words ausdünnen, damit nicht jedes Mal eine spezifische Methode gesucht wird -> direkt eliminieren?
+
+- Problem from sklearn import Class123 as c
+    -> wie kann man nun nach c schauen?
+Möglichkeiten wie Klassen auftachen:
+    1. (Klasse,
+    1. (Klasse)
+    1. (Klasse
+    1. (Klasse(
+    1. (Klasse.
+    2. ,Klasse)
+    2. ,Klasse
+    2. ,Klasse(
+    2. ,Klasse,
+    2. ,Klasse.
+    3.  Klasse
+    3.  Klasse(
+    3.  Klasse,
+    3.  Klasse)
+    3.  Klasse.
+    4. .Klasse(
+    4. .Klasse)
+    4. .Klasse,
+    4. .Klasse
+    4. .Klasse.
