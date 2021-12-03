@@ -1,4 +1,5 @@
 from pprint import pprint
+import ast
 
 def get_source_code(source_file):
     with open(source_file) as f:
@@ -67,7 +68,7 @@ def get_relevant_lines(code, search_words):
     return lines
 
 
-source_file = "test_projects/sklearn_lin_reg.py"
+source_file = "test_projects/sklearn_birch.py"
 ml_lib = "sklearn"
 code = get_source_code(source_file)
 import_lines = get_import_lines(code, ml_lib)
@@ -76,4 +77,4 @@ search_words = get_search_words(import_lines, ml_lib)
 pprint(search_words)
 code = reduce_code(code)
 lines = get_relevant_lines(code, search_words)
-pprint(lines)
+#pprint(lines)
