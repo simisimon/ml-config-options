@@ -104,3 +104,10 @@ ungeklärte Probleme:
 zutun:
     - BinOp und UnaryOp immer checken!!!
     - Listen können unendlich tief sein -> auch das abdecken!
+
+Fragen:
+    - sklearn.cluster.AffinityPropagation() irrelevant?
+    - ap = sklearn.cluster.AffinityPropagation() relevant?
+    - linear_model.LinearRegression(2, 5) --> was davon relevant
+    - regr = linear_model.LinearRegression(2, 5)
+    - regr.fit(diabetes_X_train, diabetes_y_train)
