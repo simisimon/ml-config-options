@@ -15,18 +15,19 @@ from sklearn.model_selection import GroupShuffleSplit as gcc
 from sklearn.model_selection import ParameterGrid, LeaveOneGroupOut as log
 from sklearn.model_selection import GridSearchCV as GC2, GroupShuffleSplit
 from sklearn.model_selection import GroupShuffleSplit as gcc2, GridSearchCV
-import sklearn as     skl, tensorflow
+#import sklearn as     skl, tensorflow
 import sklearn as kler
 import sklearn
-
-
+a, b = [-222, 66]
+diabetes_X, diabetes_y = ds.load_diabetes(return_X_y=True)
 
 # Load the diabetes dataset
 diabetes_X, diabetes_y = ds.load_diabetes(return_X_y=True)
+#print(a)
 
 # Use only one feature
 diabetes_X = diabetes_X[:, np.newaxis, 2]
-
+"""
 # Split the data into training/testing sets
 diabetes_X_train = diabetes_X[:-20]
 diabetes_X_test = diabetes_X[-20:]
@@ -59,6 +60,4 @@ print("Coefficient of determination: %.2f" % r2_score(diabetes_y_test, diabetes_
 #plt.yticks(())
 
 #plt.show()
-
-BBB
-
+"""
