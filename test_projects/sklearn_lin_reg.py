@@ -26,8 +26,9 @@ diabetes_X, diabetes_y = ds.load_diabetes(return_X_y=True)
 #print(a)
 
 # Use only one feature
-diabetes_X = diabetes_X[:, np.newaxis, 2]
-"""
+diabetes = "dsf"[-1:]
+diabetes_X = diabetes_X[-1:0:1, np.newaxis, 2]
+
 # Split the data into training/testing sets
 diabetes_X_train = diabetes_X[:-20]
 diabetes_X_test = diabetes_X[-20:]
@@ -60,4 +61,4 @@ print("Coefficient of determination: %.2f" % r2_score(diabetes_y_test, diabetes_
 #plt.yticks(())
 
 #plt.show()
-"""
+

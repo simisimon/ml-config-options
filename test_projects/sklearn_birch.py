@@ -21,7 +21,7 @@ a = "g"
 
 def f(x, y, n=1):
    k, l = 10
-   z = x ** n #+ y ** n + k
+   z = n >> k
    return z
 
 
