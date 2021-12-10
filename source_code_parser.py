@@ -1,10 +1,11 @@
 import ast
 from operator import attrgetter
 from pprint import pprint
+import re
 
 # https://stackoverflow.com/questions/33506902/python-extracting-editing-all-constants-involved-in-a-function-via-ast
-project = "test_projects/sklearn_birch.py"
-final_vars = {}
+project = "test_projects/sklearn_lin_reg.py"
+final_vars = [] ##dict
 
 
 def get_objects(project):
@@ -13,22 +14,15 @@ def get_objects(project):
 
     root = ast.parse(tree)
     objects = root.body
+
     return objects
 
 
 def extract(objects):
     for obj in objects:
-        obj_type = type(obj)
-        extract_vars(obj, obj_type)
+        obj_type[type(obj)](obj)
 
     return final_vars
-
-
-def extract_vars(obj, obj_type):
-    if obj_type == ast.Assign:
-        extract_assigns(obj)
-    elif obj_type == ast.FunctionDef:
-        extract_func(obj)
 
 
 def extract_assigns(obj):
@@ -48,12 +42,23 @@ def extract_assigns(obj):
         values = obj_type[ast_type](obj.value)
         if type(obj.targets[0]) == ast.Tuple:
             if type(obj.value) == ast.Tuple or type(obj.value) == ast.List:
-                final_vars[assign.id] = values[assign_vars.index(assign)]
+                final_vars.append(assign.id + " = " + str(values[assign_vars.index(assign)])) # dict:  final_vars[assign.id] = values[assign_vars.index(assign)]
             else:
-                final_vars[assign.id] = values
+                final_vars.append(assign.id + " = " + str(values))# dict final_vars[assign.id] = values
         else:
-            final_vars[assign.id] = values
+            final_vars.append(assign.id + " = " + str(values))# dict final_vars[assign.id] = values
 
+
+def extract_expr(obj):
+    if type(obj.value) == ast.Constant:
+        print("docstring?")
+    else:
+        ast_type = type(obj.value)
+        values = obj_type[ast_type](obj.value)
+        final_vars.append(values)
+
+def dummy(obj):
+    pass
 
 def extract_func(obj):
     assigns = obj.body
@@ -226,7 +231,10 @@ def extract_index(obj_val):
     return values
 
 
-obj_type = {ast.Tuple: extract_tuple,
+obj_type = {ast.Expr: extract_expr,
+            ast.Assign: extract_assigns,
+            ast.FunctionDef: extract_func,
+            ast.Tuple: extract_tuple,
             ast.List: extract_list,
             ast.Call: extract_call,
             ast.BinOp: extract_bin_op,
@@ -238,7 +246,9 @@ obj_type = {ast.Tuple: extract_tuple,
             ast.Subscript: extract_subscript,
             ast.Slice: extract_slice,
             ast.ExtSlice: extract_ext_slice,
-            ast.Index: extract_index}
+            ast.Index: extract_index,
+            ast.Import: dummy,
+            ast.ImportFrom: dummy}
 
 objects = get_objects(project)
 result = extract(objects)

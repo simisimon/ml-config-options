@@ -1,6 +1,7 @@
 import sklearn.cluster
 from sklearn.cluster import Birch
 import sklearn
+
 X = [[-9999, 1], [0.3, 1], [0.3, +1], [0, not(1)], [0.3, ~1], [0.3, 1]]
 print(X)
 brc = Birch(-5, True, n=-2, g=5)

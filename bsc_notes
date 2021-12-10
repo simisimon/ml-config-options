@@ -111,3 +111,6 @@ Fragen:
     - linear_model.LinearRegression(2, 5) --> was davon relevant
     - regr = linear_model.LinearRegression(2, 5)
     - regr.fit(diabetes_X_train, diabetes_y_train)
+
+- Ursprünglich alles als Dicitionary gespeichert, jedoch alphabetische Sortierung und keys einmalig, daher Lieber Liste
+- Problem: unterscheiden zwischen strings und variable: plt.scatter(diabetes_X_test, diabetes_y_test, color=black)

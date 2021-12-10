@@ -5,6 +5,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.compose import make_column_transformer
 from sklearn.linear_model import LogisticRegression
 
+
 set_config(display="diagram")
 
 num_proc = make_pipeline(SimpleImputer(strategy="median"), StandardScaler())
@@ -19,3 +20,4 @@ preprocessor = make_column_transformer(
 )
 
 clf = make_pipeline(preprocessor, LogisticRegression())
+
