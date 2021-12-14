@@ -114,3 +114,26 @@ Fragen:
 
 - Ursprünglich alles als Dicitionary gespeichert, jedoch alphabetische Sortierung und keys einmalig, daher Lieber Liste
 - Problem: unterscheiden zwischen strings und variable: plt.scatter(diabetes_X_test, diabetes_y_test, color=black)
+
+Relevant:
+    - linear_model.LinearRegression(6, 10)
+    - regr = linear_model.LinearRegression(2, 5)
+    - mdl.append(SVC(class_weight=None, probability=True))
+
+irrelevant:
+    - regr.fit(diabetes_X_train, diabetes_y_train)
+    - regr2 = regr
+
+Offen:
+    - def func1():
+        count = 100
+        return count
+
+      count = func1()
+      linear_model.LinearRegression(count)
+    - Welche Datenstruktur?
+    - Wie berücksichtige ich die Struktur?
+        - if/else, for
+        - with
+        - Funktionen
+        - Klassen

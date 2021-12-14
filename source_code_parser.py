@@ -21,37 +21,42 @@ def get_objects(project):
 def extract(objects):
     for obj in objects:
         obj_type[type(obj)](obj)
-
     return final_vars
 
 
 def extract_assigns(obj):
-    assign_vars = []
-    # print(type(obj.value))
-    if type(obj.targets[0]) == ast.Tuple:
-        if type(obj.value) == ast.Tuple or type(obj.value) == ast.List:
-            if len(obj.targets[0].elts) == len(obj.value.elts):
-                assign_vars.extend(obj.targets[0].elts)
-        else:
-            assign_vars.extend(obj.targets[0].elts)
-    else:
-        assign_vars.append(obj.targets[0])
+    ast_type = type(obj.value)
+    values = obj_type[ast_type](obj.value)
 
-    for assign in assign_vars:
-        ast_type = type(obj.value)
-        values = obj_type[ast_type](obj.value)
-        if type(assign) == ast.Attribute:
-            assign_id = assign_attr(assign)
+    if type(obj.targets[0]) != ast.Tuple: #Case 1: Normalfall
+        assign_vars = extraxt_assign_vars(obj.targets[0])
+        final_vars.append(assign_vars + " = " + str(values))
+
+    elif type(obj.value) != ast.Tuple and type(obj.value) != ast.List: #Case 2: Zusammenfassung
+        if type(obj.value) != ast.Constant: #Tupel = Konstante syntaktisch falsch und wird geskippt
+            assign_vars = ""
+            for assign in obj.targets[0].elts:
+                assign_vars += str((extraxt_assign_vars(assign))) + ", "
+            final_vars.append(assign_vars[:-2] + " = " + str(values))
         else:
-            assign_id = assign.id
-        if type(obj.targets[0]) == ast.Tuple:
-            if type(obj.value) == ast.Tuple or type(obj.value) == ast.List:
-                final_vars.append(assign_id + " = " + str(values[assign_vars.index(assign)])) # dict:  final_vars[assign.id] = values[assign_vars.index(assign)]
-            else:
-                final_vars.append(assign_id + " = " + str(values))  # dict final_vars[assign.id] = values
-                print("Falsches Tupel????????????????????")
-        else:
-            final_vars.append(assign_id + " = " + str(values))# dict final_vars[assign.id] = values
+            print("Syntaktisch nicht zulässig")
+
+    elif len(obj.targets[0].elts) == len(obj.value.elts): #Case 3: Mehrere Assignments
+        for assign in obj.targets[0].elts:
+            assign_var = extraxt_assign_vars(assign)
+            final_vars.append(assign_var + " = " + str(values[obj.targets[0].elts.index(assign)]))
+
+    else:
+        print("NEUER FALL!!!!!! bzw. Falsches Assignment") #kein Assignment
+
+
+def extraxt_assign_vars(assign_obj):
+    if type(assign_obj) == ast.Attribute:
+        assign_id = assign_attr(assign_obj)
+    else:
+        assign_id = assign_obj.id
+    return assign_id
+
 
 def assign_attr(assign):
     if type(assign.value) == ast.Attribute:
@@ -69,8 +74,10 @@ def extract_expr(obj):
         values = obj_type[ast_type](obj.value)
         final_vars.append(values)
 
+
 def dummy(obj):
     pass
+
 
 def extract_func(obj):
     assigns = obj.body
@@ -213,6 +220,7 @@ def extract_subscript(obj_val):
     values += obj_type[ast_type](obj_val.slice) + "]"
     return values
 
+
 def extract_slice(obj_val):
     values = ""
     lower = obj_val.lower
@@ -230,6 +238,7 @@ def extract_slice(obj_val):
         values += ":" + str(obj_type[ast_type](step))
     return values
 
+
 def extract_ext_slice(obj_val):
     values = ""
     for d in obj_val.dims:
@@ -237,10 +246,12 @@ def extract_ext_slice(obj_val):
         values += str(obj_type[ast_type](d)) + ", "
     return values[:-2]
 
+
 def extract_index(obj_val):
     ast_type = type(obj_val.value)
     values = obj_type[ast_type](obj_val.value)
     return values
+
 
 def extract_with(obj_val):
     values = ""
@@ -255,6 +266,7 @@ def extract_with(obj_val):
             values += val_temp
     return values
 
+
 def extract_withitem(obj_val):
     values = "with "
     ast_type = type(obj_val.context_expr)
@@ -264,6 +276,7 @@ def extract_withitem(obj_val):
         ast_type = type(obj_val.optional_vars)
         values += " as " + obj_type[ast_type](obj_val.optional_vars)
     return values + ":"
+
 
 obj_type = {ast.Expr: extract_expr,
             ast.Assign: extract_assigns,
