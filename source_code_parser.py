@@ -40,13 +40,25 @@ def extract_assigns(obj):
     for assign in assign_vars:
         ast_type = type(obj.value)
         values = obj_type[ast_type](obj.value)
+        if type(assign) == ast.Attribute:
+            assign_id = assign_attr(assign)
+        else:
+            assign_id = assign.id
         if type(obj.targets[0]) == ast.Tuple:
             if type(obj.value) == ast.Tuple or type(obj.value) == ast.List:
-                final_vars.append(assign.id + " = " + str(values[assign_vars.index(assign)])) # dict:  final_vars[assign.id] = values[assign_vars.index(assign)]
+                final_vars.append(assign_id + " = " + str(values[assign_vars.index(assign)])) # dict:  final_vars[assign.id] = values[assign_vars.index(assign)]
             else:
-                final_vars.append(assign.id + " = " + str(values))# dict final_vars[assign.id] = values
+                final_vars.append(assign_id + " = " + str(values))  # dict final_vars[assign.id] = values
+                print("Falsches Tupel????????????????????")
         else:
-            final_vars.append(assign.id + " = " + str(values))# dict final_vars[assign.id] = values
+            final_vars.append(assign_id + " = " + str(values))# dict final_vars[assign.id] = values
+
+def assign_attr(assign):
+    if type(assign.value) == ast.Attribute:
+        value = assign_attr(assign.value) + "." + assign.attr
+    else:
+        value = assign.value.id + "." + assign.attr
+    return value
 
 
 def extract_expr(obj):
@@ -230,6 +242,28 @@ def extract_index(obj_val):
     values = obj_type[ast_type](obj_val.value)
     return values
 
+def extract_with(obj_val):
+    values = ""
+    for item in obj_val.items:
+        ast_type = type(item)
+        final_vars.append(obj_type[ast_type](item))
+
+    for v in obj_val.body:
+        ast_type = type(v)
+        val_temp = obj_type[ast_type](v)
+        if val_temp != None:
+            values += val_temp
+    return values
+
+def extract_withitem(obj_val):
+    values = "with "
+    ast_type = type(obj_val.context_expr)
+    values += obj_type[ast_type](obj_val.context_expr)
+
+    if obj_val.optional_vars != None:
+        ast_type = type(obj_val.optional_vars)
+        values += " as " + obj_type[ast_type](obj_val.optional_vars)
+    return values + ":"
 
 obj_type = {ast.Expr: extract_expr,
             ast.Assign: extract_assigns,
@@ -247,6 +281,8 @@ obj_type = {ast.Expr: extract_expr,
             ast.Slice: extract_slice,
             ast.ExtSlice: extract_ext_slice,
             ast.Index: extract_index,
+            ast.With: extract_with,
+            ast.withitem: extract_withitem,
             ast.Import: dummy,
             ast.ImportFrom: dummy}
 
@@ -257,7 +293,10 @@ pprint(result)
 #with open(project, "r") as source:
   #  tree = ast.parse(source.read())
 
-#print(ast.dump(tree, indent=4))
+#tree2 = ast.parse(open(project).read())
+
+#tree
+#pprint(ast.dump(tree))
 
 
 # gg = ast.iter_child_nodes(node)    # iterate over child nodes
