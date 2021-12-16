@@ -25,14 +25,13 @@ def extract(objects):
 
 
 def extract_assigns(obj):
-    ast_type = type(obj.value)
-    values = obj_type[ast_type](obj.value)
-
     if type(obj.targets[0]) != ast.Tuple: #Case 1: Normalfall
+        values = obj_type[type(obj.value)](obj.value)
         assign_vars = extraxt_assign_vars(obj.targets[0])
         final_vars.append(assign_vars + " = " + str(values))
 
     elif type(obj.value) != ast.Tuple and type(obj.value) != ast.List: #Case 2: Zusammenfassung
+        values = obj_type[type(obj.value)](obj.value)
         if type(obj.value) != ast.Constant: #Tupel = Konstante syntaktisch falsch und wird geskippt
             assign_vars = ""
             for assign in obj.targets[0].elts:
@@ -42,28 +41,27 @@ def extract_assigns(obj):
             print("Syntaktisch nicht zulässig")
 
     elif len(obj.targets[0].elts) == len(obj.value.elts): #Case 3: Mehrere Assignments
-        for assign in obj.targets[0].elts:
+        targets = obj.targets[0].elts
+        for assign in targets:
             assign_var = extraxt_assign_vars(assign)
-            final_vars.append(assign_var + " = " + str(values[obj.targets[0].elts.index(assign)]))
+            value = obj.value.elts[targets.index(assign)]
+            value = obj_type[type(value)](value)
+            final_vars.append(assign_var + " = " + str(value))
 
     else:
         print("NEUER FALL!!!!!! bzw. Falsches Assignment") #kein Assignment
 
 
 def extraxt_assign_vars(assign_obj):
-    if type(assign_obj) == ast.Attribute:
-        assign_id = assign_attr(assign_obj)
-    else:
-        assign_id = assign_obj.id
-    return assign_id
-
-
-def assign_attr(assign):
-    if type(assign.value) == ast.Attribute:
-        value = assign_attr(assign.value) + "." + assign.attr
-    else:
-        value = assign.value.id + "." + assign.attr
-    return value
+    ast_type = type(assign_obj)
+    values = obj_type[ast_type](assign_obj)
+    #if type(assign_obj) == ast.Attribute:
+     #   assign_id = extract_attr(assign_obj)
+    #elif type(assign_obj) == ast.Tuple:
+     #   assign_id = extract_tuple(assign_obj)
+    #else:
+     #   assign_id = assign_obj.id
+    return values
 
 
 def extract_expr(obj):
@@ -89,10 +87,12 @@ def extract_func(obj):
 
 
 def extract_tuple(obj_val):
-    values = []
+
+    values = "("
     for o in obj_val.elts:
         ast_type = type(o)
-        values.append(obj_type[ast_type](o))
+        values += str(obj_type[ast_type](o)) + ", "
+    values = values[:-2] + ")"
     return values
 
 
@@ -297,7 +297,8 @@ obj_type = {ast.Expr: extract_expr,
             ast.With: extract_with,
             ast.withitem: extract_withitem,
             ast.Import: dummy,
-            ast.ImportFrom: dummy}
+            ast.ImportFrom: dummy,
+            ast.Assert: dummy}
 
 objects = get_objects(project)
 result = extract(objects)
