@@ -67,17 +67,96 @@ def extract_expr(obj):
 
 
 def dummy(obj):
+    print("dummy: " + str(type(obj)))
     pass
 
 
 def extract_func(obj):
-    assigns = obj.body
-    for assign in assigns:
-        if type(assign) == ast.Assign:
-            extract_assigns(assign)
-        else:
-            print("return?!")
+    body = obj.body
+    return_value = ""
+    for e in body:
+        values = get_values(e)
+        if type(values) == str:
+            if values.startswith("return "):
+                args = extract_args(obj.args)
+                return_value = "def: " + obj.name + args + ": " + values
+                final_vars.append(return_value)
+    if return_value == "":
+        args = extract_args(obj.args)
+        values = "def: " + obj.name + args
+        final_vars.append(values)
 
+
+def extract_args(args):
+    arg_dict = {}
+    #order: 1. posonylargs(x) + /, 2. args(x), 1.5 default(=1), 3. *, 4.vararg(x), 5. kwonlyargs(x), 6. kwdefault(=1), 7. **kwarg
+    if len(args.posonlyargs) > 0:
+        for arg in args.posonlyargs: #parameter before /
+            annotation = ""
+            if arg.annotation != None:
+                annotation = ":" + str(get_values(arg.annotation))
+            arg_dict[get_position(arg)] = arg.arg + annotation
+        # place "/" at the right spot
+        if len(args.defaults) == 0:
+            pos = float(get_position(args.posonlyargs[len(args.posonlyargs) - 1]))
+            arg_dict[str(pos + 0.0001)] = "/"
+        elif len(args.args) == 0:
+            pos = float(get_position(args.defaults[len(args.defaults) - 1]))
+            arg_dict[str(pos + 0.0001)] = "/"
+        else:
+            pos = float(get_position(args.args[0]))
+            arg_dict[str(pos - 0.0001)] = "/"
+
+    for arg in args.args: #parameter
+        annotation = ""
+        if arg.annotation != None:
+            annotation = ":" + str(get_values(arg.annotation))
+        arg_dict[get_position(arg)] = arg.arg + annotation
+
+    for arg in args.defaults: #default of args and posonlyargs
+        arg_dict[get_position(arg)] = "=" + str(get_values(arg))
+
+    if args.vararg != None:  #*-Parameter
+        annotation = ""
+        if args.vararg.annotation != None:
+            annotation = ":" + str(get_values(args.vararg.annotation))
+        arg_dict[get_position(args.vararg)] = "*" + args.vararg.arg + annotation
+
+    for arg in args.kwonlyargs:  #parameter after *-parameter
+        annotation = ""
+        if arg.annotation != None:
+            annotation = ":" + str(get_values(arg.annotation))
+        arg_dict[get_position(arg)] = arg.arg + annotation
+
+    if len(args.kw_defaults) > 0:   #default of kwonlyargs
+        if args.vararg == None:
+            pos = float(get_position(args.kwonlyargs[0]))
+            arg_dict[str(pos-0.0001)] = "*"  #to place "*" at the right spot
+
+        for arg in args.kw_defaults:
+            if arg != None:
+                arg_dict[get_position(arg)] = "=" + str(get_values(arg))
+
+    if args.kwarg != None: #**-parameter
+        annotation = ""
+        if args.kwarg.annotation != None:
+            annotation = ":" + str(get_values(args.kwarg.annotation))
+        arg_dict[get_position(args.kwarg)] = "**" + args.kwarg.arg + annotation
+
+    arg_dict = dict(sorted(arg_dict.items()))
+    param = ""
+    for val in arg_dict.values():
+        if val.startswith("="):
+            param = param[:-2]
+        param += val + ", "
+    param = "(" + param[:-2] + ")"
+    return param
+
+
+def get_position(obj):
+    line_no = str(obj.lineno)
+    col_no = str(obj.col_offset).zfill(3)
+    return line_no + "." + col_no
 
 def extract_tuple(obj_val):
     values = "("
@@ -246,6 +325,14 @@ def extract_withitem(obj_val):
         values += " as " + get_values(obj_val.optional_vars)
     return values + ":"
 
+def extract_if(obj_val):
+    #ignore condition
+    for e in obj_val.body:
+        get_values(e)
+
+def extract_return(obj_val):
+    values = "return " + str(get_values(obj_val.value))
+    return values
 
 obj_type = {ast.Expr: extract_expr,
             ast.Assign: extract_assigns,
@@ -267,8 +354,9 @@ obj_type = {ast.Expr: extract_expr,
             ast.withitem: extract_withitem,
             ast.Import: dummy,
             ast.ImportFrom: dummy,
-            ast.Assert: dummy
-            }
+            ast.Assert: dummy,
+            ast.If: extract_if,
+            ast.Return: extract_return}
 
 objects = get_objects(project)
 result = extract(objects)
