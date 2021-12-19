@@ -4,8 +4,8 @@ from pprint import pprint
 import re
 
 # https://stackoverflow.com/questions/33506902/python-extracting-editing-all-constants-involved-in-a-function-via-ast
-project = "test_projects/sklearn_birch.py"
-final_vars = [] ##dict
+project = "test_projects/another_test_project.py"
+final_vars = {}
 
 
 def get_objects(project):
@@ -24,11 +24,20 @@ def extract(objects):
     return final_vars
 
 
+def extract_class(obj):
+    value = "class " + obj.name + "("
+    for b in obj.bases:
+        value += get_values(b) + ", "
+    final_vars[obj.lineno] = value[:-2] + ")"
+    for b in obj.body:
+        get_values(b)
+
+
 def extract_assigns(obj):
     if type(obj.targets[0]) != ast.Tuple: #Case 1: Normalfall
         values = get_values(obj.value)
         assign_vars = get_values(obj.targets[0])
-        final_vars.append(assign_vars + " = " + str(values))
+        final_vars[obj.lineno] = assign_vars + " = " + str(values)
 
     elif type(obj.value) != ast.Tuple and type(obj.value) != ast.List: #Case 2: Zusammenfassung
         values = get_values(obj.value)
@@ -36,7 +45,7 @@ def extract_assigns(obj):
             assign_vars = ""
             for assign in obj.targets[0].elts:
                 assign_vars += str(get_values(assign)) + ", "
-            final_vars.append(assign_vars[:-2] + " = " + str(values))
+            final_vars[obj.lineno] = assign_vars[:-2] + " = " + str(values)
         else:
             print("Syntaktisch nicht zulässig")
 
@@ -46,10 +55,11 @@ def extract_assigns(obj):
             assign_var = get_values(assign)
             value = obj.value.elts[targets.index(assign)]
             value = get_values(value)
-            final_vars.append(assign_var + " = " + str(value))
+            final_vars[float(str(obj.lineno) + "." + str(targets.index(assign)))] = assign_var + " = " + str(value)
 
     else:
         print("NEUER FALL!!!!!! bzw. Falsches Assignment") #kein Assignment
+
 
 
 def get_values(obj_value):
@@ -63,28 +73,28 @@ def extract_expr(obj):
         print("docstring?")
     else:
         values = get_values(obj.value)
-        final_vars.append(values)
+        final_vars[obj.lineno] = values
 
 
 def dummy(obj):
-    print("dummy: " + str(type(obj)))
+    print(str(obj.lineno) + ": dummy " + str(type(obj)))
     pass
 
 
 def extract_func(obj):
     body = obj.body
     return_value = ""
-    for e in body:
-        values = get_values(e)
+    for b in body:
+        values = get_values(b)
         if type(values) == str:
             if values.startswith("return "):
                 args = extract_args(obj.args)
                 return_value = "def: " + obj.name + args + ": " + values
-                final_vars.append(return_value)
+                final_vars[b.lineno] = return_value
     if return_value == "":
         args = extract_args(obj.args)
         values = "def: " + obj.name + args
-        final_vars.append(values)
+        final_vars[obj.lineno] = values
 
 
 def extract_args(args):
@@ -192,7 +202,7 @@ def extract_call(obj_val):
         if values[-1] != "(":
             values += ", "
         param_value = get_values(param.value)
-        values += param.arg + "=" + str(param_value)
+        values += str(param.arg) + "=" + str(param_value)
     values += ")"
     return values
 
@@ -274,7 +284,7 @@ def extract_dict(obj_val):
 
 def extract_subscript(obj_val):
     values = get_values(obj_val.value) + "["
-    values += get_values(obj_val.slice) + "]"
+    values += str(get_values(obj_val.slice)) + "]"
     return values
 
 
@@ -308,7 +318,7 @@ def extract_index(obj_val):
 def extract_with(obj_val):
     values = ""
     for item in obj_val.items:
-        final_vars.append(get_values(item))
+        final_vars[obj_val.lineno] = (get_values(item))
 
     for v in obj_val.body:
         val_temp = get_values(v)
@@ -327,8 +337,43 @@ def extract_withitem(obj_val):
 
 def extract_if(obj_val):
     #ignore condition
-    for e in obj_val.body:
-        get_values(e)
+    for b in obj_val.body:
+        get_values(b)
+
+def extract_for(obj_val):
+    for b in obj_val.body:
+        get_values(b)
+    return ""
+
+def extract_compare(obj_val):
+    values = str(get_values(obj_val.left))
+    for c in obj_val.comparators:
+        values += " " + get_cmpop(obj_val.ops[obj_val.comparators.index(c)]) + " " + str(get_values(c))
+    return values
+
+def get_cmpop(op):
+    if type(op) == ast.Eq:
+        return "=="
+    elif type(op) == ast.NotEq:
+        return "!="
+    elif type(op) == ast.Lt:
+        return "<"
+    elif type(op) == ast.LtE:
+        return "<="
+    elif type(op) == ast.Gt:
+        return ">"
+    elif type(op) == ast.GtE:
+        return ">="
+    elif type(op) == ast.Is:
+        return "is"
+    elif type(op) == ast.IsNot:
+        return "is not"
+    elif type(op) == ast.In:
+        return "in"
+    elif type(op) == ast.NotIn:
+        return "not in"
+
+
 
 def extract_return(obj_val):
     values = "return " + str(get_values(obj_val.value))
@@ -356,7 +401,10 @@ obj_type = {ast.Expr: extract_expr,
             ast.ImportFrom: dummy,
             ast.Assert: dummy,
             ast.If: extract_if,
-            ast.Return: extract_return}
+            ast.Return: extract_return,
+            ast.ClassDef: extract_class,
+            ast.For: extract_for,
+            ast.Compare: extract_compare}
 
 objects = get_objects(project)
 result = extract(objects)
