@@ -169,10 +169,10 @@ def get_position(obj):
     return line_no + "." + col_no
 
 def extract_tuple(obj_val):
-    values = "("
+    values = "" #"("
     for o in obj_val.elts:
         values += str(get_values(o)) + ", "
-    values = values[:-2] + ")"
+    values = values[:-2] #+ ")"
     return values
 
 
@@ -247,13 +247,13 @@ def extract_constant(obj_val):
 
 def extract_unary_op(obj_val):
     if type(obj_val.op) == ast.USub:
-        return -obj_val.operand.n
+        return "-" + str(get_values(obj_val.operand))
     elif type(obj_val.op) == ast.UAdd:
-        return +obj_val.operand.n
+        return "+" + str(get_values(obj_val.operand))
     elif type(obj_val.op) == ast.Not:
-        return not obj_val.operand.n
+        return "not" + str(get_values(obj_val.operand))
     elif type(obj_val.op) == ast.Invert:
-        return ~obj_val.operand.n
+        return "~" + str(get_values(obj_val.operand))
 
 
 def extract_name(obj_val):
@@ -341,8 +341,15 @@ def extract_if(obj_val):
         get_values(b)
 
 def extract_for(obj_val):
+    values = "for "
+    values += get_values(obj_val.target)
+    #for b in obj_val.target.elts:
+       # values += get_values(b) + ", "
+    values = values[:-2] + " in "
+    values += get_values(obj_val.iter) + ":"
     for b in obj_val.body:
         get_values(b)
+    final_vars[obj_val.lineno] = values
     return ""
 
 def extract_compare(obj_val):
@@ -374,10 +381,26 @@ def get_cmpop(op):
         return "not in"
 
 
-
 def extract_return(obj_val):
     values = "return " + str(get_values(obj_val.value))
     return values
+
+
+def extract_joined_str(obj_val):
+    values = "f"
+    for v in obj_val.values:
+        values += get_values(v)
+
+    return values
+
+
+def extract_formatted_val(obj_val):
+    value = "{" + get_values(obj_val.value)
+    if obj_val.format_spec != None:
+        value += ":" + get_values(obj_val.format_spec)[1:]
+    value += "}"
+    return value
+
 
 obj_type = {ast.Expr: extract_expr,
             ast.Assign: extract_assigns,
@@ -404,7 +427,9 @@ obj_type = {ast.Expr: extract_expr,
             ast.Return: extract_return,
             ast.ClassDef: extract_class,
             ast.For: extract_for,
-            ast.Compare: extract_compare}
+            ast.Compare: extract_compare,
+            ast.JoinedStr: extract_joined_str,
+            ast.FormattedValue: extract_formatted_val}
 
 objects = get_objects(project)
 result = extract(objects)
