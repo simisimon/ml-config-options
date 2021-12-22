@@ -98,6 +98,8 @@ Möglichkeiten wie Klassen auftachen:
     4. .Klasse.
 
 
+https://stackoverflow.com/questions/33506902/python-extracting-editing-all-constants-involved-in-a-function-via-ast
+
 ungeklärte Probleme:
     - was wenn sich Wert einer Variable ändert bspw. am Anfang a = 5, am Ende a = 10, ausgegeben wird nur a = 10
 

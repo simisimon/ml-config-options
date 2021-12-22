@@ -3,10 +3,8 @@ from operator import attrgetter
 from pprint import pprint
 import re
 
-# https://stackoverflow.com/questions/33506902/python-extracting-editing-all-constants-involved-in-a-function-via-ast
 project = "test_projects/another_test_project.py"
 final_vars = {}
-
 
 def get_objects(project):
     with open(project, "r") as source:
@@ -24,6 +22,28 @@ def extract(objects):
     return final_vars
 
 
+def get_values(obj_value):
+    ast_type = type(obj_value)
+    values = obj_type[ast_type](obj_value)
+    return values
+
+"""ast-handling"""
+def extract_func(obj):
+    body = obj.body
+    return_value = ""
+    for b in body:
+        values = get_values(b)
+        if type(values) == str:
+            if values.startswith("return "):
+                args = extract_args(obj.args)
+                return_value = "def: " + obj.name + args + ": " + values
+                final_vars[b.lineno] = return_value
+    if return_value == "":
+        args = extract_args(obj.args)
+        values = "def: " + obj.name + args
+        final_vars[obj.lineno] = values
+
+
 def extract_class(obj):
     value = "class " + obj.name + "("
     for b in obj.bases:
@@ -33,11 +53,17 @@ def extract_class(obj):
         get_values(b)
 
 
+def extract_return(obj_val):
+    values = "return " + str(get_values(obj_val.value))
+    return values
+
+
 def extract_assigns(obj):
     if type(obj.targets[0]) != ast.Tuple: #Case 1: Normalfall
         values = get_values(obj.value)
         assign_vars = get_values(obj.targets[0])
         final_vars[obj.lineno] = assign_vars + " = " + str(values)
+
 
     elif type(obj.value) != ast.Tuple and type(obj.value) != ast.List: #Case 2: Zusammenfassung
         values = get_values(obj.value)
@@ -61,10 +87,31 @@ def extract_assigns(obj):
         print("NEUER FALL!!!!!! bzw. Falsches Assignment") #kein Assignment
 
 
+def extract_for(obj_val):
+    values = "for "
+    values += get_values(obj_val.target) + " in "
+    values += get_values(obj_val.iter) + ":"
+    for b in obj_val.body:
+        get_values(b)
+    final_vars[obj_val.lineno] = values
+    return ""
 
-def get_values(obj_value):
-    ast_type = type(obj_value)
-    values = obj_type[ast_type](obj_value)
+
+def extract_if(obj_val):
+    #ignore condition
+    for b in obj_val.body:
+        get_values(b)
+
+
+def extract_with(obj_val):
+    values = ""
+    for item in obj_val.items:
+        final_vars[obj_val.lineno] = (get_values(item))
+
+    for v in obj_val.body:
+        val_temp = get_values(v)
+        if val_temp != None:
+            values += val_temp
     return values
 
 
@@ -76,25 +123,212 @@ def extract_expr(obj):
         final_vars[obj.lineno] = values
 
 
-def dummy(obj):
-    print(str(obj.lineno) + ": dummy " + str(type(obj)))
-    pass
+def extract_bool_op(obj):
+    values = ""
+    for v in obj.values:
+        values += get_values(v)
+        if obj.values.index(v) + 1 != len(obj.values):
+            if type(obj.op) == ast.And:
+                values += " and "
+            elif type(obj.op) == ast.Or:
+                values += " or "
+    return values
 
 
-def extract_func(obj):
-    body = obj.body
-    return_value = ""
-    for b in body:
-        values = get_values(b)
-        if type(values) == str:
-            if values.startswith("return "):
-                args = extract_args(obj.args)
-                return_value = "def: " + obj.name + args + ": " + values
-                final_vars[b.lineno] = return_value
-    if return_value == "":
-        args = extract_args(obj.args)
-        values = "def: " + obj.name + args
-        final_vars[obj.lineno] = values
+def extract_bin_op(obj_val):
+    values = str(get_values(obj_val.left))
+    if type(obj_val.op) == ast.Add:
+        values += " + "
+    elif type(obj_val.op) == ast.Sub:
+        values += " - "
+    elif type(obj_val.op) == ast.Mult:
+        values += " * "
+    elif type(obj_val.op) == ast.Div:
+        values += " / "
+    elif type(obj_val.op) == ast.FloorDiv:
+        values += " // "
+    elif type(obj_val.op) == ast.Mod:
+        values += " % "
+    elif type(obj_val.op) == ast.Pow:
+        values += " ** "
+    elif type(obj_val.op) == ast.LShift:
+        values += " << "
+    elif type(obj_val.op) == ast.RShift:
+        values += " >> "
+    elif type(obj_val.op) == ast.BitOr:
+        values += " | "
+    elif type(obj_val.op) == ast.BitXor:
+        values += " ^ "
+    elif type(obj_val.op) == ast.BitAnd:
+        values += " & "
+    elif type(obj_val.op) == ast.MatMult:
+        values += " @ "
+
+    values += str(get_values(obj_val.right))
+    return values
+
+
+def extract_unary_op(obj_val):
+    if type(obj_val.op) == ast.USub:
+        return "-" + str(get_values(obj_val.operand))
+    elif type(obj_val.op) == ast.UAdd:
+        return "+" + str(get_values(obj_val.operand))
+    elif type(obj_val.op) == ast.Not:
+        return "not" + str(get_values(obj_val.operand))
+    elif type(obj_val.op) == ast.Invert:
+        return "~" + str(get_values(obj_val.operand))
+
+
+def extract_dict(obj_val):
+    values = "{"
+    count = 0
+    for key in obj_val.keys:
+        values += str(get_values(key)) + ": "
+        v = obj_val.values[count]
+        if type(v) != ast.List:
+            values += str(get_values(v)) + ", "
+        else:
+            values += "["
+            for e in get_values(v):
+                values += str(e) + ", "
+            values = values[:-2] + "]" + ", "
+        count += 1
+
+    """values = {}
+    count = 0
+    for key in obj_val.keys:
+        k = get_values(key)
+
+        v = obj_val.values[count]
+        v = get_values(v)
+
+        values[k] = v
+        count += 1"""
+    values = values[:-2] + "}"
+    return values
+
+
+def extract_compare(obj_val):
+    values = str(get_values(obj_val.left))
+    for c in obj_val.comparators:
+        values += " " + get_cmpop(obj_val.ops[obj_val.comparators.index(c)]) + " " + str(get_values(c))
+    return values
+
+
+def extract_call(obj_val):
+    values = get_values(obj_val.func)
+
+    values += "("
+    for param in obj_val.args:
+        if values[-1] != "(":
+            values += ", "
+        param_value = get_values(param)
+        values += str(param_value)
+    for param in obj_val.keywords:
+        if values[-1] != "(":
+            values += ", "
+        param_value = get_values(param.value)
+        values += str(param.arg) + "=" + str(param_value)
+    values += ")"
+    return values
+
+
+def extract_joined_str(obj_val):
+    values = "f" + "'"
+    for v in obj_val.values:
+        if type(v) != ast.FormattedValue:
+            values += get_values(v)[1:-1]
+        else:
+            values += get_values(v)
+    values = values + "'"
+    return values
+
+
+def extract_formatted_val(obj_val):
+    value = "{" + get_values(obj_val.value)
+    if obj_val.format_spec != None:
+        value += ":" + get_values(obj_val.format_spec)[2:-1]
+    value += "}"
+    return value
+
+
+def extract_constant(obj_val):
+    if type(obj_val.n) == str:
+        values = "'" + obj_val.n + "'"
+    else:
+        values = obj_val.n
+    return values
+
+
+def extract_attr(obj_val):
+    values = get_values(obj_val.value)
+    values += "." + obj_val.attr
+    return values
+
+
+def extract_subscript(obj_val):
+    values = get_values(obj_val.value) + "["
+    values += str(get_values(obj_val.slice)) + "]"
+    return values
+
+
+def extract_name(obj_val):
+    values = obj_val.id
+    return values
+
+
+def extract_list(obj_val):
+    values = "["
+    for o in obj_val.elts:
+        values += str(get_values(o)) + ", "
+    values = values[:-2] + "]"
+    return values
+
+
+def extract_tuple(obj_val):
+    values = "" #"("
+    for o in obj_val.elts:
+        values += str(get_values(o)) + ", "
+    values = values[:-2] #+ ")"
+    return values
+
+
+def extract_slice(obj_val):
+    values = ""
+    lower = obj_val.lower
+    upper = obj_val.upper
+    step = obj_val.step
+    if lower != None:
+        values += str(get_values(lower))
+    values += ":"
+    if upper != None:
+        values += str(get_values(upper))
+    if step != None:
+        values += ":" + str(get_values(step))
+    return values
+
+
+def get_cmpop(op):
+    if type(op) == ast.Eq:
+        return "=="
+    elif type(op) == ast.NotEq:
+        return "!="
+    elif type(op) == ast.Lt:
+        return "<"
+    elif type(op) == ast.LtE:
+        return "<="
+    elif type(op) == ast.Gt:
+        return ">"
+    elif type(op) == ast.GtE:
+        return ">="
+    elif type(op) == ast.Is:
+        return "is"
+    elif type(op) == ast.IsNot:
+        return "is not"
+    elif type(op) == ast.In:
+        return "in"
+    elif type(op) == ast.NotIn:
+        return "not in"
 
 
 def extract_args(args):
@@ -163,144 +397,17 @@ def extract_args(args):
     return param
 
 
-def get_position(obj):
-    line_no = str(obj.lineno)
-    col_no = str(obj.col_offset).zfill(3)
-    return line_no + "." + col_no
+def extract_withitem(obj_val):
+    values = "with "
+    values += get_values(obj_val.context_expr)
 
-def extract_tuple(obj_val):
-    values = "" #"("
-    for o in obj_val.elts:
-        values += str(get_values(o)) + ", "
-    values = values[:-2] #+ ")"
-    return values
+    if obj_val.optional_vars != None:
+        values += " as " + get_values(obj_val.optional_vars)
+    return values + ":"
 
 
-def extract_list(obj_val):
-    values = []
-    for o in obj_val.elts:
-        values.append(get_values(o))
-
-        if type(o) == ast.List:
-            list_values = []
-            for v in o.elts:
-                list_values.append(get_values(v))
-            values.append(list_values)
-    return values
-
-
-def extract_call(obj_val):
-    values = get_values(obj_val.func)
-
-    values += "("
-    for param in obj_val.args:
-        if values[-1] != "(":
-            values += ", "
-        param_value = get_values(param)
-        values += str(param_value)
-    for param in obj_val.keywords:
-        if values[-1] != "(":
-            values += ", "
-        param_value = get_values(param.value)
-        values += str(param.arg) + "=" + str(param_value)
-    values += ")"
-    return values
-
-
-def extract_bin_op(obj_val):
-    values = get_values(obj_val.left)
-    if type(obj_val.op) == ast.Add:
-        values += " + "
-    elif type(obj_val.op) == ast.Sub:
-        values += " - "
-    elif type(obj_val.op) == ast.Mult:
-        values += " * "
-    elif type(obj_val.op) == ast.Div:
-        values += " / "
-    elif type(obj_val.op) == ast.FloorDiv:
-        values += " // "
-    elif type(obj_val.op) == ast.Mod:
-        values += " % "
-    elif type(obj_val.op) == ast.Pow:
-        values += " ** "
-    elif type(obj_val.op) == ast.LShift:
-        values += " << "
-    elif type(obj_val.op) == ast.RShift:
-        values += " >> "
-    elif type(obj_val.op) == ast.BitOr:
-        values += " | "
-    elif type(obj_val.op) == ast.BitXor:
-        values += " ^ "
-    elif type(obj_val.op) == ast.BitAnd:
-        values += " & "
-    elif type(obj_val.op) == ast.MatMult:
-        values += " @ "
-
-    values += str(get_values(obj_val.right))
-    return values
-
-
-def extract_constant(obj_val):
-    values = obj_val.n
-    return values
-
-
-def extract_unary_op(obj_val):
-    if type(obj_val.op) == ast.USub:
-        return "-" + str(get_values(obj_val.operand))
-    elif type(obj_val.op) == ast.UAdd:
-        return "+" + str(get_values(obj_val.operand))
-    elif type(obj_val.op) == ast.Not:
-        return "not" + str(get_values(obj_val.operand))
-    elif type(obj_val.op) == ast.Invert:
-        return "~" + str(get_values(obj_val.operand))
-
-
-def extract_name(obj_val):
-    values = obj_val.id
-    return values
-
-
-def extract_attr(obj_val):
-    values = get_values(obj_val.value)
-    values += "." + obj_val.attr
-    return values
-
-
-def extract_dict(obj_val):
-    values = {}
-    count = 0
-    for key in obj_val.keys:
-        k = get_values(key)
-
-        v = obj_val.values[count]
-        v = get_values(v)
-
-        values[k] = v
-        count += 1
-
-    return values
-
-
-def extract_subscript(obj_val):
-    values = get_values(obj_val.value) + "["
-    values += str(get_values(obj_val.slice)) + "]"
-    return values
-
-
-def extract_slice(obj_val):
-    values = ""
-    lower = obj_val.lower
-    upper = obj_val.upper
-    step = obj_val.step
-    if lower != None:
-        values += str(get_values(lower))
-    values += ":"
-    if upper != None:
-        values += str(get_values(upper))
-    if step != None:
-        values += ":" + str(get_values(step))
-    return values
+def dummy(obj):
+    print(str(obj.lineno) + ": dummy " + str(type(obj)))
 
 
 def extract_ext_slice(obj_val):
@@ -315,94 +422,14 @@ def extract_index(obj_val):
     return values
 
 
-def extract_with(obj_val):
-    values = ""
-    for item in obj_val.items:
-        final_vars[obj_val.lineno] = (get_values(item))
-
-    for v in obj_val.body:
-        val_temp = get_values(v)
-        if val_temp != None:
-            values += val_temp
-    return values
+def get_position(obj):
+    line_no = str(obj.lineno)
+    col_no = str(obj.col_offset).zfill(3)
+    return line_no + "." + col_no
 
 
-def extract_withitem(obj_val):
-    values = "with "
-    values += get_values(obj_val.context_expr)
-
-    if obj_val.optional_vars != None:
-        values += " as " + get_values(obj_val.optional_vars)
-    return values + ":"
-
-def extract_if(obj_val):
-    #ignore condition
-    for b in obj_val.body:
-        get_values(b)
-
-def extract_for(obj_val):
-    values = "for "
-    values += get_values(obj_val.target)
-    #for b in obj_val.target.elts:
-       # values += get_values(b) + ", "
-    values = values[:-2] + " in "
-    values += get_values(obj_val.iter) + ":"
-    for b in obj_val.body:
-        get_values(b)
-    final_vars[obj_val.lineno] = values
-    return ""
-
-def extract_compare(obj_val):
-    values = str(get_values(obj_val.left))
-    for c in obj_val.comparators:
-        values += " " + get_cmpop(obj_val.ops[obj_val.comparators.index(c)]) + " " + str(get_values(c))
-    return values
-
-def get_cmpop(op):
-    if type(op) == ast.Eq:
-        return "=="
-    elif type(op) == ast.NotEq:
-        return "!="
-    elif type(op) == ast.Lt:
-        return "<"
-    elif type(op) == ast.LtE:
-        return "<="
-    elif type(op) == ast.Gt:
-        return ">"
-    elif type(op) == ast.GtE:
-        return ">="
-    elif type(op) == ast.Is:
-        return "is"
-    elif type(op) == ast.IsNot:
-        return "is not"
-    elif type(op) == ast.In:
-        return "in"
-    elif type(op) == ast.NotIn:
-        return "not in"
-
-
-def extract_return(obj_val):
-    values = "return " + str(get_values(obj_val.value))
-    return values
-
-
-def extract_joined_str(obj_val):
-    values = "f"
-    for v in obj_val.values:
-        values += get_values(v)
-
-    return values
-
-
-def extract_formatted_val(obj_val):
-    value = "{" + get_values(obj_val.value)
-    if obj_val.format_spec != None:
-        value += ":" + get_values(obj_val.format_spec)[1:]
-    value += "}"
-    return value
-
-
-obj_type = {ast.Expr: extract_expr,
+obj_type = {ast.BoolOp: extract_bool_op,
+            ast.Expr: extract_expr,
             ast.Assign: extract_assigns,
             ast.FunctionDef: extract_func,
             ast.Tuple: extract_tuple,
@@ -429,7 +456,15 @@ obj_type = {ast.Expr: extract_expr,
             ast.For: extract_for,
             ast.Compare: extract_compare,
             ast.JoinedStr: extract_joined_str,
-            ast.FormattedValue: extract_formatted_val}
+            ast.FormattedValue: extract_formatted_val,
+            ast.Pass: dummy,
+            ast.Break: dummy,
+            ast.Continue: dummy,
+            ast.Delete: dummy,
+            ast.Lambda: dummy,
+            ast.AugAssign: dummy}
+
+#To-Do: Lamdbda, augAssign, else
 
 objects = get_objects(project)
 result = extract(objects)
