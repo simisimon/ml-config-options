@@ -87,6 +87,21 @@ def extract_assigns(obj):
         print("NEUER FALL!!!!!! bzw. Falsches Assignment") #kein Assignment
 
 
+def extract_aug_assign(obj):
+    value = get_values(obj.target)
+    value += get_operator(obj.op) + "= "
+    value += get_values(obj.value)
+    final_vars[obj.lineno] = value
+
+
+def extract_ann_assign(obj):
+    value = get_values(obj.target) + ": "
+    value += get_values(obj.annotation)
+    if obj.value != None:
+        value += " = " + str(get_values(obj.value))
+    final_vars[obj.lineno] = value
+
+
 def extract_for(obj_val):
     values = "for "
     values += get_values(obj_val.target) + " in "
@@ -100,6 +115,9 @@ def extract_for(obj_val):
 def extract_if(obj_val):
     #ignore condition
     for b in obj_val.body:
+        get_values(b)
+
+    for b in obj_val.orelse:
         get_values(b)
 
 
@@ -137,33 +155,7 @@ def extract_bool_op(obj):
 
 def extract_bin_op(obj_val):
     values = str(get_values(obj_val.left))
-    if type(obj_val.op) == ast.Add:
-        values += " + "
-    elif type(obj_val.op) == ast.Sub:
-        values += " - "
-    elif type(obj_val.op) == ast.Mult:
-        values += " * "
-    elif type(obj_val.op) == ast.Div:
-        values += " / "
-    elif type(obj_val.op) == ast.FloorDiv:
-        values += " // "
-    elif type(obj_val.op) == ast.Mod:
-        values += " % "
-    elif type(obj_val.op) == ast.Pow:
-        values += " ** "
-    elif type(obj_val.op) == ast.LShift:
-        values += " << "
-    elif type(obj_val.op) == ast.RShift:
-        values += " >> "
-    elif type(obj_val.op) == ast.BitOr:
-        values += " | "
-    elif type(obj_val.op) == ast.BitXor:
-        values += " ^ "
-    elif type(obj_val.op) == ast.BitAnd:
-        values += " & "
-    elif type(obj_val.op) == ast.MatMult:
-        values += " @ "
-
+    values += get_operator(obj_val.op) + " "
     values += str(get_values(obj_val.right))
     return values
 
@@ -177,6 +169,15 @@ def extract_unary_op(obj_val):
         return "not" + str(get_values(obj_val.operand))
     elif type(obj_val.op) == ast.Invert:
         return "~" + str(get_values(obj_val.operand))
+
+
+def extract_lambda(obj_val):
+    value = "lambda"
+    args = extract_args(obj_val.args)[1:-1]
+    if args != "":
+        value += " " + args
+    value += ": " + get_values(obj_val.body)
+    return value
 
 
 def extract_dict(obj_val):
@@ -417,6 +418,35 @@ def extract_ext_slice(obj_val):
     return values[:-2]
 
 
+def get_operator(op):
+    if type(op) == ast.Add:
+        return " +"
+    elif type(op) == ast.Sub:
+        return " -"
+    elif type(op) == ast.Mult:
+        return " *"
+    elif type(op) == ast.Div:
+        return " /"
+    elif type(op) == ast.FloorDiv:
+        return " //"
+    elif type(op) == ast.Mod:
+        return " %"
+    elif type(op) == ast.Pow:
+        return " **"
+    elif type(op) == ast.LShift:
+        return " <<"
+    elif type(op) == ast.RShift:
+        return " >>"
+    elif type(op) == ast.BitOr:
+        return " |"
+    elif type(op) == ast.BitXor:
+        return " ^"
+    elif type(op) == ast.BitAnd:
+        return " &"
+    elif type(op) == ast.MatMult:
+        return " @"
+
+
 def extract_index(obj_val):
     values = get_values(obj_val.value)
     return values
@@ -461,10 +491,10 @@ obj_type = {ast.BoolOp: extract_bool_op,
             ast.Break: dummy,
             ast.Continue: dummy,
             ast.Delete: dummy,
-            ast.Lambda: dummy,
-            ast.AugAssign: dummy}
+            ast.Lambda: extract_lambda,
+            ast.AugAssign: extract_aug_assign,
+            ast.AnnAssign: extract_ann_assign}
 
-#To-Do: Lamdbda, augAssign, else
 
 objects = get_objects(project)
 result = extract(objects)
