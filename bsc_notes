@@ -151,3 +151,8 @@ Möglichkeit string in strings darzustellen:
   tf.keras.layers.Dropout(0.2),
   tf.keras.layers.Dense(10, activation='softmax')
 ])
+
+Konsitenz reinbringen bei den Kontrollstrukturen: for, while wird gedruckt, if else nicht?!, try/except auch nicht?
+    Mögliche Lösung: Zeilenangaben anhängen und zuordnen
+
+line no function definitions

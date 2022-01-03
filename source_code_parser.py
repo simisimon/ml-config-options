@@ -29,6 +29,10 @@ def get_values(obj_value):
 
 """ast-handling"""
 def extract_func(obj):
+    if type(obj) == ast.FunctionDef:
+        func_type = "def: "
+    else:
+        func_type = "async def: "
     body = obj.body
     return_value = ""
     for b in body:
@@ -36,12 +40,14 @@ def extract_func(obj):
         if type(values) == str:
             if values.startswith("return "):
                 args = extract_args(obj.args)
-                return_value = "def: " + obj.name + args + ": " + values
+                return_value = func_type + obj.name + args + ": " + values
                 final_vars[b.lineno] = return_value
     if return_value == "":
         args = extract_args(obj.args)
-        values = "def: " + obj.name + args
+        values = func_type + obj.name + args
         final_vars[obj.lineno] = values
+    for d in obj.decorator_list:
+        final_vars[d.lineno] = "@" + str(get_values(d))
 
 
 def extract_class(obj):
@@ -90,7 +96,7 @@ def extract_assigns(obj):
 def extract_aug_assign(obj):
     value = get_values(obj.target)
     value += get_operator(obj.op) + "= "
-    value += get_values(obj.value)
+    value += str(get_values(obj.value))
     final_vars[obj.lineno] = value
 
 
@@ -101,15 +107,29 @@ def extract_ann_assign(obj):
         value += " = " + str(get_values(obj.value))
     final_vars[obj.lineno] = value
 
-
-def extract_for(obj_val):
-    values = "for "
-    values += get_values(obj_val.target) + " in "
-    values += get_values(obj_val.iter) + ":"
-    for b in obj_val.body:
+def extract_for(obj):
+    if type(obj) == ast.For:
+        values = "for "
+    else:
+        values = "async for "
+    values += get_values(obj.target) + " in "
+    values += get_values(obj.iter) + ":"
+    for b in obj.body:
         get_values(b)
-    final_vars[obj_val.lineno] = values
+    final_vars[obj.lineno] = values
     return ""
+
+
+def extract_while(obj):
+    values = "while ("
+    values += str(get_values(obj.test)) + "):"
+    final_vars[obj.lineno] = values
+    for b in obj.body:
+        get_values(b)
+    if len(obj.orelse) > 0:
+        for o in obj.orelse:
+            get_values(o)
+
 
 
 def extract_if(obj_val):
@@ -121,16 +141,55 @@ def extract_if(obj_val):
         get_values(b)
 
 
-def extract_with(obj_val):
-    values = ""
-    for item in obj_val.items:
-        final_vars[obj_val.lineno] = (get_values(item))
+def extract_with(obj):
+    if type(obj) == ast.AsyncWith:
+        values = "async "
+    else:
+        values = ""
+    for item in obj.items:
+        final_vars[obj.lineno] = (get_values(item))
 
-    for v in obj_val.body:
+    for v in obj.body:
         val_temp = get_values(v)
         if val_temp != None:
             values += val_temp
     return values
+
+
+def extract_raise(obj):
+    values = "raise "
+    values += str(get_values(obj.exc))
+    if obj.cause != None:
+        values += " from " + str(get_values(obj.cause))
+    final_vars[obj.lineno] = values
+
+
+def extract_try(obj):
+    values = ""
+    for b in obj.body:
+        get_values(b)
+    for h in obj.handlers:
+        get_values(h)
+    for o in obj.orelse:
+        get_values(o)
+    for f in obj.finalbody:
+        get_values(f)
+
+
+def extract_global(obj):
+    values = "global "
+    for n in obj.names:
+        values += n + ", "
+    values = values[:-2]
+    final_vars[obj.lineno] = values
+
+
+def extract_nonlocal(obj):
+    values = "nonlocal "
+    for n in obj.names:
+        values += n + ", "
+    values = values[:-2]
+    final_vars[obj.lineno] = values
 
 
 def extract_expr(obj):
@@ -153,6 +212,11 @@ def extract_bool_op(obj):
     return values
 
 
+def extract_named_expr(obj):
+    value = str(get_values(obj.target)) + " := " + str(get_values(obj.value))
+    return value
+
+
 def extract_bin_op(obj_val):
     values = str(get_values(obj_val.left))
     values += get_operator(obj_val.op) + " "
@@ -166,7 +230,7 @@ def extract_unary_op(obj_val):
     elif type(obj_val.op) == ast.UAdd:
         return "+" + str(get_values(obj_val.operand))
     elif type(obj_val.op) == ast.Not:
-        return "not" + str(get_values(obj_val.operand))
+        return "not " + str(get_values(obj_val.operand))
     elif type(obj_val.op) == ast.Invert:
         return "~" + str(get_values(obj_val.operand))
 
@@ -176,7 +240,14 @@ def extract_lambda(obj_val):
     args = extract_args(obj_val.args)[1:-1]
     if args != "":
         value += " " + args
-    value += ": " + get_values(obj_val.body)
+    value += ": " + str(get_values(obj_val.body))
+    return value
+
+
+def extract_if_exp(obj):
+    value = str(get_values(obj.body))
+    value += " if " + str(get_values(obj.test))
+    value += " else " + str(get_values(obj.orelse))
     return value
 
 
@@ -195,18 +266,66 @@ def extract_dict(obj_val):
             values = values[:-2] + "]" + ", "
         count += 1
 
-    """values = {}
-    count = 0
-    for key in obj_val.keys:
-        k = get_values(key)
-
-        v = obj_val.values[count]
-        v = get_values(v)
-
-        values[k] = v
-        count += 1"""
-    values = values[:-2] + "}"
+    if len(obj_val.keys) > 0:
+        values = values[:-2]
+    values += "}"
     return values
+
+
+def extract_set(obj):
+    value = "{"
+    for e in obj.elts:
+        value += str(get_values(e)) + ", "
+    value = value[:-2] + "}"
+    return value
+
+
+def extract_list_comp(obj):
+    values = "[" + str(get_values(obj.elt))
+    for g in obj.generators:
+        values += str(get_values(g))
+    values += "]"
+    return values
+
+
+def extract_set_comp(obj):
+    values = "{" + str(get_values(obj.elt))
+    for g in obj.generators:
+        values += str(get_values(g))
+    values += "}"
+    return values
+
+
+def extract_dict_comp(obj):
+    values = "{" + str(get_values(obj.key)) + ":"
+    values += str(get_values(obj.value))
+    for g in obj.generators:
+        values += str(get_values(g))
+    values += "}"
+    return values
+
+
+def extract_generator_exp(obj):
+    value = get_values(obj.elt)
+    for g in obj.generators:
+        value += get_values(g)
+    return value
+
+
+def extract_await(obj):
+    value = "await "
+    value += str(get_values(obj.value))
+    return value
+
+
+def extract_yield(obj):
+    value = "yield " + get_values(obj.value)
+    return value
+
+
+def extract_yield_from(obj):
+    value = "yield from " + get_values(obj.value)
+    return value
 
 
 def extract_compare(obj_val):
@@ -273,6 +392,11 @@ def extract_subscript(obj_val):
     return values
 
 
+def extract_starred(obj):
+    values = "*" + str(get_values(obj.value))
+    return values
+
+
 def extract_name(obj_val):
     values = obj_val.id
     return values
@@ -282,7 +406,9 @@ def extract_list(obj_val):
     values = "["
     for o in obj_val.elts:
         values += str(get_values(o)) + ", "
-    values = values[:-2] + "]"
+    if len(obj_val.elts) > 0:
+        values = values[:-2]
+    values += "]"
     return values
 
 
@@ -330,6 +456,19 @@ def get_cmpop(op):
         return "in"
     elif type(op) == ast.NotIn:
         return "not in"
+
+
+def extract_comprehension(obj):
+    value = " for " + str(get_values(obj.target))
+    value += " in " + str(get_values(obj.iter))
+    for i in obj.ifs:
+        value += " if " + str(get_values(i))
+    return value
+
+
+def extract_except_handler(obj):
+    for b in obj.body:
+        get_values(b)
 
 
 def extract_args(args):
@@ -407,6 +546,7 @@ def extract_withitem(obj_val):
     return values + ":"
 
 
+"""ast-handling helping functions"""
 def dummy(obj):
     print(str(obj.lineno) + ": dummy " + str(type(obj)))
 
@@ -493,7 +633,29 @@ obj_type = {ast.BoolOp: extract_bool_op,
             ast.Delete: dummy,
             ast.Lambda: extract_lambda,
             ast.AugAssign: extract_aug_assign,
-            ast.AnnAssign: extract_ann_assign}
+            ast.AnnAssign: extract_ann_assign,
+            ast.IfExp: extract_if_exp,
+            ast.GeneratorExp: extract_generator_exp,
+            ast.comprehension: extract_comprehension,
+            ast.ListComp: extract_list_comp,
+            ast.While: extract_while,
+            ast.Yield: extract_yield,
+            ast.Starred: extract_starred,
+            ast.Try: extract_try,
+            ast.ExceptHandler: extract_except_handler,
+            ast.Raise: extract_raise,
+            ast.Global: extract_global,
+            ast.Nonlocal: extract_nonlocal,
+            ast.YieldFrom: extract_yield_from,
+            ast.AsyncFunctionDef: extract_func,
+            ast.Await: extract_await,
+            ast.AsyncFor: extract_for,
+            ast.AsyncWith: extract_with,
+            ast.DictComp: extract_dict_comp,
+            ast.Set: extract_set,
+            ast.SetComp: extract_set_comp,
+            ast.NamedExpr: extract_named_expr
+            }
 
 
 objects = get_objects(project)
