@@ -156,3 +156,101 @@ Konsitenz reinbringen bei den Kontrollstrukturen: for, while wird gedruckt, if e
     Mögliche Lösung: Zeilenangaben anhängen und zuordnen
 
 line no function definitions
+
+
+Struktur:
+    1. Werte aus Import-Lines filtern
+    2. Durch ast-Objekte iterieren und Objekte rauslesen, die Import-Werte enthalten
+        Problem: bspw. Function, Class, For etc haben bodys und kapseln oft selbst nochmal eine Vielzahl an Objekten
+        Loopen durch:
+            FunctionDef body, decorater_list (unnötig)
+            AsyncFunctionDef body, decorater_list (unnötig)
+            ClassDef bases, keywords, body, decorater_list
+            Delete targets
+            Assign targets
+            For body, orelse
+            AsyncFor body, orelse
+            While body, orelse
+            If body, orelse
+            With items, body
+            Async With items, body
+            Match cases
+            Try body, handlers, orelse, finalbody
+            Import names
+            ImportFrom names
+            Global names
+            Nonlocal names
+
+            BoolOp values
+            Dict keys
+            Set elts
+            ListComp generators
+            SetComp generators
+            DictComp generators
+            GeneratorExp generators
+            Compare ops, comparators
+            Call args, keywords
+            JoinedStr values
+            List elts
+            Tuple elts
+
+            comprehension ifs
+            excepthandler ExceptHandler:body
+            arguments posonlyargs, args, kwonlyargs, kw_defaults, defaults
+            match_case body
+            pattern
+
+
+            Lösung: Typ prüfen und rausfiltern
+
+            body: FunctionDef, AsyncFunctionDef, ClassDef, For, AsyncFor, While, If, With, AsyncWith, Try
+            ?decorator_list: FunctionDef, AsyncFunctionDef, ClassDef
+            orelse: For, AsyncFor, While, If, Try
+            handlers: Try -> [excepthandler1: body] #Try hat handlers, handlers ist Liste aus mehrern ExceptHandlers, jeder ExceptHandler hat Body
+            finalbody: Try
+
+            Offen: Match
+
+            3 Categorien:
+            FunctionDef, AsyncFunctionDef, ClassDef, With, AsyncWith, ExceptHandler: body
+            For, AsyncFor, While, If: body, orelse
+            Try: body, orelse, handlers, finalbody
+
+
+        Vorgehen:
+            1. alle Objekte finden, in den relevante import-values auftauchen
+            2. durch einzelene Objekte nach den 3 oberen Kategorieren iterieren
+            3. gucken ob bei den import-values auch Klassen dabei sind (Vergleich mit scraper) attr =, id =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

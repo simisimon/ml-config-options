@@ -1,15 +1,17 @@
 from pprint import pprint
-import ast
+
 
 def get_source_code(source_file):
     with open(source_file) as f:
         code = f.read()
     return code
 
+
 def get_import_lines(code, ml_lib):
     import_lines = [line for line in code.split('\n') if line.startswith("from") or line.startswith("import")]
     import_lines = [line for line in import_lines if ml_lib in line]
     return import_lines
+
 
 def get_search_words(ml_lib_import_lines, ml_lib):
     search_words = []
@@ -42,6 +44,7 @@ def get_search_words(ml_lib_import_lines, ml_lib):
     search_words = list(dict.fromkeys(search_words))  #remove duplicates
     return search_words
 
+
 def modify_import_lines(ml_lib_import_lines, initial_word):
     lines_list = [line for line in ml_lib_import_lines if line.startswith(initial_word)] #all lines starting with import/from and containing library
     lines_list = [s.replace(initial_word, "") for s in lines_list]  # removing import/from keyword
@@ -51,9 +54,11 @@ def modify_import_lines(ml_lib_import_lines, initial_word):
 
     return lines_list
 
+
 def reduce_code(code):
     code = [line for line in code.split('\n') if not (line.startswith("from") or line.startswith("import") or line.startswith("#") or line == "")]
     return code
+
 
 def get_relevant_lines(code, search_words):
     classes = [s.replace("class:", "") for s in search_words if s.startswith("class:")]
@@ -68,13 +73,18 @@ def get_relevant_lines(code, search_words):
     return lines
 
 
-source_file = "test_projects/sklearn_birch.py"
-ml_lib = "sklearn"
-code = get_source_code(source_file)
-import_lines = get_import_lines(code, ml_lib)
+def get_import_val(project, ml_lib):
+    code = get_source_code(project)
+    import_lines = get_import_lines(code, ml_lib)
+    search_words = get_search_words(import_lines, ml_lib)
+    return search_words
+
+
+
+
 #pprint(import_lines)
-search_words = get_search_words(import_lines, ml_lib)
-pprint(search_words)
-code = reduce_code(code)
-lines = get_relevant_lines(code, search_words)
+
+#pprint(search_words)
+#code = reduce_code(code)
+#lines = get_relevant_lines(code, search_words)
 #pprint(lines)

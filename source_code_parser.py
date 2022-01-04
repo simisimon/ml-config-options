@@ -1,10 +1,7 @@
 import ast
-from operator import attrgetter
 from pprint import pprint
 import re
 
-project = "test_projects/another_test_project.py"
-final_vars = {}
 
 def get_objects(project):
     with open(project, "r") as source:
@@ -26,6 +23,7 @@ def get_values(obj_value):
     ast_type = type(obj_value)
     values = obj_type[ast_type](obj_value)
     return values
+
 
 """ast-handling"""
 def extract_func(obj):
@@ -658,9 +656,16 @@ obj_type = {ast.BoolOp: extract_bool_op,
             }
 
 
+project = "test_projects/another_test_project.py"
+ml_lib = "sklearn"
+final_vars = {}
+
 objects = get_objects(project)
 result = extract(objects)
-pprint(result)
+#pprint(result)
+
+
+
 
 #with open(project, "r") as source:
   #  tree = ast.parse(source.read())
