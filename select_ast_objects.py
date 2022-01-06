@@ -63,12 +63,12 @@ def get_obj(obj):
 
 
 def get_ast_objects_containing_classes():
-    final_ast_objects = []
+    final_ast_objects = {}
     for s in preselected_ast_objects:
         dump_ast = ast.dump(s)
         for c in classes:
             if c in dump_ast:
-                final_ast_objects.append(s)
+                final_ast_objects[s.lineno] = ast.unparse(s)  #saving as an object = s
                 break
     return final_ast_objects
 
@@ -86,5 +86,4 @@ get_selected_ast_objects()
 for p in preselected_ast_objects:
     print("preselection: " + ast.unparse(p))
 final_ast_objects = get_ast_objects_containing_classes()
-for f in final_ast_objects:
-    print("final selection: " + ast.unparse(f))
+pprint(final_ast_objects, width=250)
