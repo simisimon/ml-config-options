@@ -152,6 +152,8 @@ Möglichkeit string in strings darzustellen:
   tf.keras.layers.Dense(10, activation='softmax')
 ])
 
+limit: Klammern beim bin.op werden nicht mit übernommen bsp. accum = accum * rho + (grad**2) * (1 - rho)
+
 Konsitenz reinbringen bei den Kontrollstrukturen: for, while wird gedruckt, if else nicht?!, try/except auch nicht?
     Mögliche Lösung: Zeilenangaben anhängen und zuordnen
 
@@ -223,7 +225,9 @@ Struktur:
             3. gucken ob bei den import-values auch Klassen dabei sind (Vergleich mit scraper) attr =, id =
 
 
-
+        category1 = [ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.With, ast.AsyncWith, ast.ExceptHandler]
+category2 = [ast.For, ast.AsyncFor, ast.While, ast.If]
+category3 = [ast.Import, ast.ImportFrom]
 
 
 

@@ -1,5 +1,6 @@
 import ast
 from pprint import pprint
+from class_scraper import sklearn_classes
 
 
 def get_parent_ast_objects(prj):
@@ -28,75 +29,62 @@ def get_import_val(obj):
                             import_obj.append(n.asname)
                         else:
                             import_obj.append(n.name)
-
     return import_obj
 
 
 def get_selected_ast_objects():
     for p in parent_ast_objects:
-        get_val(p)
+        get_obj(p)
 
 
-def get_val(obj):
-    if type(obj) in category1:  # consider body
-        get_category_1(obj)
-    elif type(obj) in category2:  # consider body and orelse
-        get_category_2(obj)
-    elif type(obj) == ast.Try:  # consider body, orelse, handlers and finalbody
-        get_try(obj)
-    elif type(obj) in category3: # not relevant at all
-        pass
-    else:  # nothing to consider
-        get_category_4(obj)
+def get_obj(obj):
+    if hasattr(obj, 'body'):
+        for b in obj.body:  # func, async func, class, with, async with, except handler
+            get_obj(b)
+        obj.body = []
+        if hasattr(obj, 'orelse'):  # control-flow-objects: for, if, async for, while
+            for o in obj.orelse:
+                get_obj(o)
+            obj.orelse = []
+            if hasattr(obj, 'handlers'):  # exception-objects: try
+                for h in obj.handlers:
+                    get_obj(h)
+                for f in obj.finalbody:
+                    get_obj(f)
+                obj.handlers = []
+                obj.finalbody = []
+    if type(obj) != ast.Import and type(obj) != ast.ImportFrom:  # import-objects: import, import from
+        dump_ast = ast.dump(obj)
+        for i in import_values:
+            import_string = "'" + i + "'"
+            if import_string in dump_ast:
+                preselected_ast_objects.append(obj)
+                break
 
 
-def get_category_1(obj):
-    for b in obj.body:
-        get_val(b)
-
-
-def get_category_2(obj):
-    for b in obj.body:
-        get_val(b)
-    for o in obj.orelse:
-        get_val(o)
-
-
-def get_try(obj):
-    for b in obj.body:
-        get_val(b)
-    for o in obj.orelse:
-        get_val(o)
-    for h in obj.handlers:
-        get_val(h)
-    for f in obj.finalbody:
-        get_val(f)
-
-
-def get_category_4(obj):
-    dump_ast = ast.dump(obj)
-    for i in import_values:
-        import_string = "'" + i + "'"
-        if import_string in dump_ast:
-            selected_ast_objects.append(obj)
+def get_ast_objects_containing_classes():
+    final_ast_objects = []
+    for s in preselected_ast_objects:
+        dump_ast = ast.dump(s)
+        for c in classes:
+            if c in dump_ast:
+                final_ast_objects.append(s)
+                break
+    return final_ast_objects
 
 
 project = "test_projects/another_test_project.py"
 ml_lib = "sklearn"
+classes = sklearn_classes
 
 parent_ast_objects = get_parent_ast_objects(project)
 import_values = get_import_val(parent_ast_objects)
-pprint(import_values)
+print("import values: " + str(import_values))
 
-category1 = [ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.With, ast.AsyncWith, ast.ExceptHandler]
-category2 = [ast.For, ast.AsyncFor, ast.While, ast.If]
-category3 = [ast.Import, ast.ImportFrom]
-selected_ast_objects = []
+preselected_ast_objects = []
 get_selected_ast_objects()
-pprint(selected_ast_objects)
-for p in selected_ast_objects:
-    pprint(ast.unparse(p), width=300)
-
-
-# missing: iterate through specific parent_obj at category 1-2 and try
-# next Step: Iterate over selected_ast_objects to extract objects with ml-lib classes
+for p in preselected_ast_objects:
+    print("preselection: " + ast.unparse(p))
+final_ast_objects = get_ast_objects_containing_classes()
+for f in final_ast_objects:
+    print("final selection: " + ast.unparse(f))

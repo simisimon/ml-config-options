@@ -1,4 +1,15 @@
 # coop
+current:
+1) class_scraper.py
+   - extract classes from doc
+2) select_ast_objects.py
+   - extract keyword from import lines from project source code
+   - loop through source code and extract lines containing those keywords
+   - loop through those preselected lines and extract lines that contain classes from step 1)
+
+
+_______________
+old:
 1) extract.py
    - extract information from ML-lib docs
 2) analyze_import.py 

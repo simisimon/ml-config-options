@@ -5,7 +5,7 @@ import bs4
 from bs4 import BeautifulSoup
 from pprint import pprint
 
-import sklearn, mlflow, tensorflow as tf #, torch
+#import sklearn, mlflow, tensorflow as tf #, torch
 
 def get_dir(ml_lib):
     lib_dir = dir(ml_lib)
@@ -53,6 +53,27 @@ def get_sklearn_modules():
     modules.pop()
     return modules
 
+
+def get_sklearn_classes():
+    link = "https://scikit-learn.org/stable/modules/classes.html#"
+    html = urlopen(link)
+    soup = BeautifulSoup(html, "html.parser")
+    table_rows = soup.body.findAll("tr")
+    sklearn_objects = []
+    for o in table_rows:
+        obj = o.find("a").text
+        sklearn_objects.append(obj)
+
+    sklearn_classes = []
+    for s in sklearn_objects:
+        index = [i for i, c in enumerate(s) if c.isupper()]
+        for i in index:
+            if s[i-1] == ".":
+                sklearn_classes.append(s)
+                break
+
+    return sklearn_classes
+
 def get_mlflow_modules():
     link = "https://mlflow.org/docs/latest/python_api/index.html"
     html = urlopen(link)
@@ -66,21 +87,22 @@ def get_mlflow_modules():
 
     return modules
 
-sklearn_func = get_func(sklearn)
+sklearn_classes = get_sklearn_classes()
+#sklearn_func = get_func(sklearn)
 sklearn_modules = get_sklearn_modules()
 #pprint(sklearn_func)
-#pprint(sklearn_modules)
+pprint(sklearn_modules)
 
 #torch_func = get_func(torch) #not working sufficiently
 #pprint(torch_func)
 
-mlflow_func = get_func(mlflow)
-mlflow_modules = get_mlflow_modules()
+#mlflow_func = get_func(mlflow)
+#mlflow_modules = get_mlflow_modules()
 #pprint(mlflow_func)
 #pprint(mlflow_modules)
 
-tf_func = get_func(tf)
-tf_modules = get_tf_modules()
+#tf_func = get_func(tf)
+#tf_modules = get_tf_modules()
 #pprint(tf_modules)
 #pprint(tf_func)
 
