@@ -1,8 +1,9 @@
 # coop
 current:
 1) class_scraper.py
-   - extract classes from doc
-2) select_ast_objects.py
+   - extract classes incl. parameter from doc
+   - save into json file
+2) obj_selector.py
    - extract keyword from import lines from project source code
    - loop through source code and extract lines containing those keywords
    - loop through those preselected lines and extract lines that contain classes from step 1)
