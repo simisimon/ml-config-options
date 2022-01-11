@@ -231,7 +231,10 @@ category3 = [ast.Import, ast.ImportFrom]
 
 
 
+code': "cross_val_predict(LogisticRegression(solver='liblinear'), X, y, "
+            "method='predict_proba', cv=KFold(2))"
 
+Zu beachten: Dummys, Alphabetische Reihenfolge, None, Variablenzuweisung
 
 
 

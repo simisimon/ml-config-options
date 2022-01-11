@@ -82,7 +82,8 @@ class CodeObjects:
         for s in self.preselected_ast_objects:
             dump_ast = ast.dump(s)
             for c in classes:
-                if c in dump_ast:
+                c_edit = "\'" + c + "\'"
+                if c_edit in dump_ast:
                     final_obj.append([c, s])#final_obj[c] = ast.unparse(s) #final_obj.append(ast.unparse(s))#final_obj[s.lineno] = s #ast.unparse(s)
                     #break
         return final_obj
