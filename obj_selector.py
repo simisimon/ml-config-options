@@ -42,11 +42,12 @@ class CodeObjects:
                                 import_obj.append(n.name)
                 elif type(d) == ast.ImportFrom:
                     for n in d.names:
-                        if self.ml_lib in d.module:
-                            if n.asname != None:
-                                import_obj.append(n.asname)
-                            else:
-                                import_obj.append(n.name)
+                        if d.module != None:
+                            if self.ml_lib in d.module:
+                                if n.asname != None:
+                                    import_obj.append(n.asname)
+                                else:
+                                    import_obj.append(n.name)
         return import_obj
 
     def preselect_ast_objects(self, parent_obj, import_val):
@@ -82,10 +83,12 @@ class CodeObjects:
         for s in self.preselected_ast_objects:
             dump_ast = ast.dump(s)
             for c in classes:
-                c_edit = "\'" + c + "\'"
-                if c_edit in dump_ast:
-                    final_obj.append([c, s])#final_obj[c] = ast.unparse(s) #final_obj.append(ast.unparse(s))#final_obj[s.lineno] = s #ast.unparse(s)
-                    #break
+                c_edit_dump = "\'" + c + "\'"
+                if c_edit_dump in dump_ast:
+                    c_edit_unparse = c + "("
+                    if c_edit_unparse in ast.unparse(s):
+                        final_obj.append([c, s])#final_obj[c] = ast.unparse(s) #final_obj.append(ast.unparse(s))#final_obj[s.lineno] = s #ast.unparse(s)
+                        #break
         return final_obj
 
 

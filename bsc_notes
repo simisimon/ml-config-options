@@ -230,9 +230,36 @@ category2 = [ast.For, ast.AsyncFor, ast.While, ast.If]
 category3 = [ast.Import, ast.ImportFrom]
 
 
+umgang mit +=
 
 code': "cross_val_predict(LogisticRegression(solver='liblinear'), X, y, "
             "method='predict_proba', cv=KFold(2))"
+code': 'kernels = [RBF(length_scale=0.1), fixed_kernel, '
+            'RBF(length_scale=1.0, length_scale_bounds=(0.001, 1000.0)), '
+            'C(1.0, (0.01, 100.0)) * RBF(length_scale=1.0, '
+            'length_scale_bounds=(0.001, 1000.0))]'
+kernels = [
+    RBF(length_scale=2.0),
+    RBF(length_scale_bounds=(0.5, 2.0)),
+    ConstantKernel(constant_value=10.0),
+    2.0 * RBF(length_scale=0.33, length_scale_bounds="fixed"),
+    2.0 * RBF(length_scale=0.5),
+    kernel_rbf_plus_white,
+    2.0 * RBF(length_scale=[0.5, 2.0]),
+    2.0 * Matern(length_scale=0.33, length_scale_bounds="fixed"),
+    2.0 * Matern(length_scale=0.5, nu=0.5),
+    2.0 * Matern(length_scale=1.5, nu=1.5),
+    2.0 * Matern(length_scale=2.5, nu=2.5),
+    2.0 * Matern(length_scale=[0.5, 2.0], nu=0.5),
+    3.0 * Matern(length_scale=[2.0, 0.5], nu=1.5),
+    4.0 * Matern(length_scale=[0.5, 0.5], nu=2.5),
+    RationalQuadratic(length_scale=0.5, alpha=1.5),
+    ExpSineSquared(length_scale=0.5, periodicity=1.5),
+    DotProduct(sigma_0=2.0),
+    DotProduct(sigma_0=2.0) ** 2,
+    RBF(length_scale=[2.0]),
+    Matern(length_scale=[2.0]),
+]
 
 Zu beachten: Dummys, Alphabetische Reihenfolge, None, Variablenzuweisung
 

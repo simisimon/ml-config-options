@@ -1,4 +1,5 @@
 import ast
+import types
 
 from obj_selector import CodeObjects
 from pprint import pprint
@@ -13,7 +14,7 @@ class NodeObjects:
     def __init__(self, obj):
         self.class_ = obj[0]
         self.obj = obj[1]
-        self.variable = ""
+        self.variable = []
         self.parameter = {}
 
     def get_objects(self, obj):
@@ -27,19 +28,160 @@ class NodeObjects:
         values = self.obj_type[ast_type](self, obj)
         return values
 
+    def extract_func(self, obj):
+        self.extract_args(obj.args)
+        #decorator noch offen!
+        self.get_values(obj.returns)
+        return ast.unparse(obj)
+
+    def extract_async_func(self, obj):
+        self.extract_args(obj.args)
+        #decorator noch offen!
+        self.get_values(obj.returns)
+        return ast.unparse(obj)
+
+    def extract_return(self, obj):
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_delete(self, obj):
+        for target in obj.targets:
+            self.get_values(target)
+        return ast.unparse(obj)
+
     def extract_assigns(self, obj):
             #if type(obj.value) == ast.Call:
                 #if obj.value.func.id == self.class_:
-        self.variable = self.get_values(obj.targets[0])
+        for target in obj.targets:
+            self.variable.append(self.get_values(target))
         self.get_values(obj.value)
+
+    def extract_for(self, obj):
+        self.get_values(obj.iter)
+        self.get_values(obj.target)
+        return ast.unparse(obj)
+
+    def extract_while(self, obj):
+        self.get_values(obj.test)
+        return ast.unparse(obj)
+
+    def extract_if(self, obj):
+        self.get_values(obj.test)
+        return ast.unparse(obj)
+
+    def extract_raise(self, obj):
+        self.get_values(obj.cause)
+        self.get_values(obj.exc)
+        return ast.unparse(obj)
+
+    def extract_async_for(self, obj):
+        self.get_values(obj.iter)
+        self.get_values(obj.target)
+        return ast.unparse(obj)
+
+    def extract_with(self, obj):
+        for item in obj.items:
+            self.get_values(item.context_expr)
+            self.get_values(item.optional_vars)
+        return ast.unparse(obj)
+
+    def extract_async_with(self, obj):
+        for item in obj.items:
+            self.get_values(item.context_expr)
+            self.get_values(item.optional_vars)
+        return ast.unparse(obj)
+
+    def extract_assert(self, obj):
+        self.get_values(obj.msg)
+        self.get_values(obj.test)
+        return ast.unparse(obj)
 
     def extract_expr(self, obj):
         self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_bool_op(self, obj):
+        for val in obj.values:
+            self.get_values(val)
+        return ast.unparse(obj)
+
+    def extract_named_expr(self, obj):
+        self.get_values(obj.target)
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_bin_op(self, obj):
+        self.get_values(obj.left)
+        self.get_values(obj.right)
+        return ast.unparse(obj)
+
+    def extract_unary_op(self, obj):
+        self.get_values(obj.operand)
+        return ast.unparse(obj)
 
     def extract_lambda(self, obj):
+        self.get_values(obj.body)
+        return ast.unparse(obj)
+
+    def extract_if_exp(self, obj):
+        self.get_values(obj.body)
+        self.get_values(obj.orelse)
+        self.get_values(obj.test)
         return ast.unparse(obj)
 
     def extract_dict(self, obj):
+        for key in obj.keys:
+            self.get_values(key)
+        for val in obj.values:
+            self.get_values(val)
+        return ast.unparse(obj)
+
+    def extract_set(self, obj):
+        for ele in obj.elts:
+            self.get_values(ele)
+        return ast.unparse(obj)
+
+    def extract_list_comp(self, obj):
+        self.get_values(obj.elt)
+        for comp in obj.generators:
+            self.extract_comprehension(comp)
+        return ast.unparse(obj)
+
+    def extract_set_comp(self, obj):
+        self.get_values(obj.elt)
+        for comp in obj.generators:
+            self.extract_comprehension(comp)
+        return ast.unparse(obj)
+
+    def extract_dict_comp(self, obj):
+        self.get_values(obj.key)
+        self.get_values(obj.value)
+        for comp in obj.generators:
+            self.extract_comprehension(comp)
+        return ast.unparse(obj)
+
+    def extract_generator_exp(self, obj):
+        self.get_values(obj.elt)
+        for comp in obj.generators:
+            self.extract_comprehension(comp)
+        return ast.unparse(obj)
+
+    def extract_await(self, obj):
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_yield(self, obj):
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_yield_from(self, obj):
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_compare(self, obj):
+        for comp in obj.comparators:
+            self.get_values(comp)
+        self.get_values(obj.left)
         return ast.unparse(obj)
 
     def extract_call(self, obj):
@@ -57,7 +199,17 @@ class NodeObjects:
                 self.get_values(arg)
             for param in obj.keywords:
                 self.get_values(param.value)
-            return ast.unparse(obj)
+        return ast.unparse(obj)
+
+    def extracted_formatted_val(self, obj):
+        self.get_values(obj.format_spec)
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_joined_str(self, obj):
+        for val in obj.values:
+            self.get_values(val)
+        return ast.unparse(obj)
 
     def extract_constant(self, obj):
         return ast.unparse(obj)
@@ -66,9 +218,17 @@ class NodeObjects:
         self.get_values(obj.value)
         return ast.unparse(obj)
 
+    def extract_subscript(self, obj):
+        self.get_values(obj.slice)
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
+    def extract_starred(self, obj):
+        self.get_values(obj.value)
+        return ast.unparse(obj)
+
     def extract_name(self, obj):
-        id = obj.id
-        return id
+        return obj.id
 
     def extract_list(self, obj):
         for ele in obj.elts:
@@ -78,6 +238,47 @@ class NodeObjects:
     def extract_tuple(self, obj):
         for ele in obj.elts:
             self.get_values(ele)
+        return ast.unparse(obj)
+
+    def extract_slice(self, obj):
+        self.get_values(obj.lower)
+        self.get_values(obj.upper)
+        self.get_values(obj.step)
+        return ast.unparse(obj)
+
+    def extract_comprehension(self, obj):
+        self.get_values(obj.iter)
+        self.get_values(obj.target)
+        for i in obj.ifs:
+            self.get_values(i)
+        return ast.unparse(obj)
+
+    def extract_args(self, obj):
+        args = []
+        for arg in obj.posonlyargs:
+            if arg.annotation == None:
+                args.append(arg.arg)
+        for arg in obj.args:
+            if arg.annotation == None:
+                args.append(arg.arg)
+        if len(args) > 0:
+            for default in obj.defaults:
+                if default != None:
+                    if self.class_ in ast.unparse(default):
+                        self.get_values(default)
+                        self.variable = args[obj.defaults.index(default)]
+
+        kw_only_args = []
+        for arg in obj.kwonlyargs:
+            if arg.annotation == None:
+                kw_only_args.append(arg.arg)
+        if len(kw_only_args) > 0:
+            for kw in obj.kw_defaults:
+                if kw != None:
+                    if self.class_ in ast.unparse(kw):
+                        self.variable = kw_only_args[obj.kw_defaults.index(kw)]
+
+        self.get_values(obj.kwarg)
         return ast.unparse(obj)
 
     def dummy(self, obj):
@@ -92,10 +293,50 @@ class NodeObjects:
                 ast.Dict: extract_dict,
                 ast.Attribute: extract_attr,
                 ast.Tuple: extract_tuple,
-                ast.Assert: dummy,
+                ast.BinOp: extract_bin_op,
+                ast.UnaryOp: extract_unary_op,
+                ast.Assert: extract_assert,
                 ast.Lambda: extract_lambda,
+                ast.FunctionDef: extract_func,
+                ast.For: extract_for,
+                ast.Set: extract_set,
+                ast.Subscript: extract_subscript,
                 ast.ClassDef: dummy,
-                ast.With: dummy}
+                ast.Return: extract_return,
+                ast.With: extract_with,
+                ast.Compare: extract_compare,
+                ast.Slice: extract_slice,
+                ast.BoolOp: extract_bool_op,
+                ast.ListComp: extract_list_comp,
+                ast.IfExp: extract_if_exp,
+                ast.FormattedValue: extracted_formatted_val,
+                ast.JoinedStr: extract_joined_str,
+                ast.While: extract_while,
+                ast.If: extract_if,
+                ast.Starred: extract_starred,
+                ast.Delete: extract_delete,
+                ast.Await: extract_await,
+                ast.NamedExpr: extract_named_expr,
+                ast.DictComp: extract_dict_comp,
+                ast.SetComp: extract_set_comp,
+                ast.Raise: extract_raise,
+                ast.AsyncFor: extract_async_for,
+                ast.AsyncWith: extract_async_with,
+                ast.Yield: extract_yield,
+                ast.YieldFrom: extract_yield_from,
+                ast.GeneratorExp: extract_generator_exp,
+                ast.AsyncFunctionDef: extract_async_func,
+                ast.Pass: dummy,
+                ast.Break: dummy,
+                ast.Continue: dummy,
+                ast.Import: dummy,
+                ast.ImportFrom: dummy,
+                ast.Global: dummy,
+                ast.Nonlocal: dummy,
+                ast.Try: dummy,
+                ast.excepthandler: dummy,
+                type(None): dummy
+                }
 
 
 def convert_into_data_structure(project, objects, classes):
@@ -127,64 +368,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-"""
-obj_type = {ast.BoolOp: extract_bool_op,
-            ,
-            ,
-            ast.FunctionDef: extract_func,
-            ,
-            ,
-            ,
-            ast.BinOp: extract_bin_op,
-            ,
-            ast.UnaryOp: extract_unary_op,
-            ,
-            ,
-            ,
-            ast.Subscript: extract_subscript,
-            ast.Slice: extract_slice,
-            ast.ExtSlice: extract_ext_slice,
-            ast.Index: extract_index,
-            ,
-            ast.withitem: extract_withitem,
-            ast.Import: dummy,
-            ast.ImportFrom: dummy,
-            ,
-            ast.If: extract_if,
-            ast.Return: extract_return,
-            ---ast.ClassDef,
-            ast.For: extract_for,
-            ast.Compare: extract_compare,
-            ast.JoinedStr: extract_joined_str,
-            ast.FormattedValue: extract_formatted_val,
-            ast.Pass: dummy,
-            ast.Break: dummy,
-            ast.Continue: dummy,
-            ast.Delete: dummy,
-            ,
-            ast.AugAssign: extract_aug_assign,
-            ast.AnnAssign: extract_ann_assign,
-            ast.IfExp: extract_if_exp,
-            ast.GeneratorExp: extract_generator_exp,
-            ast.comprehension: extract_comprehension,
-            ast.ListComp: extract_list_comp,
-            ast.While: extract_while,
-            ast.Yield: extract_yield,
-            ast.Starred: extract_starred,
-            ast.Try: extract_try,
-            ast.ExceptHandler: extract_except_handler,
-            ast.Raise: extract_raise,
-            ast.Global: extract_global,
-            ast.Nonlocal: extract_nonlocal,
-            ast.YieldFrom: extract_yield_from,
-            ast.AsyncFunctionDef: extract_func,
-            ast.Await: extract_await,
-            ast.AsyncFor: extract_for,
-            ast.AsyncWith: extract_with,
-            ast.DictComp: extract_dict_comp,
-            ast.Set: extract_set,
-            ast.SetComp: extract_set_comp,
-            ast.NamedExpr: extract_named_expr
-            }
-"""
