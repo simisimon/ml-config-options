@@ -229,15 +229,14 @@ Struktur:
 category2 = [ast.For, ast.AsyncFor, ast.While, ast.If]
 category3 = [ast.Import, ast.ImportFrom]
 
-
+Frage: Wie umgehen wenn var = blabla + bla(LogisticRegression(x=1). Stand jetzt ist Var die Variable
 umgang mit +=
 
-code': "cross_val_predict(LogisticRegression(solver='liblinear'), X, y, "
-            "method='predict_proba', cv=KFold(2))"
+code': "cross_val_predict(cv=KFold(2))"  -> Variable -> cv
 code': 'kernels = [RBF(length_scale=0.1), fixed_kernel, '
             'RBF(length_scale=1.0, length_scale_bounds=(0.001, 1000.0)), '
             'C(1.0, (0.01, 100.0)) * RBF(length_scale=1.0, '
-            'length_scale_bounds=(0.001, 1000.0))]'
+            'length_scale_bounds=(0.001, 1000.0))]'  -> Lösungen für mehrmals RBF?
 kernels = [
     RBF(length_scale=2.0),
     RBF(length_scale_bounds=(0.5, 2.0)),
@@ -261,9 +260,9 @@ kernels = [
     Matern(length_scale=[2.0]),
 ]
 
-Zu beachten: Dummys, Alphabetische Reihenfolge, None, Variablenzuweisung
+Zu beachten: Dummys, Variablenzuweisung, Dopplungen
 
-
+Speicherung in Tupel, da Dict sortiert sind
 
 
 
