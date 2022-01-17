@@ -1,5 +1,6 @@
 import ast
 import types
+import json
 
 from obj_selector import CodeObjects
 from pprint import pprint
@@ -11,6 +12,7 @@ def get_parameters(objects):
         obj_with_prm = NodeObjects(obj).get_objects(obj[1])
         objects_with_prm.append(obj_with_prm)
     return objects_with_prm
+
 
 class NodeObjects:
     def __init__(self, obj):
@@ -164,7 +166,7 @@ class NodeObjects:
         if func == self.class_:
             for arg in obj.args:
                 argument = self.get_values(arg)
-                self.parameter.append((argument, ))
+                self.parameter.append((None, argument))
             for param in obj.keywords:
                 argument = str(param.arg)
                 value = self.get_values(param.value)
@@ -292,18 +294,49 @@ class NodeObjects:
                 }
 
 
-def convert_into_data_structure(project, objects, classes):
-    # structure: .py-file
-    # class1 --- class2 --- class3
-    # (lineno --- variable - parameters)
-    project = project
-    class_name = objects[0]
-    obj = objects[1]
-    line_no = obj.lineno
-    if type(obj) == ast.Assign:
-        variable = obj.targets
-    parameter = classes.get(class_name)
-    parameter = ""
+def merge_parameter(objects, classes):
+    for obj in objects:
+        class_ = classes[obj["3) class"]]
+        param_tuples = obj['5) parameter']
+        param_dict = class_.copy()
+        pos_arg = []
+        for key in param_dict:
+            if key != "*":
+             pos_arg.append(key)
+            else:
+                del param_dict["*"]
+                break
+        if len(param_tuples) > 0:
+            for arg in pos_arg:
+                index = pos_arg.index(arg)
+                if param_tuples[index][0] is None:
+                    key = list(param_dict)[index]
+                    value = param_tuples[index][1]
+                    param_dict[key] = value
+                else:
+                    break
+            for param in param_tuples:
+                key = param[0]
+                if key in param_dict:
+                    value = param[1]
+                    param_dict[key] = value
+        obj['5) parameter'] = param_dict
+    return objects
+
+
+def convert_into_node_structure(project, objects):
+    api_objects = []
+    for obj in objects:
+        for var in obj["4) variable"]:
+            dict_obj = {"project": project,
+                        "class": obj["3) class"],
+                        "line_no": obj["6) line_no"],
+                        "variable": var,
+                        "parameter": obj["5) parameter"]}
+            api_objects.append(dict_obj)
+
+    with open("node_objects.txt", 'w') as outfile:
+        json.dump(api_objects, outfile, indent=4)
 
 
 def main():
@@ -314,8 +347,9 @@ def main():
     classes = CodeObjects(ml_lib, project).read_json()
 
     objects_with_prm = get_parameters(ast_objects)
-    pprint(objects_with_prm)
-    #convert_into_data_structure(project, ast_objects[9], classes)
+
+    final_obj = merge_parameter(objects_with_prm, classes)
+    convert_into_node_structure(project, final_obj)
 
 
 if __name__ == "__main__":

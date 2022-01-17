@@ -260,9 +260,15 @@ kernels = [
     Matern(length_scale=[2.0]),
 ]
 
-Zu beachten: Dummys, Variablenzuweisung, Dopplungen
+Zu beachten: Dummys, Variablenzuweisung, AugAssing etc, decorators, Dopplungen
 
 Speicherung in Tupel, da Dict sortiert sind
+
+Zuweisung der Parameter zu den Klassen:
+class sklearn.decomposition.SparseCoder(dictionary, *, transform_algorithm='omp', transform_n_nonzero_coefs=None, transform_alpha=None, split_sign=False, n_jobs=None, positive_code=False, transform_max_iter=1000)
+alles was nach Sternchen kommt, muss mit Parameternamen angegeben werden
+nur dictionary darf direkt mit einem Wert initialisiert werden
+https://stackoverflow.com/questions/66922295/what-does-asterisk-mean-when-used-as-a-param-for-a-scikit-learn-model
 
 
 
