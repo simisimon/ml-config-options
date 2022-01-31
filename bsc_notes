@@ -271,8 +271,12 @@ nur dictionary darf direkt mit einem Wert initialisiert werden
 https://stackoverflow.com/questions/66922295/what-does-asterisk-mean-when-used-as-a-param-for-a-scikit-learn-model
 
 
+(cfgnet-XNQxSlNA-py3.8) marco@Marcos-MacBook-Pro CfgNet % poetry run cfgnet export --output=export2 --format=png --include-unlinked --visualize-dot /Users/marco/repos/CfgNet
 
+Scalpel wird nicht verwendet, da unter anderem Verarbeitung von Dictionairies nicht funktioniert. Bsp. x = test_dict["key"] läuft in Exception und führt zu Abbruch
 
+Mögliches Vorgehen zum Tracking der Variablenwerte:
+    1.
 
 
 

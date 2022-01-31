@@ -57,29 +57,17 @@ class NodeObjects:
         return ast.unparse(obj)
 
     def extract_assigns(self, obj):
-        #if type(obj.value) == ast.Call:
-            #if obj.value.func.id == self.class_:
-        #offen: Berücksichtigung, dass nicht nur Klasse zugewiesen wird
-        for target in obj.targets:
-            self.variable.append(self.get_values(target))
-        self.get_values(obj.value)
-        return ast.unparse(obj)
-
-    def extract_aug_assign(self, obj):
-        # offen: Berücksichtigung, dass nicht nur Klasse zugewiesen wird
-        # offen: Berücksichtigung des Operators
-        self.variable.append(self.get_values(obj.target))
-        self.get_values(obj.value)
+        value = self.get_values(obj.value)
+        if value is not None: #for case of ann_assign
+            if type(obj.value) == ast.Call:
+                if ast.unparse(obj.value).startswith(self.class_):
+                    for target in obj.targets:
+                        self.variable.append(self.get_values(target))
         return ast.unparse(obj)
 
     def extract_ann_assign(self, obj):
-        # offen: Berücksichtigung, dass nicht nur Klasse zugewiesen wird
-        # offen: Berücksichtigung des Operators
         value = self.get_values(obj.value)
-        annotation = self.get_values(obj.annotation)
         if value != None:
-            self.variable.append(self.get_values(obj.target) + ": " + annotation)
-        else:
             self.variable.append(self.get_values(obj.target))
         return ast.unparse(obj)
 
@@ -177,7 +165,7 @@ class NodeObjects:
             for param in obj.keywords:
                 param_val = self.get_values(param.value)
                 if param_val.startswith(self.class_):
-                    self.variable = param.arg
+                    self.variable.append(param.arg)
         return ast.unparse(obj)
 
     def extracted_formatted_val(self, obj):
@@ -219,7 +207,7 @@ class NodeObjects:
                 if default != None:
                     if self.class_ in ast.unparse(default):
                         self.get_values(default)
-                        self.variable = args[obj.defaults.index(default)]
+                        self.variable.append(args[obj.defaults.index(default)])
 
         kw_only_args = []
         for arg in obj.kwonlyargs:
@@ -229,7 +217,7 @@ class NodeObjects:
             for kw in obj.kw_defaults:
                 if kw != None:
                     if self.class_ in ast.unparse(kw):
-                        self.variable = kw_only_args[obj.kw_defaults.index(kw)]
+                        self.variable.append(kw_only_args[obj.kw_defaults.index(kw)])
 
         self.get_values(obj.kwarg)
         return ast.unparse(obj)
@@ -266,8 +254,8 @@ class NodeObjects:
                 ast.JoinedStr: extract_multiple_val,
                 ast.While: extract_cond,
                 ast.If: extract_cond,
-                ast.AugAssign: extract_aug_assign,
-                ast.AnnAssign: extract_ann_assign,
+                ast.AugAssign: extract_val,
+                ast.AnnAssign: extract_assigns,
                 ast.Starred: extract_val,
                 ast.Delete: extract_delete,
                 ast.Await: extract_val,
@@ -296,30 +284,25 @@ class NodeObjects:
 
 def merge_parameter(objects, classes):
     for obj in objects:
-        class_ = classes[obj["3) class"]]
-        param_tuples = obj['5) parameter']
-        param_dict = class_.copy()
-        pos_arg = []
-        for key in param_dict:
-            if key != "*":
-             pos_arg.append(key)
+        cls_parameters = classes[obj["3) class"]]
+        prj_parameters = obj['5) parameter']
+        param_dict = {}
+        asterisks = False
+        for prj_param in prj_parameters:
+            if prj_param[0] is None and not asterisks:
+                for cls_param in list(cls_parameters):
+                    if len(param_dict) <= list(cls_parameters).index(cls_param):
+                        if cls_param != '*':
+                            param_dict[cls_param] = prj_param[1]
+                            break
+                        else:
+                            asterisks = True
+                            break
             else:
-                del param_dict["*"]
-                break
-        if len(param_tuples) > 0:
-            for arg in pos_arg:
-                index = pos_arg.index(arg)
-                if param_tuples[index][0] is None:
-                    key = list(param_dict)[index]
-                    value = param_tuples[index][1]
-                    param_dict[key] = value
-                else:
-                    break
-            for param in param_tuples:
-                key = param[0]
-                if key in param_dict:
-                    value = param[1]
-                    param_dict[key] = value
+                for cls_param in list(cls_parameters):
+                    if cls_param == prj_param[0]:
+                        param_dict[cls_param] = prj_param[1]
+                        break
         obj['5) parameter'] = param_dict
     return objects
 
@@ -327,13 +310,19 @@ def merge_parameter(objects, classes):
 def convert_into_node_structure(project, objects):
     api_objects = []
     for obj in objects:
-        for var in obj["4) variable"]:
-            dict_obj = {"project": project,
-                        "class": obj["3) class"],
-                        "line_no": obj["6) line_no"],
-                        "variable": var,
-                        "parameter": obj["5) parameter"]}
+        dict_obj = {"project": project,
+                    "class": obj["3) class"],
+                    "line_no": obj["6) line_no"],
+                    "variable": None,
+                    "parameter": obj["5) parameter"]}
+        if len(obj["4) variable"]) == 0:
             api_objects.append(dict_obj)
+        else:
+            for var in obj["4) variable"]:
+                dict_obj["variable"] = var
+                dict_copy = dict_obj.copy()
+                api_objects.append(dict_copy)
+
 
     with open("node_objects.txt", 'w') as outfile:
         json.dump(api_objects, outfile, indent=4)
@@ -349,9 +338,11 @@ def main():
     objects_with_prm = get_parameters(ast_objects)
 
     final_obj = merge_parameter(objects_with_prm, classes)
+    pprint(final_obj)
     convert_into_node_structure(project, final_obj)
 
 
 if __name__ == "__main__":
     main()
+
 
