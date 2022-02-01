@@ -276,7 +276,12 @@ https://stackoverflow.com/questions/66922295/what-does-asterisk-mean-when-used-a
 Scalpel wird nicht verwendet, da unter anderem Verarbeitung von Dictionairies nicht funktioniert. Bsp. x = test_dict["key"] läuft in Exception und führt zu Abbruch
 
 Mögliches Vorgehen zum Tracking der Variablenwerte:
-    1.
+    1. Alle Variablenzuweisungen der Funktion rausfiltern
+    2. Objekte nach gesuchten Variable durchsuchen
+
+Zu Tun:
+- Variablenwerte tracken
+- Parameter im Fall von Dopplungen behandeln! -> DONE!!
 
 
 

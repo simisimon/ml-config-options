@@ -4,13 +4,35 @@ import json
 
 from obj_selector import CodeObjects
 from pprint import pprint
+from re import finditer
 
 
 def get_parameters(objects):
     objects_with_prm = []
     for obj in objects:
-        obj_with_prm = NodeObjects(obj).get_objects(obj[1])
-        objects_with_prm.append(obj_with_prm)
+        class_ = obj[0]
+        obj_code = ast.unparse(obj[1])
+        indices = [i.start() for i in finditer(class_, obj_code)]
+        indices.reverse()
+
+        """check if same class occurs multiple times in obj"""
+        if len(indices) > 1:
+            for i in range(len(indices)):
+                for j in range(len(indices)):
+                    if i != j:
+                        start = indices[j]
+                        stop = start + len(class_)
+                        obj_code = "".join((obj_code[:start], "", obj_code[stop:]))
+
+                ast_obj = (class_, ast.parse(obj_code).body[0])
+                obj_with_prm = NodeObjects(ast_obj).get_objects(ast_obj[1])
+                obj_with_prm['6) line_no'] = obj[1].lineno
+                objects_with_prm.append(obj_with_prm)
+                obj_code = ast.unparse(obj[1])
+        else:
+            obj_with_prm = NodeObjects(obj).get_objects(obj[1])
+            objects_with_prm.append(obj_with_prm)
+
     return objects_with_prm
 
 
