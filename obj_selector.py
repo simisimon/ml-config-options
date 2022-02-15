@@ -7,17 +7,19 @@ class CodeObjects:
     def __init__(self, ml_lib, project):
         self.ml_lib = ml_lib
         self.project = project
-        self.preselected_ast_objects = []
         self.functions = []
+        self.preselected_ast_objects = []
+        self.final_ast_objects = []
+
 
     def get_objects(self):
         classes = self.read_json()
         parent_ast_objects = self.get_parent_ast_objects()
         import_values = self.get_import_val(parent_ast_objects)
         self.preselect_ast_objects(parent_ast_objects, import_values)
-        final_ast_objects = self.get_ast_objects_containing_classes(classes)
-        assignments = self.get_parent_functions(final_ast_objects)
-        return final_ast_objects
+        self.get_ast_objects_containing_classes(classes)
+        self.get_variables(parent_ast_objects)
+        return self.final_ast_objects
 
     def read_json(self):
         with open(self.ml_lib + '.txt') as json_file:
@@ -63,7 +65,8 @@ class CodeObjects:
                 for body_obj in obj.body:
                     if type(body_obj) == ast.Assign:
                         assignments.append(body_obj)
-                self.functions.append((obj.end_lineno, obj.lineno, assignments))
+                func = {"line no": obj.lineno, "line no end": obj.end_lineno, "assignments": assignments}
+                self.functions.append(func)
             for b in obj.body:  # func, async func, class, with, async with, except handler
                 self.get_obj(b, import_val)
             obj.body = []
@@ -87,7 +90,6 @@ class CodeObjects:
                     break
 
     def get_ast_objects_containing_classes(self, classes):
-        final_obj = []
         for s in self.preselected_ast_objects:
             dump_ast = ast.dump(s)
             for c in classes:
@@ -95,16 +97,30 @@ class CodeObjects:
                 if c_edit_dump in dump_ast:
                     c_edit_unparse = c + "("
                     if c_edit_unparse in ast.unparse(s):
-                        final_obj.append([c, s])#final_obj[c] = ast.unparse(s) #final_obj.append(ast.unparse(s))#final_obj[s.lineno] = s #ast.unparse(s)
-                        #break
-        return final_obj
+                        final_obj = {"class": c, "obj": s, "param variables": None}
+                        self.final_ast_objects.append(final_obj)
 
-    def get_parent_functions(self, ast_objects):
-        for obj in ast_objects:
+    def get_variables(self, parent_ast_objects):
+        global_assignments = []
+        for obj in parent_ast_objects:
+            if type(obj) == ast.Assign:
+                global_assignments.append(obj)
+        self.functions = sorted(self.functions, key=lambda d: d['line no end'])
+        for obj in self.final_ast_objects:
             for func in self.functions:
-                if func[1] <= obj[1].lineno <= func[0]:
-                    obj.append(func[2])
-        return ast_objects
+                if func["line no"] <= obj["obj"].lineno:
+                    if obj["obj"].lineno <= func["line no end"]:
+                        obj["param variables"] = func["assignments"]
+                        break
+                else:
+                    relevant_global_vars = []
+                    for assign in global_assignments:
+                        if assign.lineno < obj["obj"].lineno:
+                            relevant_global_vars.append(assign)
+                        else:
+                            break
+                    obj["param variables"] = relevant_global_vars
+                    break
 
 
 def main():
@@ -112,7 +128,7 @@ def main():
     ml_lib = "sklearn"
 
     ast_objects = CodeObjects(ml_lib, project).get_objects()
-    pprint(ast_objects, width=250)
+    pprint(ast_objects, width=75)
 
 
 if __name__ == "__main__":

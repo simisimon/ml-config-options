@@ -9,9 +9,8 @@ from re import finditer
 def get_parameters(objects):
     objects_with_prm = []
     for obj in objects:
-        class_ = obj[0]
-        obj_code = ast.unparse(obj[1])
-        indices = [i.start() for i in finditer(class_, obj_code)]
+        obj_code = ast.unparse(obj["obj"])
+        indices = [i.start() for i in finditer(obj["class"], obj_code)]
         indices.reverse()
 
         """check if same class occurs multiple times in obj"""
@@ -20,16 +19,16 @@ def get_parameters(objects):
                 for j in range(len(indices)):
                     if i != j:
                         start = indices[j]
-                        stop = start + len(class_)
+                        stop = start + len(obj["class"])
                         obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
 
-                ast_obj = (class_, ast.parse(obj_code).body[0])
-                obj_with_prm = NodeObjects(ast_obj).get_objects(ast_obj[1])
-                obj_with_prm['6) line_no'] = obj[1].lineno
+                ast_dict = {"class": obj["class"], "obj": ast.parse(obj_code).body[0], "param variables": obj["param variables"]}
+                obj_with_prm = NodeObjects(ast_dict).get_objects(obj["obj"])
+                obj_with_prm['6) line_no'] = obj["obj"].lineno
                 objects_with_prm.append(obj_with_prm)
-                obj_code = ast.unparse(obj[1])
+                obj_code = ast.unparse(obj["obj"])
         else:
-            obj_with_prm = NodeObjects(obj).get_objects(obj[1])
+            obj_with_prm = NodeObjects(obj).get_objects(obj["obj"])
             objects_with_prm.append(obj_with_prm)
 
     return objects_with_prm
@@ -37,15 +36,17 @@ def get_parameters(objects):
 
 class NodeObjects:
     def __init__(self, obj):
-        self.class_ = obj[0]
-        self.obj = obj[1]
+        self.class_ = obj["class"]
+        self.obj = obj["obj"]
         self.variable = []
         self.parameter = []
+        self.parameter_variables = obj["param variables"]
 
     def get_objects(self, obj):
         self.get_values(obj)
         obj_dict = {"1) object": type(self.obj), "2) code": ast.unparse(self.obj), "3) class": self.class_,
-                    "4) variable": self.variable, "5) parameter": self.parameter, "6) line_no": self.obj.lineno}
+                    "4) variable": self.variable, "5) parameter": self.parameter, "6) line_no": self.obj.lineno,
+                    "7) parameter variables": self.parameter_variables}
         return obj_dict
 
     def get_values(self, obj):
