@@ -308,7 +308,9 @@ poetry run cfgnet export --output=graph_test --format=png --include-unlinked --v
 
 
 
-
+Scope fürs Variablentracking:
+    - alle Assignments auf erster Ebene
+        - dafür in obj_selector: alle Funktionen finden.
 
 
 

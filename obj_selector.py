@@ -8,6 +8,7 @@ class CodeObjects:
         self.ml_lib = ml_lib
         self.project = project
         self.preselected_ast_objects = []
+        self.functions = []
 
     def get_objects(self):
         classes = self.read_json()
@@ -15,6 +16,7 @@ class CodeObjects:
         import_values = self.get_import_val(parent_ast_objects)
         self.preselect_ast_objects(parent_ast_objects, import_values)
         final_ast_objects = self.get_ast_objects_containing_classes(classes)
+        assignments = self.get_parent_functions(final_ast_objects)
         return final_ast_objects
 
     def read_json(self):
@@ -56,6 +58,12 @@ class CodeObjects:
 
     def get_obj(self, obj, import_val):
         if hasattr(obj, 'body'):
+            if type(obj) == ast.FunctionDef or type(obj) == ast.AsyncFunctionDef:
+                assignments = []
+                for body_obj in obj.body:
+                    if type(body_obj) == ast.Assign:
+                        assignments.append(body_obj)
+                self.functions.append((obj.end_lineno, obj.lineno, assignments))
             for b in obj.body:  # func, async func, class, with, async with, except handler
                 self.get_obj(b, import_val)
             obj.body = []
@@ -79,7 +87,7 @@ class CodeObjects:
                     break
 
     def get_ast_objects_containing_classes(self, classes):
-        final_obj = [] #final_obj = []
+        final_obj = []
         for s in self.preselected_ast_objects:
             dump_ast = ast.dump(s)
             for c in classes:
@@ -90,6 +98,13 @@ class CodeObjects:
                         final_obj.append([c, s])#final_obj[c] = ast.unparse(s) #final_obj.append(ast.unparse(s))#final_obj[s.lineno] = s #ast.unparse(s)
                         #break
         return final_obj
+
+    def get_parent_functions(self, ast_objects):
+        for obj in ast_objects:
+            for func in self.functions:
+                if func[1] <= obj[1].lineno <= func[0]:
+                    obj.append(func[2])
+        return ast_objects
 
 
 def main():
