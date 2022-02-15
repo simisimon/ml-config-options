@@ -7,7 +7,7 @@ import warnings
 from functools import partial
 from time import sleep
 
-import pytest
+#import pytest
 import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 from sklearn.exceptions import FitFailedWarning
@@ -76,13 +76,15 @@ from sklearn.datasets import make_multilabel_classification
 from sklearn.model_selection.tests.common import OneTimeSplitter
 from sklearn.model_selection import GridSearchCV
 
+x = 2
+liste = {GridSearchCV(n_jobs=2), GridSearchCV(2,1), GridSearchCV(0)}
 
 try:
     WindowsError
 except NameError:
     WindowsError = None
 
-
+GridSearchCV(3, 3, 5)
 class MockImprovingEstimator(BaseEstimator):
     """Dummy classifier to test the learning curve"""
 
@@ -1883,7 +1885,7 @@ def test_gridsearchcv_cross_val_predict_with_method():
     iris = load_iris()
     X, y = iris.data, iris.target
     X, y = shuffle(X, y, random_state=0)
-    est = GridSearchCV(
+    est = oest = GridSearchCV(
         LogisticRegression(random_state=42, solver="liblinear"), {"C": [0.1, 1]}, cv=2
     )
     for method in ["decision_function", "predict_proba", "predict_log_proba"]:

@@ -1,5 +1,4 @@
 import ast
-import types
 import json
 
 from obj_selector import CodeObjects
@@ -22,7 +21,7 @@ def get_parameters(objects):
                     if i != j:
                         start = indices[j]
                         stop = start + len(class_)
-                        obj_code = "".join((obj_code[:start], "", obj_code[stop:]))
+                        obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
 
                 ast_obj = (class_, ast.parse(obj_code).body[0])
                 obj_with_prm = NodeObjects(ast_obj).get_objects(ast_obj[1])

@@ -283,7 +283,28 @@ Zu Tun:
 - Variablenwerte tracken
 - Parameter im Fall von Dopplungen behandeln! -> DONE!!
 
+Zu Variablenwerte tracken:
+    1) Prüfen ob es sich um Variablen oder Konstanten handelt
+    2) Wenn Variable(n), dann Übergeordnete Funktionen und Klassen betrachten:
+        3) Alle Zuweisungen rausfiltern
+        4) Prüfen, welche Zuweisungen der(den) gesuchten Variable(n) Werte zuweisen
+        5) Wenn bei Zuweisungen neue Variablen auftauchen, gehe zu 4).
+    -> Scope bleibt aber immer nur die übergeordnete Funktion / Klasse!
 
+src  -> plugins -> source_code
+-> modules: json file hinzufügen
+-> von sklearn plug_in code mehr oder weniger kopieren bzw. die ersten beiden Funktionen der Klasse (is_responsible, parse_config_file
+test -> files -> datei hinzufügen für pytorch zum testen
+
+es muss ein git repository sein!
+immer erst option zum artifact hinzufügen
+artifact ist .py datei
+plugin manager zeile 27, 47 adaptieren
+unter plugin_manager bei source_code Plugins hinzuüfgen
+
+diese beiden Befehle ausführen - .py datei in test/files ordner hinzufügen
+poetry run cfgnet init /Users/marco/repos/CfgNet
+poetry run cfgnet export --output=graph_test --format=png --include-unlinked --visualize-dot /Users/marco/repos/CfgNet
 
 
 

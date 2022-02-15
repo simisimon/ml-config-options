@@ -1,101 +1,829 @@
 [
     {
         "project": "test_projects/another_test_project.py",
-        "class": "OneVsRestClassifier",
-        "line_no": 93,
-        "variable": "a",
+        "class": "GridSearchCV",
+        "line_no": 80,
+        "variable": null,
         "parameter": {
-            "estimator": "SVC(kernel='linear')",
-            "n_jobs": "None"
+            "estimator": "0"
         }
     },
     {
         "project": "test_projects/another_test_project.py",
-        "class": "OneVsRestClassifier",
-        "line_no": 93,
-        "variable": "classif",
+        "class": "GridSearchCV",
+        "line_no": 80,
+        "variable": null,
         "parameter": {
-            "estimator": "SVC(kernel='linear')",
-            "n_jobs": "None"
+            "estimator": "2",
+            "param_grid": "1"
         }
     },
     {
         "project": "test_projects/another_test_project.py",
-        "class": "SVC",
-        "line_no": 93,
-        "variable": "a",
+        "class": "GridSearchCV",
+        "line_no": 80,
+        "variable": null,
         "parameter": {
-            "C": "1.0",
-            "kernel": "'linear'",
-            "degree": "3",
-            "gamma": "'scale'",
-            "coef0": "0.0",
-            "shrinking": "True",
-            "probability": "False",
-            "tol": "0.001",
-            "cache_size": "200",
-            "class_weight": "None",
-            "verbose": "False",
-            "max_iter": "- 1",
-            "decision_function_shape": "'ovr'",
-            "break_ties": "False",
-            "random_state": "None"
+            "n_jobs": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GridSearchCV",
+        "line_no": 87,
+        "variable": null,
+        "parameter": {
+            "estimator": "3",
+            "param_grid": "3"
         }
     },
     {
         "project": "test_projects/another_test_project.py",
         "class": "SVC",
-        "line_no": 93,
-        "variable": "classif",
+        "line_no": 322,
+        "variable": "clf",
         "parameter": {
-            "C": "1.0",
+            "gamma": "'auto'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GridSearchCV",
+        "line_no": 323,
+        "variable": "grid",
+        "parameter": {
+            "estimator": "clf",
+            "param_grid": "{'C': [1, 10]}"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 387,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SimpleImputer",
+        "line_no": 395,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Pipeline",
+        "line_no": 395,
+        "variable": "pipeline",
+        "parameter": {
+            "steps": "[('imputer', SimpleImputer()), ('classifier', MockClassifier())]"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 411,
+        "variable": "cv",
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Ridge",
+        "line_no": 415,
+        "variable": "reg",
+        "parameter": {
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 419,
+        "variable": "clf",
+        "parameter": {
             "kernel": "'linear'",
-            "degree": "3",
-            "gamma": "'scale'",
-            "coef0": "0.0",
-            "shrinking": "True",
-            "probability": "False",
-            "tol": "0.001",
-            "cache_size": "200",
-            "class_weight": "None",
-            "verbose": "False",
-            "max_iter": "- 1",
-            "decision_function_shape": "'ovr'",
-            "break_ties": "False",
-            "random_state": "None"
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 583,
+        "variable": "clf",
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GroupKFold",
+        "line_no": 585,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GroupShuffleSplit",
+        "line_no": 585,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LeaveOneGroupOut",
+        "line_no": 585,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LeavePGroupsOut",
+        "line_no": 585,
+        "variable": null,
+        "parameter": {
+            "n_groups": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 621,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 624,
+        "variable": "kfold",
+        "parameter": {
+            "n_splits": "5"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 626,
+        "variable": "kfold",
+        "parameter": {
+            "n_splits": "5"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 640,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "'precomputed'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 645,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 650,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "lambda x, y: np.dot(x, y.T)"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 655,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "'precomputed'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 726,
+        "variable": "clf",
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Ridge",
+        "line_no": 745,
+        "variable": "reg",
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 772,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "StratifiedKFold",
+        "line_no": 773,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 795,
+        "variable": "svm_sparse",
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "StratifiedKFold",
+        "line_no": 796,
+        "variable": "cv_sparse",
+        "parameter": {
+            "n_splits": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SimpleImputer",
+        "line_no": 838,
+        "variable": null,
+        "parameter": {
+            "strategy": "'mean'",
+            "missing_values": "np.nan"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Pipeline",
+        "line_no": 838,
+        "variable": "p",
+        "parameter": {
+            "steps": "[('imputer', SimpleImputer(strategy='mean', missing_values=np.nan)), ('classifier', MockClassifier())]"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SimpleImputer",
+        "line_no": 867,
+        "variable": null,
+        "parameter": {
+            "strategy": "'mean'",
+            "missing_values": "np.nan"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Pipeline",
+        "line_no": 867,
+        "variable": "p",
+        "parameter": {
+            "steps": "[('imputer', SimpleImputer(strategy='mean', missing_values=np.nan)), ('classifier', MockClassifier())]"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KNeighborsClassifier",
+        "line_no": 894,
+        "variable": "clf",
+        "parameter": {
+            "n_neighbors": "1"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 908,
+        "variable": "cv",
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Ridge",
+        "line_no": 910,
+        "variable": "est",
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LeaveOneOut",
+        "line_no": 924,
+        "variable": "cv",
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KMeans",
+        "line_no": 934,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 953,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 953,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "2"
         }
     },
     {
         "project": "test_projects/another_test_project.py",
         "class": "LogisticRegression",
-        "line_no": 109,
+        "line_no": 965,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 972,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "RidgeClassifier",
+        "line_no": 992,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 992,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 997,
         "variable": "est",
         "parameter": {
-            "penalty": "'l2'",
-            "dual": "False",
-            "tol": "0.0001",
-            "C": "1.0",
-            "fit_intercept": "True",
-            "intercept_scaling": "1",
-            "class_weight": "None",
-            "random_state": "0",
-            "solver": "'liblinear'",
-            "max_iter": "100",
-            "multi_class": "'auto'",
-            "verbose": "0",
-            "warm_start": "False",
-            "n_jobs": "None",
-            "l1_ratio": "None"
+            "kernel": "'linear'",
+            "decision_function_shape": "'ovo'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1011,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "3"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1017,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1024,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1033,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1040,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "Ridge",
+        "line_no": 1052,
+        "variable": "clf",
+        "parameter": {
+            "fit_intercept": "False",
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1078,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1084,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1130,
+        "variable": "clf",
+        "parameter": {
+            "random_state": "1",
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "StratifiedKFold",
+        "line_no": 1131,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1178,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "n_splits"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "PassiveAggressiveClassifier",
+        "line_no": 1346,
+        "variable": "estimator",
+        "parameter": {
+            "max_iter": "1",
+            "tol": "None",
+            "shuffle": "False"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1430,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "3"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "PassiveAggressiveClassifier",
+        "line_no": 1465,
+        "variable": "estimator",
+        "parameter": {
+            "max_iter": "5",
+            "tol": "None",
+            "shuffle": "False"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GroupKFold",
+        "line_no": 1467,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 1638,
+        "variable": null,
+        "parameter": {
+            "kernel": "'linear'",
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1652,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "n_splits",
+            "shuffle": "True"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 1652,
+        "variable": null,
+        "parameter": {
+            "kernel": "'linear'",
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1666,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "n_splits"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 1666,
+        "variable": null,
+        "parameter": {
+            "kernel": "'linear'",
+            "random_state": "0"
         }
     },
     {
         "project": "test_projects/another_test_project.py",
         "class": "OneVsRestClassifier",
-        "line_no": 109,
+        "line_no": 1742,
+        "variable": "classif",
+        "parameter": {
+            "estimator": "SVC(kernel='linear')"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 1742,
+        "variable": null,
+        "parameter": {
+            "kernel": "'linear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1751,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "3",
+            "shuffle": "False"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1772,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "3",
+            "shuffle": "False"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1803,
+        "variable": "cv",
+        "parameter": {
+            "n_splits": "3",
+            "shuffle": "False"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1867,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1868,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SGDClassifier",
+        "line_no": 1880,
         "variable": "est",
         "parameter": {
-            "estimator": "LogisticRegression(solver='liblinear', random_state=0)",
-            "n_jobs": "None"
+            "loss": "'log'",
+            "random_state": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1888,
+        "variable": null,
+        "parameter": {
+            "random_state": "42",
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GridSearchCV",
+        "line_no": 1888,
+        "variable": "est",
+        "parameter": {
+            "estimator": "LogisticRegression(random_state=42, solver='liblinear')",
+            "param_grid": "{'C': [0.1, 1]}",
+            "cv": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "GridSearchCV",
+        "line_no": 1888,
+        "variable": "oest",
+        "parameter": {
+            "estimator": "LogisticRegression(random_state=42, solver='liblinear')",
+            "param_grid": "{'C': [0.1, 1]}",
+            "cv": "2"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1904,
+        "variable": null,
+        "parameter": {
+            "solver": "'liblinear'",
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "OneVsRestClassifier",
+        "line_no": 1904,
+        "variable": "est",
+        "parameter": {
+            "estimator": "LogisticRegression(solver='liblinear', random_state=0)"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 1944,
+        "variable": "est",
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1996,
+        "variable": "kfold3",
+        "parameter": {
+            "n_splits": "3"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "KFold",
+        "line_no": 1997,
+        "variable": "kfold4",
+        "parameter": {
+            "n_splits": "4"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LabelEncoder",
+        "line_no": 1999,
+        "variable": "le",
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 2003,
+        "variable": "est",
+        "parameter": {
+            "solver": "'liblinear'"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 2121,
+        "variable": "clf",
+        "parameter": {
+            "kernel": "'linear'",
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "ShuffleSplit",
+        "line_no": 2122,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 2207,
+        "variable": "clf",
+        "parameter": {
+            "max_iter": "5"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LogisticRegression",
+        "line_no": 2239,
+        "variable": "clf",
+        "parameter": {
+            "max_iter": "5"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 2321,
+        "variable": "clf",
+        "parameter": {
+            "kernel": "'linear'",
+            "random_state": "0"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "ShuffleSplit",
+        "line_no": 2322,
+        "variable": null,
+        "parameter": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "LinearSVC",
+        "line_no": 2358,
+        "variable": "est",
+        "parameter": {
+            "random_state": "42"
+        }
+    },
+    {
+        "project": "test_projects/another_test_project.py",
+        "class": "SVC",
+        "line_no": 2374,
+        "variable": "svm",
+        "parameter": {
+            "kernel": "'precomputed'"
         }
     }
 ]
