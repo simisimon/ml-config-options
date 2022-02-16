@@ -23,7 +23,7 @@ def get_parameters(objects):
                         obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
 
                 ast_dict = {"class": obj["class"], "obj": ast.parse(obj_code).body[0], "param variables": obj["param variables"]}
-                obj_with_prm = NodeObjects(ast_dict).get_objects(obj["obj"])
+                obj_with_prm = NodeObjects(ast_dict).get_objects(ast_dict["obj"])
                 obj_with_prm['6) line_no'] = obj["obj"].lineno
                 objects_with_prm.append(obj_with_prm)
                 obj_code = ast.unparse(obj["obj"])
@@ -41,12 +41,13 @@ class NodeObjects:
         self.variable = []
         self.parameter = []
         self.parameter_variables = obj["param variables"]
+        self.variable_value = {}
 
     def get_objects(self, obj):
         self.get_values(obj)
         obj_dict = {"1) object": type(self.obj), "2) code": ast.unparse(self.obj), "3) class": self.class_,
                     "4) variable": self.variable, "5) parameter": self.parameter, "6) line_no": self.obj.lineno,
-                    "7) parameter variables": self.parameter_variables}
+                    "7) value of parameter variables": self.variable_value}
         return obj_dict
 
     def get_values(self, obj):
@@ -175,10 +176,15 @@ class NodeObjects:
         func = self.get_values(obj.func)
         if func == self.class_:
             for arg in obj.args:
+                if type(arg) == ast.Name:
+                    self.get_variable_scope(arg)
                 argument = self.get_values(arg)
                 self.parameter.append((None, argument))
             for param in obj.keywords:
                 argument = str(param.arg)
+                value = self.get_values(param.value)
+                if type(param.value) == ast.Name:
+                    self.get_variable_scope(param.value)
                 value = self.get_values(param.value)
                 self.parameter.append((argument, value))
         else:
@@ -246,6 +252,12 @@ class NodeObjects:
 
     def dummy(self, obj):
         print(str(type(self.obj)) + ": dummy " + ast.unparse(self.obj))
+
+    def get_variable_scope(self, obj):
+        for assign in self.parameter_variables:
+            for target in assign.targets:
+                if ast.unparse(target) == ast.unparse(obj):
+                    self.variable_value[ast.unparse(obj)] = ast.unparse(assign.value)
 
     obj_type = {ast.Name: extract_unparse_obj,
                 ast.Constant: extract_unparse_obj,
@@ -329,6 +341,21 @@ def merge_parameter(objects, classes):
     return objects
 
 
+def get_variable_scope(objects):
+    for obj in objects:
+        scope = {}
+        parameter = obj['5) parameter']
+        for item in parameter.items():
+            if item[1].startswith('ast.Name:'):
+                item = list(item)
+                item[1] = item[1].replace('ast.Name:', "")
+                parameter[item[0]] = item[1]
+                for assign in obj['7) parameter variables']:
+                    for target in assign.targets:
+                        if ast.unparse(target) == item[1]:
+                            scope[item[1]] = ast.unparse(assign.value)
+        obj["8) scope of parameter variables"] = scope
+
 def convert_into_node_structure(project, objects):
     api_objects = []
     for obj in objects:
@@ -336,7 +363,8 @@ def convert_into_node_structure(project, objects):
                     "class": obj["3) class"],
                     "line_no": obj["6) line_no"],
                     "variable": None,
-                    "parameter": obj["5) parameter"]}
+                    "parameter": obj["5) parameter"],
+                    "parameter_values": obj["7) value of parameter variables"]}
         if len(obj["4) variable"]) == 0:
             api_objects.append(dict_obj)
         else:
@@ -344,7 +372,6 @@ def convert_into_node_structure(project, objects):
                 dict_obj["variable"] = var
                 dict_copy = dict_obj.copy()
                 api_objects.append(dict_copy)
-
 
     with open("node_objects.txt", 'w') as outfile:
         json.dump(api_objects, outfile, indent=4)
@@ -358,8 +385,10 @@ def main():
     classes = CodeObjects(ml_lib, project).read_json()
 
     objects_with_prm = get_parameters(ast_objects)
-
+    #pprint(objects_with_prm)
     final_obj = merge_parameter(objects_with_prm, classes)
+    #pprint(final_obj)
+    #get_variable_scope(final_obj)
     pprint(final_obj)
     convert_into_node_structure(project, final_obj)
 

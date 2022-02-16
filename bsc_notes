@@ -286,9 +286,8 @@ Zu Tun:
 Zu Variablenwerte tracken:
     1) Prüfen ob es sich um Variablen oder Konstanten handelt
     2) Wenn Variable(n), dann Übergeordnete Funktionen und Klassen betrachten:
-        3) Alle Zuweisungen rausfiltern
+        3) Alle oberen Zuweisungen rausfiltern
         4) Prüfen, welche Zuweisungen der(den) gesuchten Variable(n) Werte zuweisen
-        5) Wenn bei Zuweisungen neue Variablen auftauchen, gehe zu 4).
     -> Scope bleibt aber immer nur die übergeordnete Funktion / Klasse!
 
 src  -> plugins -> source_code

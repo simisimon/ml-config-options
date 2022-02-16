@@ -18,7 +18,7 @@ class CodeObjects:
         import_values = self.get_import_val(parent_ast_objects)
         self.preselect_ast_objects(parent_ast_objects, import_values)
         self.get_ast_objects_containing_classes(classes)
-        self.get_variables(parent_ast_objects)
+        self.get_param_variables(parent_ast_objects)
         return self.final_ast_objects
 
     def read_json(self):
@@ -100,7 +100,7 @@ class CodeObjects:
                         final_obj = {"class": c, "obj": s, "param variables": None}
                         self.final_ast_objects.append(final_obj)
 
-    def get_variables(self, parent_ast_objects):
+    def get_param_variables(self, parent_ast_objects):
         global_assignments = []
         for obj in parent_ast_objects:
             if type(obj) == ast.Assign:
@@ -110,16 +110,22 @@ class CodeObjects:
             for func in self.functions:
                 if func["line no"] <= obj["obj"].lineno:
                     if obj["obj"].lineno <= func["line no end"]:
-                        obj["param variables"] = func["assignments"]
+                        relevant_assigns = []
+                        for assign in func["assignments"]:
+                            if assign.lineno < obj["obj"].lineno:
+                                relevant_assigns.append(assign)
+                            else:
+                                break
+                        obj["param variables"] = relevant_assigns
                         break
                 else:
-                    relevant_global_vars = []
+                    relevant_global_assigns = []
                     for assign in global_assignments:
                         if assign.lineno < obj["obj"].lineno:
-                            relevant_global_vars.append(assign)
+                            relevant_global_assigns.append(assign)
                         else:
                             break
-                    obj["param variables"] = relevant_global_vars
+                    obj["param variables"] = relevant_global_assigns
                     break
 
 
