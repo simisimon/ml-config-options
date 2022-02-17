@@ -314,11 +314,15 @@ Scope fürs Variablentracking:
 
 
 
+torch: https://pytorch.org/docs/stable/tensors.html -> Klassen nochmal ansehen -> wenn empty, dann nicht hinzufügen?
+torch: https://pytorch.org/docs/stable/tensor_attributes.html
 
+2 mal gleicher Name für Klasse: was tun?
+class
+torch.profiler.profile(*, activities=None, schedule=None, on_trace_ready=None, record_shapes=False, profile_memory=False, with_stack=False, with_flops=False, with_modules=False, use_cuda=None)
 
-
-
-
+class
+torch.autograd.profiler.profile(enabled=True, *, use_cuda=False, record_shapes=False, with_flops=False, profile_memory=False, with_stack=False, with_modules=False, use_kineto=False, use_cpu=True)
 
 
 
