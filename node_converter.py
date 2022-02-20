@@ -1,16 +1,16 @@
 import ast
 import json
 
-from obj_selector import CodeObjects
+from obj_selector import TorchObjects, SklearnObjects
 from pprint import pprint
-from re import finditer
 
 
 def get_parameters(objects):
     objects_with_prm = []
     for obj in objects:
-        obj_code = ast.unparse(obj["obj"])
-        indices = [i.start() for i in finditer(obj["class"], obj_code)]
+        obj_code = ast.unparse(obj["object"])
+        class_string = "{0}(".format(obj["class"])
+        indices = [i for i in range(len(obj_code)) if obj_code.startswith(class_string, i)]
         indices.reverse()
 
         """check if same class occurs multiple times in obj"""
@@ -21,14 +21,18 @@ def get_parameters(objects):
                         start = indices[j]
                         stop = start + len(obj["class"])
                         obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
-
-                ast_dict = {"class": obj["class"], "obj": ast.parse(obj_code).body[0], "param variables": obj["param variables"]}
-                obj_with_prm = NodeObjects(ast_dict).get_objects(ast_dict["obj"])
-                obj_with_prm['6) line_no'] = obj["obj"].lineno
+                try:
+                    ast_dict = {"class": obj["class"], "object": ast.parse(obj_code).body[0],
+                                "parameter variables": obj["parameter variables"]}
+                except:
+                    ast_dict = {"class": obj["class"], "object": ast.parse(obj_code + "[]").body[0],
+                                "parameter variables": obj["parameter variables"]}
+                obj_with_prm = NodeObjects(ast_dict).get_objects(ast_dict["object"])
+                obj_with_prm['6) line_no'] = obj["object"].lineno
                 objects_with_prm.append(obj_with_prm)
-                obj_code = ast.unparse(obj["obj"])
+                obj_code = ast.unparse(obj["object"])
         else:
-            obj_with_prm = NodeObjects(obj).get_objects(obj["obj"])
+            obj_with_prm = NodeObjects(obj).get_objects(obj["object"])
             objects_with_prm.append(obj_with_prm)
 
     return objects_with_prm
@@ -37,10 +41,10 @@ def get_parameters(objects):
 class NodeObjects:
     def __init__(self, obj):
         self.class_ = obj["class"]
-        self.obj = obj["obj"]
-        self.variable = []
+        self.obj = obj["object"]
+        self.variable = ""
         self.parameter = []
-        self.parameter_variables = obj["param variables"]
+        self.parameter_variables = obj["parameter variables"]
         self.variable_value = {}
 
     def get_objects(self, obj):
@@ -57,7 +61,7 @@ class NodeObjects:
 
     def extract_func(self, obj):
         self.extract_args(obj.args)
-        #decorator noch offen!
+        # decorator noch offen!
         self.get_values(obj.returns)
         return ast.unparse(obj)
 
@@ -67,7 +71,7 @@ class NodeObjects:
         for keyword in obj.keywords:
             value = self.get_values(keyword.value)
             if self.class_ in value:
-                self.variable.append(keyword.arg)
+                self.variable = keyword.arg
         return ast.unparse(obj)
 
     def extract_val(self, obj):
@@ -81,17 +85,16 @@ class NodeObjects:
 
     def extract_assigns(self, obj):
         value = self.get_values(obj.value)
-        if value is not None: #for case of ann_assign
+        if value is not None:  # for case of ann_assign
             if type(obj.value) == ast.Call:
                 if ast.unparse(obj.value).startswith(self.class_):
-                    for target in obj.targets:
-                        self.variable.append(self.get_values(target))
+                    self.variable = ast.unparse(obj.targets)
         return ast.unparse(obj)
 
     def extract_ann_assign(self, obj):
         value = self.get_values(obj.value)
         if value != None:
-            self.variable.append(self.get_values(obj.target))
+            self.variable = ast.unparse(obj.target)
         return ast.unparse(obj)
 
     def extract_for(self, obj):
@@ -182,7 +185,6 @@ class NodeObjects:
                 self.parameter.append((None, argument))
             for param in obj.keywords:
                 argument = str(param.arg)
-                value = self.get_values(param.value)
                 if type(param.value) == ast.Name:
                     self.get_variable_scope(param.value)
                 value = self.get_values(param.value)
@@ -193,7 +195,7 @@ class NodeObjects:
             for param in obj.keywords:
                 param_val = self.get_values(param.value)
                 if param_val.startswith(self.class_):
-                    self.variable.append(param.arg)
+                    self.variable = param.arg
         return ast.unparse(obj)
 
     def extracted_formatted_val(self, obj):
@@ -203,6 +205,12 @@ class NodeObjects:
 
     def extract_unparse_obj(self, obj):
         return ast.unparse(obj)
+
+    def extract_attr(self, obj):
+        if obj.attr == self.class_:
+            return obj.attr
+        else:
+            self.get_values(obj.value)
 
     def extract_subscript(self, obj):
         self.get_values(obj.slice)
@@ -235,7 +243,7 @@ class NodeObjects:
                 if default != None:
                     if self.class_ in ast.unparse(default):
                         self.get_values(default)
-                        self.variable.append(args[obj.defaults.index(default)])
+                        self.variable = args[obj.defaults.index(default)]
 
         kw_only_args = []
         for arg in obj.kwonlyargs:
@@ -245,13 +253,14 @@ class NodeObjects:
             for kw in obj.kw_defaults:
                 if kw != None:
                     if self.class_ in ast.unparse(kw):
-                        self.variable.append(kw_only_args[obj.kw_defaults.index(kw)])
+                        self.variable = kw_only_args[obj.kw_defaults.index(kw)]
 
         self.get_values(obj.kwarg)
         return ast.unparse(obj)
 
     def dummy(self, obj):
-        print(str(type(self.obj)) + ": dummy " + ast.unparse(self.obj))
+        if type(obj) != type(None):
+            print(str(type(self.obj)) + ": dummy " + ast.unparse(self.obj))
 
     def get_variable_scope(self, obj):
         for assign in self.parameter_variables:
@@ -266,7 +275,7 @@ class NodeObjects:
                 ast.Expr: extract_val,
                 ast.List: extract_elements,
                 ast.Dict: extract_dict,
-                ast.Attribute: extract_val,
+                ast.Attribute: extract_attr,
                 ast.Tuple: extract_elements,
                 ast.BinOp: extract_bin_op,
                 ast.UnaryOp: extract_unary_op,
@@ -356,6 +365,7 @@ def get_variable_scope(objects):
                             scope[item[1]] = ast.unparse(assign.value)
         obj["8) scope of parameter variables"] = scope
 
+
 def convert_into_node_structure(project, objects):
     api_objects = []
     for obj in objects:
@@ -378,22 +388,22 @@ def convert_into_node_structure(project, objects):
 
 
 def main():
-    project = "test_projects/another_test_project.py"
-    ml_lib = "sklearn"
+    #project = "test_projects/another_test_project.py"
+    #ast_objects = SklearnObjects(project).get_objects()
+    #classes = SklearnObjects(project).read_json()
 
-    ast_objects = CodeObjects(ml_lib, project).get_objects()
-    classes = CodeObjects(ml_lib, project).read_json()
+    project = "test_projects/torch_project.py"
+    ast_objects = TorchObjects(project).get_objects()
+    classes = TorchObjects(project).read_json()
 
     objects_with_prm = get_parameters(ast_objects)
-    #pprint(objects_with_prm)
+    pprint(objects_with_prm)
     final_obj = merge_parameter(objects_with_prm, classes)
+    # pprint(final_obj)
+    # get_variable_scope(final_obj)
     #pprint(final_obj)
-    #get_variable_scope(final_obj)
-    pprint(final_obj)
     convert_into_node_structure(project, final_obj)
 
 
 if __name__ == "__main__":
     main()
-
-

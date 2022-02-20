@@ -4,61 +4,60 @@ import json
 
 
 class CodeObjects:
-    def __init__(self, ml_lib, project):
-        self.ml_lib = ml_lib
+    def __init__(self, project):
+        self.library = ""
+        self.classes = {}
         self.project = project
-        self.functions = []
-        self.preselected_ast_objects = []
-        self.final_ast_objects = []
-
+        self.first_level_objects = []
+        self.import_objects = []
+        self.function_objects = []  # scope of parameter variables
+        self.objects_from_library = []
+        self.library_class_objects = []
 
     def get_objects(self):
-        classes = self.read_json()
-        parent_ast_objects = self.get_parent_ast_objects()
-        import_values = self.get_import_val(parent_ast_objects)
-        self.preselect_ast_objects(parent_ast_objects, import_values)
-        self.get_ast_objects_containing_classes(classes)
-        self.get_param_variables(parent_ast_objects)
-        return self.final_ast_objects
+        self.read_json()
+        self.get_first_level_objects()
+        self.get_import_objects()
+        self.get_objects_from_library()
+        self.get_objects_containing_classes()
+        self.get_param_variables()
+        return self.library_class_objects
 
     def read_json(self):
-        with open(self.ml_lib + '.txt') as json_file:
-            classes = json.load(json_file)
-        return classes
+        with open("{0}.txt".format(self.library)) as json_file:
+            self.classes = json.load(json_file)
+        return self.classes
 
-    def get_parent_ast_objects(self):
+    def get_first_level_objects(self):
         with open(self.project, "r") as source:
             tree = ast.parse(source.read())
-        obj = tree.body
-        return obj
+        self.first_level_objects = tree.body
 
-    def get_import_val(self, parent_ast_objects):
-        import_obj = []
-        for o in parent_ast_objects:
-            desc_nodes = list(ast.walk(o))
-            for d in desc_nodes:
-                if type(d) == ast.Import:
-                    for n in d.names:
-                        if self.ml_lib in n.name:
-                            if n.asname != None:
-                                import_obj.append(n.asname)
+    def get_import_objects(self):
+        for obj in self.first_level_objects:
+            nodes = list(ast.walk(obj))
+            for node in nodes:
+                if type(node) == ast.Import:
+                    for package in node.names:
+                        if self.library in package.name:
+                            if package.asname is not None:
+                                self.import_objects.append(package.asname)
                             else:
-                                import_obj.append(n.name)
-                elif type(d) == ast.ImportFrom:
-                    for n in d.names:
-                        if d.module != None:
-                            if self.ml_lib in d.module:
-                                if n.asname != None:
-                                    import_obj.append(n.asname)
+                                self.import_objects.append(package.name)
+                elif type(node) == ast.ImportFrom:
+                    for package in node.names:
+                        if node.module is not None:
+                            if self.library in node.module:
+                                if package.asname is not None:
+                                    self.import_objects.append(package.asname)
                                 else:
-                                    import_obj.append(n.name)
-        return import_obj
+                                    self.import_objects.append(package.name)
 
-    def preselect_ast_objects(self, parent_obj, import_val):
-        for p in parent_obj:
-            self.get_obj(p, import_val)
+    def get_objects_from_library(self):
+        for obj in self.first_level_objects:
+            self.get_object(obj)
 
-    def get_obj(self, obj, import_val):
+    def get_object(self, obj):
         if hasattr(obj, 'body'):
             if type(obj) == ast.FunctionDef or type(obj) == ast.AsyncFunctionDef:
                 assignments = []
@@ -66,74 +65,91 @@ class CodeObjects:
                     if type(body_obj) == ast.Assign:
                         assignments.append(body_obj)
                 func = {"line no": obj.lineno, "line no end": obj.end_lineno, "assignments": assignments}
-                self.functions.append(func)
-            for b in obj.body:  # func, async func, class, with, async with, except handler
-                self.get_obj(b, import_val)
+                self.function_objects.append(func)
+            for body_obj in obj.body:  # func, async func, class, with, async with, except handler
+                self.get_object(body_obj)
             obj.body = []
             if hasattr(obj, 'orelse'):  # control-flow-objects: for, if, async for, while
-                for o in obj.orelse:
-                    self.get_obj(o, import_val)
+                for orelse_obj in obj.orelse:
+                    self.get_object(orelse_obj)
                 obj.orelse = []
                 if hasattr(obj, 'handlers'):  # exception-objects: try
-                    for h in obj.handlers:
-                        self.get_obj(h, import_val)
-                    for f in obj.finalbody:
-                        self.get_obj(f, import_val)
+                    for handler_obj in obj.handlers:
+                        self.get_object(handler_obj)
+                    for finalbody_obj in obj.finalbody:
+                        self.get_object(finalbody_obj)
                     obj.handlers = []
                     obj.finalbody = []
         if type(obj) != ast.Import and type(obj) != ast.ImportFrom:  # import-objects: import, import from
-            dump_ast = ast.dump(obj)
-            for i in import_val:
-                import_string = "'" + i + "'"
-                if import_string in dump_ast:
-                    self.preselected_ast_objects.append(obj)
+            dump_ast_obj = ast.dump(obj)
+            for import_obj in self.import_objects:
+                import_string = "'{0}'".format(import_obj)
+                if import_string in dump_ast_obj:
+                    self.objects_from_library.append(obj)
                     break
 
-    def get_ast_objects_containing_classes(self, classes):
-        for s in self.preselected_ast_objects:
-            dump_ast = ast.dump(s)
-            for c in classes:
-                c_edit_dump = "\'" + c + "\'"
-                if c_edit_dump in dump_ast:
-                    c_edit_unparse = c + "("
-                    if c_edit_unparse in ast.unparse(s):
-                        final_obj = {"class": c, "obj": s, "param variables": None}
-                        self.final_ast_objects.append(final_obj)
+    def get_objects_containing_classes(self):
+        for obj in self.objects_from_library:
+            dump_ast_obj = ast.dump(obj)
+            for class_ in self.classes:
+                class_edit = "'{0}'".format(class_)
+                if class_edit in dump_ast_obj:
+                    class_string = "{0}(".format(class_)
+                    obj_code = ast.unparse(obj)
+                    indices = [i for i in range(len(obj_code)) if obj_code.startswith(class_string, i)]
+                    for index in indices:
+                        if not(obj_code[index - 1].isalnum()) or index == 0:
+                            if class_string in ast.unparse(obj):
+                                class_object = {"class": class_, "object": obj, "parameter variables": None}
+                                self.library_class_objects.append(class_object)
 
-    def get_param_variables(self, parent_ast_objects):
+    def get_param_variables(self):
         global_assignments = []
-        for obj in parent_ast_objects:
+        for obj in self.first_level_objects:
             if type(obj) == ast.Assign:
                 global_assignments.append(obj)
-        self.functions = sorted(self.functions, key=lambda d: d['line no end'])
-        for obj in self.final_ast_objects:
-            for func in self.functions:
-                if func["line no"] <= obj["obj"].lineno:
-                    if obj["obj"].lineno <= func["line no end"]:
-                        relevant_assigns = []
+        self.function_objects = sorted(self.function_objects, key=lambda d: d["line no end"])
+        for obj in self.library_class_objects:
+            for func in self.function_objects:
+                if func["line no"] <= obj["object"].lineno:
+                    if obj["object"].lineno <= func["line no end"]:
+                        assigns_before_obj = []
                         for assign in func["assignments"]:
-                            if assign.lineno < obj["obj"].lineno:
-                                relevant_assigns.append(assign)
+                            if assign.lineno < obj["object"].lineno:
+                                assigns_before_obj.append(assign)
                             else:
                                 break
-                        obj["param variables"] = relevant_assigns
+                        obj["parameter variables"] = assigns_before_obj
                         break
                 else:
-                    relevant_global_assigns = []
+                    global_assigns_before_obj = []
                     for assign in global_assignments:
-                        if assign.lineno < obj["obj"].lineno:
-                            relevant_global_assigns.append(assign)
+                        if assign.lineno < obj["object"].lineno:
+                            global_assigns_before_obj.append(assign)
                         else:
                             break
-                    obj["param variables"] = relevant_global_assigns
+                    obj["parameter variables"] = global_assigns_before_obj
                     break
+
+
+class SklearnObjects(CodeObjects):
+    def __init__(self, project):
+        CodeObjects.__init__(self, project)
+        self.library = "sklearn"
+
+
+class TorchObjects(CodeObjects):
+    def __init__(self, project):
+        CodeObjects.__init__(self, project)
+        self.library = "torch"
 
 
 def main():
     project = "test_projects/another_test_project.py"
-    ml_lib = "sklearn"
+    # project = "test_projects/torch_project.py"
+    ast_objects = SklearnObjects(project).get_objects()
+    # ast_objects = TorchObjects(project).get_objects()
 
-    ast_objects = CodeObjects(ml_lib, project).get_objects()
     pprint(ast_objects, width=75)
 
 

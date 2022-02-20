@@ -17,7 +17,7 @@ class ClassScraper:
         return parameters
 
     def create_json(self, library, classes):
-        with open("{0}.txt".format(library), 'w') as outfile:
+        with open("{0}.txt".format(library), "w") as outfile:
             json.dump(classes, outfile, indent=4)
 
 
@@ -70,7 +70,7 @@ class TorchScraper(ClassScraper):
         self.scrape_class_urls()
         self.scrape_desc_elements()
         self.scrape_classes()
-        self.create_json("pytorch", self.classes)
+        self.create_json("torch", self.classes)
 
     def scrape_module_urls(self):
         link = "https://pytorch.org/docs/stable/index.html"

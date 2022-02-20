@@ -1,1 +1,426 @@
-[]
+[
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "BatchNorm1d",
+        "line_no": 767,
+        "variable": null,
+        "parameter": {
+            "num_features": "5",
+            "affine": "False"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Identity",
+        "line_no": 2419,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 2810,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 2824,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 2877,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 2902,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 2924,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 2979,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 3006,
+        "variable": null,
+        "parameter": {
+            "in_features": "20",
+            "out_features": "30"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 3007,
+        "variable": null,
+        "parameter": {
+            "in_features": "30",
+            "out_features": "40"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 3009,
+        "variable": null,
+        "parameter": {
+            "record_shapes": "True"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "LSTM",
+        "line_no": 3028,
+        "variable": null,
+        "parameter": {
+            "*args": "10",
+            "**kwargs": "20"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 3030,
+        "variable": null,
+        "parameter": {
+            "record_shapes": "True"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 3076,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "profile",
+        "line_no": 3101,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Sequential",
+        "line_no": 3168,
+        "variable": null,
+        "parameter": {
+            "*args": "nn.InstanceNorm2d(2)"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "ReLU",
+        "line_no": 3168,
+        "variable": null,
+        "parameter": {
+            "inplace": "True"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "InstanceNorm2d",
+        "line_no": 3168,
+        "variable": null,
+        "parameter": {
+            "num_features": "2"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3274,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3281,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3336,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3343,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3372,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3388,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3417,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "detect_anomaly",
+        "line_no": 3483,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Sequential",
+        "line_no": 4398,
+        "variable": null,
+        "parameter": {
+            "*args": "nn.Linear(nz_inp, nz_bottleneck)"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "ReLU",
+        "line_no": 4398,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4398,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_bottleneck",
+            "out_features": "nz_inp"
+        },
+        "parameter_values": {
+            "nz_bottleneck": "1000",
+            "nz_inp": "10"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4398,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_inp",
+            "out_features": "nz_bottleneck"
+        },
+        "parameter_values": {
+            "nz_inp": "10",
+            "nz_bottleneck": "1000"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4398,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_bottleneck",
+            "out_features": "nz_inp"
+        },
+        "parameter_values": {
+            "nz_bottleneck": "1000",
+            "nz_inp": "10"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4398,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_inp",
+            "out_features": "nz_bottleneck"
+        },
+        "parameter_values": {
+            "nz_inp": "10",
+            "nz_bottleneck": "1000"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Sequential",
+        "line_no": 4428,
+        "variable": null,
+        "parameter": {
+            "*args": "nn.Linear(nz_inp, nz_bottleneck)"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "ReLU",
+        "line_no": 4428,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4428,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_bottleneck",
+            "out_features": "nz_inp"
+        },
+        "parameter_values": {
+            "nz_bottleneck": "1000",
+            "nz_inp": "10"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4428,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_inp",
+            "out_features": "nz_bottleneck"
+        },
+        "parameter_values": {
+            "nz_inp": "10",
+            "nz_bottleneck": "1000"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4428,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_bottleneck",
+            "out_features": "nz_inp"
+        },
+        "parameter_values": {
+            "nz_bottleneck": "1000",
+            "nz_inp": "10"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4428,
+        "variable": null,
+        "parameter": {
+            "in_features": "nz_inp",
+            "out_features": "nz_bottleneck"
+        },
+        "parameter_values": {
+            "nz_inp": "10",
+            "nz_bottleneck": "1000"
+        }
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4475,
+        "variable": null,
+        "parameter": {
+            "in_features": "2",
+            "out_features": "2",
+            "bias": "False"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4476,
+        "variable": null,
+        "parameter": {
+            "in_features": "2",
+            "out_features": "2",
+            "bias": "False"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "Linear",
+        "line_no": 4534,
+        "variable": null,
+        "parameter": {
+            "in_features": "2",
+            "out_features": "2",
+            "bias": "False"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "DataParallel",
+        "line_no": 4553,
+        "variable": null,
+        "parameter": {
+            "module": "deepcopy(model)"
+        },
+        "parameter_values": {}
+    }
+]
