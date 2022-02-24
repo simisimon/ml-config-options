@@ -4,6 +4,11 @@ import json
 
 
 class ClassScraper:
+    def __init__(self):
+        self.class_urls = []
+        self.classes = {}
+        self.library = ""
+
     def scrape_parameters(self, elements):
         parameters = {}
         for e in elements:
@@ -16,20 +21,20 @@ class ClassScraper:
                 parameters[param] = None
         return parameters
 
-    def create_json(self, library, classes):
-        with open("{0}.txt".format(library), "w") as outfile:
-            json.dump(classes, outfile, indent=4)
+    def create_json(self):
+        with open("{0}.txt".format(self.library), "w") as outfile:
+            json.dump(self.classes, outfile, indent=4)
 
 
 class SklearnScraper(ClassScraper):
     def __init__(self):
-        self.class_urls = []
-        self.classes = {}
+        ClassScraper.__init__(self)
+        self.library = "sklearn"
 
     def get_classes(self):
         self.scrape_class_urls()
         self.scrape_classes()
-        self.create_json("sklearn", self.classes)
+        self.create_json()
 
     def scrape_class_urls(self):
         link = "https://scikit-learn.org/stable/modules/classes.html#"
@@ -51,26 +56,27 @@ class SklearnScraper(ClassScraper):
             soup = BeautifulSoup(html, "html.parser")
 
             data_table = soup.find("dt", {"class": "sig sig-object py"})
+            full_class_name = data_table.attrs["id"]
+            class_ = full_class_name[full_class_name.rfind(".") + 1:]
             elements = data_table.findAll("em", {"class": "sig-param"})
-            class_ = data_table.find("span", {"class": "sig-name descname"}).text
 
             parameters = self.scrape_parameters(elements)
-            self.classes[class_] = parameters
+            self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
 
 
 class TorchScraper(ClassScraper):
     def __init__(self):
+        ClassScraper.__init__(self)
+        self.library = "torch"
         self.module_urls = []
-        self.class_urls = []
         self.desc_elements = []
-        self.classes = {}
 
     def get_classes(self):
         self.scrape_module_urls()
         self.scrape_class_urls()
         self.scrape_desc_elements()
         self.scrape_classes()
-        self.create_json("torch", self.classes)
+        self.create_json()
 
     def scrape_module_urls(self):
         link = "https://pytorch.org/docs/stable/index.html"
@@ -128,17 +134,17 @@ class TorchScraper(ClassScraper):
 
     def scrape_classes(self):
         for desc_element in self.desc_elements:
-            dt = desc_element.find("dt")
-            if "id" in dt.attrs:
-                class_ = dt.attrs["id"]
-                class_ = class_[class_.rfind(".") + 1:]
+            data_table = desc_element.find("dt")
+            if "id" in data_table.attrs:
+                class_path = data_table.attrs["id"]
+                class_ = class_path[class_path.rfind(".") + 1:]
                 elements = desc_element.findAll("em", {"class": "sig-param"})
                 parameters = self.scrape_parameters(elements)
-                self.classes[class_] = parameters
+                self.classes[class_path] = {"class": class_, "parameters": parameters}
 
 
 def main():
-    SklearnScraper().get_classes()
+    #SklearnScraper().get_classes()
     TorchScraper().get_classes()
 
 

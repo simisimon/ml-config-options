@@ -9,8 +9,11 @@ def get_parameters(objects):
     objects_with_prm = []
     for obj in objects:
         obj_code = ast.unparse(obj["object"])
-        class_string = "{0}(".format(obj["class"])
+        class_string = "{0}(".format(obj["class alias"])
         indices = [i for i in range(len(obj_code)) if obj_code.startswith(class_string, i)]
+        for index in indices.copy():
+            if index != 0 and (obj_code[index - 1].isalnum() or obj_code[index - 1] == "."):
+                indices.remove(index)
         indices.reverse()
 
         """check if same class occurs multiple times in obj"""
@@ -19,13 +22,13 @@ def get_parameters(objects):
                 for j in range(len(indices)):
                     if i != j:
                         start = indices[j]
-                        stop = start + len(obj["class"])
+                        stop = start + len(obj["class alias"])
                         obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
                 try:
-                    ast_dict = {"class": obj["class"], "object": ast.parse(obj_code).body[0],
+                    ast_dict = {"class": obj["class"], "class alias": obj["class alias"], "object": ast.parse(obj_code).body[0],
                                 "parameter variables": obj["parameter variables"]}
                 except:
-                    ast_dict = {"class": obj["class"], "object": ast.parse(obj_code + "[]").body[0],
+                    ast_dict = {"class": obj["class"], "class alias": obj["class alias"], "object": ast.parse(obj_code + "[]").body[0],
                                 "parameter variables": obj["parameter variables"]}
                 obj_with_prm = NodeObjects(ast_dict).get_objects(ast_dict["object"])
                 obj_with_prm['6) line_no'] = obj["object"].lineno
@@ -388,15 +391,15 @@ def convert_into_node_structure(project, objects):
 
 
 def main():
-    #project = "test_projects/another_test_project.py"
-    #ast_objects = SklearnObjects(project).get_objects()
-    #classes = SklearnObjects(project).read_json()
+    project = "test_projects/another_test_project.py"
+    class_objects_from_library = SklearnObjects(project).get_objects()
+    classes = SklearnObjects(project).read_json()
 
-    project = "test_projects/torch_project.py"
-    ast_objects = TorchObjects(project).get_objects()
-    classes = TorchObjects(project).read_json()
+    #project = "test_projects/torch_project.py"
+    #class_objects_from_library = TorchObjects(project).get_objects()
+    #classes = TorchObjects(project).read_json()
 
-    objects_with_prm = get_parameters(ast_objects)
+    objects_with_prm = get_parameters(class_objects_from_library)
     pprint(objects_with_prm)
     final_obj = merge_parameter(objects_with_prm, classes)
     # pprint(final_obj)

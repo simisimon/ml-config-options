@@ -1,4 +1,3 @@
-"""Test the validation module"""
 import os
 import re
 import sys
@@ -11,6 +10,10 @@ from time import sleep
 import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 from sklearn.exceptions import FitFailedWarning
+import sklearn.impute as BBB
+import sklearn
+import sklearn.impute._base
+import sklearn.externals as ext
 
 from sklearn.model_selection.tests.test_search import FailingClassifier
 
@@ -75,10 +78,18 @@ from sklearn.datasets import make_multilabel_classification
 
 from sklearn.model_selection.tests.common import OneTimeSplitter
 from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import ParameterGrid as PG
 
+#x = sklearn.model_selection.PredefinedSplit(12)
+x = y.x(sklearn.impute._base.SimpleImputer(PG(2)) + PG(3)) + BBB.SimpleImputer(88888)
+yyyy = sklearn.impute._base.SimpleImputer(2)
+x = sklearn.impute.SimpleImputer(44)
 x = 2
-liste = {GridSearchCV(n_jobs=2), GridSearchCV(2,1), GridSearchCV(0)}
+x = [1, 2, 3, 4]
+liste = {GridSearchCV(n_jobs=x), GridSearchCV(2,1), GridSearchCV(0)}
+test = PG(2, 3)
 
+x = "PG(2)"
 try:
     WindowsError
 except NameError:
@@ -2335,6 +2346,11 @@ def test_fit_and_score_verbosity(
         assert re.match(expected, outlines[1])
     else:
         assert re.match(expected, outlines[0])
+
+
+x = 2
+x = -2
+x = SVC(x)
 
 
 def test_score():

@@ -1,2760 +1,3972 @@
 {
-    "Tensor": {},
-    "dtype": {},
-    "device": {},
-    "layout": {},
-    "memory_format": {},
-    "Function": {
-        "*args": null,
-        "**kwargs": null
-    },
-    "profile": {
-        "*": null,
-        "activities": "None",
-        "schedule": "None",
-        "on_trace_ready": "None",
-        "record_shapes": "False",
-        "profile_memory": "False",
-        "with_stack": "False",
-        "with_flops": "False",
-        "with_modules": "False",
-        "use_cuda": "None",
-        "key": null,
-        "value": null,
-        "path": null,
-        "metric": "'self_cpu_time_total'",
-        "group_by_input_shape": "False",
-        "group_by_stack_n": "0"
-    },
-    "emit_nvtx": {
-        "enabled": "True",
-        "record_shapes": "False"
-    },
-    "detect_anomaly": {},
-    "set_detect_anomaly": {
-        "mode": null
-    },
-    "saved_tensors_hooks": {
-        "pack_hook": null,
-        "unpack_hook": null
-    },
-    "save_on_cpu": {
-        "pin_memory": "False"
-    },
-    "autocast": {
-        "enabled": "True",
-        "dtype": "torch.float16",
-        "cache_enabled": "True"
-    },
-    "GradScaler": {
-        "init_scale": "65536.0",
-        "growth_factor": "2.0",
-        "backoff_factor": "0.5",
-        "growth_interval": "2000",
-        "enabled": "True",
-        "state_dict": null,
-        "outputs": null,
-        "new_factor": null,
-        "new_interval": null,
-        "optimizer": null,
-        "*args": null,
-        "**kwargs": null,
-        "new_scale": "None"
-    },
-    "Backend": {
-        "name": null
-    },
-    "Store": {},
-    "TCPStore": {},
-    "HashStore": {},
-    "FileStore": {},
-    "PrefixStore": {},
-    "ReduceOp": {},
-    "reduce_op": {},
-    "Join": {
-        "joinables": null,
-        "enable": "True",
-        "throw_on_early_termination": "False",
-        "**kwargs": null,
-        "joinable": null
-    },
-    "Joinable": {
-        "**kwargs": null
-    },
-    "JoinHook": {
-        "is_last_joiner": null
-    },
-    "ZeroRedundancyOptimizer": {
-        "params": null,
-        "optimizer_class": null,
-        "process_group": "None",
-        "parameters_as_bucket_view": "False",
-        "overlap_with_ddp": "False",
-        "**defaults": null,
-        "param_group": null,
-        "to": "0",
-        "**kwargs": null,
-        "state_dict": null,
-        "closure": "None"
-    },
-    "Distribution": {
-        "batch_shape": null,
-        "event_shape": "torch.Size([])",
-        "validate_args": "None",
-        "value": null,
-        "expand": "True",
-        "_instance": "None",
-        "sample_shape": "torch.Size([])",
-        "n": null
-    },
-    "ExponentialFamily": {
-        "batch_shape": "torch.Size([])",
-        "event_shape": "torch.Size([])",
-        "validate_args": "None"
-    },
-    "Bernoulli": {
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "expand": "True",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Beta": {
-        "concentration1": null,
-        "concentration0": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "()"
-    },
-    "Binomial": {
-        "total_count": "1",
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "expand": "True",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Categorical": {
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "expand": "True",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Cauchy": {
-        "loc": null,
-        "scale": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "Chi2": {
-        "df": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "ContinuousBernoulli": {
-        "probs": "None",
-        "logits": "None",
-        "lims": "(0.499, 0.501)",
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "Dirichlet": {
-        "concentration": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "()"
-    },
-    "Exponential": {
-        "rate": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "FisherSnedecor": {
-        "df1": null,
-        "df2": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Gamma": {
-        "concentration": null,
-        "rate": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Geometric": {
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Gumbel": {
-        "loc": null,
-        "scale": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null
-    },
-    "HalfCauchy": {
-        "scale": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "prob": null
-    },
-    "HalfNormal": {
-        "scale": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "prob": null
-    },
-    "Independent": {
-        "base_distribution": null,
-        "reinterpreted_batch_ndims": null,
-        "validate_args": "None",
-        "expand": "True",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Kumaraswamy": {
-        "concentration1": null,
-        "concentration0": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "LKJCholesky": {
-        "dim": null,
-        "concentration": "1.0",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Laplace": {
-        "loc": null,
-        "scale": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "LogNormal": {
-        "loc": null,
-        "scale": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "LowRankMultivariateNormal": {
-        "loc": null,
-        "cov_factor": null,
-        "cov_diag": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "MixtureSameFamily": {
-        "mixture_distribution": null,
-        "component_distribution": null,
-        "validate_args": "None",
-        "x": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "Multinomial": {
-        "total_count": "1",
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "MultivariateNormal": {
-        "loc": null,
-        "covariance_matrix": "None",
-        "precision_matrix": "None",
-        "scale_tril": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "NegativeBinomial": {
-        "total_count": null,
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Normal": {
-        "loc": null,
-        "scale": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "OneHotCategorical": {
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "expand": "True",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Pareto": {
-        "scale": null,
-        "alpha": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "Poisson": {
-        "rate": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "RelaxedBernoulli": {
-        "temperature": null,
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "LogitRelaxedBernoulli": {
-        "temperature": null,
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "RelaxedOneHotCategorical": {
-        "temperature": null,
-        "probs": "None",
-        "logits": "None",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "StudentT": {
-        "df": null,
-        "loc": "0.0",
-        "scale": "1.0",
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None",
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "TransformedDistribution": {
-        "base_distribution": null,
-        "transforms": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "Uniform": {
-        "low": null,
-        "high": null,
-        "validate_args": "None",
-        "value": null,
-        "batch_shape": null,
-        "_instance": "None",
-        "sample_shape": "torch.Size([])"
-    },
-    "VonMises": {
-        "loc": null,
-        "concentration": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "value": null,
-        "sample_shape": "torch.Size([])"
-    },
-    "Weibull": {
-        "scale": null,
-        "concentration": null,
-        "validate_args": "None",
-        "batch_shape": null,
-        "_instance": "None"
-    },
-    "AbsTransform": {
-        "cache_size": "0"
-    },
-    "AffineTransform": {
-        "loc": null,
-        "scale": null,
-        "event_dim": "0",
-        "cache_size": "0"
-    },
-    "ComposeTransform": {
-        "parts": null,
-        "cache_size": "0"
-    },
-    "CorrCholeskyTransform": {
-        "cache_size": "0"
-    },
-    "ExpTransform": {
-        "cache_size": "0"
-    },
-    "IndependentTransform": {
-        "base_transform": null,
-        "reinterpreted_batch_ndims": null,
-        "cache_size": "0"
-    },
-    "LowerCholeskyTransform": {
-        "cache_size": "0"
-    },
-    "PowerTransform": {
-        "exponent": null,
-        "cache_size": "0"
-    },
-    "ReshapeTransform": {
-        "in_shape": null,
-        "out_shape": null,
-        "cache_size": "0"
-    },
-    "SigmoidTransform": {
-        "cache_size": "0"
-    },
-    "TanhTransform": {
-        "cache_size": "0"
-    },
-    "SoftmaxTransform": {
-        "cache_size": "0"
-    },
-    "StackTransform": {
-        "tseq": null,
-        "dim": "0",
-        "cache_size": "0"
-    },
-    "StickBreakingTransform": {
-        "cache_size": "0"
-    },
-    "Transform": {
-        "cache_size": "0",
-        "x": null,
-        "y": null,
-        "shape": null
-    },
-    "Constraint": {
-        "value": null
-    },
-    "ConstraintRegistry": {
-        "constraint": null,
-        "factory": "None"
-    },
-    "Future": {
-        "*": null,
-        "devices": "None",
-        "callback": null,
-        "result": null
-    },
-    "GraphModule": {
-        "*args": null,
-        "**kwargs": null,
-        "root": null,
-        "graph": null,
-        "class_name": "'GraphModule'",
-        "target": null,
-        "m": null,
-        "folder": null,
-        "module_name": "'FxModule'"
-    },
-    "Graph": {
-        "owning_module": "None",
-        "tracer_cls": "None",
-        "the_function": null,
-        "args": "None",
-        "kwargs": "None",
-        "type_expr": "None",
-        "method_name": null,
-        "module_name": null,
-        "op": null,
-        "target": null,
-        "name": null,
-        "to_erase": null,
-        "*args": null,
-        "qualified_name": null,
-        "g": null,
-        "val_map": null,
-        "return_output_node": "False",
-        "n": "None",
-        "node": null,
-        "arg_transform": "<function Graph.<lambda>>",
-        "result": null,
-        "root_module": null,
-        "out": null
-    },
-    "Node": {
-        "graph": null,
-        "name": null,
-        "op": null,
-        "target": null,
-        "args": null,
-        "kwargs": null,
-        "return_type": "None",
-        "x": null,
-        "placeholder_names": "None",
-        "maybe_return_typename": "None",
-        "root": null,
-        "arg_types": "None",
-        "kwarg_types": "None",
-        "normalize_to_only_use_kwargs": "False",
-        "replace_with": null,
-        "old_input": null,
-        "new_input": null,
-        "idx": null,
-        "arg": null,
-        "key": null
-    },
-    "Tracer": {
-        "autowrap_modules": "(math)",
-        "autowrap_functions": "()",
-        "enable_cpatching": "False",
-        "m": null,
-        "forward": null,
-        "args": null,
-        "kwargs": null,
-        "a": null,
-        "root_fn": null,
-        "is_module": null,
-        "concrete_args": "None",
-        "kind": null,
-        "target": null,
-        "name": "None",
-        "type_expr": "None",
-        "proxy_factory_fn": "None",
-        "module_qualified_name": null,
-        "obj": null,
-        "mod": null,
-        "node": null,
-        "root": null
-    },
-    "Proxy": {
-        "node": null,
-        "tracer": "None"
-    },
-    "Interpreter": {
-        "module": null,
-        "garbage_collect_values": "True",
-        "target": null,
-        "args": null,
-        "kwargs": null,
-        "n": null,
-        "*args": null,
-        "initial_env": "None"
-    },
-    "Transformer": {
-        "d_model": "512",
-        "nhead": "8",
-        "num_encoder_layers": "6",
-        "num_decoder_layers": "6",
-        "dim_feedforward": "2048",
-        "dropout": "0.1",
-        "activation": "<function relu>",
-        "custom_encoder": "None",
-        "custom_decoder": "None",
-        "layer_norm_eps": "1e-05",
-        "batch_first": "False",
-        "norm_first": "False",
-        "device": "None",
-        "dtype": "None",
-        "src": null,
-        "tgt": null,
-        "src_mask": "None",
-        "tgt_mask": "None",
-        "memory_mask": "None",
-        "src_key_padding_mask": "None",
-        "tgt_key_padding_mask": "None",
-        "memory_key_padding_mask": "None",
-        "sz": null
-    },
-    "PackagingError": {
-        "dependency_graph": null
-    },
-    "EmptyMatchError": {},
-    "PackageExporter": {
-        "f": null,
-        "importer": "<torch.package.importer._SysImporter object>",
-        "module_name": null,
-        "dependencies": "True",
-        "include": null,
-        "*": null,
-        "exclude": "()",
-        "allow_empty": "True",
-        "hook": null,
-        "package": null,
-        "resource": null,
-        "binary": null,
-        "obj": null,
-        "file_or_directory": null,
-        "src": null,
-        "is_package": "False",
-        "text": null
-    },
-    "PackageImporter": {
-        "file_or_buffer": null,
-        "module_allowed": "<function PackageImporter.<lambda>>",
-        "*": null,
-        "include": "'**'",
-        "exclude": "()",
-        "name": null,
-        "package": null,
-        "resource": null,
-        "map_location": "None",
-        "encoding": "'utf-8'",
-        "errors": "'strict'"
-    },
-    "Directory": {
-        "name": null,
-        "is_dir": null,
-        "filename": null
-    },
-    "ProfilerAction": {
-        "value": null
-    },
-    "ProfilerActivity": {},
-    "Optimizer": {
-        "params": null,
-        "defaults": null
-    },
-    "GradBucket": {},
-    "PowerSGDState": {
-        "process_group": null,
-        "matrix_approximation_rank": "1",
-        "start_powerSGD_iter": "1000",
-        "min_compression_rate": "2",
-        "use_error_feedback": "True",
-        "warm_start": "True",
-        "orthogonalization_epsilon": "0",
-        "random_seed": "0",
-        "compression_stats_logging_frequency": "10000"
-    },
-    "Pipe": {
-        "module": null,
-        "chunks": "1",
-        "checkpoint": "'except_last'",
-        "deferred_batch_norm": "False",
-        "*inputs": null
-    },
-    "stash": {
-        "name": null,
-        "tensor": null
-    },
-    "pop": {
-        "name": null
-    },
-    "WorkerInfo": {},
-    "BackendType": {
-        "value": null
-    },
-    "RpcBackendOptions": {},
-    "TensorPipeRpcBackendOptions": {
-        "*": null,
-        "num_worker_threads": "16",
-        "rpc_timeout": "60.0",
-        "init_method": "'env://'",
-        "device_maps": "None",
-        "devices": null,
-        "_transports": "None",
-        "_channels": "None",
-        "to": null,
-        "device_map": null
-    },
-    "RRef": {
-        "self: torch._C._distributed_rpc.PyRRef": null,
-        "dist_autograd_ctx_id: int ": " - 1",
-        "retain_graph: bool ": " False",
-        "timeout: float ": " - 1.0"
-    },
-    "RemoteModule": {
-        "remote_device": null,
-        "module_cls": null,
-        "args": "None",
-        "kwargs": "None",
-        "recurse": "True"
-    },
-    "context": {},
-    "DistributedOptimizer": {
-        "optimizer_class": null,
-        "params_rref": null,
-        "*args": null,
-        "**kwargs": null,
-        "context_id": null
-    },
-    "DoubleStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "FloatStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "HalfStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "dtype": "None"
-    },
-    "LongStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "IntStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "ShortStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "CharStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "ByteStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "BoolStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "BFloat16Storage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "ComplexDoubleStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "ComplexFloatStorage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "filename": null,
-        "shared": "False",
-        "size": "0",
-        "dtype": "None"
-    },
-    "QUInt8Storage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "dtype": "None"
-    },
-    "QInt8Storage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "dtype": "None"
-    },
-    "QInt32Storage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "dtype": "None"
-    },
-    "QUInt4x2Storage": {
-        "*args": null,
-        "**kwargs": null,
-        "device": "None",
-        "non_blocking": "False",
-        "dtype": "None"
-    },
-    "Timer": {
-        "stmt": "'pass'",
-        "setup": "'pass'",
-        "global_setup": "''",
-        "timer": "<built-in function perf_counter>",
-        "globals": "None",
-        "label": "None",
-        "sub_label": "None",
-        "description": "None",
-        "env": "None",
-        "num_threads": "1",
-        "language": "<Language.PYTHON: 0>",
-        "callback": "None",
-        "min_run_time": "0.2",
-        "number": "1000000",
-        "*": null,
-        "repeats": "None",
-        "collect_baseline": "True",
-        "retain_out_file": "False"
-    },
-    "Measurement": {
-        "number_per_run": null,
-        "raw_times": null,
-        "task_spec": null,
-        "metadata": "None",
-        "measurements": null
-    },
-    "CallgrindStats": {
-        "task_spec": null,
-        "number_per_run": null,
-        "built_with_debug_symbols": null,
-        "baseline_inclusive_stats": null,
-        "baseline_exclusive_stats": null,
-        "stmt_inclusive_stats": null,
-        "stmt_exclusive_stats": null,
-        "stmt_callgrind_out": null,
-        "*": null,
-        "denoise": "False",
-        "other": null,
-        "inclusive": "False"
-    },
-    "FunctionCounts": {
-        "_data": null,
-        "inclusive": null,
-        "truncate_rows": "True",
-        "_linewidth": "None",
-        "filter_fn": null,
-        "map_fn": null
-    },
-    "DataLoader": {
-        "dataset": null,
-        "batch_size": "1",
-        "shuffle": "False",
-        "sampler": "None",
-        "batch_sampler": "None",
-        "num_workers": "0",
-        "collate_fn": "None",
-        "pin_memory": "False",
-        "drop_last": "False",
-        "timeout": "0",
-        "worker_init_fn": "None",
-        "multiprocessing_context": "None",
-        "generator": "None",
-        "*": null,
-        "prefetch_factor": "2",
-        "persistent_workers": "False"
-    },
-    "Dataset": {
-        "*args": null,
-        "**kwds": null
-    },
-    "IterableDataset": {
-        "*args": null,
-        "**kwds": null
-    },
-    "TensorDataset": {
-        "*tensors": null
-    },
-    "ConcatDataset": {
-        "datasets": null
-    },
-    "ChainDataset": {
-        "datasets": null
-    },
-    "Subset": {
-        "dataset": null,
-        "indices": null
-    },
-    "Sampler": {
-        "data_source": null
-    },
-    "SequentialSampler": {
-        "data_source": null
-    },
-    "RandomSampler": {
-        "data_source": null,
-        "replacement": "False",
-        "num_samples": "None",
-        "generator": "None"
-    },
-    "SubsetRandomSampler": {
-        "indices": null,
-        "generator": "None"
-    },
-    "WeightedRandomSampler": {
-        "weights": null,
-        "num_samples": null,
-        "replacement": "True",
-        "generator": "None"
-    },
-    "BatchSampler": {
-        "sampler": null,
-        "batch_size": null,
-        "drop_last": null
-    },
-    "DistributedSampler": {
-        "dataset": null,
-        "num_replicas": "None",
-        "rank": "None",
-        "shuffle": "True",
-        "seed": "0",
-        "drop_last": "False"
-    },
-    "SummaryWriter": {
-        "log_dir": "None",
-        "comment": "''",
-        "purge_step": "None",
-        "max_queue": "10",
-        "flush_secs": "120",
-        "filename_suffix": "''",
-        "tag": null,
-        "scalar_value": null,
-        "global_step": "None",
-        "walltime": "None",
-        "new_style": "False",
-        "double_precision": "False",
-        "main_tag": null,
-        "tag_scalar_dict": null,
-        "values": null,
-        "bins": "'tensorflow'",
-        "max_bins": "None",
-        "img_tensor": null,
-        "dataformats": "'NCHW'",
-        "figure": null,
-        "close": "True",
-        "vid_tensor": null,
-        "fps": "4",
-        "snd_tensor": null,
-        "sample_rate": "44100",
-        "text_string": null,
-        "model": null,
-        "input_to_model": "None",
-        "verbose": "False",
-        "use_strict_trace": "True",
-        "mat": null,
-        "metadata": "None",
-        "label_img": "None",
-        "metadata_header": "None",
-        "labels": null,
-        "predictions": null,
-        "num_thresholds": "127",
-        "weights": "None",
-        "layout": null,
-        "vertices": null,
-        "colors": "None",
-        "faces": "None",
-        "config_dict": "None",
-        "hparam_dict": null,
-        "metric_dict": null,
-        "hparam_domain_discrete": "None",
-        "run_name": "None"
-    },
-    "finfo": {},
-    "iinfo": {},
-    "Generator": {
-        "device": "'cpu'",
-        "seed": null,
-        "new_state": null
-    },
-    "SobolEngine": {
-        "dimension": null,
-        "scramble": "False",
-        "seed": "None",
-        "n": null,
-        "out": "None",
-        "dtype": "torch.float32",
-        "m": null
-    },
-    "Parameter": {
-        "data": "None",
-        "requires_grad": "True"
-    },
-    "UninitializedParameter": {
-        "requires_grad": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "UninitializedBuffer": {
-        "requires_grad": "False",
-        "device": "None",
-        "dtype": "None"
-    },
-    "Module": {
-        "name": null,
-        "module": null,
-        "fn": null,
-        "recurse": "True",
-        "device": "None",
-        "*input": null,
-        "target": null,
-        "state_dict": null,
-        "strict": "True",
-        "prefix": "''",
-        "memo": "None",
-        "remove_duplicate": "True",
-        "hook": null,
-        "tensor": null,
-        "persistent": "True",
-        "param": null,
-        "requires_grad": "True",
-        "state": null,
-        "destination": "None",
-        "keep_vars": "False",
-        "*args": null,
-        "**kwargs": null,
-        "dtype": null,
-        "non_blocking": "False",
-        "memory_format": "torch.channels_last",
-        "*": null,
-        "mode": "True",
-        "dst_type": null,
-        "set_to_none": "False"
-    },
-    "Sequential": {
-        "*args": null
-    },
-    "ModuleList": {
-        "modules": null,
-        "module": null,
-        "index": null
-    },
-    "ModuleDict": {
-        "modules": null,
-        "key": null
-    },
-    "ParameterList": {
-        "parameters": null,
-        "parameter": null
-    },
-    "ParameterDict": {
-        "parameters": null,
-        "key": null
-    },
-    "Conv1d": {
-        "in_channels": null,
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "dilation": "1",
-        "groups": "1",
-        "bias": "True",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "Conv2d": {
-        "in_channels": null,
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "dilation": "1",
-        "groups": "1",
-        "bias": "True",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "Conv3d": {
-        "in_channels": null,
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "dilation": "1",
-        "groups": "1",
-        "bias": "True",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "ConvTranspose1d": {
-        "in_channels": null,
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "output_padding": "0",
-        "groups": "1",
-        "bias": "True",
-        "dilation": "1",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "ConvTranspose2d": {
-        "in_channels": null,
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "output_padding": "0",
-        "groups": "1",
-        "bias": "True",
-        "dilation": "1",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "ConvTranspose3d": {
-        "in_channels": null,
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "output_padding": "0",
-        "groups": "1",
-        "bias": "True",
-        "dilation": "1",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyConv1d": {
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "dilation": "1",
-        "groups": "1",
-        "bias": "True",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyConv2d": {
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "dilation": "1",
-        "groups": "1",
-        "bias": "True",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyConv3d": {
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "dilation": "1",
-        "groups": "1",
-        "bias": "True",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyConvTranspose1d": {
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "output_padding": "0",
-        "groups": "1",
-        "bias": "True",
-        "dilation": "1",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyConvTranspose2d": {
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "output_padding": "0",
-        "groups": "1",
-        "bias": "True",
-        "dilation": "1",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyConvTranspose3d": {
-        "out_channels": null,
-        "kernel_size": null,
-        "stride": "1",
-        "padding": "0",
-        "output_padding": "0",
-        "groups": "1",
-        "bias": "True",
-        "dilation": "1",
-        "padding_mode": "'zeros'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "Unfold": {
-        "kernel_size": null,
-        "dilation": "1",
-        "padding": "0",
-        "stride": "1"
-    },
-    "Fold": {
-        "output_size": null,
-        "kernel_size": null,
-        "dilation": "1",
-        "padding": "0",
-        "stride": "1"
-    },
-    "MaxPool1d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0",
-        "dilation": "1",
-        "return_indices": "False",
-        "ceil_mode": "False"
-    },
-    "MaxPool2d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0",
-        "dilation": "1",
-        "return_indices": "False",
-        "ceil_mode": "False"
-    },
-    "MaxPool3d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0",
-        "dilation": "1",
-        "return_indices": "False",
-        "ceil_mode": "False"
-    },
-    "MaxUnpool1d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0"
-    },
-    "MaxUnpool2d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0"
-    },
-    "MaxUnpool3d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0"
-    },
-    "AvgPool1d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0",
-        "ceil_mode": "False",
-        "count_include_pad": "True"
-    },
-    "AvgPool2d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0",
-        "ceil_mode": "False",
-        "count_include_pad": "True",
-        "divisor_override": "None"
-    },
-    "AvgPool3d": {
-        "kernel_size": null,
-        "stride": "None",
-        "padding": "0",
-        "ceil_mode": "False",
-        "count_include_pad": "True",
-        "divisor_override": "None"
-    },
-    "FractionalMaxPool2d": {
-        "kernel_size": null,
-        "output_size": "None",
-        "output_ratio": "None",
-        "return_indices": "False",
-        "_random_samples": "None"
-    },
-    "FractionalMaxPool3d": {
-        "kernel_size": null,
-        "output_size": "None",
-        "output_ratio": "None",
-        "return_indices": "False",
-        "_random_samples": "None"
-    },
-    "LPPool1d": {
-        "norm_type": null,
-        "kernel_size": null,
-        "stride": "None",
-        "ceil_mode": "False"
-    },
-    "LPPool2d": {
-        "norm_type": null,
-        "kernel_size": null,
-        "stride": "None",
-        "ceil_mode": "False"
-    },
-    "AdaptiveMaxPool1d": {
-        "output_size": null,
-        "return_indices": "False"
-    },
-    "AdaptiveMaxPool2d": {
-        "output_size": null,
-        "return_indices": "False"
-    },
-    "AdaptiveMaxPool3d": {
-        "output_size": null,
-        "return_indices": "False"
-    },
-    "AdaptiveAvgPool1d": {
-        "output_size": null
-    },
-    "AdaptiveAvgPool2d": {
-        "output_size": null
-    },
-    "AdaptiveAvgPool3d": {
-        "output_size": null
-    },
-    "ReflectionPad1d": {
-        "padding": null
-    },
-    "ReflectionPad2d": {
-        "padding": null
-    },
-    "ReflectionPad3d": {
-        "padding": null
-    },
-    "ReplicationPad1d": {
-        "padding": null
-    },
-    "ReplicationPad2d": {
-        "padding": null
-    },
-    "ReplicationPad3d": {
-        "padding": null
-    },
-    "ZeroPad2d": {
-        "padding": null
-    },
-    "ConstantPad1d": {
-        "padding": null,
-        "value": null
-    },
-    "ConstantPad2d": {
-        "padding": null,
-        "value": null
-    },
-    "ConstantPad3d": {
-        "padding": null,
-        "value": null
-    },
-    "ELU": {
-        "alpha": "1.0",
-        "inplace": "False"
-    },
-    "Hardshrink": {
-        "lambd": "0.5"
-    },
-    "Hardsigmoid": {
-        "inplace": "False"
-    },
-    "Hardtanh": {
-        "min_val": "- 1.0",
-        "max_val": "1.0",
-        "inplace": "False",
-        "min_value": "None",
-        "max_value": "None"
-    },
-    "Hardswish": {
-        "inplace": "False"
-    },
-    "LeakyReLU": {
-        "negative_slope": "0.01",
-        "inplace": "False"
-    },
-    "LogSigmoid": {},
-    "MultiheadAttention": {
-        "embed_dim": null,
-        "num_heads": null,
-        "dropout": "0.0",
-        "bias": "True",
-        "add_bias_kv": "False",
-        "add_zero_attn": "False",
-        "kdim": "None",
-        "vdim": "None",
-        "batch_first": "False",
-        "device": "None",
-        "dtype": "None",
-        "query": null,
-        "key": null,
-        "value": null,
-        "key_padding_mask": "None",
-        "need_weights": "True",
-        "attn_mask": "None"
-    },
-    "PReLU": {
-        "num_parameters": "1",
-        "init": "0.25",
-        "device": "None",
-        "dtype": "None"
-    },
-    "ReLU": {
-        "inplace": "False"
-    },
-    "ReLU6": {
-        "inplace": "False"
-    },
-    "RReLU": {
-        "lower": "0.125",
-        "upper": "0.3333333333333333",
-        "inplace": "False"
-    },
-    "SELU": {
-        "inplace": "False"
-    },
-    "CELU": {
-        "alpha": "1.0",
-        "inplace": "False"
-    },
-    "GELU": {},
-    "Sigmoid": {},
-    "SiLU": {
-        "inplace": "False"
-    },
-    "Mish": {
-        "inplace": "False"
-    },
-    "Softplus": {
-        "beta": "1",
-        "threshold": "20"
-    },
-    "Softshrink": {
-        "lambd": "0.5"
-    },
-    "Softsign": {},
-    "Tanh": {},
-    "Tanhshrink": {},
-    "Threshold": {
-        "threshold": null,
-        "value": null,
-        "inplace": "False"
-    },
-    "GLU": {
-        "dim": "- 1"
-    },
-    "Softmin": {
-        "dim": "None"
-    },
-    "Softmax": {
-        "dim": "None"
-    },
-    "Softmax2d": {},
-    "LogSoftmax": {
-        "dim": "None"
-    },
-    "AdaptiveLogSoftmaxWithLoss": {
-        "in_features": null,
-        "n_classes": null,
-        "cutoffs": null,
-        "div_value": "4.0",
-        "head_bias": "False",
-        "device": "None",
-        "dtype": "None",
-        "input": null
-    },
-    "BatchNorm1d": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "BatchNorm2d": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "BatchNorm3d": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyBatchNorm1d": {
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyBatchNorm2d": {
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyBatchNorm3d": {
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "GroupNorm": {
-        "num_groups": null,
-        "num_channels": null,
-        "eps": "1e-05",
-        "affine": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "SyncBatchNorm": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "process_group": "None",
-        "device": "None",
-        "dtype": "None",
-        "module": null
-    },
-    "InstanceNorm1d": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "False",
-        "track_running_stats": "False",
-        "device": "None",
-        "dtype": "None"
-    },
-    "InstanceNorm2d": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "False",
-        "track_running_stats": "False",
-        "device": "None",
-        "dtype": "None"
-    },
-    "InstanceNorm3d": {
-        "num_features": null,
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "False",
-        "track_running_stats": "False",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyInstanceNorm1d": {
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyInstanceNorm2d": {
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyInstanceNorm3d": {
-        "eps": "1e-05",
-        "momentum": "0.1",
-        "affine": "True",
-        "track_running_stats": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LayerNorm": {
-        "normalized_shape": null,
-        "eps": "1e-05",
-        "elementwise_affine": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LocalResponseNorm": {
-        "size": null,
-        "alpha": "0.0001",
-        "beta": "0.75",
-        "k": "1.0"
-    },
-    "RNNBase": {
-        "mode": null,
-        "input_size": null,
-        "hidden_size": null,
-        "num_layers": "1",
-        "bias": "True",
-        "batch_first": "False",
-        "dropout": "0.0",
-        "bidirectional": "False",
-        "proj_size": "0",
-        "device": "None",
-        "dtype": "None"
-    },
-    "RNN": {
-        "*args": null,
-        "**kwargs": null
-    },
-    "LSTM": {
-        "*args": null,
-        "**kwargs": null
-    },
-    "GRU": {
-        "*args": null,
-        "**kwargs": null
-    },
-    "RNNCell": {
-        "input_size": null,
-        "hidden_size": null,
-        "bias": "True",
-        "nonlinearity": "'tanh'",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LSTMCell": {
-        "input_size": null,
-        "hidden_size": null,
-        "bias": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "GRUCell": {
-        "input_size": null,
-        "hidden_size": null,
-        "bias": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "TransformerEncoder": {
-        "encoder_layer": null,
-        "num_layers": null,
-        "norm": "None",
-        "src": null,
-        "mask": "None",
-        "src_key_padding_mask": "None"
-    },
-    "TransformerDecoder": {
-        "decoder_layer": null,
-        "num_layers": null,
-        "norm": "None",
-        "tgt": null,
-        "memory": null,
-        "tgt_mask": "None",
-        "memory_mask": "None",
-        "tgt_key_padding_mask": "None",
-        "memory_key_padding_mask": "None"
-    },
-    "TransformerEncoderLayer": {
-        "d_model": null,
-        "nhead": null,
-        "dim_feedforward": "2048",
-        "dropout": "0.1",
-        "activation": "<function relu>",
-        "layer_norm_eps": "1e-05",
-        "batch_first": "False",
-        "norm_first": "False",
-        "device": "None",
-        "dtype": "None",
-        "src": null,
-        "src_mask": "None",
-        "src_key_padding_mask": "None"
-    },
-    "TransformerDecoderLayer": {
-        "d_model": null,
-        "nhead": null,
-        "dim_feedforward": "2048",
-        "dropout": "0.1",
-        "activation": "<function relu>",
-        "layer_norm_eps": "1e-05",
-        "batch_first": "False",
-        "norm_first": "False",
-        "device": "None",
-        "dtype": "None",
-        "tgt": null,
-        "memory": null,
-        "tgt_mask": "None",
-        "memory_mask": "None",
-        "tgt_key_padding_mask": "None",
-        "memory_key_padding_mask": "None"
-    },
-    "Identity": {
-        "module": null,
-        "name": null,
-        "t": null,
-        "default_mask": "None",
-        "importance_scores": "None"
-    },
-    "Linear": {
-        "in_features": null,
-        "out_features": null,
-        "bias": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "Bilinear": {
-        "in1_features": null,
-        "in2_features": null,
-        "out_features": null,
-        "bias": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "LazyLinear": {
-        "out_features": null,
-        "bias": "True",
-        "device": "None",
-        "dtype": "None"
-    },
-    "Dropout": {
-        "p": "0.5",
-        "inplace": "False"
-    },
-    "Dropout2d": {
-        "p": "0.5",
-        "inplace": "False"
-    },
-    "Dropout3d": {
-        "p": "0.5",
-        "inplace": "False"
-    },
-    "AlphaDropout": {
-        "p": "0.5",
-        "inplace": "False"
-    },
-    "FeatureAlphaDropout": {
-        "p": "0.5",
-        "inplace": "False"
-    },
-    "Embedding": {
-        "num_embeddings": null,
-        "embedding_dim": null,
-        "padding_idx": "None",
-        "max_norm": "None",
-        "norm_type": "2.0",
-        "scale_grad_by_freq": "False",
-        "sparse": "False",
-        "_weight": "None",
-        "device": "None",
-        "dtype": "None",
-        "embeddings": null,
-        "freeze": "True"
-    },
-    "EmbeddingBag": {
-        "num_embeddings": null,
-        "embedding_dim": null,
-        "max_norm": "None",
-        "norm_type": "2.0",
-        "scale_grad_by_freq": "False",
-        "mode": "'mean'",
-        "sparse": "False",
-        "_weight": "None",
-        "include_last_offset": "False",
-        "padding_idx": "None",
-        "device": "None",
-        "dtype": "None",
-        "input": null,
-        "offsets": "None",
-        "per_sample_weights": "None",
-        "embeddings": null,
-        "freeze": "True"
-    },
-    "CosineSimilarity": {
-        "dim": "1",
-        "eps": "1e-08"
-    },
-    "PairwiseDistance": {
-        "p": "2.0",
-        "eps": "1e-06",
-        "keepdim": "False"
-    },
-    "L1Loss": {
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "MSELoss": {
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "CrossEntropyLoss": {
-        "weight": "None",
-        "size_average": "None",
-        "ignore_index": "- 100",
-        "reduce": "None",
-        "reduction": "'mean'",
-        "label_smoothing": "0.0"
-    },
-    "CTCLoss": {
-        "blank": "0",
-        "reduction": "'mean'",
-        "zero_infinity": "False"
-    },
-    "NLLLoss": {
-        "weight": "None",
-        "size_average": "None",
-        "ignore_index": "- 100",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "PoissonNLLLoss": {
-        "log_input": "True",
-        "full": "False",
-        "size_average": "None",
-        "eps": "1e-08",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "GaussianNLLLoss": {
-        "*": null,
-        "full": "False",
-        "eps": "1e-06",
-        "reduction": "'mean'"
-    },
-    "KLDivLoss": {
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'",
-        "log_target": "False"
-    },
-    "BCELoss": {
-        "weight": "None",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "BCEWithLogitsLoss": {
-        "weight": "None",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'",
-        "pos_weight": "None"
-    },
-    "MarginRankingLoss": {
-        "margin": "0.0",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "HingeEmbeddingLoss": {
-        "margin": "1.0",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "MultiLabelMarginLoss": {
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "HuberLoss": {
-        "reduction": "'mean'",
-        "delta": "1.0"
-    },
-    "SmoothL1Loss": {
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'",
-        "beta": "1.0"
-    },
-    "SoftMarginLoss": {
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "MultiLabelSoftMarginLoss": {
-        "weight": "None",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "CosineEmbeddingLoss": {
-        "margin": "0.0",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "MultiMarginLoss": {
-        "p": "1",
-        "margin": "1.0",
-        "weight": "None",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "TripletMarginLoss": {
-        "margin": "1.0",
-        "p": "2.0",
-        "eps": "1e-06",
-        "swap": "False",
-        "size_average": "None",
-        "reduce": "None",
-        "reduction": "'mean'"
-    },
-    "TripletMarginWithDistanceLoss": {
-        "*": null,
-        "distance_function": "None",
-        "margin": "1.0",
-        "swap": "False",
-        "reduction": "'mean'"
-    },
-    "PixelShuffle": {
-        "upscale_factor": null
-    },
-    "PixelUnshuffle": {
-        "downscale_factor": null
-    },
-    "Upsample": {
-        "size": "None",
-        "scale_factor": "None",
-        "mode": "'nearest'",
-        "align_corners": "None"
-    },
-    "UpsamplingNearest2d": {
-        "size": "None",
-        "scale_factor": "None"
-    },
-    "UpsamplingBilinear2d": {
-        "size": "None",
-        "scale_factor": "None"
-    },
-    "ChannelShuffle": {
-        "groups": null
-    },
-    "DataParallel": {
-        "module": null,
-        "device_ids": "None",
-        "output_device": "None",
-        "dim": "0"
-    },
-    "DistributedDataParallel": {
-        "module": null,
-        "device_ids": "None",
-        "output_device": "None",
-        "dim": "0",
-        "broadcast_buffers": "True",
-        "process_group": "None",
-        "bucket_cap_mb": "25",
-        "find_unused_parameters": "False",
-        "check_reduction": "False",
-        "gradient_as_bucket_view": "False",
-        "divide_by_initial_world_size": "True",
-        "enable": "True",
-        "throw_on_early_termination": "False",
-        "**kwargs": null,
-        "state": null,
-        "hook": null
-    },
-    "BasePruningMethod": {
-        "module": null,
-        "name": null,
-        "*args": null,
-        "importance_scores": "None",
-        "**kwargs": null,
-        "t": null,
-        "default_mask": "None"
-    },
-    "PruningContainer": {
-        "*args": null,
-        "method": null,
-        "module": null,
-        "name": null,
-        "importance_scores": "None",
-        "**kwargs": null,
-        "t": null,
-        "default_mask": "None"
-    },
-    "RandomUnstructured": {
-        "amount": null,
-        "module": null,
-        "name": null,
-        "t": null,
-        "default_mask": "None",
-        "importance_scores": "None"
-    },
-    "L1Unstructured": {
-        "amount": null,
-        "module": null,
-        "name": null,
-        "importance_scores": "None",
-        "t": null,
-        "default_mask": "None"
-    },
-    "RandomStructured": {
-        "amount": null,
-        "dim": "- 1",
-        "module": null,
-        "name": null,
-        "t": null,
-        "default_mask": "None",
-        "importance_scores": "None"
-    },
-    "LnStructured": {
-        "amount": null,
-        "n": null,
-        "dim": null,
-        "module": null,
-        "name": null,
-        "importance_scores": "None",
-        "t": null,
-        "default_mask": "None"
-    },
-    "CustomFromMask": {
-        "mask": null,
-        "module": null,
-        "name": null,
-        "t": null,
-        "default_mask": "None",
-        "importance_scores": "None"
-    },
-    "ParametrizationList": {
-        "modules": null,
-        "original": null,
-        "unsafe": "False",
-        "value": null
-    },
-    "PackedSequence": {
-        "data": null,
-        "batch_sizes": "None",
-        "sorted_indices": "None",
-        "unsorted_indices": "None",
-        "value": null,
-        "start": null,
-        "stop": null,
-        "*args": null,
-        "**kwargs": null
-    },
-    "Flatten": {
-        "start_dim": "1",
-        "end_dim": "- 1"
-    },
-    "Unflatten": {
-        "dim": null,
-        "unflattened_size": null
-    },
-    "LazyModuleMixin": {
-        "*args": null,
-        "**kwargs": null
-    },
-    "StreamContext": {
-        "stream": null
-    },
-    "Stream": {
-        "device": "None",
-        "priority": "0",
-        "**kwargs": null,
-        "event": null,
-        "stream": null
-    },
-    "Event": {
-        "name": null,
-        "source": null,
-        "timestamp": "0",
-        "metadata": "<factory>"
-    },
-    "CUDAGraph": {
-        "pool": "None"
-    },
-    "ElasticAgent": {
-        "role": "'default'"
-    },
-    "WorkerSpec": {
-        "role": null,
-        "local_world_size": null,
-        "rdzv_handler": null,
-        "fn": "None",
-        "entrypoint": "None",
-        "args": "()",
-        "max_restarts": "3",
-        "monitor_interval": "30.0",
-        "master_port": "None",
-        "master_addr": "None",
-        "redirects": "<Std.NONE: 0>",
-        "tee": "<Std.NONE: 0>"
-    },
-    "WorkerState": {
-        "value": null,
-        "state": null
-    },
-    "Worker": {
-        "local_rank": null,
-        "global_rank": "- 1",
-        "role_rank": "- 1",
-        "world_size": "- 1",
-        "role_world_size": "- 1"
-    },
-    "WorkerGroup": {
-        "spec": null
-    },
-    "LocalElasticAgent": {
-        "spec": null,
-        "start_method": "'spawn'",
-        "exit_barrier_timeout": "300",
-        "log_dir": "None"
-    },
-    "SimpleElasticAgent": {
-        "spec": null,
-        "exit_barrier_timeout": "300",
-        "store": null,
-        "group_rank": null,
-        "group_world_size": null,
-        "worker_group": null,
-        "death_sig": "<Signals.SIGTERM: 15>"
-    },
-    "RunResult": {
-        "state": null,
-        "return_values": "<factory>",
-        "failures": "<factory>"
-    },
-    "PContext": {
-        "name": null,
-        "entrypoint": null,
-        "args": null,
-        "envs": null,
-        "stdouts": null,
-        "stderrs": null,
-        "tee_stdouts": null,
-        "tee_stderrs": null,
-        "error_files": null
-    },
-    "MultiprocessContext": {
-        "name": null,
-        "entrypoint": null,
-        "args": null,
-        "envs": null,
-        "stdouts": null,
-        "stderrs": null,
-        "tee_stdouts": null,
-        "tee_stderrs": null,
-        "error_files": null,
-        "start_method": null
-    },
-    "SubprocessContext": {
-        "name": null,
-        "entrypoint": null,
-        "args": null,
-        "envs": null,
-        "stdouts": null,
-        "stderrs": null,
-        "tee_stdouts": null,
-        "tee_stderrs": null,
-        "error_files": null
-    },
-    "RunProcsResult": {
-        "return_values": "<factory>",
-        "failures": "<factory>",
-        "stdouts": "<factory>",
-        "stderrs": "<factory>"
-    },
-    "ChildFailedError": {
-        "name": null,
-        "failures": null
-    },
-    "ErrorHandler": {},
-    "ProcessFailure": {
-        "local_rank": null,
-        "pid": null,
-        "exitcode": null,
-        "error_file": null
-    },
-    "RendezvousParameters": {
-        "backend": null,
-        "endpoint": null,
-        "run_id": null,
-        "min_nodes": null,
-        "max_nodes": null,
-        "**kwargs": null,
-        "key": null,
-        "default": "None"
-    },
-    "RendezvousHandlerRegistry": {
-        "params": null,
-        "backend": null,
-        "creator": null
-    },
-    "RendezvousHandler": {},
-    "RendezvousError": {},
-    "RendezvousClosedError": {},
-    "RendezvousTimeoutError": {},
-    "RendezvousConnectionError": {},
-    "RendezvousStateError": {},
-    "DynamicRendezvousHandler": {
-        "run_id": null,
-        "store": null,
-        "backend": null,
-        "min_nodes": null,
-        "max_nodes": null,
-        "timeout": "None"
-    },
-    "RendezvousBackend": {
-        "state": null,
-        "token": "None"
-    },
-    "RendezvousTimeout": {
-        "join": "None",
-        "last_call": "None",
-        "close": "None",
-        "heartbeat": "None"
-    },
-    "C10dRendezvousBackend": {
-        "store": null,
-        "run_id": null,
-        "state": null,
-        "token": "None"
-    },
-    "EtcdRendezvousBackend": {
-        "client": null,
-        "run_id": null,
-        "key_prefix": "None",
-        "ttl": "None",
-        "state": null,
-        "token": "None"
-    },
-    "EtcdRendezvousHandler": {
-        "rdzv_impl": null
-    },
-    "EtcdStore": {
-        "etcd_client": null,
-        "etcd_store_prefix": null,
-        "timeout": "None",
-        "key": null,
-        "num": null,
-        "keys": null,
-        "value": null,
-        "override_timeout": "None"
-    },
-    "EtcdServer": {
-        "data_dir": "None"
-    },
-    "LocalTimerServer": {
-        "mp_queue": null,
-        "max_interval": "60",
-        "daemon": "True"
-    },
-    "LocalTimerClient": {
-        "mp_queue": null
-    },
-    "TimerRequest": {
-        "worker_id": null,
-        "scope_id": null,
-        "expiration_time": null
-    },
-    "TimerServer": {
-        "request_queue": null,
-        "max_interval": null,
-        "daemon": "True",
-        "worker_ids": null,
-        "deadline": null,
-        "timer_requests": null
-    },
-    "TimerClient": {
-        "scope_id": null,
-        "expiration_time": null
-    },
-    "MetricHandler": {},
-    "ConsoleMetricHandler": {},
-    "NullMetricHandler": {},
-    "EventSource": {
-        "value": null
-    },
-    "ScriptModule": {
-        "name": null,
-        "module": null,
-        "fn": null,
-        "recurse": "True",
-        "device": "None",
-        "target": null,
-        "state_dict": null,
-        "strict": "True",
-        "prefix": "''",
-        "memo": "None",
-        "remove_duplicate": "True",
-        "hook": null,
-        "tensor": null,
-        "persistent": "True",
-        "param": null,
-        "requires_grad": "True",
-        "f": null,
-        "_extra_files": "{}",
-        "state": null,
-        "destination": "None",
-        "keep_vars": "False",
-        "*args": null,
-        "**kwargs": null,
-        "dtype": null,
-        "non_blocking": "False",
-        "memory_format": "torch.channels_last",
-        "*": null,
-        "mode": "True",
-        "dst_type": null,
-        "set_to_none": "False"
-    },
-    "ScriptFunction": {
-        "self: torch._C.ScriptFunction": null,
-        "filename: str": null,
-        "_extra_files: Dict[str, str] ": " {}"
-    },
-    "Attribute": {
-        "value": null,
-        "type": null,
-        "start": null,
-        "stop": null
-    },
-    "Adadelta": {
-        "params": null,
-        "lr": "1.0",
-        "rho": "0.9",
-        "eps": "1e-06",
-        "weight_decay": "0",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "Adagrad": {
-        "params": null,
-        "lr": "0.01",
-        "lr_decay": "0",
-        "weight_decay": "0",
-        "initial_accumulator_value": "0",
-        "eps": "1e-10",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "Adam": {
-        "params": null,
-        "lr": "0.001",
-        "betas": "(0.9, 0.999)",
-        "eps": "1e-08",
-        "weight_decay": "0",
-        "amsgrad": "False",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "AdamW": {
-        "params": null,
-        "lr": "0.001",
-        "betas": "(0.9, 0.999)",
-        "eps": "1e-08",
-        "weight_decay": "0.01",
-        "amsgrad": "False",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "SparseAdam": {
-        "params": null,
-        "lr": "0.001",
-        "betas": "(0.9, 0.999)",
-        "eps": "1e-08",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "Adamax": {
-        "params": null,
-        "lr": "0.002",
-        "betas": "(0.9, 0.999)",
-        "eps": "1e-08",
-        "weight_decay": "0",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "ASGD": {
-        "params": null,
-        "lr": "0.01",
-        "lambd": "0.0001",
-        "alpha": "0.75",
-        "t0": "1000000.0",
-        "weight_decay": "0",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "LBFGS": {
-        "params": null,
-        "lr": "1",
-        "max_iter": "20",
-        "max_eval": "None",
-        "tolerance_grad": "1e-07",
-        "tolerance_change": "1e-09",
-        "history_size": "100",
-        "line_search_fn": "None",
-        "param_group": null,
-        "state_dict": null,
-        "closure": null,
-        "set_to_none": "False"
-    },
-    "NAdam": {
-        "params": null,
-        "lr": "0.002",
-        "betas": "(0.9, 0.999)",
-        "eps": "1e-08",
-        "weight_decay": "0",
-        "momentum_decay": "0.004",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "RAdam": {
-        "params": null,
-        "lr": "0.001",
-        "betas": "(0.9, 0.999)",
-        "eps": "1e-08",
-        "weight_decay": "0",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "RMSprop": {
-        "params": null,
-        "lr": "0.01",
-        "alpha": "0.99",
-        "eps": "1e-08",
-        "weight_decay": "0",
-        "momentum": "0",
-        "centered": "False",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "Rprop": {
-        "params": null,
-        "lr": "0.01",
-        "etas": "(0.5, 1.2)",
-        "step_sizes": "(1e-06, 50)",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "SGD": {
-        "params": null,
-        "lr": "<required parameter>",
-        "momentum": "0",
-        "dampening": "0",
-        "weight_decay": "0",
-        "nesterov": "False",
-        "param_group": null,
-        "state_dict": null,
-        "closure": "None",
-        "set_to_none": "False"
-    },
-    "LambdaLR": {
-        "optimizer": null,
-        "lr_lambda": null,
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "MultiplicativeLR": {
-        "optimizer": null,
-        "lr_lambda": null,
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "StepLR": {
-        "optimizer": null,
-        "step_size": null,
-        "gamma": "0.1",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "MultiStepLR": {
-        "optimizer": null,
-        "milestones": null,
-        "gamma": "0.1",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "ConstantLR": {
-        "optimizer": null,
-        "factor": "0.3333333333333333",
-        "total_iters": "5",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "LinearLR": {
-        "optimizer": null,
-        "start_factor": "0.3333333333333333",
-        "end_factor": "1.0",
-        "total_iters": "5",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "ExponentialLR": {
-        "optimizer": null,
-        "gamma": null,
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "CosineAnnealingLR": {
-        "optimizer": null,
-        "T_max": null,
-        "eta_min": "0",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "ChainedScheduler": {
-        "schedulers": null,
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "SequentialLR": {
-        "optimizer": null,
-        "schedulers": null,
-        "milestones": null,
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "ReduceLROnPlateau": {
-        "optimizer": null,
-        "mode": "'min'",
-        "factor": "0.1",
-        "patience": "10",
-        "threshold": "0.0001",
-        "threshold_mode": "'rel'",
-        "cooldown": "0",
-        "min_lr": "0",
-        "eps": "1e-08",
-        "verbose": "False"
-    },
-    "CyclicLR": {
-        "optimizer": null,
-        "base_lr": null,
-        "max_lr": null,
-        "step_size_up": "2000",
-        "step_size_down": "None",
-        "mode": "'triangular'",
-        "gamma": "1.0",
-        "scale_fn": "None",
-        "scale_mode": "'cycle'",
-        "cycle_momentum": "True",
-        "base_momentum": "0.8",
-        "max_momentum": "0.9",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "OneCycleLR": {
-        "optimizer": null,
-        "max_lr": null,
-        "total_steps": "None",
-        "epochs": "None",
-        "steps_per_epoch": "None",
-        "pct_start": "0.3",
-        "anneal_strategy": "'cos'",
-        "cycle_momentum": "True",
-        "base_momentum": "0.85",
-        "max_momentum": "0.95",
-        "div_factor": "25.0",
-        "final_div_factor": "10000.0",
-        "three_phase": "False",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
-    },
-    "CosineAnnealingWarmRestarts": {
-        "optimizer": null,
-        "T_0": null,
-        "T_mult": "1",
-        "eta_min": "0",
-        "last_epoch": "- 1",
-        "verbose": "False",
-        "state_dict": null,
-        "is_verbose": null,
-        "group": null,
-        "lr": null,
-        "epoch": "None"
+    "torch.Tensor": {
+        "short name": "Tensor",
+        "parameters": {}
+    },
+    "torch.torch.dtype": {
+        "short name": "dtype",
+        "parameters": {}
+    },
+    "torch.torch.device": {
+        "short name": "device",
+        "parameters": {}
+    },
+    "torch.torch.layout": {
+        "short name": "layout",
+        "parameters": {}
+    },
+    "torch.torch.memory_format": {
+        "short name": "memory_format",
+        "parameters": {}
+    },
+    "torch.autograd.Function": {
+        "short name": "Function",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.autograd.profiler.profile": {
+        "short name": "profile",
+        "parameters": {
+            "enabled": "True",
+            "*": null,
+            "use_cuda": "False",
+            "record_shapes": "False",
+            "with_flops": "False",
+            "profile_memory": "False",
+            "with_stack": "False",
+            "with_modules": "False",
+            "use_kineto": "False",
+            "use_cpu": "True"
+        }
+    },
+    "torch.autograd.profiler.emit_nvtx": {
+        "short name": "emit_nvtx",
+        "parameters": {
+            "enabled": "True",
+            "record_shapes": "False"
+        }
+    },
+    "torch.autograd.detect_anomaly": {
+        "short name": "detect_anomaly",
+        "parameters": {}
+    },
+    "torch.autograd.set_detect_anomaly": {
+        "short name": "set_detect_anomaly",
+        "parameters": {
+            "mode": null
+        }
+    },
+    "torch.autograd.graph.saved_tensors_hooks": {
+        "short name": "saved_tensors_hooks",
+        "parameters": {
+            "pack_hook": null,
+            "unpack_hook": null
+        }
+    },
+    "torch.autograd.graph.save_on_cpu": {
+        "short name": "save_on_cpu",
+        "parameters": {
+            "pin_memory": "False"
+        }
+    },
+    "torch.autocast": {
+        "short name": "autocast",
+        "parameters": {
+            "device_type": null,
+            "enabled": "True",
+            "**kwargs": null
+        }
+    },
+    "torch.cuda.amp.autocast": {
+        "short name": "autocast",
+        "parameters": {
+            "enabled": "True",
+            "dtype": "torch.float16",
+            "cache_enabled": "True"
+        }
+    },
+    "torch.cuda.amp.GradScaler": {
+        "short name": "GradScaler",
+        "parameters": {
+            "init_scale": "65536.0",
+            "growth_factor": "2.0",
+            "backoff_factor": "0.5",
+            "growth_interval": "2000",
+            "enabled": "True",
+            "state_dict": null,
+            "outputs": null,
+            "new_factor": null,
+            "new_interval": null,
+            "optimizer": null,
+            "*args": null,
+            "**kwargs": null,
+            "new_scale": "None"
+        }
+    },
+    "torch.distributed.Backend": {
+        "short name": "Backend",
+        "parameters": {
+            "name": null
+        }
+    },
+    "torch.distributed.Store": {
+        "short name": "Store",
+        "parameters": {}
+    },
+    "torch.distributed.TCPStore": {
+        "short name": "TCPStore",
+        "parameters": {}
+    },
+    "torch.distributed.HashStore": {
+        "short name": "HashStore",
+        "parameters": {}
+    },
+    "torch.distributed.FileStore": {
+        "short name": "FileStore",
+        "parameters": {}
+    },
+    "torch.distributed.PrefixStore": {
+        "short name": "PrefixStore",
+        "parameters": {}
+    },
+    "torch.distributed.ReduceOp": {
+        "short name": "ReduceOp",
+        "parameters": {}
+    },
+    "torch.distributed.reduce_op": {
+        "short name": "reduce_op",
+        "parameters": {}
+    },
+    "torch.distributed.algorithms.Join": {
+        "short name": "Join",
+        "parameters": {
+            "joinables": null,
+            "enable": "True",
+            "throw_on_early_termination": "False",
+            "**kwargs": null,
+            "joinable": null
+        }
+    },
+    "torch.distributed.algorithms.Joinable": {
+        "short name": "Joinable",
+        "parameters": {
+            "**kwargs": null
+        }
+    },
+    "torch.distributed.algorithms.JoinHook": {
+        "short name": "JoinHook",
+        "parameters": {
+            "is_last_joiner": null
+        }
+    },
+    "torch.distributed.optim.ZeroRedundancyOptimizer": {
+        "short name": "ZeroRedundancyOptimizer",
+        "parameters": {
+            "params": null,
+            "optimizer_class": null,
+            "process_group": "None",
+            "parameters_as_bucket_view": "False",
+            "overlap_with_ddp": "False",
+            "**defaults": null,
+            "param_group": null,
+            "to": "0",
+            "**kwargs": null,
+            "state_dict": null,
+            "closure": "None"
+        }
+    },
+    "torch.distributions.distribution.Distribution": {
+        "short name": "Distribution",
+        "parameters": {
+            "batch_shape": null,
+            "event_shape": "torch.Size([])",
+            "validate_args": "None",
+            "value": null,
+            "expand": "True",
+            "_instance": "None",
+            "sample_shape": "torch.Size([])",
+            "n": null
+        }
+    },
+    "torch.distributions.exp_family.ExponentialFamily": {
+        "short name": "ExponentialFamily",
+        "parameters": {
+            "batch_shape": "torch.Size([])",
+            "event_shape": "torch.Size([])",
+            "validate_args": "None"
+        }
+    },
+    "torch.distributions.bernoulli.Bernoulli": {
+        "short name": "Bernoulli",
+        "parameters": {
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "expand": "True",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.beta.Beta": {
+        "short name": "Beta",
+        "parameters": {
+            "concentration1": null,
+            "concentration0": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "()"
+        }
+    },
+    "torch.distributions.binomial.Binomial": {
+        "short name": "Binomial",
+        "parameters": {
+            "total_count": "1",
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "expand": "True",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.categorical.Categorical": {
+        "short name": "Categorical",
+        "parameters": {
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "expand": "True",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.cauchy.Cauchy": {
+        "short name": "Cauchy",
+        "parameters": {
+            "loc": null,
+            "scale": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.chi2.Chi2": {
+        "short name": "Chi2",
+        "parameters": {
+            "df": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.continuous_bernoulli.ContinuousBernoulli": {
+        "short name": "ContinuousBernoulli",
+        "parameters": {
+            "probs": "None",
+            "logits": "None",
+            "lims": "(0.499, 0.501)",
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.dirichlet.Dirichlet": {
+        "short name": "Dirichlet",
+        "parameters": {
+            "concentration": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "()"
+        }
+    },
+    "torch.distributions.exponential.Exponential": {
+        "short name": "Exponential",
+        "parameters": {
+            "rate": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.fishersnedecor.FisherSnedecor": {
+        "short name": "FisherSnedecor",
+        "parameters": {
+            "df1": null,
+            "df2": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.gamma.Gamma": {
+        "short name": "Gamma",
+        "parameters": {
+            "concentration": null,
+            "rate": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.geometric.Geometric": {
+        "short name": "Geometric",
+        "parameters": {
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.gumbel.Gumbel": {
+        "short name": "Gumbel",
+        "parameters": {
+            "loc": null,
+            "scale": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null
+        }
+    },
+    "torch.distributions.half_cauchy.HalfCauchy": {
+        "short name": "HalfCauchy",
+        "parameters": {
+            "scale": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "prob": null
+        }
+    },
+    "torch.distributions.half_normal.HalfNormal": {
+        "short name": "HalfNormal",
+        "parameters": {
+            "scale": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "prob": null
+        }
+    },
+    "torch.distributions.independent.Independent": {
+        "short name": "Independent",
+        "parameters": {
+            "base_distribution": null,
+            "reinterpreted_batch_ndims": null,
+            "validate_args": "None",
+            "expand": "True",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.kumaraswamy.Kumaraswamy": {
+        "short name": "Kumaraswamy",
+        "parameters": {
+            "concentration1": null,
+            "concentration0": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.lkj_cholesky.LKJCholesky": {
+        "short name": "LKJCholesky",
+        "parameters": {
+            "dim": null,
+            "concentration": "1.0",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.laplace.Laplace": {
+        "short name": "Laplace",
+        "parameters": {
+            "loc": null,
+            "scale": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.log_normal.LogNormal": {
+        "short name": "LogNormal",
+        "parameters": {
+            "loc": null,
+            "scale": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.lowrank_multivariate_normal.LowRankMultivariateNormal": {
+        "short name": "LowRankMultivariateNormal",
+        "parameters": {
+            "loc": null,
+            "cov_factor": null,
+            "cov_diag": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.mixture_same_family.MixtureSameFamily": {
+        "short name": "MixtureSameFamily",
+        "parameters": {
+            "mixture_distribution": null,
+            "component_distribution": null,
+            "validate_args": "None",
+            "x": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.multinomial.Multinomial": {
+        "short name": "Multinomial",
+        "parameters": {
+            "total_count": "1",
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.multivariate_normal.MultivariateNormal": {
+        "short name": "MultivariateNormal",
+        "parameters": {
+            "loc": null,
+            "covariance_matrix": "None",
+            "precision_matrix": "None",
+            "scale_tril": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.negative_binomial.NegativeBinomial": {
+        "short name": "NegativeBinomial",
+        "parameters": {
+            "total_count": null,
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.normal.Normal": {
+        "short name": "Normal",
+        "parameters": {
+            "loc": null,
+            "scale": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.one_hot_categorical.OneHotCategorical": {
+        "short name": "OneHotCategorical",
+        "parameters": {
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "expand": "True",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.pareto.Pareto": {
+        "short name": "Pareto",
+        "parameters": {
+            "scale": null,
+            "alpha": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.poisson.Poisson": {
+        "short name": "Poisson",
+        "parameters": {
+            "rate": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.relaxed_bernoulli.RelaxedBernoulli": {
+        "short name": "RelaxedBernoulli",
+        "parameters": {
+            "temperature": null,
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.relaxed_bernoulli.LogitRelaxedBernoulli": {
+        "short name": "LogitRelaxedBernoulli",
+        "parameters": {
+            "temperature": null,
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.relaxed_categorical.RelaxedOneHotCategorical": {
+        "short name": "RelaxedOneHotCategorical",
+        "parameters": {
+            "temperature": null,
+            "probs": "None",
+            "logits": "None",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.studentT.StudentT": {
+        "short name": "StudentT",
+        "parameters": {
+            "df": null,
+            "loc": "0.0",
+            "scale": "1.0",
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None",
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.transformed_distribution.TransformedDistribution": {
+        "short name": "TransformedDistribution",
+        "parameters": {
+            "base_distribution": null,
+            "transforms": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.uniform.Uniform": {
+        "short name": "Uniform",
+        "parameters": {
+            "low": null,
+            "high": null,
+            "validate_args": "None",
+            "value": null,
+            "batch_shape": null,
+            "_instance": "None",
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.von_mises.VonMises": {
+        "short name": "VonMises",
+        "parameters": {
+            "loc": null,
+            "concentration": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "value": null,
+            "sample_shape": "torch.Size([])"
+        }
+    },
+    "torch.distributions.weibull.Weibull": {
+        "short name": "Weibull",
+        "parameters": {
+            "scale": null,
+            "concentration": null,
+            "validate_args": "None",
+            "batch_shape": null,
+            "_instance": "None"
+        }
+    },
+    "torch.distributions.transforms.AbsTransform": {
+        "short name": "AbsTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.AffineTransform": {
+        "short name": "AffineTransform",
+        "parameters": {
+            "loc": null,
+            "scale": null,
+            "event_dim": "0",
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.ComposeTransform": {
+        "short name": "ComposeTransform",
+        "parameters": {
+            "parts": null,
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.CorrCholeskyTransform": {
+        "short name": "CorrCholeskyTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.ExpTransform": {
+        "short name": "ExpTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.IndependentTransform": {
+        "short name": "IndependentTransform",
+        "parameters": {
+            "base_transform": null,
+            "reinterpreted_batch_ndims": null,
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.LowerCholeskyTransform": {
+        "short name": "LowerCholeskyTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.PowerTransform": {
+        "short name": "PowerTransform",
+        "parameters": {
+            "exponent": null,
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.ReshapeTransform": {
+        "short name": "ReshapeTransform",
+        "parameters": {
+            "in_shape": null,
+            "out_shape": null,
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.SigmoidTransform": {
+        "short name": "SigmoidTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.TanhTransform": {
+        "short name": "TanhTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.SoftmaxTransform": {
+        "short name": "SoftmaxTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.StackTransform": {
+        "short name": "StackTransform",
+        "parameters": {
+            "tseq": null,
+            "dim": "0",
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.StickBreakingTransform": {
+        "short name": "StickBreakingTransform",
+        "parameters": {
+            "cache_size": "0"
+        }
+    },
+    "torch.distributions.transforms.Transform": {
+        "short name": "Transform",
+        "parameters": {
+            "cache_size": "0",
+            "x": null,
+            "y": null,
+            "shape": null
+        }
+    },
+    "torch.distributions.constraints.Constraint": {
+        "short name": "Constraint",
+        "parameters": {
+            "value": null
+        }
+    },
+    "torch.distributions.constraint_registry.ConstraintRegistry": {
+        "short name": "ConstraintRegistry",
+        "parameters": {
+            "constraint": null,
+            "factory": "None"
+        }
+    },
+    "torch.futures.Future": {
+        "short name": "Future",
+        "parameters": {
+            "*": null,
+            "devices": "None",
+            "callback": null,
+            "result": null
+        }
+    },
+    "torch.fx.GraphModule": {
+        "short name": "GraphModule",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "root": null,
+            "graph": null,
+            "class_name": "'GraphModule'",
+            "target": null,
+            "m": null,
+            "folder": null,
+            "module_name": "'FxModule'"
+        }
+    },
+    "torch.fx.Graph": {
+        "short name": "Graph",
+        "parameters": {
+            "owning_module": "None",
+            "tracer_cls": "None",
+            "the_function": null,
+            "args": "None",
+            "kwargs": "None",
+            "type_expr": "None",
+            "method_name": null,
+            "module_name": null,
+            "op": null,
+            "target": null,
+            "name": null,
+            "to_erase": null,
+            "*args": null,
+            "qualified_name": null,
+            "g": null,
+            "val_map": null,
+            "return_output_node": "False",
+            "n": "None",
+            "node": null,
+            "arg_transform": "<function Graph.<lambda>>",
+            "result": null,
+            "root_module": null,
+            "out": null
+        }
+    },
+    "torch.fx.Node": {
+        "short name": "Node",
+        "parameters": {
+            "graph": null,
+            "name": null,
+            "op": null,
+            "target": null,
+            "args": null,
+            "kwargs": null,
+            "return_type": "None",
+            "x": null,
+            "placeholder_names": "None",
+            "maybe_return_typename": "None",
+            "root": null,
+            "arg_types": "None",
+            "kwarg_types": "None",
+            "normalize_to_only_use_kwargs": "False",
+            "replace_with": null,
+            "old_input": null,
+            "new_input": null,
+            "idx": null,
+            "arg": null,
+            "key": null
+        }
+    },
+    "torch.fx.Tracer": {
+        "short name": "Tracer",
+        "parameters": {
+            "autowrap_modules": "(math)",
+            "autowrap_functions": "()",
+            "enable_cpatching": "False",
+            "m": null,
+            "forward": null,
+            "args": null,
+            "kwargs": null,
+            "a": null,
+            "root_fn": null,
+            "is_module": null,
+            "concrete_args": "None",
+            "kind": null,
+            "target": null,
+            "name": "None",
+            "type_expr": "None",
+            "proxy_factory_fn": "None",
+            "module_qualified_name": null,
+            "obj": null,
+            "mod": null,
+            "node": null,
+            "root": null
+        }
+    },
+    "torch.fx.Proxy": {
+        "short name": "Proxy",
+        "parameters": {
+            "node": null,
+            "tracer": "None"
+        }
+    },
+    "torch.fx.Interpreter": {
+        "short name": "Interpreter",
+        "parameters": {
+            "module": null,
+            "garbage_collect_values": "True",
+            "target": null,
+            "args": null,
+            "kwargs": null,
+            "n": null,
+            "*args": null,
+            "initial_env": "None"
+        }
+    },
+    "torch.fx.Transformer": {
+        "short name": "Transformer",
+        "parameters": {
+            "module": null,
+            "target": null,
+            "args": null,
+            "kwargs": null
+        }
+    },
+    "torch.package.PackagingError": {
+        "short name": "PackagingError",
+        "parameters": {
+            "dependency_graph": null
+        }
+    },
+    "torch.package.EmptyMatchError": {
+        "short name": "EmptyMatchError",
+        "parameters": {}
+    },
+    "torch.package.PackageExporter": {
+        "short name": "PackageExporter",
+        "parameters": {
+            "f": null,
+            "importer": "<torch.package.importer._SysImporter object>",
+            "module_name": null,
+            "dependencies": "True",
+            "include": null,
+            "*": null,
+            "exclude": "()",
+            "allow_empty": "True",
+            "hook": null,
+            "package": null,
+            "resource": null,
+            "binary": null,
+            "obj": null,
+            "file_or_directory": null,
+            "src": null,
+            "is_package": "False",
+            "text": null
+        }
+    },
+    "torch.package.PackageImporter": {
+        "short name": "PackageImporter",
+        "parameters": {
+            "file_or_buffer": null,
+            "module_allowed": "<function PackageImporter.<lambda>>",
+            "*": null,
+            "include": "'**'",
+            "exclude": "()",
+            "name": null,
+            "package": null,
+            "resource": null,
+            "map_location": "None",
+            "encoding": "'utf-8'",
+            "errors": "'strict'"
+        }
+    },
+    "torch.package.Directory": {
+        "short name": "Directory",
+        "parameters": {
+            "name": null,
+            "is_dir": null,
+            "filename": null
+        }
+    },
+    "torch.profiler.profile": {
+        "short name": "profile",
+        "parameters": {
+            "*": null,
+            "activities": "None",
+            "schedule": "None",
+            "on_trace_ready": "None",
+            "record_shapes": "False",
+            "profile_memory": "False",
+            "with_stack": "False",
+            "with_flops": "False",
+            "with_modules": "False",
+            "use_cuda": "None",
+            "key": null,
+            "value": null,
+            "path": null,
+            "metric": "'self_cpu_time_total'",
+            "group_by_input_shape": "False",
+            "group_by_stack_n": "0"
+        }
+    },
+    "torch.profiler.ProfilerAction": {
+        "short name": "ProfilerAction",
+        "parameters": {
+            "value": null
+        }
+    },
+    "torch.profiler.ProfilerActivity": {
+        "short name": "ProfilerActivity",
+        "parameters": {}
+    },
+    "torch.optim.Optimizer": {
+        "short name": "Optimizer",
+        "parameters": {
+            "params": null,
+            "defaults": null
+        }
+    },
+    "torch.distributed.GradBucket": {
+        "short name": "GradBucket",
+        "parameters": {}
+    },
+    "torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState": {
+        "short name": "PowerSGDState",
+        "parameters": {
+            "process_group": null,
+            "matrix_approximation_rank": "1",
+            "start_powerSGD_iter": "1000",
+            "min_compression_rate": "2",
+            "use_error_feedback": "True",
+            "warm_start": "True",
+            "orthogonalization_epsilon": "0",
+            "random_seed": "0",
+            "compression_stats_logging_frequency": "10000"
+        }
+    },
+    "torch.distributed.pipeline.sync.Pipe": {
+        "short name": "Pipe",
+        "parameters": {
+            "module": null,
+            "chunks": "1",
+            "checkpoint": "'except_last'",
+            "deferred_batch_norm": "False",
+            "*inputs": null
+        }
+    },
+    "torch.distributed.pipeline.sync.skip.skippable.stash": {
+        "short name": "stash",
+        "parameters": {
+            "name": null,
+            "tensor": null
+        }
+    },
+    "torch.distributed.pipeline.sync.skip.skippable.pop": {
+        "short name": "pop",
+        "parameters": {
+            "name": null
+        }
+    },
+    "torch.distributed.rpc.WorkerInfo": {
+        "short name": "WorkerInfo",
+        "parameters": {}
+    },
+    "torch.distributed.rpc.BackendType": {
+        "short name": "BackendType",
+        "parameters": {
+            "value": null
+        }
+    },
+    "torch.distributed.rpc.RpcBackendOptions": {
+        "short name": "RpcBackendOptions",
+        "parameters": {}
+    },
+    "torch.distributed.rpc.TensorPipeRpcBackendOptions": {
+        "short name": "TensorPipeRpcBackendOptions",
+        "parameters": {
+            "*": null,
+            "num_worker_threads": "16",
+            "rpc_timeout": "60.0",
+            "init_method": "'env://'",
+            "device_maps": "None",
+            "devices": null,
+            "_transports": "None",
+            "_channels": "None",
+            "to": null,
+            "device_map": null
+        }
+    },
+    "torch.distributed.rpc.RRef": {
+        "short name": "RRef",
+        "parameters": {
+            "self: torch._C._distributed_rpc.PyRRef": null,
+            "dist_autograd_ctx_id: int ": " - 1",
+            "retain_graph: bool ": " False",
+            "timeout: float ": " - 1.0"
+        }
+    },
+    "torch.distributed.nn.api.remote_module.RemoteModule": {
+        "short name": "RemoteModule",
+        "parameters": {
+            "remote_device": null,
+            "module_cls": null,
+            "args": "None",
+            "kwargs": "None",
+            "recurse": "True"
+        }
+    },
+    "torch.distributed.autograd.context": {
+        "short name": "context",
+        "parameters": {}
+    },
+    "torch.distributed.optim.DistributedOptimizer": {
+        "short name": "DistributedOptimizer",
+        "parameters": {
+            "optimizer_class": null,
+            "params_rref": null,
+            "*args": null,
+            "**kwargs": null,
+            "context_id": null
+        }
+    },
+    "torch.DoubleStorage": {
+        "short name": "DoubleStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.FloatStorage": {
+        "short name": "FloatStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.HalfStorage": {
+        "short name": "HalfStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "dtype": "None"
+        }
+    },
+    "torch.LongStorage": {
+        "short name": "LongStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.IntStorage": {
+        "short name": "IntStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.ShortStorage": {
+        "short name": "ShortStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.CharStorage": {
+        "short name": "CharStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.ByteStorage": {
+        "short name": "ByteStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.BoolStorage": {
+        "short name": "BoolStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.BFloat16Storage": {
+        "short name": "BFloat16Storage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.ComplexDoubleStorage": {
+        "short name": "ComplexDoubleStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.ComplexFloatStorage": {
+        "short name": "ComplexFloatStorage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "filename": null,
+            "shared": "False",
+            "size": "0",
+            "dtype": "None"
+        }
+    },
+    "torch.QUInt8Storage": {
+        "short name": "QUInt8Storage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "dtype": "None"
+        }
+    },
+    "torch.QInt8Storage": {
+        "short name": "QInt8Storage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "dtype": "None"
+        }
+    },
+    "torch.QInt32Storage": {
+        "short name": "QInt32Storage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "dtype": "None"
+        }
+    },
+    "torch.QUInt4x2Storage": {
+        "short name": "QUInt4x2Storage",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null,
+            "device": "None",
+            "non_blocking": "False",
+            "dtype": "None"
+        }
+    },
+    "torch.utils.benchmark.Timer": {
+        "short name": "Timer",
+        "parameters": {
+            "stmt": "'pass'",
+            "setup": "'pass'",
+            "global_setup": "''",
+            "timer": "<built-in function perf_counter>",
+            "globals": "None",
+            "label": "None",
+            "sub_label": "None",
+            "description": "None",
+            "env": "None",
+            "num_threads": "1",
+            "language": "<Language.PYTHON: 0>",
+            "callback": "None",
+            "min_run_time": "0.2",
+            "number": "1000000",
+            "*": null,
+            "repeats": "None",
+            "collect_baseline": "True",
+            "retain_out_file": "False"
+        }
+    },
+    "torch.utils.benchmark.Measurement": {
+        "short name": "Measurement",
+        "parameters": {
+            "number_per_run": null,
+            "raw_times": null,
+            "task_spec": null,
+            "metadata": "None",
+            "measurements": null
+        }
+    },
+    "torch.utils.benchmark.CallgrindStats": {
+        "short name": "CallgrindStats",
+        "parameters": {
+            "task_spec": null,
+            "number_per_run": null,
+            "built_with_debug_symbols": null,
+            "baseline_inclusive_stats": null,
+            "baseline_exclusive_stats": null,
+            "stmt_inclusive_stats": null,
+            "stmt_exclusive_stats": null,
+            "stmt_callgrind_out": null,
+            "*": null,
+            "denoise": "False",
+            "other": null,
+            "inclusive": "False"
+        }
+    },
+    "torch.utils.benchmark.FunctionCounts": {
+        "short name": "FunctionCounts",
+        "parameters": {
+            "_data": null,
+            "inclusive": null,
+            "truncate_rows": "True",
+            "_linewidth": "None",
+            "filter_fn": null,
+            "map_fn": null
+        }
+    },
+    "torch.utils.data.DataLoader": {
+        "short name": "DataLoader",
+        "parameters": {
+            "dataset": null,
+            "batch_size": "1",
+            "shuffle": "False",
+            "sampler": "None",
+            "batch_sampler": "None",
+            "num_workers": "0",
+            "collate_fn": "None",
+            "pin_memory": "False",
+            "drop_last": "False",
+            "timeout": "0",
+            "worker_init_fn": "None",
+            "multiprocessing_context": "None",
+            "generator": "None",
+            "*": null,
+            "prefetch_factor": "2",
+            "persistent_workers": "False"
+        }
+    },
+    "torch.utils.data.Dataset": {
+        "short name": "Dataset",
+        "parameters": {
+            "*args": null,
+            "**kwds": null
+        }
+    },
+    "torch.utils.data.IterableDataset": {
+        "short name": "IterableDataset",
+        "parameters": {
+            "*args": null,
+            "**kwds": null
+        }
+    },
+    "torch.utils.data.TensorDataset": {
+        "short name": "TensorDataset",
+        "parameters": {
+            "*tensors": null
+        }
+    },
+    "torch.utils.data.ConcatDataset": {
+        "short name": "ConcatDataset",
+        "parameters": {
+            "datasets": null
+        }
+    },
+    "torch.utils.data.ChainDataset": {
+        "short name": "ChainDataset",
+        "parameters": {
+            "datasets": null
+        }
+    },
+    "torch.utils.data.Subset": {
+        "short name": "Subset",
+        "parameters": {
+            "dataset": null,
+            "indices": null
+        }
+    },
+    "torch.utils.data.Sampler": {
+        "short name": "Sampler",
+        "parameters": {
+            "data_source": null
+        }
+    },
+    "torch.utils.data.SequentialSampler": {
+        "short name": "SequentialSampler",
+        "parameters": {
+            "data_source": null
+        }
+    },
+    "torch.utils.data.RandomSampler": {
+        "short name": "RandomSampler",
+        "parameters": {
+            "data_source": null,
+            "replacement": "False",
+            "num_samples": "None",
+            "generator": "None"
+        }
+    },
+    "torch.utils.data.SubsetRandomSampler": {
+        "short name": "SubsetRandomSampler",
+        "parameters": {
+            "indices": null,
+            "generator": "None"
+        }
+    },
+    "torch.utils.data.WeightedRandomSampler": {
+        "short name": "WeightedRandomSampler",
+        "parameters": {
+            "weights": null,
+            "num_samples": null,
+            "replacement": "True",
+            "generator": "None"
+        }
+    },
+    "torch.utils.data.BatchSampler": {
+        "short name": "BatchSampler",
+        "parameters": {
+            "sampler": null,
+            "batch_size": null,
+            "drop_last": null
+        }
+    },
+    "torch.utils.data.distributed.DistributedSampler": {
+        "short name": "DistributedSampler",
+        "parameters": {
+            "dataset": null,
+            "num_replicas": "None",
+            "rank": "None",
+            "shuffle": "True",
+            "seed": "0",
+            "drop_last": "False"
+        }
+    },
+    "torch.utils.tensorboard.writer.SummaryWriter": {
+        "short name": "SummaryWriter",
+        "parameters": {
+            "log_dir": "None",
+            "comment": "''",
+            "purge_step": "None",
+            "max_queue": "10",
+            "flush_secs": "120",
+            "filename_suffix": "''",
+            "tag": null,
+            "scalar_value": null,
+            "global_step": "None",
+            "walltime": "None",
+            "new_style": "False",
+            "double_precision": "False",
+            "main_tag": null,
+            "tag_scalar_dict": null,
+            "values": null,
+            "bins": "'tensorflow'",
+            "max_bins": "None",
+            "img_tensor": null,
+            "dataformats": "'NCHW'",
+            "figure": null,
+            "close": "True",
+            "vid_tensor": null,
+            "fps": "4",
+            "snd_tensor": null,
+            "sample_rate": "44100",
+            "text_string": null,
+            "model": null,
+            "input_to_model": "None",
+            "verbose": "False",
+            "use_strict_trace": "True",
+            "mat": null,
+            "metadata": "None",
+            "label_img": "None",
+            "metadata_header": "None",
+            "labels": null,
+            "predictions": null,
+            "num_thresholds": "127",
+            "weights": "None",
+            "layout": null,
+            "vertices": null,
+            "colors": "None",
+            "faces": "None",
+            "config_dict": "None",
+            "hparam_dict": null,
+            "metric_dict": null,
+            "hparam_domain_discrete": "None",
+            "run_name": "None"
+        }
+    },
+    "torch.torch.finfo": {
+        "short name": "finfo",
+        "parameters": {}
+    },
+    "torch.torch.iinfo": {
+        "short name": "iinfo",
+        "parameters": {}
+    },
+    "torch.Generator": {
+        "short name": "Generator",
+        "parameters": {
+            "device": "'cpu'",
+            "seed": null,
+            "new_state": null
+        }
+    },
+    "torch.quasirandom.SobolEngine": {
+        "short name": "SobolEngine",
+        "parameters": {
+            "dimension": null,
+            "scramble": "False",
+            "seed": "None",
+            "n": null,
+            "out": "None",
+            "dtype": "torch.float32",
+            "m": null
+        }
+    },
+    "torch.nn.parameter.Parameter": {
+        "short name": "Parameter",
+        "parameters": {
+            "data": "None",
+            "requires_grad": "True"
+        }
+    },
+    "torch.nn.parameter.UninitializedParameter": {
+        "short name": "UninitializedParameter",
+        "parameters": {
+            "requires_grad": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.parameter.UninitializedBuffer": {
+        "short name": "UninitializedBuffer",
+        "parameters": {
+            "requires_grad": "False",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Module": {
+        "short name": "Module",
+        "parameters": {
+            "name": null,
+            "module": null,
+            "fn": null,
+            "recurse": "True",
+            "device": "None",
+            "*input": null,
+            "target": null,
+            "state_dict": null,
+            "strict": "True",
+            "prefix": "''",
+            "memo": "None",
+            "remove_duplicate": "True",
+            "hook": null,
+            "tensor": null,
+            "persistent": "True",
+            "param": null,
+            "requires_grad": "True",
+            "state": null,
+            "destination": "None",
+            "keep_vars": "False",
+            "*args": null,
+            "**kwargs": null,
+            "dtype": null,
+            "non_blocking": "False",
+            "memory_format": "torch.channels_last",
+            "*": null,
+            "mode": "True",
+            "dst_type": null,
+            "set_to_none": "False"
+        }
+    },
+    "torch.nn.Sequential": {
+        "short name": "Sequential",
+        "parameters": {
+            "*args": null
+        }
+    },
+    "torch.nn.ModuleList": {
+        "short name": "ModuleList",
+        "parameters": {
+            "modules": null,
+            "module": null,
+            "index": null
+        }
+    },
+    "torch.nn.ModuleDict": {
+        "short name": "ModuleDict",
+        "parameters": {
+            "modules": null,
+            "key": null
+        }
+    },
+    "torch.nn.ParameterList": {
+        "short name": "ParameterList",
+        "parameters": {
+            "parameters": null,
+            "parameter": null
+        }
+    },
+    "torch.nn.ParameterDict": {
+        "short name": "ParameterDict",
+        "parameters": {
+            "parameters": null,
+            "key": null
+        }
+    },
+    "torch.nn.Conv1d": {
+        "short name": "Conv1d",
+        "parameters": {
+            "in_channels": null,
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "dilation": "1",
+            "groups": "1",
+            "bias": "True",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Conv2d": {
+        "short name": "Conv2d",
+        "parameters": {
+            "in_channels": null,
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "dilation": "1",
+            "groups": "1",
+            "bias": "True",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Conv3d": {
+        "short name": "Conv3d",
+        "parameters": {
+            "in_channels": null,
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "dilation": "1",
+            "groups": "1",
+            "bias": "True",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.ConvTranspose1d": {
+        "short name": "ConvTranspose1d",
+        "parameters": {
+            "in_channels": null,
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "output_padding": "0",
+            "groups": "1",
+            "bias": "True",
+            "dilation": "1",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.ConvTranspose2d": {
+        "short name": "ConvTranspose2d",
+        "parameters": {
+            "in_channels": null,
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "output_padding": "0",
+            "groups": "1",
+            "bias": "True",
+            "dilation": "1",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.ConvTranspose3d": {
+        "short name": "ConvTranspose3d",
+        "parameters": {
+            "in_channels": null,
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "output_padding": "0",
+            "groups": "1",
+            "bias": "True",
+            "dilation": "1",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyConv1d": {
+        "short name": "LazyConv1d",
+        "parameters": {
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "dilation": "1",
+            "groups": "1",
+            "bias": "True",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyConv2d": {
+        "short name": "LazyConv2d",
+        "parameters": {
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "dilation": "1",
+            "groups": "1",
+            "bias": "True",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyConv3d": {
+        "short name": "LazyConv3d",
+        "parameters": {
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "dilation": "1",
+            "groups": "1",
+            "bias": "True",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyConvTranspose1d": {
+        "short name": "LazyConvTranspose1d",
+        "parameters": {
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "output_padding": "0",
+            "groups": "1",
+            "bias": "True",
+            "dilation": "1",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyConvTranspose2d": {
+        "short name": "LazyConvTranspose2d",
+        "parameters": {
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "output_padding": "0",
+            "groups": "1",
+            "bias": "True",
+            "dilation": "1",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyConvTranspose3d": {
+        "short name": "LazyConvTranspose3d",
+        "parameters": {
+            "out_channels": null,
+            "kernel_size": null,
+            "stride": "1",
+            "padding": "0",
+            "output_padding": "0",
+            "groups": "1",
+            "bias": "True",
+            "dilation": "1",
+            "padding_mode": "'zeros'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Unfold": {
+        "short name": "Unfold",
+        "parameters": {
+            "kernel_size": null,
+            "dilation": "1",
+            "padding": "0",
+            "stride": "1"
+        }
+    },
+    "torch.nn.Fold": {
+        "short name": "Fold",
+        "parameters": {
+            "output_size": null,
+            "kernel_size": null,
+            "dilation": "1",
+            "padding": "0",
+            "stride": "1"
+        }
+    },
+    "torch.nn.MaxPool1d": {
+        "short name": "MaxPool1d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0",
+            "dilation": "1",
+            "return_indices": "False",
+            "ceil_mode": "False"
+        }
+    },
+    "torch.nn.MaxPool2d": {
+        "short name": "MaxPool2d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0",
+            "dilation": "1",
+            "return_indices": "False",
+            "ceil_mode": "False"
+        }
+    },
+    "torch.nn.MaxPool3d": {
+        "short name": "MaxPool3d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0",
+            "dilation": "1",
+            "return_indices": "False",
+            "ceil_mode": "False"
+        }
+    },
+    "torch.nn.MaxUnpool1d": {
+        "short name": "MaxUnpool1d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0"
+        }
+    },
+    "torch.nn.MaxUnpool2d": {
+        "short name": "MaxUnpool2d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0"
+        }
+    },
+    "torch.nn.MaxUnpool3d": {
+        "short name": "MaxUnpool3d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0"
+        }
+    },
+    "torch.nn.AvgPool1d": {
+        "short name": "AvgPool1d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0",
+            "ceil_mode": "False",
+            "count_include_pad": "True"
+        }
+    },
+    "torch.nn.AvgPool2d": {
+        "short name": "AvgPool2d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0",
+            "ceil_mode": "False",
+            "count_include_pad": "True",
+            "divisor_override": "None"
+        }
+    },
+    "torch.nn.AvgPool3d": {
+        "short name": "AvgPool3d",
+        "parameters": {
+            "kernel_size": null,
+            "stride": "None",
+            "padding": "0",
+            "ceil_mode": "False",
+            "count_include_pad": "True",
+            "divisor_override": "None"
+        }
+    },
+    "torch.nn.FractionalMaxPool2d": {
+        "short name": "FractionalMaxPool2d",
+        "parameters": {
+            "kernel_size": null,
+            "output_size": "None",
+            "output_ratio": "None",
+            "return_indices": "False",
+            "_random_samples": "None"
+        }
+    },
+    "torch.nn.FractionalMaxPool3d": {
+        "short name": "FractionalMaxPool3d",
+        "parameters": {
+            "kernel_size": null,
+            "output_size": "None",
+            "output_ratio": "None",
+            "return_indices": "False",
+            "_random_samples": "None"
+        }
+    },
+    "torch.nn.LPPool1d": {
+        "short name": "LPPool1d",
+        "parameters": {
+            "norm_type": null,
+            "kernel_size": null,
+            "stride": "None",
+            "ceil_mode": "False"
+        }
+    },
+    "torch.nn.LPPool2d": {
+        "short name": "LPPool2d",
+        "parameters": {
+            "norm_type": null,
+            "kernel_size": null,
+            "stride": "None",
+            "ceil_mode": "False"
+        }
+    },
+    "torch.nn.AdaptiveMaxPool1d": {
+        "short name": "AdaptiveMaxPool1d",
+        "parameters": {
+            "output_size": null,
+            "return_indices": "False"
+        }
+    },
+    "torch.nn.AdaptiveMaxPool2d": {
+        "short name": "AdaptiveMaxPool2d",
+        "parameters": {
+            "output_size": null,
+            "return_indices": "False"
+        }
+    },
+    "torch.nn.AdaptiveMaxPool3d": {
+        "short name": "AdaptiveMaxPool3d",
+        "parameters": {
+            "output_size": null,
+            "return_indices": "False"
+        }
+    },
+    "torch.nn.AdaptiveAvgPool1d": {
+        "short name": "AdaptiveAvgPool1d",
+        "parameters": {
+            "output_size": null
+        }
+    },
+    "torch.nn.AdaptiveAvgPool2d": {
+        "short name": "AdaptiveAvgPool2d",
+        "parameters": {
+            "output_size": null
+        }
+    },
+    "torch.nn.AdaptiveAvgPool3d": {
+        "short name": "AdaptiveAvgPool3d",
+        "parameters": {
+            "output_size": null
+        }
+    },
+    "torch.nn.ReflectionPad1d": {
+        "short name": "ReflectionPad1d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ReflectionPad2d": {
+        "short name": "ReflectionPad2d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ReflectionPad3d": {
+        "short name": "ReflectionPad3d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ReplicationPad1d": {
+        "short name": "ReplicationPad1d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ReplicationPad2d": {
+        "short name": "ReplicationPad2d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ReplicationPad3d": {
+        "short name": "ReplicationPad3d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ZeroPad2d": {
+        "short name": "ZeroPad2d",
+        "parameters": {
+            "padding": null
+        }
+    },
+    "torch.nn.ConstantPad1d": {
+        "short name": "ConstantPad1d",
+        "parameters": {
+            "padding": null,
+            "value": null
+        }
+    },
+    "torch.nn.ConstantPad2d": {
+        "short name": "ConstantPad2d",
+        "parameters": {
+            "padding": null,
+            "value": null
+        }
+    },
+    "torch.nn.ConstantPad3d": {
+        "short name": "ConstantPad3d",
+        "parameters": {
+            "padding": null,
+            "value": null
+        }
+    },
+    "torch.nn.ELU": {
+        "short name": "ELU",
+        "parameters": {
+            "alpha": "1.0",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Hardshrink": {
+        "short name": "Hardshrink",
+        "parameters": {
+            "lambd": "0.5"
+        }
+    },
+    "torch.nn.Hardsigmoid": {
+        "short name": "Hardsigmoid",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Hardtanh": {
+        "short name": "Hardtanh",
+        "parameters": {
+            "min_val": "- 1.0",
+            "max_val": "1.0",
+            "inplace": "False",
+            "min_value": "None",
+            "max_value": "None"
+        }
+    },
+    "torch.nn.Hardswish": {
+        "short name": "Hardswish",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.LeakyReLU": {
+        "short name": "LeakyReLU",
+        "parameters": {
+            "negative_slope": "0.01",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.LogSigmoid": {
+        "short name": "LogSigmoid",
+        "parameters": {}
+    },
+    "torch.nn.MultiheadAttention": {
+        "short name": "MultiheadAttention",
+        "parameters": {
+            "embed_dim": null,
+            "num_heads": null,
+            "dropout": "0.0",
+            "bias": "True",
+            "add_bias_kv": "False",
+            "add_zero_attn": "False",
+            "kdim": "None",
+            "vdim": "None",
+            "batch_first": "False",
+            "device": "None",
+            "dtype": "None",
+            "query": null,
+            "key": null,
+            "value": null,
+            "key_padding_mask": "None",
+            "need_weights": "True",
+            "attn_mask": "None"
+        }
+    },
+    "torch.nn.PReLU": {
+        "short name": "PReLU",
+        "parameters": {
+            "num_parameters": "1",
+            "init": "0.25",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.ReLU": {
+        "short name": "ReLU",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.ReLU6": {
+        "short name": "ReLU6",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.RReLU": {
+        "short name": "RReLU",
+        "parameters": {
+            "lower": "0.125",
+            "upper": "0.3333333333333333",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.SELU": {
+        "short name": "SELU",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.CELU": {
+        "short name": "CELU",
+        "parameters": {
+            "alpha": "1.0",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.GELU": {
+        "short name": "GELU",
+        "parameters": {}
+    },
+    "torch.nn.Sigmoid": {
+        "short name": "Sigmoid",
+        "parameters": {}
+    },
+    "torch.nn.SiLU": {
+        "short name": "SiLU",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Mish": {
+        "short name": "Mish",
+        "parameters": {
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Softplus": {
+        "short name": "Softplus",
+        "parameters": {
+            "beta": "1",
+            "threshold": "20"
+        }
+    },
+    "torch.nn.Softshrink": {
+        "short name": "Softshrink",
+        "parameters": {
+            "lambd": "0.5"
+        }
+    },
+    "torch.nn.Softsign": {
+        "short name": "Softsign",
+        "parameters": {}
+    },
+    "torch.nn.Tanh": {
+        "short name": "Tanh",
+        "parameters": {}
+    },
+    "torch.nn.Tanhshrink": {
+        "short name": "Tanhshrink",
+        "parameters": {}
+    },
+    "torch.nn.Threshold": {
+        "short name": "Threshold",
+        "parameters": {
+            "threshold": null,
+            "value": null,
+            "inplace": "False"
+        }
+    },
+    "torch.nn.GLU": {
+        "short name": "GLU",
+        "parameters": {
+            "dim": "- 1"
+        }
+    },
+    "torch.nn.Softmin": {
+        "short name": "Softmin",
+        "parameters": {
+            "dim": "None"
+        }
+    },
+    "torch.nn.Softmax": {
+        "short name": "Softmax",
+        "parameters": {
+            "dim": "None"
+        }
+    },
+    "torch.nn.Softmax2d": {
+        "short name": "Softmax2d",
+        "parameters": {}
+    },
+    "torch.nn.LogSoftmax": {
+        "short name": "LogSoftmax",
+        "parameters": {
+            "dim": "None"
+        }
+    },
+    "torch.nn.AdaptiveLogSoftmaxWithLoss": {
+        "short name": "AdaptiveLogSoftmaxWithLoss",
+        "parameters": {
+            "in_features": null,
+            "n_classes": null,
+            "cutoffs": null,
+            "div_value": "4.0",
+            "head_bias": "False",
+            "device": "None",
+            "dtype": "None",
+            "input": null
+        }
+    },
+    "torch.nn.BatchNorm1d": {
+        "short name": "BatchNorm1d",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.BatchNorm2d": {
+        "short name": "BatchNorm2d",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.BatchNorm3d": {
+        "short name": "BatchNorm3d",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyBatchNorm1d": {
+        "short name": "LazyBatchNorm1d",
+        "parameters": {
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyBatchNorm2d": {
+        "short name": "LazyBatchNorm2d",
+        "parameters": {
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyBatchNorm3d": {
+        "short name": "LazyBatchNorm3d",
+        "parameters": {
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.GroupNorm": {
+        "short name": "GroupNorm",
+        "parameters": {
+            "num_groups": null,
+            "num_channels": null,
+            "eps": "1e-05",
+            "affine": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.SyncBatchNorm": {
+        "short name": "SyncBatchNorm",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "process_group": "None",
+            "device": "None",
+            "dtype": "None",
+            "module": null
+        }
+    },
+    "torch.nn.InstanceNorm1d": {
+        "short name": "InstanceNorm1d",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "False",
+            "track_running_stats": "False",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.InstanceNorm2d": {
+        "short name": "InstanceNorm2d",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "False",
+            "track_running_stats": "False",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.InstanceNorm3d": {
+        "short name": "InstanceNorm3d",
+        "parameters": {
+            "num_features": null,
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "False",
+            "track_running_stats": "False",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyInstanceNorm1d": {
+        "short name": "LazyInstanceNorm1d",
+        "parameters": {
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyInstanceNorm2d": {
+        "short name": "LazyInstanceNorm2d",
+        "parameters": {
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyInstanceNorm3d": {
+        "short name": "LazyInstanceNorm3d",
+        "parameters": {
+            "eps": "1e-05",
+            "momentum": "0.1",
+            "affine": "True",
+            "track_running_stats": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LayerNorm": {
+        "short name": "LayerNorm",
+        "parameters": {
+            "normalized_shape": null,
+            "eps": "1e-05",
+            "elementwise_affine": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LocalResponseNorm": {
+        "short name": "LocalResponseNorm",
+        "parameters": {
+            "size": null,
+            "alpha": "0.0001",
+            "beta": "0.75",
+            "k": "1.0"
+        }
+    },
+    "torch.nn.RNNBase": {
+        "short name": "RNNBase",
+        "parameters": {
+            "mode": null,
+            "input_size": null,
+            "hidden_size": null,
+            "num_layers": "1",
+            "bias": "True",
+            "batch_first": "False",
+            "dropout": "0.0",
+            "bidirectional": "False",
+            "proj_size": "0",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.RNN": {
+        "short name": "RNN",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.nn.LSTM": {
+        "short name": "LSTM",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.nn.GRU": {
+        "short name": "GRU",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.nn.RNNCell": {
+        "short name": "RNNCell",
+        "parameters": {
+            "input_size": null,
+            "hidden_size": null,
+            "bias": "True",
+            "nonlinearity": "'tanh'",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LSTMCell": {
+        "short name": "LSTMCell",
+        "parameters": {
+            "input_size": null,
+            "hidden_size": null,
+            "bias": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.GRUCell": {
+        "short name": "GRUCell",
+        "parameters": {
+            "input_size": null,
+            "hidden_size": null,
+            "bias": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Transformer": {
+        "short name": "Transformer",
+        "parameters": {
+            "d_model": "512",
+            "nhead": "8",
+            "num_encoder_layers": "6",
+            "num_decoder_layers": "6",
+            "dim_feedforward": "2048",
+            "dropout": "0.1",
+            "activation": "<function relu>",
+            "custom_encoder": "None",
+            "custom_decoder": "None",
+            "layer_norm_eps": "1e-05",
+            "batch_first": "False",
+            "norm_first": "False",
+            "device": "None",
+            "dtype": "None",
+            "src": null,
+            "tgt": null,
+            "src_mask": "None",
+            "tgt_mask": "None",
+            "memory_mask": "None",
+            "src_key_padding_mask": "None",
+            "tgt_key_padding_mask": "None",
+            "memory_key_padding_mask": "None",
+            "sz": null
+        }
+    },
+    "torch.nn.TransformerEncoder": {
+        "short name": "TransformerEncoder",
+        "parameters": {
+            "encoder_layer": null,
+            "num_layers": null,
+            "norm": "None",
+            "src": null,
+            "mask": "None",
+            "src_key_padding_mask": "None"
+        }
+    },
+    "torch.nn.TransformerDecoder": {
+        "short name": "TransformerDecoder",
+        "parameters": {
+            "decoder_layer": null,
+            "num_layers": null,
+            "norm": "None",
+            "tgt": null,
+            "memory": null,
+            "tgt_mask": "None",
+            "memory_mask": "None",
+            "tgt_key_padding_mask": "None",
+            "memory_key_padding_mask": "None"
+        }
+    },
+    "torch.nn.TransformerEncoderLayer": {
+        "short name": "TransformerEncoderLayer",
+        "parameters": {
+            "d_model": null,
+            "nhead": null,
+            "dim_feedforward": "2048",
+            "dropout": "0.1",
+            "activation": "<function relu>",
+            "layer_norm_eps": "1e-05",
+            "batch_first": "False",
+            "norm_first": "False",
+            "device": "None",
+            "dtype": "None",
+            "src": null,
+            "src_mask": "None",
+            "src_key_padding_mask": "None"
+        }
+    },
+    "torch.nn.TransformerDecoderLayer": {
+        "short name": "TransformerDecoderLayer",
+        "parameters": {
+            "d_model": null,
+            "nhead": null,
+            "dim_feedforward": "2048",
+            "dropout": "0.1",
+            "activation": "<function relu>",
+            "layer_norm_eps": "1e-05",
+            "batch_first": "False",
+            "norm_first": "False",
+            "device": "None",
+            "dtype": "None",
+            "tgt": null,
+            "memory": null,
+            "tgt_mask": "None",
+            "memory_mask": "None",
+            "tgt_key_padding_mask": "None",
+            "memory_key_padding_mask": "None"
+        }
+    },
+    "torch.nn.Identity": {
+        "short name": "Identity",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.nn.Linear": {
+        "short name": "Linear",
+        "parameters": {
+            "in_features": null,
+            "out_features": null,
+            "bias": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Bilinear": {
+        "short name": "Bilinear",
+        "parameters": {
+            "in1_features": null,
+            "in2_features": null,
+            "out_features": null,
+            "bias": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.LazyLinear": {
+        "short name": "LazyLinear",
+        "parameters": {
+            "out_features": null,
+            "bias": "True",
+            "device": "None",
+            "dtype": "None"
+        }
+    },
+    "torch.nn.Dropout": {
+        "short name": "Dropout",
+        "parameters": {
+            "p": "0.5",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Dropout2d": {
+        "short name": "Dropout2d",
+        "parameters": {
+            "p": "0.5",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Dropout3d": {
+        "short name": "Dropout3d",
+        "parameters": {
+            "p": "0.5",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.AlphaDropout": {
+        "short name": "AlphaDropout",
+        "parameters": {
+            "p": "0.5",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.FeatureAlphaDropout": {
+        "short name": "FeatureAlphaDropout",
+        "parameters": {
+            "p": "0.5",
+            "inplace": "False"
+        }
+    },
+    "torch.nn.Embedding": {
+        "short name": "Embedding",
+        "parameters": {
+            "num_embeddings": null,
+            "embedding_dim": null,
+            "padding_idx": "None",
+            "max_norm": "None",
+            "norm_type": "2.0",
+            "scale_grad_by_freq": "False",
+            "sparse": "False",
+            "_weight": "None",
+            "device": "None",
+            "dtype": "None",
+            "embeddings": null,
+            "freeze": "True"
+        }
+    },
+    "torch.nn.EmbeddingBag": {
+        "short name": "EmbeddingBag",
+        "parameters": {
+            "num_embeddings": null,
+            "embedding_dim": null,
+            "max_norm": "None",
+            "norm_type": "2.0",
+            "scale_grad_by_freq": "False",
+            "mode": "'mean'",
+            "sparse": "False",
+            "_weight": "None",
+            "include_last_offset": "False",
+            "padding_idx": "None",
+            "device": "None",
+            "dtype": "None",
+            "input": null,
+            "offsets": "None",
+            "per_sample_weights": "None",
+            "embeddings": null,
+            "freeze": "True"
+        }
+    },
+    "torch.nn.CosineSimilarity": {
+        "short name": "CosineSimilarity",
+        "parameters": {
+            "dim": "1",
+            "eps": "1e-08"
+        }
+    },
+    "torch.nn.PairwiseDistance": {
+        "short name": "PairwiseDistance",
+        "parameters": {
+            "p": "2.0",
+            "eps": "1e-06",
+            "keepdim": "False"
+        }
+    },
+    "torch.nn.L1Loss": {
+        "short name": "L1Loss",
+        "parameters": {
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.MSELoss": {
+        "short name": "MSELoss",
+        "parameters": {
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.CrossEntropyLoss": {
+        "short name": "CrossEntropyLoss",
+        "parameters": {
+            "weight": "None",
+            "size_average": "None",
+            "ignore_index": "- 100",
+            "reduce": "None",
+            "reduction": "'mean'",
+            "label_smoothing": "0.0"
+        }
+    },
+    "torch.nn.CTCLoss": {
+        "short name": "CTCLoss",
+        "parameters": {
+            "blank": "0",
+            "reduction": "'mean'",
+            "zero_infinity": "False"
+        }
+    },
+    "torch.nn.NLLLoss": {
+        "short name": "NLLLoss",
+        "parameters": {
+            "weight": "None",
+            "size_average": "None",
+            "ignore_index": "- 100",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.PoissonNLLLoss": {
+        "short name": "PoissonNLLLoss",
+        "parameters": {
+            "log_input": "True",
+            "full": "False",
+            "size_average": "None",
+            "eps": "1e-08",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.GaussianNLLLoss": {
+        "short name": "GaussianNLLLoss",
+        "parameters": {
+            "*": null,
+            "full": "False",
+            "eps": "1e-06",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.KLDivLoss": {
+        "short name": "KLDivLoss",
+        "parameters": {
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'",
+            "log_target": "False"
+        }
+    },
+    "torch.nn.BCELoss": {
+        "short name": "BCELoss",
+        "parameters": {
+            "weight": "None",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.BCEWithLogitsLoss": {
+        "short name": "BCEWithLogitsLoss",
+        "parameters": {
+            "weight": "None",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'",
+            "pos_weight": "None"
+        }
+    },
+    "torch.nn.MarginRankingLoss": {
+        "short name": "MarginRankingLoss",
+        "parameters": {
+            "margin": "0.0",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.HingeEmbeddingLoss": {
+        "short name": "HingeEmbeddingLoss",
+        "parameters": {
+            "margin": "1.0",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.MultiLabelMarginLoss": {
+        "short name": "MultiLabelMarginLoss",
+        "parameters": {
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.HuberLoss": {
+        "short name": "HuberLoss",
+        "parameters": {
+            "reduction": "'mean'",
+            "delta": "1.0"
+        }
+    },
+    "torch.nn.SmoothL1Loss": {
+        "short name": "SmoothL1Loss",
+        "parameters": {
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'",
+            "beta": "1.0"
+        }
+    },
+    "torch.nn.SoftMarginLoss": {
+        "short name": "SoftMarginLoss",
+        "parameters": {
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.MultiLabelSoftMarginLoss": {
+        "short name": "MultiLabelSoftMarginLoss",
+        "parameters": {
+            "weight": "None",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.CosineEmbeddingLoss": {
+        "short name": "CosineEmbeddingLoss",
+        "parameters": {
+            "margin": "0.0",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.MultiMarginLoss": {
+        "short name": "MultiMarginLoss",
+        "parameters": {
+            "p": "1",
+            "margin": "1.0",
+            "weight": "None",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.TripletMarginLoss": {
+        "short name": "TripletMarginLoss",
+        "parameters": {
+            "margin": "1.0",
+            "p": "2.0",
+            "eps": "1e-06",
+            "swap": "False",
+            "size_average": "None",
+            "reduce": "None",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.TripletMarginWithDistanceLoss": {
+        "short name": "TripletMarginWithDistanceLoss",
+        "parameters": {
+            "*": null,
+            "distance_function": "None",
+            "margin": "1.0",
+            "swap": "False",
+            "reduction": "'mean'"
+        }
+    },
+    "torch.nn.PixelShuffle": {
+        "short name": "PixelShuffle",
+        "parameters": {
+            "upscale_factor": null
+        }
+    },
+    "torch.nn.PixelUnshuffle": {
+        "short name": "PixelUnshuffle",
+        "parameters": {
+            "downscale_factor": null
+        }
+    },
+    "torch.nn.Upsample": {
+        "short name": "Upsample",
+        "parameters": {
+            "size": "None",
+            "scale_factor": "None",
+            "mode": "'nearest'",
+            "align_corners": "None"
+        }
+    },
+    "torch.nn.UpsamplingNearest2d": {
+        "short name": "UpsamplingNearest2d",
+        "parameters": {
+            "size": "None",
+            "scale_factor": "None"
+        }
+    },
+    "torch.nn.UpsamplingBilinear2d": {
+        "short name": "UpsamplingBilinear2d",
+        "parameters": {
+            "size": "None",
+            "scale_factor": "None"
+        }
+    },
+    "torch.nn.ChannelShuffle": {
+        "short name": "ChannelShuffle",
+        "parameters": {
+            "groups": null
+        }
+    },
+    "torch.nn.DataParallel": {
+        "short name": "DataParallel",
+        "parameters": {
+            "module": null,
+            "device_ids": "None",
+            "output_device": "None",
+            "dim": "0"
+        }
+    },
+    "torch.nn.parallel.DistributedDataParallel": {
+        "short name": "DistributedDataParallel",
+        "parameters": {
+            "module": null,
+            "device_ids": "None",
+            "output_device": "None",
+            "dim": "0",
+            "broadcast_buffers": "True",
+            "process_group": "None",
+            "bucket_cap_mb": "25",
+            "find_unused_parameters": "False",
+            "check_reduction": "False",
+            "gradient_as_bucket_view": "False",
+            "divide_by_initial_world_size": "True",
+            "enable": "True",
+            "throw_on_early_termination": "False",
+            "**kwargs": null,
+            "state": null,
+            "hook": null
+        }
+    },
+    "torch.nn.utils.prune.BasePruningMethod": {
+        "short name": "BasePruningMethod",
+        "parameters": {
+            "module": null,
+            "name": null,
+            "*args": null,
+            "importance_scores": "None",
+            "**kwargs": null,
+            "t": null,
+            "default_mask": "None"
+        }
+    },
+    "torch.nn.utils.prune.PruningContainer": {
+        "short name": "PruningContainer",
+        "parameters": {
+            "*args": null,
+            "method": null,
+            "module": null,
+            "name": null,
+            "importance_scores": "None",
+            "**kwargs": null,
+            "t": null,
+            "default_mask": "None"
+        }
+    },
+    "torch.nn.utils.prune.Identity": {
+        "short name": "Identity",
+        "parameters": {
+            "module": null,
+            "name": null,
+            "t": null,
+            "default_mask": "None",
+            "importance_scores": "None"
+        }
+    },
+    "torch.nn.utils.prune.RandomUnstructured": {
+        "short name": "RandomUnstructured",
+        "parameters": {
+            "amount": null,
+            "module": null,
+            "name": null,
+            "t": null,
+            "default_mask": "None",
+            "importance_scores": "None"
+        }
+    },
+    "torch.nn.utils.prune.L1Unstructured": {
+        "short name": "L1Unstructured",
+        "parameters": {
+            "amount": null,
+            "module": null,
+            "name": null,
+            "importance_scores": "None",
+            "t": null,
+            "default_mask": "None"
+        }
+    },
+    "torch.nn.utils.prune.RandomStructured": {
+        "short name": "RandomStructured",
+        "parameters": {
+            "amount": null,
+            "dim": "- 1",
+            "module": null,
+            "name": null,
+            "t": null,
+            "default_mask": "None",
+            "importance_scores": "None"
+        }
+    },
+    "torch.nn.utils.prune.LnStructured": {
+        "short name": "LnStructured",
+        "parameters": {
+            "amount": null,
+            "n": null,
+            "dim": null,
+            "module": null,
+            "name": null,
+            "importance_scores": "None",
+            "t": null,
+            "default_mask": "None"
+        }
+    },
+    "torch.nn.utils.prune.CustomFromMask": {
+        "short name": "CustomFromMask",
+        "parameters": {
+            "mask": null,
+            "module": null,
+            "name": null,
+            "t": null,
+            "default_mask": "None",
+            "importance_scores": "None"
+        }
+    },
+    "torch.nn.utils.parametrize.ParametrizationList": {
+        "short name": "ParametrizationList",
+        "parameters": {
+            "modules": null,
+            "original": null,
+            "unsafe": "False",
+            "value": null
+        }
+    },
+    "torch.nn.utils.rnn.PackedSequence": {
+        "short name": "PackedSequence",
+        "parameters": {
+            "data": null,
+            "batch_sizes": "None",
+            "sorted_indices": "None",
+            "unsorted_indices": "None",
+            "value": null,
+            "start": null,
+            "stop": null,
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.nn.Flatten": {
+        "short name": "Flatten",
+        "parameters": {
+            "start_dim": "1",
+            "end_dim": "- 1"
+        }
+    },
+    "torch.nn.Unflatten": {
+        "short name": "Unflatten",
+        "parameters": {
+            "dim": null,
+            "unflattened_size": null
+        }
+    },
+    "torch.nn.modules.lazy.LazyModuleMixin": {
+        "short name": "LazyModuleMixin",
+        "parameters": {
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.cuda.StreamContext": {
+        "short name": "StreamContext",
+        "parameters": {
+            "stream": null
+        }
+    },
+    "torch.cuda.Stream": {
+        "short name": "Stream",
+        "parameters": {
+            "device": "None",
+            "priority": "0",
+            "**kwargs": null,
+            "event": null,
+            "stream": null
+        }
+    },
+    "torch.cuda.Event": {
+        "short name": "Event",
+        "parameters": {
+            "enable_timing": "False",
+            "blocking": "False",
+            "interprocess": "False",
+            "end_event": null,
+            "device": null,
+            "handle": null,
+            "stream": "None"
+        }
+    },
+    "torch.cuda.CUDAGraph": {
+        "short name": "CUDAGraph",
+        "parameters": {
+            "pool": "None"
+        }
+    },
+    "torch.distributed.elastic.agent.server.ElasticAgent": {
+        "short name": "ElasticAgent",
+        "parameters": {
+            "role": "'default'"
+        }
+    },
+    "torch.distributed.elastic.agent.server.WorkerSpec": {
+        "short name": "WorkerSpec",
+        "parameters": {
+            "role": null,
+            "local_world_size": null,
+            "rdzv_handler": null,
+            "fn": "None",
+            "entrypoint": "None",
+            "args": "()",
+            "max_restarts": "3",
+            "monitor_interval": "30.0",
+            "master_port": "None",
+            "master_addr": "None",
+            "redirects": "<Std.NONE: 0>",
+            "tee": "<Std.NONE: 0>"
+        }
+    },
+    "torch.distributed.elastic.agent.server.WorkerState": {
+        "short name": "WorkerState",
+        "parameters": {
+            "value": null,
+            "state": null
+        }
+    },
+    "torch.distributed.elastic.agent.server.Worker": {
+        "short name": "Worker",
+        "parameters": {
+            "local_rank": null,
+            "global_rank": "- 1",
+            "role_rank": "- 1",
+            "world_size": "- 1",
+            "role_world_size": "- 1"
+        }
+    },
+    "torch.distributed.elastic.agent.server.WorkerGroup": {
+        "short name": "WorkerGroup",
+        "parameters": {
+            "spec": null
+        }
+    },
+    "torch.distributed.elastic.agent.server.local_elastic_agent.LocalElasticAgent": {
+        "short name": "LocalElasticAgent",
+        "parameters": {
+            "spec": null,
+            "start_method": "'spawn'",
+            "exit_barrier_timeout": "300",
+            "log_dir": "None"
+        }
+    },
+    "torch.distributed.elastic.agent.server.SimpleElasticAgent": {
+        "short name": "SimpleElasticAgent",
+        "parameters": {
+            "spec": null,
+            "exit_barrier_timeout": "300",
+            "store": null,
+            "group_rank": null,
+            "group_world_size": null,
+            "worker_group": null,
+            "death_sig": "<Signals.SIGTERM: 15>"
+        }
+    },
+    "torch.distributed.elastic.agent.server.api.RunResult": {
+        "short name": "RunResult",
+        "parameters": {
+            "state": null,
+            "return_values": "<factory>",
+            "failures": "<factory>"
+        }
+    },
+    "torch.distributed.elastic.multiprocessing.api.PContext": {
+        "short name": "PContext",
+        "parameters": {
+            "name": null,
+            "entrypoint": null,
+            "args": null,
+            "envs": null,
+            "stdouts": null,
+            "stderrs": null,
+            "tee_stdouts": null,
+            "tee_stderrs": null,
+            "error_files": null
+        }
+    },
+    "torch.distributed.elastic.multiprocessing.api.MultiprocessContext": {
+        "short name": "MultiprocessContext",
+        "parameters": {
+            "name": null,
+            "entrypoint": null,
+            "args": null,
+            "envs": null,
+            "stdouts": null,
+            "stderrs": null,
+            "tee_stdouts": null,
+            "tee_stderrs": null,
+            "error_files": null,
+            "start_method": null
+        }
+    },
+    "torch.distributed.elastic.multiprocessing.api.SubprocessContext": {
+        "short name": "SubprocessContext",
+        "parameters": {
+            "name": null,
+            "entrypoint": null,
+            "args": null,
+            "envs": null,
+            "stdouts": null,
+            "stderrs": null,
+            "tee_stdouts": null,
+            "tee_stderrs": null,
+            "error_files": null
+        }
+    },
+    "torch.distributed.elastic.multiprocessing.api.RunProcsResult": {
+        "short name": "RunProcsResult",
+        "parameters": {
+            "return_values": "<factory>",
+            "failures": "<factory>",
+            "stdouts": "<factory>",
+            "stderrs": "<factory>"
+        }
+    },
+    "torch.distributed.elastic.multiprocessing.errors.ChildFailedError": {
+        "short name": "ChildFailedError",
+        "parameters": {
+            "name": null,
+            "failures": null
+        }
+    },
+    "torch.distributed.elastic.multiprocessing.errors.ErrorHandler": {
+        "short name": "ErrorHandler",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.multiprocessing.errors.ProcessFailure": {
+        "short name": "ProcessFailure",
+        "parameters": {
+            "local_rank": null,
+            "pid": null,
+            "exitcode": null,
+            "error_file": null
+        }
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousParameters": {
+        "short name": "RendezvousParameters",
+        "parameters": {
+            "backend": null,
+            "endpoint": null,
+            "run_id": null,
+            "min_nodes": null,
+            "max_nodes": null,
+            "**kwargs": null,
+            "key": null,
+            "default": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousHandlerRegistry": {
+        "short name": "RendezvousHandlerRegistry",
+        "parameters": {
+            "params": null,
+            "backend": null,
+            "creator": null
+        }
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousHandler": {
+        "short name": "RendezvousHandler",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousError": {
+        "short name": "RendezvousError",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousClosedError": {
+        "short name": "RendezvousClosedError",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousTimeoutError": {
+        "short name": "RendezvousTimeoutError",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousConnectionError": {
+        "short name": "RendezvousConnectionError",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.rendezvous.RendezvousStateError": {
+        "short name": "RendezvousStateError",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.rendezvous.dynamic_rendezvous.DynamicRendezvousHandler": {
+        "short name": "DynamicRendezvousHandler",
+        "parameters": {
+            "run_id": null,
+            "store": null,
+            "backend": null,
+            "min_nodes": null,
+            "max_nodes": null,
+            "timeout": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.dynamic_rendezvous.RendezvousBackend": {
+        "short name": "RendezvousBackend",
+        "parameters": {
+            "state": null,
+            "token": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.dynamic_rendezvous.RendezvousTimeout": {
+        "short name": "RendezvousTimeout",
+        "parameters": {
+            "join": "None",
+            "last_call": "None",
+            "close": "None",
+            "heartbeat": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.c10d_rendezvous_backend.C10dRendezvousBackend": {
+        "short name": "C10dRendezvousBackend",
+        "parameters": {
+            "store": null,
+            "run_id": null,
+            "state": null,
+            "token": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.etcd_rendezvous_backend.EtcdRendezvousBackend": {
+        "short name": "EtcdRendezvousBackend",
+        "parameters": {
+            "client": null,
+            "run_id": null,
+            "key_prefix": "None",
+            "ttl": "None",
+            "state": null,
+            "token": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.etcd_rendezvous.EtcdRendezvousHandler": {
+        "short name": "EtcdRendezvousHandler",
+        "parameters": {
+            "rdzv_impl": null
+        }
+    },
+    "torch.distributed.elastic.rendezvous.etcd_store.EtcdStore": {
+        "short name": "EtcdStore",
+        "parameters": {
+            "etcd_client": null,
+            "etcd_store_prefix": null,
+            "timeout": "None",
+            "key": null,
+            "num": null,
+            "keys": null,
+            "value": null,
+            "override_timeout": "None"
+        }
+    },
+    "torch.distributed.elastic.rendezvous.etcd_server.EtcdServer": {
+        "short name": "EtcdServer",
+        "parameters": {
+            "data_dir": "None"
+        }
+    },
+    "torch.distributed.elastic.timer.LocalTimerServer": {
+        "short name": "LocalTimerServer",
+        "parameters": {
+            "mp_queue": null,
+            "max_interval": "60",
+            "daemon": "True"
+        }
+    },
+    "torch.distributed.elastic.timer.LocalTimerClient": {
+        "short name": "LocalTimerClient",
+        "parameters": {
+            "mp_queue": null
+        }
+    },
+    "torch.distributed.elastic.timer.TimerRequest": {
+        "short name": "TimerRequest",
+        "parameters": {
+            "worker_id": null,
+            "scope_id": null,
+            "expiration_time": null
+        }
+    },
+    "torch.distributed.elastic.timer.TimerServer": {
+        "short name": "TimerServer",
+        "parameters": {
+            "request_queue": null,
+            "max_interval": null,
+            "daemon": "True",
+            "worker_ids": null,
+            "deadline": null,
+            "timer_requests": null
+        }
+    },
+    "torch.distributed.elastic.timer.TimerClient": {
+        "short name": "TimerClient",
+        "parameters": {
+            "scope_id": null,
+            "expiration_time": null
+        }
+    },
+    "torch.distributed.elastic.metrics.api.MetricHandler": {
+        "short name": "MetricHandler",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.metrics.api.ConsoleMetricHandler": {
+        "short name": "ConsoleMetricHandler",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.metrics.api.NullMetricHandler": {
+        "short name": "NullMetricHandler",
+        "parameters": {}
+    },
+    "torch.distributed.elastic.events.api.Event": {
+        "short name": "Event",
+        "parameters": {
+            "name": null,
+            "source": null,
+            "timestamp": "0",
+            "metadata": "<factory>"
+        }
+    },
+    "torch.distributed.elastic.events.api.EventSource": {
+        "short name": "EventSource",
+        "parameters": {
+            "value": null
+        }
+    },
+    "torch.jit.ScriptModule": {
+        "short name": "ScriptModule",
+        "parameters": {
+            "name": null,
+            "module": null,
+            "fn": null,
+            "recurse": "True",
+            "device": "None",
+            "target": null,
+            "state_dict": null,
+            "strict": "True",
+            "prefix": "''",
+            "memo": "None",
+            "remove_duplicate": "True",
+            "hook": null,
+            "tensor": null,
+            "persistent": "True",
+            "param": null,
+            "requires_grad": "True",
+            "f": null,
+            "_extra_files": "{}",
+            "state": null,
+            "destination": "None",
+            "keep_vars": "False",
+            "*args": null,
+            "**kwargs": null,
+            "dtype": null,
+            "non_blocking": "False",
+            "memory_format": "torch.channels_last",
+            "*": null,
+            "mode": "True",
+            "dst_type": null,
+            "set_to_none": "False"
+        }
+    },
+    "torch.jit.ScriptFunction": {
+        "short name": "ScriptFunction",
+        "parameters": {
+            "self: torch._C.ScriptFunction": null,
+            "filename: str": null,
+            "_extra_files: Dict[str, str] ": " {}"
+        }
+    },
+    "torch.jit.Attribute": {
+        "short name": "Attribute",
+        "parameters": {
+            "value": null,
+            "type": null,
+            "start": null,
+            "stop": null
+        }
+    },
+    "torch.optim.Adadelta": {
+        "short name": "Adadelta",
+        "parameters": {
+            "params": null,
+            "lr": "1.0",
+            "rho": "0.9",
+            "eps": "1e-06",
+            "weight_decay": "0",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.Adagrad": {
+        "short name": "Adagrad",
+        "parameters": {
+            "params": null,
+            "lr": "0.01",
+            "lr_decay": "0",
+            "weight_decay": "0",
+            "initial_accumulator_value": "0",
+            "eps": "1e-10",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.Adam": {
+        "short name": "Adam",
+        "parameters": {
+            "params": null,
+            "lr": "0.001",
+            "betas": "(0.9, 0.999)",
+            "eps": "1e-08",
+            "weight_decay": "0",
+            "amsgrad": "False",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.AdamW": {
+        "short name": "AdamW",
+        "parameters": {
+            "params": null,
+            "lr": "0.001",
+            "betas": "(0.9, 0.999)",
+            "eps": "1e-08",
+            "weight_decay": "0.01",
+            "amsgrad": "False",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.SparseAdam": {
+        "short name": "SparseAdam",
+        "parameters": {
+            "params": null,
+            "lr": "0.001",
+            "betas": "(0.9, 0.999)",
+            "eps": "1e-08",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.Adamax": {
+        "short name": "Adamax",
+        "parameters": {
+            "params": null,
+            "lr": "0.002",
+            "betas": "(0.9, 0.999)",
+            "eps": "1e-08",
+            "weight_decay": "0",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.ASGD": {
+        "short name": "ASGD",
+        "parameters": {
+            "params": null,
+            "lr": "0.01",
+            "lambd": "0.0001",
+            "alpha": "0.75",
+            "t0": "1000000.0",
+            "weight_decay": "0",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.LBFGS": {
+        "short name": "LBFGS",
+        "parameters": {
+            "params": null,
+            "lr": "1",
+            "max_iter": "20",
+            "max_eval": "None",
+            "tolerance_grad": "1e-07",
+            "tolerance_change": "1e-09",
+            "history_size": "100",
+            "line_search_fn": "None",
+            "param_group": null,
+            "state_dict": null,
+            "closure": null,
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.NAdam": {
+        "short name": "NAdam",
+        "parameters": {
+            "params": null,
+            "lr": "0.002",
+            "betas": "(0.9, 0.999)",
+            "eps": "1e-08",
+            "weight_decay": "0",
+            "momentum_decay": "0.004",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.RAdam": {
+        "short name": "RAdam",
+        "parameters": {
+            "params": null,
+            "lr": "0.001",
+            "betas": "(0.9, 0.999)",
+            "eps": "1e-08",
+            "weight_decay": "0",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.RMSprop": {
+        "short name": "RMSprop",
+        "parameters": {
+            "params": null,
+            "lr": "0.01",
+            "alpha": "0.99",
+            "eps": "1e-08",
+            "weight_decay": "0",
+            "momentum": "0",
+            "centered": "False",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.Rprop": {
+        "short name": "Rprop",
+        "parameters": {
+            "params": null,
+            "lr": "0.01",
+            "etas": "(0.5, 1.2)",
+            "step_sizes": "(1e-06, 50)",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.SGD": {
+        "short name": "SGD",
+        "parameters": {
+            "params": null,
+            "lr": "<required parameter>",
+            "momentum": "0",
+            "dampening": "0",
+            "weight_decay": "0",
+            "nesterov": "False",
+            "param_group": null,
+            "state_dict": null,
+            "closure": "None",
+            "set_to_none": "False"
+        }
+    },
+    "torch.optim.lr_scheduler.LambdaLR": {
+        "short name": "LambdaLR",
+        "parameters": {
+            "optimizer": null,
+            "lr_lambda": null,
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.MultiplicativeLR": {
+        "short name": "MultiplicativeLR",
+        "parameters": {
+            "optimizer": null,
+            "lr_lambda": null,
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.StepLR": {
+        "short name": "StepLR",
+        "parameters": {
+            "optimizer": null,
+            "step_size": null,
+            "gamma": "0.1",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.MultiStepLR": {
+        "short name": "MultiStepLR",
+        "parameters": {
+            "optimizer": null,
+            "milestones": null,
+            "gamma": "0.1",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.ConstantLR": {
+        "short name": "ConstantLR",
+        "parameters": {
+            "optimizer": null,
+            "factor": "0.3333333333333333",
+            "total_iters": "5",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.LinearLR": {
+        "short name": "LinearLR",
+        "parameters": {
+            "optimizer": null,
+            "start_factor": "0.3333333333333333",
+            "end_factor": "1.0",
+            "total_iters": "5",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.ExponentialLR": {
+        "short name": "ExponentialLR",
+        "parameters": {
+            "optimizer": null,
+            "gamma": null,
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.CosineAnnealingLR": {
+        "short name": "CosineAnnealingLR",
+        "parameters": {
+            "optimizer": null,
+            "T_max": null,
+            "eta_min": "0",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.ChainedScheduler": {
+        "short name": "ChainedScheduler",
+        "parameters": {
+            "schedulers": null,
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.SequentialLR": {
+        "short name": "SequentialLR",
+        "parameters": {
+            "optimizer": null,
+            "schedulers": null,
+            "milestones": null,
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.ReduceLROnPlateau": {
+        "short name": "ReduceLROnPlateau",
+        "parameters": {
+            "optimizer": null,
+            "mode": "'min'",
+            "factor": "0.1",
+            "patience": "10",
+            "threshold": "0.0001",
+            "threshold_mode": "'rel'",
+            "cooldown": "0",
+            "min_lr": "0",
+            "eps": "1e-08",
+            "verbose": "False"
+        }
+    },
+    "torch.optim.lr_scheduler.CyclicLR": {
+        "short name": "CyclicLR",
+        "parameters": {
+            "optimizer": null,
+            "base_lr": null,
+            "max_lr": null,
+            "step_size_up": "2000",
+            "step_size_down": "None",
+            "mode": "'triangular'",
+            "gamma": "1.0",
+            "scale_fn": "None",
+            "scale_mode": "'cycle'",
+            "cycle_momentum": "True",
+            "base_momentum": "0.8",
+            "max_momentum": "0.9",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.OneCycleLR": {
+        "short name": "OneCycleLR",
+        "parameters": {
+            "optimizer": null,
+            "max_lr": null,
+            "total_steps": "None",
+            "epochs": "None",
+            "steps_per_epoch": "None",
+            "pct_start": "0.3",
+            "anneal_strategy": "'cos'",
+            "cycle_momentum": "True",
+            "base_momentum": "0.85",
+            "max_momentum": "0.95",
+            "div_factor": "25.0",
+            "final_div_factor": "10000.0",
+            "three_phase": "False",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
+    },
+    "torch.optim.lr_scheduler.CosineAnnealingWarmRestarts": {
+        "short name": "CosineAnnealingWarmRestarts",
+        "parameters": {
+            "optimizer": null,
+            "T_0": null,
+            "T_mult": "1",
+            "eta_min": "0",
+            "last_epoch": "- 1",
+            "verbose": "False",
+            "state_dict": null,
+            "is_verbose": null,
+            "group": null,
+            "lr": null,
+            "epoch": "None"
+        }
     }
 }
