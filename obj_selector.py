@@ -118,6 +118,11 @@ class CodeObjects:
                     break
 
     def get_objects_containing_classes(self):
+        for import_name, import_obj_values in self.import_other_objects.items():     # to detect classes that are not declared as the common path
+            if import_obj_values['path'] == self.library:
+                library_name_import = True
+                library_alias = import_name
+
         for obj in self.objects_from_library:
             dump_ast_obj = ast.dump(obj)
             obj_code = ast.unparse(obj)
@@ -153,6 +158,31 @@ class CodeObjects:
                                         dump_ast_obj = dump_ast_obj.replace(import_value, "id='temp_class'", 1)
                                         obj_code = obj_code.replace(class_string, "temp_class(", 1)
                                 if class_occurence > 0:
+                                    if library_name_import:
+                                        if class_.split(".")[-1] in obj_code and library_alias in obj_code:
+                                            split_code = obj_code.split(library_alias)
+                                            split_class = class_.split(".")[1:]
+                                            for split in split_class:
+                                                split_class[split_class.index(split)] = ".{0}.".format(split)
+                                            split_class[-1] = "{0}(".format(split_class[-1][:-1])
+
+                                            for split in split_code:
+                                                split = split.split(" ")[0]
+                                                if split.startswith("."):
+                                                    findings = [i for i in split_class if i in split]
+                                                    if split_class == findings:
+                                                        start = obj_code.index(library_alias + split)
+                                                        stop = obj_code.index("(", start)
+                                                        obj_code = obj_code[:start] + "temp_class(" + obj_code[stop + 1:]
+
+                                            obj_code = obj_code.replace("temp_class(", class_string)
+                                            lineno = obj.lineno
+                                            end_lineno = obj.end_lineno
+                                            obj = ast.parse(obj_code).body[0]
+                                            obj.lineno = lineno
+                                            obj.end_lineno = end_lineno
+                                            x = 2
+
                                     lib_class_obj = {"class": class_, "class alias": class_string[:-1], "object": obj,
                                                      "parameter variables": None}
                                     self.class_objects_from_library.append(lib_class_obj)

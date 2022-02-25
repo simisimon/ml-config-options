@@ -7,11 +7,12 @@ from functools import partial
 from time import sleep
 
 #import pytest
+import sklearn as skl
 import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 from sklearn.exceptions import FitFailedWarning
 import sklearn.impute as BBB
-import sklearn
+#import sklearn
 import sklearn.impute._base
 import sklearn.externals as ext
 
@@ -80,6 +81,10 @@ from sklearn.model_selection.tests.common import OneTimeSplitter
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import ParameterGrid as PG
 
+sklearn.impute.SimpleImputer(2)
+SimpleImputer(2)
+PG()
+x = skl.impute._base.SimpleImputer("Falsches") + BBB.SimpleImputer("Wahres") + skl.impute._base.SimpleImputer("Auch Falsch")
 #x = sklearn.model_selection.PredefinedSplit(12)
 x = y.x(sklearn.impute._base.SimpleImputer(PG(2)) + PG(3)) + BBB.SimpleImputer(88888)
 yyyy = sklearn.impute._base.SimpleImputer(2)

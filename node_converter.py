@@ -25,12 +25,12 @@ def get_parameters(objects):
                         stop = start + len(obj["class alias"])
                         obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
                 try:
-                    ast_dict = {"class": obj["class"], "class alias": obj["class alias"], "object": ast.parse(obj_code).body[0],
+                    new_obj = {"class": obj["class"], "class alias": obj["class alias"], "object": ast.parse(obj_code).body[0],
                                 "parameter variables": obj["parameter variables"]}
                 except:
-                    ast_dict = {"class": obj["class"], "class alias": obj["class alias"], "object": ast.parse(obj_code + "[]").body[0],
+                    new_obj = {"class": obj["class"], "class alias": obj["class alias"], "object": ast.parse(obj_code + "[]").body[0],
                                 "parameter variables": obj["parameter variables"]}
-                obj_with_prm = NodeObjects(ast_dict).get_objects(ast_dict["object"])
+                obj_with_prm = NodeObjects(new_obj).get_objects(new_obj["object"])
                 obj_with_prm['6) line_no'] = obj["object"].lineno
                 objects_with_prm.append(obj_with_prm)
                 obj_code = ast.unparse(obj["object"])
@@ -44,6 +44,7 @@ def get_parameters(objects):
 class NodeObjects:
     def __init__(self, obj):
         self.class_ = obj["class"]
+        self.class_alias = obj["class alias"].split(".")[-1]
         self.obj = obj["object"]
         self.variable = ""
         self.parameter = []
@@ -73,7 +74,7 @@ class NodeObjects:
             self.get_values(base)
         for keyword in obj.keywords:
             value = self.get_values(keyword.value)
-            if self.class_ in value:
+            if self.class_alias in value:
                 self.variable = keyword.arg
         return ast.unparse(obj)
 
@@ -90,7 +91,7 @@ class NodeObjects:
         value = self.get_values(obj.value)
         if value is not None:  # for case of ann_assign
             if type(obj.value) == ast.Call:
-                if ast.unparse(obj.value).startswith(self.class_):
+                if ast.unparse(obj.value).startswith(self.class_alias):
                     self.variable = ast.unparse(obj.targets)
         return ast.unparse(obj)
 
@@ -180,7 +181,7 @@ class NodeObjects:
 
     def extract_call(self, obj):
         func = self.get_values(obj.func)
-        if func == self.class_:
+        if func == self.class_alias:
             for arg in obj.args:
                 if type(arg) == ast.Name:
                     self.get_variable_scope(arg)
@@ -197,7 +198,7 @@ class NodeObjects:
                 self.get_values(arg)
             for param in obj.keywords:
                 param_val = self.get_values(param.value)
-                if param_val.startswith(self.class_):
+                if param_val.startswith(self.class_alias):
                     self.variable = param.arg
         return ast.unparse(obj)
 
@@ -210,7 +211,7 @@ class NodeObjects:
         return ast.unparse(obj)
 
     def extract_attr(self, obj):
-        if obj.attr == self.class_:
+        if obj.attr == self.class_alias:
             return obj.attr
         else:
             self.get_values(obj.value)
@@ -244,7 +245,7 @@ class NodeObjects:
         if len(args) > 0:
             for default in obj.defaults:
                 if default != None:
-                    if self.class_ in ast.unparse(default):
+                    if self.class_alias in ast.unparse(default):
                         self.get_values(default)
                         self.variable = args[obj.defaults.index(default)]
 
@@ -255,7 +256,7 @@ class NodeObjects:
         if len(kw_only_args) > 0:
             for kw in obj.kw_defaults:
                 if kw != None:
-                    if self.class_ in ast.unparse(kw):
+                    if self.class_alias in ast.unparse(kw):
                         self.variable = kw_only_args[obj.kw_defaults.index(kw)]
 
         self.get_values(obj.kwarg)
