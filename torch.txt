@@ -1,33 +1,33 @@
 {
     "torch.Tensor": {
-        "short name": "Tensor",
+        "class": "Tensor",
         "parameters": {}
     },
     "torch.torch.dtype": {
-        "short name": "dtype",
+        "class": "dtype",
         "parameters": {}
     },
     "torch.torch.device": {
-        "short name": "device",
+        "class": "device",
         "parameters": {}
     },
     "torch.torch.layout": {
-        "short name": "layout",
+        "class": "layout",
         "parameters": {}
     },
     "torch.torch.memory_format": {
-        "short name": "memory_format",
+        "class": "memory_format",
         "parameters": {}
     },
     "torch.autograd.Function": {
-        "short name": "Function",
+        "class": "Function",
         "parameters": {
             "*args": null,
             "**kwargs": null
         }
     },
     "torch.autograd.profiler.profile": {
-        "short name": "profile",
+        "class": "profile",
         "parameters": {
             "enabled": "True",
             "*": null,
@@ -42,37 +42,37 @@
         }
     },
     "torch.autograd.profiler.emit_nvtx": {
-        "short name": "emit_nvtx",
+        "class": "emit_nvtx",
         "parameters": {
             "enabled": "True",
             "record_shapes": "False"
         }
     },
     "torch.autograd.detect_anomaly": {
-        "short name": "detect_anomaly",
+        "class": "detect_anomaly",
         "parameters": {}
     },
     "torch.autograd.set_detect_anomaly": {
-        "short name": "set_detect_anomaly",
+        "class": "set_detect_anomaly",
         "parameters": {
             "mode": null
         }
     },
     "torch.autograd.graph.saved_tensors_hooks": {
-        "short name": "saved_tensors_hooks",
+        "class": "saved_tensors_hooks",
         "parameters": {
             "pack_hook": null,
             "unpack_hook": null
         }
     },
     "torch.autograd.graph.save_on_cpu": {
-        "short name": "save_on_cpu",
+        "class": "save_on_cpu",
         "parameters": {
             "pin_memory": "False"
         }
     },
     "torch.autocast": {
-        "short name": "autocast",
+        "class": "autocast",
         "parameters": {
             "device_type": null,
             "enabled": "True",
@@ -80,7 +80,7 @@
         }
     },
     "torch.cuda.amp.autocast": {
-        "short name": "autocast",
+        "class": "autocast",
         "parameters": {
             "enabled": "True",
             "dtype": "torch.float16",
@@ -88,110 +88,87 @@
         }
     },
     "torch.cuda.amp.GradScaler": {
-        "short name": "GradScaler",
+        "class": "GradScaler",
         "parameters": {
             "init_scale": "65536.0",
             "growth_factor": "2.0",
             "backoff_factor": "0.5",
             "growth_interval": "2000",
-            "enabled": "True",
-            "state_dict": null,
-            "outputs": null,
-            "new_factor": null,
-            "new_interval": null,
-            "optimizer": null,
-            "*args": null,
-            "**kwargs": null,
-            "new_scale": "None"
+            "enabled": "True"
         }
     },
     "torch.distributed.Backend": {
-        "short name": "Backend",
+        "class": "Backend",
         "parameters": {
             "name": null
         }
     },
     "torch.distributed.Store": {
-        "short name": "Store",
+        "class": "Store",
         "parameters": {}
     },
     "torch.distributed.TCPStore": {
-        "short name": "TCPStore",
+        "class": "TCPStore",
         "parameters": {}
     },
     "torch.distributed.HashStore": {
-        "short name": "HashStore",
+        "class": "HashStore",
         "parameters": {}
     },
     "torch.distributed.FileStore": {
-        "short name": "FileStore",
+        "class": "FileStore",
         "parameters": {}
     },
     "torch.distributed.PrefixStore": {
-        "short name": "PrefixStore",
+        "class": "PrefixStore",
         "parameters": {}
     },
     "torch.distributed.ReduceOp": {
-        "short name": "ReduceOp",
+        "class": "ReduceOp",
         "parameters": {}
     },
     "torch.distributed.reduce_op": {
-        "short name": "reduce_op",
+        "class": "reduce_op",
         "parameters": {}
     },
     "torch.distributed.algorithms.Join": {
-        "short name": "Join",
+        "class": "Join",
         "parameters": {
             "joinables": null,
             "enable": "True",
             "throw_on_early_termination": "False",
-            "**kwargs": null,
-            "joinable": null
-        }
-    },
-    "torch.distributed.algorithms.Joinable": {
-        "short name": "Joinable",
-        "parameters": {
             "**kwargs": null
         }
     },
+    "torch.distributed.algorithms.Joinable": {
+        "class": "Joinable",
+        "parameters": {}
+    },
     "torch.distributed.algorithms.JoinHook": {
-        "short name": "JoinHook",
-        "parameters": {
-            "is_last_joiner": null
-        }
+        "class": "JoinHook",
+        "parameters": {}
     },
     "torch.distributed.optim.ZeroRedundancyOptimizer": {
-        "short name": "ZeroRedundancyOptimizer",
+        "class": "ZeroRedundancyOptimizer",
         "parameters": {
             "params": null,
             "optimizer_class": null,
             "process_group": "None",
             "parameters_as_bucket_view": "False",
             "overlap_with_ddp": "False",
-            "**defaults": null,
-            "param_group": null,
-            "to": "0",
-            "**kwargs": null,
-            "state_dict": null,
-            "closure": "None"
+            "**defaults": null
         }
     },
     "torch.distributions.distribution.Distribution": {
-        "short name": "Distribution",
+        "class": "Distribution",
         "parameters": {
-            "batch_shape": null,
+            "batch_shape": "torch.Size([])",
             "event_shape": "torch.Size([])",
-            "validate_args": "None",
-            "value": null,
-            "expand": "True",
-            "_instance": "None",
-            "sample_shape": "torch.Size([])",
-            "n": null
+            "validate_args": "None"
         }
     },
     "torch.distributions.exp_family.ExponentialFamily": {
-        "short name": "ExponentialFamily",
+        "class": "ExponentialFamily",
         "parameters": {
             "batch_shape": "torch.Size([])",
             "event_shape": "torch.Size([])",
@@ -199,451 +176,314 @@
         }
     },
     "torch.distributions.bernoulli.Bernoulli": {
-        "short name": "Bernoulli",
+        "class": "Bernoulli",
         "parameters": {
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "expand": "True",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.beta.Beta": {
-        "short name": "Beta",
+        "class": "Beta",
         "parameters": {
             "concentration1": null,
             "concentration0": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "()"
+            "validate_args": "None"
         }
     },
     "torch.distributions.binomial.Binomial": {
-        "short name": "Binomial",
+        "class": "Binomial",
         "parameters": {
             "total_count": "1",
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "expand": "True",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.categorical.Categorical": {
-        "short name": "Categorical",
+        "class": "Categorical",
         "parameters": {
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "expand": "True",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.cauchy.Cauchy": {
-        "short name": "Cauchy",
+        "class": "Cauchy",
         "parameters": {
             "loc": null,
             "scale": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.chi2.Chi2": {
-        "short name": "Chi2",
+        "class": "Chi2",
         "parameters": {
             "df": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.continuous_bernoulli.ContinuousBernoulli": {
-        "short name": "ContinuousBernoulli",
+        "class": "ContinuousBernoulli",
         "parameters": {
             "probs": "None",
             "logits": "None",
             "lims": "(0.499, 0.501)",
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.dirichlet.Dirichlet": {
-        "short name": "Dirichlet",
+        "class": "Dirichlet",
         "parameters": {
             "concentration": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "()"
+            "validate_args": "None"
         }
     },
     "torch.distributions.exponential.Exponential": {
-        "short name": "Exponential",
+        "class": "Exponential",
         "parameters": {
             "rate": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.fishersnedecor.FisherSnedecor": {
-        "short name": "FisherSnedecor",
+        "class": "FisherSnedecor",
         "parameters": {
             "df1": null,
             "df2": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.gamma.Gamma": {
-        "short name": "Gamma",
+        "class": "Gamma",
         "parameters": {
             "concentration": null,
             "rate": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.geometric.Geometric": {
-        "short name": "Geometric",
+        "class": "Geometric",
         "parameters": {
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.gumbel.Gumbel": {
-        "short name": "Gumbel",
+        "class": "Gumbel",
         "parameters": {
             "loc": null,
             "scale": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null
+            "validate_args": "None"
         }
     },
     "torch.distributions.half_cauchy.HalfCauchy": {
-        "short name": "HalfCauchy",
+        "class": "HalfCauchy",
         "parameters": {
             "scale": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "prob": null
+            "validate_args": "None"
         }
     },
     "torch.distributions.half_normal.HalfNormal": {
-        "short name": "HalfNormal",
+        "class": "HalfNormal",
         "parameters": {
             "scale": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "prob": null
+            "validate_args": "None"
         }
     },
     "torch.distributions.independent.Independent": {
-        "short name": "Independent",
+        "class": "Independent",
         "parameters": {
             "base_distribution": null,
             "reinterpreted_batch_ndims": null,
-            "validate_args": "None",
-            "expand": "True",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.kumaraswamy.Kumaraswamy": {
-        "short name": "Kumaraswamy",
+        "class": "Kumaraswamy",
         "parameters": {
             "concentration1": null,
             "concentration0": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.lkj_cholesky.LKJCholesky": {
-        "short name": "LKJCholesky",
+        "class": "LKJCholesky",
         "parameters": {
             "dim": null,
             "concentration": "1.0",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.laplace.Laplace": {
-        "short name": "Laplace",
+        "class": "Laplace",
         "parameters": {
             "loc": null,
             "scale": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.log_normal.LogNormal": {
-        "short name": "LogNormal",
+        "class": "LogNormal",
         "parameters": {
             "loc": null,
             "scale": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.lowrank_multivariate_normal.LowRankMultivariateNormal": {
-        "short name": "LowRankMultivariateNormal",
+        "class": "LowRankMultivariateNormal",
         "parameters": {
             "loc": null,
             "cov_factor": null,
             "cov_diag": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.mixture_same_family.MixtureSameFamily": {
-        "short name": "MixtureSameFamily",
+        "class": "MixtureSameFamily",
         "parameters": {
             "mixture_distribution": null,
             "component_distribution": null,
-            "validate_args": "None",
-            "x": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.multinomial.Multinomial": {
-        "short name": "Multinomial",
+        "class": "Multinomial",
         "parameters": {
             "total_count": "1",
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.multivariate_normal.MultivariateNormal": {
-        "short name": "MultivariateNormal",
+        "class": "MultivariateNormal",
         "parameters": {
             "loc": null,
             "covariance_matrix": "None",
             "precision_matrix": "None",
             "scale_tril": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.negative_binomial.NegativeBinomial": {
-        "short name": "NegativeBinomial",
+        "class": "NegativeBinomial",
         "parameters": {
             "total_count": null,
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.normal.Normal": {
-        "short name": "Normal",
+        "class": "Normal",
         "parameters": {
             "loc": null,
             "scale": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.one_hot_categorical.OneHotCategorical": {
-        "short name": "OneHotCategorical",
+        "class": "OneHotCategorical",
         "parameters": {
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "expand": "True",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.pareto.Pareto": {
-        "short name": "Pareto",
+        "class": "Pareto",
         "parameters": {
             "scale": null,
             "alpha": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.poisson.Poisson": {
-        "short name": "Poisson",
+        "class": "Poisson",
         "parameters": {
             "rate": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.relaxed_bernoulli.RelaxedBernoulli": {
-        "short name": "RelaxedBernoulli",
+        "class": "RelaxedBernoulli",
         "parameters": {
             "temperature": null,
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.relaxed_bernoulli.LogitRelaxedBernoulli": {
-        "short name": "LogitRelaxedBernoulli",
+        "class": "LogitRelaxedBernoulli",
         "parameters": {
             "temperature": null,
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.relaxed_categorical.RelaxedOneHotCategorical": {
-        "short name": "RelaxedOneHotCategorical",
+        "class": "RelaxedOneHotCategorical",
         "parameters": {
             "temperature": null,
             "probs": "None",
             "logits": "None",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.studentT.StudentT": {
-        "short name": "StudentT",
+        "class": "StudentT",
         "parameters": {
             "df": null,
             "loc": "0.0",
             "scale": "1.0",
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None",
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.transformed_distribution.TransformedDistribution": {
-        "short name": "TransformedDistribution",
+        "class": "TransformedDistribution",
         "parameters": {
             "base_distribution": null,
             "transforms": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.uniform.Uniform": {
-        "short name": "Uniform",
+        "class": "Uniform",
         "parameters": {
             "low": null,
             "high": null,
-            "validate_args": "None",
-            "value": null,
-            "batch_shape": null,
-            "_instance": "None",
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.von_mises.VonMises": {
-        "short name": "VonMises",
+        "class": "VonMises",
         "parameters": {
             "loc": null,
             "concentration": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "value": null,
-            "sample_shape": "torch.Size([])"
+            "validate_args": "None"
         }
     },
     "torch.distributions.weibull.Weibull": {
-        "short name": "Weibull",
+        "class": "Weibull",
         "parameters": {
             "scale": null,
             "concentration": null,
-            "validate_args": "None",
-            "batch_shape": null,
-            "_instance": "None"
+            "validate_args": "None"
         }
     },
     "torch.distributions.transforms.AbsTransform": {
-        "short name": "AbsTransform",
+        "class": "AbsTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.AffineTransform": {
-        "short name": "AffineTransform",
+        "class": "AffineTransform",
         "parameters": {
             "loc": null,
             "scale": null,
@@ -652,26 +492,26 @@
         }
     },
     "torch.distributions.transforms.ComposeTransform": {
-        "short name": "ComposeTransform",
+        "class": "ComposeTransform",
         "parameters": {
             "parts": null,
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.CorrCholeskyTransform": {
-        "short name": "CorrCholeskyTransform",
+        "class": "CorrCholeskyTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.ExpTransform": {
-        "short name": "ExpTransform",
+        "class": "ExpTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.IndependentTransform": {
-        "short name": "IndependentTransform",
+        "class": "IndependentTransform",
         "parameters": {
             "base_transform": null,
             "reinterpreted_batch_ndims": null,
@@ -679,20 +519,20 @@
         }
     },
     "torch.distributions.transforms.LowerCholeskyTransform": {
-        "short name": "LowerCholeskyTransform",
+        "class": "LowerCholeskyTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.PowerTransform": {
-        "short name": "PowerTransform",
+        "class": "PowerTransform",
         "parameters": {
             "exponent": null,
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.ReshapeTransform": {
-        "short name": "ReshapeTransform",
+        "class": "ReshapeTransform",
         "parameters": {
             "in_shape": null,
             "out_shape": null,
@@ -700,25 +540,25 @@
         }
     },
     "torch.distributions.transforms.SigmoidTransform": {
-        "short name": "SigmoidTransform",
+        "class": "SigmoidTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.TanhTransform": {
-        "short name": "TanhTransform",
+        "class": "TanhTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.SoftmaxTransform": {
-        "short name": "SoftmaxTransform",
+        "class": "SoftmaxTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.StackTransform": {
-        "short name": "StackTransform",
+        "class": "StackTransform",
         "parameters": {
             "tseq": null,
             "dim": "0",
@@ -726,86 +566,48 @@
         }
     },
     "torch.distributions.transforms.StickBreakingTransform": {
-        "short name": "StickBreakingTransform",
+        "class": "StickBreakingTransform",
         "parameters": {
             "cache_size": "0"
         }
     },
     "torch.distributions.transforms.Transform": {
-        "short name": "Transform",
+        "class": "Transform",
         "parameters": {
-            "cache_size": "0",
-            "x": null,
-            "y": null,
-            "shape": null
+            "cache_size": "0"
         }
     },
     "torch.distributions.constraints.Constraint": {
-        "short name": "Constraint",
-        "parameters": {
-            "value": null
-        }
+        "class": "Constraint",
+        "parameters": {}
     },
     "torch.distributions.constraint_registry.ConstraintRegistry": {
-        "short name": "ConstraintRegistry",
-        "parameters": {
-            "constraint": null,
-            "factory": "None"
-        }
+        "class": "ConstraintRegistry",
+        "parameters": {}
     },
     "torch.futures.Future": {
-        "short name": "Future",
+        "class": "Future",
         "parameters": {
             "*": null,
-            "devices": "None",
-            "callback": null,
-            "result": null
+            "devices": "None"
         }
     },
     "torch.fx.GraphModule": {
-        "short name": "GraphModule",
+        "class": "GraphModule",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "root": null,
-            "graph": null,
-            "class_name": "'GraphModule'",
-            "target": null,
-            "m": null,
-            "folder": null,
-            "module_name": "'FxModule'"
+            "**kwargs": null
         }
     },
     "torch.fx.Graph": {
-        "short name": "Graph",
+        "class": "Graph",
         "parameters": {
             "owning_module": "None",
-            "tracer_cls": "None",
-            "the_function": null,
-            "args": "None",
-            "kwargs": "None",
-            "type_expr": "None",
-            "method_name": null,
-            "module_name": null,
-            "op": null,
-            "target": null,
-            "name": null,
-            "to_erase": null,
-            "*args": null,
-            "qualified_name": null,
-            "g": null,
-            "val_map": null,
-            "return_output_node": "False",
-            "n": "None",
-            "node": null,
-            "arg_transform": "<function Graph.<lambda>>",
-            "result": null,
-            "root_module": null,
-            "out": null
+            "tracer_cls": "None"
         }
     },
     "torch.fx.Node": {
-        "short name": "Node",
+        "class": "Node",
         "parameters": {
             "graph": null,
             "name": null,
@@ -813,135 +615,70 @@
             "target": null,
             "args": null,
             "kwargs": null,
-            "return_type": "None",
-            "x": null,
-            "placeholder_names": "None",
-            "maybe_return_typename": "None",
-            "root": null,
-            "arg_types": "None",
-            "kwarg_types": "None",
-            "normalize_to_only_use_kwargs": "False",
-            "replace_with": null,
-            "old_input": null,
-            "new_input": null,
-            "idx": null,
-            "arg": null,
-            "key": null
+            "return_type": "None"
         }
     },
     "torch.fx.Tracer": {
-        "short name": "Tracer",
+        "class": "Tracer",
         "parameters": {
             "autowrap_modules": "(math)",
             "autowrap_functions": "()",
-            "enable_cpatching": "False",
-            "m": null,
-            "forward": null,
-            "args": null,
-            "kwargs": null,
-            "a": null,
-            "root_fn": null,
-            "is_module": null,
-            "concrete_args": "None",
-            "kind": null,
-            "target": null,
-            "name": "None",
-            "type_expr": "None",
-            "proxy_factory_fn": "None",
-            "module_qualified_name": null,
-            "obj": null,
-            "mod": null,
-            "node": null,
-            "root": null
+            "enable_cpatching": "False"
         }
     },
     "torch.fx.Proxy": {
-        "short name": "Proxy",
+        "class": "Proxy",
         "parameters": {
             "node": null,
             "tracer": "None"
         }
     },
     "torch.fx.Interpreter": {
-        "short name": "Interpreter",
+        "class": "Interpreter",
         "parameters": {
             "module": null,
-            "garbage_collect_values": "True",
-            "target": null,
-            "args": null,
-            "kwargs": null,
-            "n": null,
-            "*args": null,
-            "initial_env": "None"
+            "garbage_collect_values": "True"
         }
     },
     "torch.fx.Transformer": {
-        "short name": "Transformer",
+        "class": "Transformer",
         "parameters": {
-            "module": null,
-            "target": null,
-            "args": null,
-            "kwargs": null
+            "module": null
         }
     },
     "torch.package.PackagingError": {
-        "short name": "PackagingError",
+        "class": "PackagingError",
         "parameters": {
             "dependency_graph": null
         }
     },
     "torch.package.EmptyMatchError": {
-        "short name": "EmptyMatchError",
+        "class": "EmptyMatchError",
         "parameters": {}
     },
     "torch.package.PackageExporter": {
-        "short name": "PackageExporter",
+        "class": "PackageExporter",
         "parameters": {
             "f": null,
-            "importer": "<torch.package.importer._SysImporter object>",
-            "module_name": null,
-            "dependencies": "True",
-            "include": null,
-            "*": null,
-            "exclude": "()",
-            "allow_empty": "True",
-            "hook": null,
-            "package": null,
-            "resource": null,
-            "binary": null,
-            "obj": null,
-            "file_or_directory": null,
-            "src": null,
-            "is_package": "False",
-            "text": null
+            "importer": "<torch.package.importer._SysImporter object>"
         }
     },
     "torch.package.PackageImporter": {
-        "short name": "PackageImporter",
+        "class": "PackageImporter",
         "parameters": {
             "file_or_buffer": null,
-            "module_allowed": "<function PackageImporter.<lambda>>",
-            "*": null,
-            "include": "'**'",
-            "exclude": "()",
-            "name": null,
-            "package": null,
-            "resource": null,
-            "map_location": "None",
-            "encoding": "'utf-8'",
-            "errors": "'strict'"
+            "module_allowed": "<function PackageImporter.<lambda>>"
         }
     },
     "torch.package.Directory": {
-        "short name": "Directory",
+        "class": "Directory",
         "parameters": {
             "name": null,
-            "is_dir": null,
-            "filename": null
+            "is_dir": null
         }
     },
     "torch.profiler.profile": {
-        "short name": "profile",
+        "class": "profile",
         "parameters": {
             "*": null,
             "activities": "None",
@@ -952,38 +689,32 @@
             "with_stack": "False",
             "with_flops": "False",
             "with_modules": "False",
-            "use_cuda": "None",
-            "key": null,
-            "value": null,
-            "path": null,
-            "metric": "'self_cpu_time_total'",
-            "group_by_input_shape": "False",
-            "group_by_stack_n": "0"
+            "use_cuda": "None"
         }
     },
     "torch.profiler.ProfilerAction": {
-        "short name": "ProfilerAction",
+        "class": "ProfilerAction",
         "parameters": {
             "value": null
         }
     },
     "torch.profiler.ProfilerActivity": {
-        "short name": "ProfilerActivity",
+        "class": "ProfilerActivity",
         "parameters": {}
     },
     "torch.optim.Optimizer": {
-        "short name": "Optimizer",
+        "class": "Optimizer",
         "parameters": {
             "params": null,
             "defaults": null
         }
     },
     "torch.distributed.GradBucket": {
-        "short name": "GradBucket",
+        "class": "GradBucket",
         "parameters": {}
     },
     "torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState": {
-        "short name": "PowerSGDState",
+        "class": "PowerSGDState",
         "parameters": {
             "process_group": null,
             "matrix_approximation_rank": "1",
@@ -997,285 +728,194 @@
         }
     },
     "torch.distributed.pipeline.sync.Pipe": {
-        "short name": "Pipe",
+        "class": "Pipe",
         "parameters": {
             "module": null,
             "chunks": "1",
             "checkpoint": "'except_last'",
-            "deferred_batch_norm": "False",
-            "*inputs": null
+            "deferred_batch_norm": "False"
         }
     },
     "torch.distributed.pipeline.sync.skip.skippable.stash": {
-        "short name": "stash",
+        "class": "stash",
         "parameters": {
             "name": null,
             "tensor": null
         }
     },
     "torch.distributed.pipeline.sync.skip.skippable.pop": {
-        "short name": "pop",
+        "class": "pop",
         "parameters": {
             "name": null
         }
     },
     "torch.distributed.rpc.WorkerInfo": {
-        "short name": "WorkerInfo",
+        "class": "WorkerInfo",
         "parameters": {}
     },
     "torch.distributed.rpc.BackendType": {
-        "short name": "BackendType",
+        "class": "BackendType",
         "parameters": {
             "value": null
         }
     },
     "torch.distributed.rpc.RpcBackendOptions": {
-        "short name": "RpcBackendOptions",
+        "class": "RpcBackendOptions",
         "parameters": {}
     },
     "torch.distributed.rpc.TensorPipeRpcBackendOptions": {
-        "short name": "TensorPipeRpcBackendOptions",
+        "class": "TensorPipeRpcBackendOptions",
         "parameters": {
             "*": null,
             "num_worker_threads": "16",
             "rpc_timeout": "60.0",
             "init_method": "'env://'",
             "device_maps": "None",
-            "devices": null,
+            "devices": "None",
             "_transports": "None",
-            "_channels": "None",
-            "to": null,
-            "device_map": null
+            "_channels": "None"
         }
     },
     "torch.distributed.rpc.RRef": {
-        "short name": "RRef",
-        "parameters": {
-            "self: torch._C._distributed_rpc.PyRRef": null,
-            "dist_autograd_ctx_id: int ": " - 1",
-            "retain_graph: bool ": " False",
-            "timeout: float ": " - 1.0"
-        }
+        "class": "RRef",
+        "parameters": {}
     },
     "torch.distributed.nn.api.remote_module.RemoteModule": {
-        "short name": "RemoteModule",
+        "class": "RemoteModule",
         "parameters": {
             "remote_device": null,
             "module_cls": null,
             "args": "None",
-            "kwargs": "None",
-            "recurse": "True"
+            "kwargs": "None"
         }
     },
     "torch.distributed.autograd.context": {
-        "short name": "context",
+        "class": "context",
         "parameters": {}
     },
     "torch.distributed.optim.DistributedOptimizer": {
-        "short name": "DistributedOptimizer",
+        "class": "DistributedOptimizer",
         "parameters": {
             "optimizer_class": null,
             "params_rref": null,
             "*args": null,
-            "**kwargs": null,
-            "context_id": null
+            "**kwargs": null
         }
     },
     "torch.DoubleStorage": {
-        "short name": "DoubleStorage",
+        "class": "DoubleStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.FloatStorage": {
-        "short name": "FloatStorage",
+        "class": "FloatStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.HalfStorage": {
-        "short name": "HalfStorage",
+        "class": "HalfStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.LongStorage": {
-        "short name": "LongStorage",
+        "class": "LongStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.IntStorage": {
-        "short name": "IntStorage",
+        "class": "IntStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.ShortStorage": {
-        "short name": "ShortStorage",
+        "class": "ShortStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.CharStorage": {
-        "short name": "CharStorage",
+        "class": "CharStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.ByteStorage": {
-        "short name": "ByteStorage",
+        "class": "ByteStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.BoolStorage": {
-        "short name": "BoolStorage",
+        "class": "BoolStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.BFloat16Storage": {
-        "short name": "BFloat16Storage",
+        "class": "BFloat16Storage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.ComplexDoubleStorage": {
-        "short name": "ComplexDoubleStorage",
+        "class": "ComplexDoubleStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.ComplexFloatStorage": {
-        "short name": "ComplexFloatStorage",
+        "class": "ComplexFloatStorage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "filename": null,
-            "shared": "False",
-            "size": "0",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.QUInt8Storage": {
-        "short name": "QUInt8Storage",
+        "class": "QUInt8Storage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.QInt8Storage": {
-        "short name": "QInt8Storage",
+        "class": "QInt8Storage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.QInt32Storage": {
-        "short name": "QInt32Storage",
+        "class": "QInt32Storage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.QUInt4x2Storage": {
-        "short name": "QUInt4x2Storage",
+        "class": "QUInt4x2Storage",
         "parameters": {
             "*args": null,
-            "**kwargs": null,
-            "device": "None",
-            "non_blocking": "False",
-            "dtype": "None"
+            "**kwargs": null
         }
     },
     "torch.utils.benchmark.Timer": {
-        "short name": "Timer",
+        "class": "Timer",
         "parameters": {
             "stmt": "'pass'",
             "setup": "'pass'",
@@ -1287,28 +927,20 @@
             "description": "None",
             "env": "None",
             "num_threads": "1",
-            "language": "<Language.PYTHON: 0>",
-            "callback": "None",
-            "min_run_time": "0.2",
-            "number": "1000000",
-            "*": null,
-            "repeats": "None",
-            "collect_baseline": "True",
-            "retain_out_file": "False"
+            "language": "<Language.PYTHON: 0>"
         }
     },
     "torch.utils.benchmark.Measurement": {
-        "short name": "Measurement",
+        "class": "Measurement",
         "parameters": {
             "number_per_run": null,
             "raw_times": null,
             "task_spec": null,
-            "metadata": "None",
-            "measurements": null
+            "metadata": "None"
         }
     },
     "torch.utils.benchmark.CallgrindStats": {
-        "short name": "CallgrindStats",
+        "class": "CallgrindStats",
         "parameters": {
             "task_spec": null,
             "number_per_run": null,
@@ -1317,26 +949,20 @@
             "baseline_exclusive_stats": null,
             "stmt_inclusive_stats": null,
             "stmt_exclusive_stats": null,
-            "stmt_callgrind_out": null,
-            "*": null,
-            "denoise": "False",
-            "other": null,
-            "inclusive": "False"
+            "stmt_callgrind_out": null
         }
     },
     "torch.utils.benchmark.FunctionCounts": {
-        "short name": "FunctionCounts",
+        "class": "FunctionCounts",
         "parameters": {
             "_data": null,
             "inclusive": null,
             "truncate_rows": "True",
-            "_linewidth": "None",
-            "filter_fn": null,
-            "map_fn": null
+            "_linewidth": "None"
         }
     },
     "torch.utils.data.DataLoader": {
-        "short name": "DataLoader",
+        "class": "DataLoader",
         "parameters": {
             "dataset": null,
             "batch_size": "1",
@@ -1357,58 +983,58 @@
         }
     },
     "torch.utils.data.Dataset": {
-        "short name": "Dataset",
+        "class": "Dataset",
         "parameters": {
             "*args": null,
             "**kwds": null
         }
     },
     "torch.utils.data.IterableDataset": {
-        "short name": "IterableDataset",
+        "class": "IterableDataset",
         "parameters": {
             "*args": null,
             "**kwds": null
         }
     },
     "torch.utils.data.TensorDataset": {
-        "short name": "TensorDataset",
+        "class": "TensorDataset",
         "parameters": {
             "*tensors": null
         }
     },
     "torch.utils.data.ConcatDataset": {
-        "short name": "ConcatDataset",
+        "class": "ConcatDataset",
         "parameters": {
             "datasets": null
         }
     },
     "torch.utils.data.ChainDataset": {
-        "short name": "ChainDataset",
+        "class": "ChainDataset",
         "parameters": {
             "datasets": null
         }
     },
     "torch.utils.data.Subset": {
-        "short name": "Subset",
+        "class": "Subset",
         "parameters": {
             "dataset": null,
             "indices": null
         }
     },
     "torch.utils.data.Sampler": {
-        "short name": "Sampler",
+        "class": "Sampler",
         "parameters": {
             "data_source": null
         }
     },
     "torch.utils.data.SequentialSampler": {
-        "short name": "SequentialSampler",
+        "class": "SequentialSampler",
         "parameters": {
             "data_source": null
         }
     },
     "torch.utils.data.RandomSampler": {
-        "short name": "RandomSampler",
+        "class": "RandomSampler",
         "parameters": {
             "data_source": null,
             "replacement": "False",
@@ -1417,14 +1043,14 @@
         }
     },
     "torch.utils.data.SubsetRandomSampler": {
-        "short name": "SubsetRandomSampler",
+        "class": "SubsetRandomSampler",
         "parameters": {
             "indices": null,
             "generator": "None"
         }
     },
     "torch.utils.data.WeightedRandomSampler": {
-        "short name": "WeightedRandomSampler",
+        "class": "WeightedRandomSampler",
         "parameters": {
             "weights": null,
             "num_samples": null,
@@ -1433,7 +1059,7 @@
         }
     },
     "torch.utils.data.BatchSampler": {
-        "short name": "BatchSampler",
+        "class": "BatchSampler",
         "parameters": {
             "sampler": null,
             "batch_size": null,
@@ -1441,7 +1067,7 @@
         }
     },
     "torch.utils.data.distributed.DistributedSampler": {
-        "short name": "DistributedSampler",
+        "class": "DistributedSampler",
         "parameters": {
             "dataset": null,
             "num_replicas": "None",
@@ -1452,94 +1078,47 @@
         }
     },
     "torch.utils.tensorboard.writer.SummaryWriter": {
-        "short name": "SummaryWriter",
+        "class": "SummaryWriter",
         "parameters": {
             "log_dir": "None",
             "comment": "''",
             "purge_step": "None",
             "max_queue": "10",
             "flush_secs": "120",
-            "filename_suffix": "''",
-            "tag": null,
-            "scalar_value": null,
-            "global_step": "None",
-            "walltime": "None",
-            "new_style": "False",
-            "double_precision": "False",
-            "main_tag": null,
-            "tag_scalar_dict": null,
-            "values": null,
-            "bins": "'tensorflow'",
-            "max_bins": "None",
-            "img_tensor": null,
-            "dataformats": "'NCHW'",
-            "figure": null,
-            "close": "True",
-            "vid_tensor": null,
-            "fps": "4",
-            "snd_tensor": null,
-            "sample_rate": "44100",
-            "text_string": null,
-            "model": null,
-            "input_to_model": "None",
-            "verbose": "False",
-            "use_strict_trace": "True",
-            "mat": null,
-            "metadata": "None",
-            "label_img": "None",
-            "metadata_header": "None",
-            "labels": null,
-            "predictions": null,
-            "num_thresholds": "127",
-            "weights": "None",
-            "layout": null,
-            "vertices": null,
-            "colors": "None",
-            "faces": "None",
-            "config_dict": "None",
-            "hparam_dict": null,
-            "metric_dict": null,
-            "hparam_domain_discrete": "None",
-            "run_name": "None"
+            "filename_suffix": "''"
         }
     },
     "torch.torch.finfo": {
-        "short name": "finfo",
+        "class": "finfo",
         "parameters": {}
     },
     "torch.torch.iinfo": {
-        "short name": "iinfo",
+        "class": "iinfo",
         "parameters": {}
     },
     "torch.Generator": {
-        "short name": "Generator",
+        "class": "Generator",
         "parameters": {
-            "device": "'cpu'",
-            "seed": null,
-            "new_state": null
+            "device": "'cpu'"
         }
     },
     "torch.quasirandom.SobolEngine": {
-        "short name": "SobolEngine",
+        "class": "SobolEngine",
         "parameters": {
             "dimension": null,
             "scramble": "False",
-            "seed": "None",
-            "n": null,
-            "out": "None",
-            "dtype": "torch.float32",
-            "m": null
+            "seed": "None"
         }
     },
     "torch.nn.parameter.Parameter": {
-        "short name": "Parameter",
+        "class": "Parameter",
         "parameters": {
             "data": "None",
             "requires_grad": "True"
         }
     },
     "torch.nn.parameter.UninitializedParameter": {
-        "short name": "UninitializedParameter",
+        "class": "UninitializedParameter",
         "parameters": {
             "requires_grad": "True",
             "device": "None",
@@ -1547,7 +1126,7 @@
         }
     },
     "torch.nn.parameter.UninitializedBuffer": {
-        "short name": "UninitializedBuffer",
+        "class": "UninitializedBuffer",
         "parameters": {
             "requires_grad": "False",
             "device": "None",
@@ -1555,76 +1134,41 @@
         }
     },
     "torch.nn.Module": {
-        "short name": "Module",
-        "parameters": {
-            "name": null,
-            "module": null,
-            "fn": null,
-            "recurse": "True",
-            "device": "None",
-            "*input": null,
-            "target": null,
-            "state_dict": null,
-            "strict": "True",
-            "prefix": "''",
-            "memo": "None",
-            "remove_duplicate": "True",
-            "hook": null,
-            "tensor": null,
-            "persistent": "True",
-            "param": null,
-            "requires_grad": "True",
-            "state": null,
-            "destination": "None",
-            "keep_vars": "False",
-            "*args": null,
-            "**kwargs": null,
-            "dtype": null,
-            "non_blocking": "False",
-            "memory_format": "torch.channels_last",
-            "*": null,
-            "mode": "True",
-            "dst_type": null,
-            "set_to_none": "False"
-        }
+        "class": "Module",
+        "parameters": {}
     },
     "torch.nn.Sequential": {
-        "short name": "Sequential",
+        "class": "Sequential",
         "parameters": {
             "*args": null
         }
     },
     "torch.nn.ModuleList": {
-        "short name": "ModuleList",
+        "class": "ModuleList",
         "parameters": {
-            "modules": null,
-            "module": null,
-            "index": null
+            "modules": "None"
         }
     },
     "torch.nn.ModuleDict": {
-        "short name": "ModuleDict",
+        "class": "ModuleDict",
         "parameters": {
-            "modules": null,
-            "key": null
+            "modules": "None"
         }
     },
     "torch.nn.ParameterList": {
-        "short name": "ParameterList",
+        "class": "ParameterList",
         "parameters": {
-            "parameters": null,
-            "parameter": null
+            "parameters": "None"
         }
     },
     "torch.nn.ParameterDict": {
-        "short name": "ParameterDict",
+        "class": "ParameterDict",
         "parameters": {
-            "parameters": null,
-            "key": null
+            "parameters": "None"
         }
     },
     "torch.nn.Conv1d": {
-        "short name": "Conv1d",
+        "class": "Conv1d",
         "parameters": {
             "in_channels": null,
             "out_channels": null,
@@ -1640,7 +1184,7 @@
         }
     },
     "torch.nn.Conv2d": {
-        "short name": "Conv2d",
+        "class": "Conv2d",
         "parameters": {
             "in_channels": null,
             "out_channels": null,
@@ -1656,7 +1200,7 @@
         }
     },
     "torch.nn.Conv3d": {
-        "short name": "Conv3d",
+        "class": "Conv3d",
         "parameters": {
             "in_channels": null,
             "out_channels": null,
@@ -1672,7 +1216,7 @@
         }
     },
     "torch.nn.ConvTranspose1d": {
-        "short name": "ConvTranspose1d",
+        "class": "ConvTranspose1d",
         "parameters": {
             "in_channels": null,
             "out_channels": null,
@@ -1689,7 +1233,7 @@
         }
     },
     "torch.nn.ConvTranspose2d": {
-        "short name": "ConvTranspose2d",
+        "class": "ConvTranspose2d",
         "parameters": {
             "in_channels": null,
             "out_channels": null,
@@ -1706,7 +1250,7 @@
         }
     },
     "torch.nn.ConvTranspose3d": {
-        "short name": "ConvTranspose3d",
+        "class": "ConvTranspose3d",
         "parameters": {
             "in_channels": null,
             "out_channels": null,
@@ -1723,7 +1267,7 @@
         }
     },
     "torch.nn.LazyConv1d": {
-        "short name": "LazyConv1d",
+        "class": "LazyConv1d",
         "parameters": {
             "out_channels": null,
             "kernel_size": null,
@@ -1738,7 +1282,7 @@
         }
     },
     "torch.nn.LazyConv2d": {
-        "short name": "LazyConv2d",
+        "class": "LazyConv2d",
         "parameters": {
             "out_channels": null,
             "kernel_size": null,
@@ -1753,7 +1297,7 @@
         }
     },
     "torch.nn.LazyConv3d": {
-        "short name": "LazyConv3d",
+        "class": "LazyConv3d",
         "parameters": {
             "out_channels": null,
             "kernel_size": null,
@@ -1768,7 +1312,7 @@
         }
     },
     "torch.nn.LazyConvTranspose1d": {
-        "short name": "LazyConvTranspose1d",
+        "class": "LazyConvTranspose1d",
         "parameters": {
             "out_channels": null,
             "kernel_size": null,
@@ -1784,7 +1328,7 @@
         }
     },
     "torch.nn.LazyConvTranspose2d": {
-        "short name": "LazyConvTranspose2d",
+        "class": "LazyConvTranspose2d",
         "parameters": {
             "out_channels": null,
             "kernel_size": null,
@@ -1800,7 +1344,7 @@
         }
     },
     "torch.nn.LazyConvTranspose3d": {
-        "short name": "LazyConvTranspose3d",
+        "class": "LazyConvTranspose3d",
         "parameters": {
             "out_channels": null,
             "kernel_size": null,
@@ -1816,7 +1360,7 @@
         }
     },
     "torch.nn.Unfold": {
-        "short name": "Unfold",
+        "class": "Unfold",
         "parameters": {
             "kernel_size": null,
             "dilation": "1",
@@ -1825,7 +1369,7 @@
         }
     },
     "torch.nn.Fold": {
-        "short name": "Fold",
+        "class": "Fold",
         "parameters": {
             "output_size": null,
             "kernel_size": null,
@@ -1835,7 +1379,7 @@
         }
     },
     "torch.nn.MaxPool1d": {
-        "short name": "MaxPool1d",
+        "class": "MaxPool1d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1846,7 +1390,7 @@
         }
     },
     "torch.nn.MaxPool2d": {
-        "short name": "MaxPool2d",
+        "class": "MaxPool2d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1857,7 +1401,7 @@
         }
     },
     "torch.nn.MaxPool3d": {
-        "short name": "MaxPool3d",
+        "class": "MaxPool3d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1868,7 +1412,7 @@
         }
     },
     "torch.nn.MaxUnpool1d": {
-        "short name": "MaxUnpool1d",
+        "class": "MaxUnpool1d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1876,7 +1420,7 @@
         }
     },
     "torch.nn.MaxUnpool2d": {
-        "short name": "MaxUnpool2d",
+        "class": "MaxUnpool2d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1884,7 +1428,7 @@
         }
     },
     "torch.nn.MaxUnpool3d": {
-        "short name": "MaxUnpool3d",
+        "class": "MaxUnpool3d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1892,7 +1436,7 @@
         }
     },
     "torch.nn.AvgPool1d": {
-        "short name": "AvgPool1d",
+        "class": "AvgPool1d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1902,7 +1446,7 @@
         }
     },
     "torch.nn.AvgPool2d": {
-        "short name": "AvgPool2d",
+        "class": "AvgPool2d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1913,7 +1457,7 @@
         }
     },
     "torch.nn.AvgPool3d": {
-        "short name": "AvgPool3d",
+        "class": "AvgPool3d",
         "parameters": {
             "kernel_size": null,
             "stride": "None",
@@ -1924,7 +1468,7 @@
         }
     },
     "torch.nn.FractionalMaxPool2d": {
-        "short name": "FractionalMaxPool2d",
+        "class": "FractionalMaxPool2d",
         "parameters": {
             "kernel_size": null,
             "output_size": "None",
@@ -1934,7 +1478,7 @@
         }
     },
     "torch.nn.FractionalMaxPool3d": {
-        "short name": "FractionalMaxPool3d",
+        "class": "FractionalMaxPool3d",
         "parameters": {
             "kernel_size": null,
             "output_size": "None",
@@ -1944,7 +1488,7 @@
         }
     },
     "torch.nn.LPPool1d": {
-        "short name": "LPPool1d",
+        "class": "LPPool1d",
         "parameters": {
             "norm_type": null,
             "kernel_size": null,
@@ -1953,7 +1497,7 @@
         }
     },
     "torch.nn.LPPool2d": {
-        "short name": "LPPool2d",
+        "class": "LPPool2d",
         "parameters": {
             "norm_type": null,
             "kernel_size": null,
@@ -1962,128 +1506,128 @@
         }
     },
     "torch.nn.AdaptiveMaxPool1d": {
-        "short name": "AdaptiveMaxPool1d",
+        "class": "AdaptiveMaxPool1d",
         "parameters": {
             "output_size": null,
             "return_indices": "False"
         }
     },
     "torch.nn.AdaptiveMaxPool2d": {
-        "short name": "AdaptiveMaxPool2d",
+        "class": "AdaptiveMaxPool2d",
         "parameters": {
             "output_size": null,
             "return_indices": "False"
         }
     },
     "torch.nn.AdaptiveMaxPool3d": {
-        "short name": "AdaptiveMaxPool3d",
+        "class": "AdaptiveMaxPool3d",
         "parameters": {
             "output_size": null,
             "return_indices": "False"
         }
     },
     "torch.nn.AdaptiveAvgPool1d": {
-        "short name": "AdaptiveAvgPool1d",
+        "class": "AdaptiveAvgPool1d",
         "parameters": {
             "output_size": null
         }
     },
     "torch.nn.AdaptiveAvgPool2d": {
-        "short name": "AdaptiveAvgPool2d",
+        "class": "AdaptiveAvgPool2d",
         "parameters": {
             "output_size": null
         }
     },
     "torch.nn.AdaptiveAvgPool3d": {
-        "short name": "AdaptiveAvgPool3d",
+        "class": "AdaptiveAvgPool3d",
         "parameters": {
             "output_size": null
         }
     },
     "torch.nn.ReflectionPad1d": {
-        "short name": "ReflectionPad1d",
+        "class": "ReflectionPad1d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ReflectionPad2d": {
-        "short name": "ReflectionPad2d",
+        "class": "ReflectionPad2d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ReflectionPad3d": {
-        "short name": "ReflectionPad3d",
+        "class": "ReflectionPad3d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ReplicationPad1d": {
-        "short name": "ReplicationPad1d",
+        "class": "ReplicationPad1d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ReplicationPad2d": {
-        "short name": "ReplicationPad2d",
+        "class": "ReplicationPad2d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ReplicationPad3d": {
-        "short name": "ReplicationPad3d",
+        "class": "ReplicationPad3d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ZeroPad2d": {
-        "short name": "ZeroPad2d",
+        "class": "ZeroPad2d",
         "parameters": {
             "padding": null
         }
     },
     "torch.nn.ConstantPad1d": {
-        "short name": "ConstantPad1d",
+        "class": "ConstantPad1d",
         "parameters": {
             "padding": null,
             "value": null
         }
     },
     "torch.nn.ConstantPad2d": {
-        "short name": "ConstantPad2d",
+        "class": "ConstantPad2d",
         "parameters": {
             "padding": null,
             "value": null
         }
     },
     "torch.nn.ConstantPad3d": {
-        "short name": "ConstantPad3d",
+        "class": "ConstantPad3d",
         "parameters": {
             "padding": null,
             "value": null
         }
     },
     "torch.nn.ELU": {
-        "short name": "ELU",
+        "class": "ELU",
         "parameters": {
             "alpha": "1.0",
             "inplace": "False"
         }
     },
     "torch.nn.Hardshrink": {
-        "short name": "Hardshrink",
+        "class": "Hardshrink",
         "parameters": {
             "lambd": "0.5"
         }
     },
     "torch.nn.Hardsigmoid": {
-        "short name": "Hardsigmoid",
+        "class": "Hardsigmoid",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.Hardtanh": {
-        "short name": "Hardtanh",
+        "class": "Hardtanh",
         "parameters": {
             "min_val": "- 1.0",
             "max_val": "1.0",
@@ -2093,24 +1637,24 @@
         }
     },
     "torch.nn.Hardswish": {
-        "short name": "Hardswish",
+        "class": "Hardswish",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.LeakyReLU": {
-        "short name": "LeakyReLU",
+        "class": "LeakyReLU",
         "parameters": {
             "negative_slope": "0.01",
             "inplace": "False"
         }
     },
     "torch.nn.LogSigmoid": {
-        "short name": "LogSigmoid",
+        "class": "LogSigmoid",
         "parameters": {}
     },
     "torch.nn.MultiheadAttention": {
-        "short name": "MultiheadAttention",
+        "class": "MultiheadAttention",
         "parameters": {
             "embed_dim": null,
             "num_heads": null,
@@ -2122,17 +1666,11 @@
             "vdim": "None",
             "batch_first": "False",
             "device": "None",
-            "dtype": "None",
-            "query": null,
-            "key": null,
-            "value": null,
-            "key_padding_mask": "None",
-            "need_weights": "True",
-            "attn_mask": "None"
+            "dtype": "None"
         }
     },
     "torch.nn.PReLU": {
-        "short name": "PReLU",
+        "class": "PReLU",
         "parameters": {
             "num_parameters": "1",
             "init": "0.25",
@@ -2141,19 +1679,19 @@
         }
     },
     "torch.nn.ReLU": {
-        "short name": "ReLU",
+        "class": "ReLU",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.ReLU6": {
-        "short name": "ReLU6",
+        "class": "ReLU6",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.RReLU": {
-        "short name": "RReLU",
+        "class": "RReLU",
         "parameters": {
             "lower": "0.125",
             "upper": "0.3333333333333333",
@@ -2161,65 +1699,65 @@
         }
     },
     "torch.nn.SELU": {
-        "short name": "SELU",
+        "class": "SELU",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.CELU": {
-        "short name": "CELU",
+        "class": "CELU",
         "parameters": {
             "alpha": "1.0",
             "inplace": "False"
         }
     },
     "torch.nn.GELU": {
-        "short name": "GELU",
+        "class": "GELU",
         "parameters": {}
     },
     "torch.nn.Sigmoid": {
-        "short name": "Sigmoid",
+        "class": "Sigmoid",
         "parameters": {}
     },
     "torch.nn.SiLU": {
-        "short name": "SiLU",
+        "class": "SiLU",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.Mish": {
-        "short name": "Mish",
+        "class": "Mish",
         "parameters": {
             "inplace": "False"
         }
     },
     "torch.nn.Softplus": {
-        "short name": "Softplus",
+        "class": "Softplus",
         "parameters": {
             "beta": "1",
             "threshold": "20"
         }
     },
     "torch.nn.Softshrink": {
-        "short name": "Softshrink",
+        "class": "Softshrink",
         "parameters": {
             "lambd": "0.5"
         }
     },
     "torch.nn.Softsign": {
-        "short name": "Softsign",
+        "class": "Softsign",
         "parameters": {}
     },
     "torch.nn.Tanh": {
-        "short name": "Tanh",
+        "class": "Tanh",
         "parameters": {}
     },
     "torch.nn.Tanhshrink": {
-        "short name": "Tanhshrink",
+        "class": "Tanhshrink",
         "parameters": {}
     },
     "torch.nn.Threshold": {
-        "short name": "Threshold",
+        "class": "Threshold",
         "parameters": {
             "threshold": null,
             "value": null,
@@ -2227,35 +1765,35 @@
         }
     },
     "torch.nn.GLU": {
-        "short name": "GLU",
+        "class": "GLU",
         "parameters": {
             "dim": "- 1"
         }
     },
     "torch.nn.Softmin": {
-        "short name": "Softmin",
+        "class": "Softmin",
         "parameters": {
             "dim": "None"
         }
     },
     "torch.nn.Softmax": {
-        "short name": "Softmax",
+        "class": "Softmax",
         "parameters": {
             "dim": "None"
         }
     },
     "torch.nn.Softmax2d": {
-        "short name": "Softmax2d",
+        "class": "Softmax2d",
         "parameters": {}
     },
     "torch.nn.LogSoftmax": {
-        "short name": "LogSoftmax",
+        "class": "LogSoftmax",
         "parameters": {
             "dim": "None"
         }
     },
     "torch.nn.AdaptiveLogSoftmaxWithLoss": {
-        "short name": "AdaptiveLogSoftmaxWithLoss",
+        "class": "AdaptiveLogSoftmaxWithLoss",
         "parameters": {
             "in_features": null,
             "n_classes": null,
@@ -2263,12 +1801,11 @@
             "div_value": "4.0",
             "head_bias": "False",
             "device": "None",
-            "dtype": "None",
-            "input": null
+            "dtype": "None"
         }
     },
     "torch.nn.BatchNorm1d": {
-        "short name": "BatchNorm1d",
+        "class": "BatchNorm1d",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2280,7 +1817,7 @@
         }
     },
     "torch.nn.BatchNorm2d": {
-        "short name": "BatchNorm2d",
+        "class": "BatchNorm2d",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2292,7 +1829,7 @@
         }
     },
     "torch.nn.BatchNorm3d": {
-        "short name": "BatchNorm3d",
+        "class": "BatchNorm3d",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2304,7 +1841,7 @@
         }
     },
     "torch.nn.LazyBatchNorm1d": {
-        "short name": "LazyBatchNorm1d",
+        "class": "LazyBatchNorm1d",
         "parameters": {
             "eps": "1e-05",
             "momentum": "0.1",
@@ -2315,7 +1852,7 @@
         }
     },
     "torch.nn.LazyBatchNorm2d": {
-        "short name": "LazyBatchNorm2d",
+        "class": "LazyBatchNorm2d",
         "parameters": {
             "eps": "1e-05",
             "momentum": "0.1",
@@ -2326,7 +1863,7 @@
         }
     },
     "torch.nn.LazyBatchNorm3d": {
-        "short name": "LazyBatchNorm3d",
+        "class": "LazyBatchNorm3d",
         "parameters": {
             "eps": "1e-05",
             "momentum": "0.1",
@@ -2337,7 +1874,7 @@
         }
     },
     "torch.nn.GroupNorm": {
-        "short name": "GroupNorm",
+        "class": "GroupNorm",
         "parameters": {
             "num_groups": null,
             "num_channels": null,
@@ -2348,7 +1885,7 @@
         }
     },
     "torch.nn.SyncBatchNorm": {
-        "short name": "SyncBatchNorm",
+        "class": "SyncBatchNorm",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2357,12 +1894,11 @@
             "track_running_stats": "True",
             "process_group": "None",
             "device": "None",
-            "dtype": "None",
-            "module": null
+            "dtype": "None"
         }
     },
     "torch.nn.InstanceNorm1d": {
-        "short name": "InstanceNorm1d",
+        "class": "InstanceNorm1d",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2374,7 +1910,7 @@
         }
     },
     "torch.nn.InstanceNorm2d": {
-        "short name": "InstanceNorm2d",
+        "class": "InstanceNorm2d",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2386,7 +1922,7 @@
         }
     },
     "torch.nn.InstanceNorm3d": {
-        "short name": "InstanceNorm3d",
+        "class": "InstanceNorm3d",
         "parameters": {
             "num_features": null,
             "eps": "1e-05",
@@ -2398,7 +1934,7 @@
         }
     },
     "torch.nn.LazyInstanceNorm1d": {
-        "short name": "LazyInstanceNorm1d",
+        "class": "LazyInstanceNorm1d",
         "parameters": {
             "eps": "1e-05",
             "momentum": "0.1",
@@ -2409,7 +1945,7 @@
         }
     },
     "torch.nn.LazyInstanceNorm2d": {
-        "short name": "LazyInstanceNorm2d",
+        "class": "LazyInstanceNorm2d",
         "parameters": {
             "eps": "1e-05",
             "momentum": "0.1",
@@ -2420,7 +1956,7 @@
         }
     },
     "torch.nn.LazyInstanceNorm3d": {
-        "short name": "LazyInstanceNorm3d",
+        "class": "LazyInstanceNorm3d",
         "parameters": {
             "eps": "1e-05",
             "momentum": "0.1",
@@ -2431,7 +1967,7 @@
         }
     },
     "torch.nn.LayerNorm": {
-        "short name": "LayerNorm",
+        "class": "LayerNorm",
         "parameters": {
             "normalized_shape": null,
             "eps": "1e-05",
@@ -2441,7 +1977,7 @@
         }
     },
     "torch.nn.LocalResponseNorm": {
-        "short name": "LocalResponseNorm",
+        "class": "LocalResponseNorm",
         "parameters": {
             "size": null,
             "alpha": "0.0001",
@@ -2450,7 +1986,7 @@
         }
     },
     "torch.nn.RNNBase": {
-        "short name": "RNNBase",
+        "class": "RNNBase",
         "parameters": {
             "mode": null,
             "input_size": null,
@@ -2466,28 +2002,28 @@
         }
     },
     "torch.nn.RNN": {
-        "short name": "RNN",
+        "class": "RNN",
         "parameters": {
             "*args": null,
             "**kwargs": null
         }
     },
     "torch.nn.LSTM": {
-        "short name": "LSTM",
+        "class": "LSTM",
         "parameters": {
             "*args": null,
             "**kwargs": null
         }
     },
     "torch.nn.GRU": {
-        "short name": "GRU",
+        "class": "GRU",
         "parameters": {
             "*args": null,
             "**kwargs": null
         }
     },
     "torch.nn.RNNCell": {
-        "short name": "RNNCell",
+        "class": "RNNCell",
         "parameters": {
             "input_size": null,
             "hidden_size": null,
@@ -2498,7 +2034,7 @@
         }
     },
     "torch.nn.LSTMCell": {
-        "short name": "LSTMCell",
+        "class": "LSTMCell",
         "parameters": {
             "input_size": null,
             "hidden_size": null,
@@ -2508,7 +2044,7 @@
         }
     },
     "torch.nn.GRUCell": {
-        "short name": "GRUCell",
+        "class": "GRUCell",
         "parameters": {
             "input_size": null,
             "hidden_size": null,
@@ -2518,7 +2054,7 @@
         }
     },
     "torch.nn.Transformer": {
-        "short name": "Transformer",
+        "class": "Transformer",
         "parameters": {
             "d_model": "512",
             "nhead": "8",
@@ -2533,45 +2069,27 @@
             "batch_first": "False",
             "norm_first": "False",
             "device": "None",
-            "dtype": "None",
-            "src": null,
-            "tgt": null,
-            "src_mask": "None",
-            "tgt_mask": "None",
-            "memory_mask": "None",
-            "src_key_padding_mask": "None",
-            "tgt_key_padding_mask": "None",
-            "memory_key_padding_mask": "None",
-            "sz": null
+            "dtype": "None"
         }
     },
     "torch.nn.TransformerEncoder": {
-        "short name": "TransformerEncoder",
+        "class": "TransformerEncoder",
         "parameters": {
             "encoder_layer": null,
             "num_layers": null,
-            "norm": "None",
-            "src": null,
-            "mask": "None",
-            "src_key_padding_mask": "None"
+            "norm": "None"
         }
     },
     "torch.nn.TransformerDecoder": {
-        "short name": "TransformerDecoder",
+        "class": "TransformerDecoder",
         "parameters": {
             "decoder_layer": null,
             "num_layers": null,
-            "norm": "None",
-            "tgt": null,
-            "memory": null,
-            "tgt_mask": "None",
-            "memory_mask": "None",
-            "tgt_key_padding_mask": "None",
-            "memory_key_padding_mask": "None"
+            "norm": "None"
         }
     },
     "torch.nn.TransformerEncoderLayer": {
-        "short name": "TransformerEncoderLayer",
+        "class": "TransformerEncoderLayer",
         "parameters": {
             "d_model": null,
             "nhead": null,
@@ -2582,14 +2100,11 @@
             "batch_first": "False",
             "norm_first": "False",
             "device": "None",
-            "dtype": "None",
-            "src": null,
-            "src_mask": "None",
-            "src_key_padding_mask": "None"
+            "dtype": "None"
         }
     },
     "torch.nn.TransformerDecoderLayer": {
-        "short name": "TransformerDecoderLayer",
+        "class": "TransformerDecoderLayer",
         "parameters": {
             "d_model": null,
             "nhead": null,
@@ -2600,24 +2115,18 @@
             "batch_first": "False",
             "norm_first": "False",
             "device": "None",
-            "dtype": "None",
-            "tgt": null,
-            "memory": null,
-            "tgt_mask": "None",
-            "memory_mask": "None",
-            "tgt_key_padding_mask": "None",
-            "memory_key_padding_mask": "None"
+            "dtype": "None"
         }
     },
     "torch.nn.Identity": {
-        "short name": "Identity",
+        "class": "Identity",
         "parameters": {
             "*args": null,
             "**kwargs": null
         }
     },
     "torch.nn.Linear": {
-        "short name": "Linear",
+        "class": "Linear",
         "parameters": {
             "in_features": null,
             "out_features": null,
@@ -2627,7 +2136,7 @@
         }
     },
     "torch.nn.Bilinear": {
-        "short name": "Bilinear",
+        "class": "Bilinear",
         "parameters": {
             "in1_features": null,
             "in2_features": null,
@@ -2638,7 +2147,7 @@
         }
     },
     "torch.nn.LazyLinear": {
-        "short name": "LazyLinear",
+        "class": "LazyLinear",
         "parameters": {
             "out_features": null,
             "bias": "True",
@@ -2647,42 +2156,42 @@
         }
     },
     "torch.nn.Dropout": {
-        "short name": "Dropout",
+        "class": "Dropout",
         "parameters": {
             "p": "0.5",
             "inplace": "False"
         }
     },
     "torch.nn.Dropout2d": {
-        "short name": "Dropout2d",
+        "class": "Dropout2d",
         "parameters": {
             "p": "0.5",
             "inplace": "False"
         }
     },
     "torch.nn.Dropout3d": {
-        "short name": "Dropout3d",
+        "class": "Dropout3d",
         "parameters": {
             "p": "0.5",
             "inplace": "False"
         }
     },
     "torch.nn.AlphaDropout": {
-        "short name": "AlphaDropout",
+        "class": "AlphaDropout",
         "parameters": {
             "p": "0.5",
             "inplace": "False"
         }
     },
     "torch.nn.FeatureAlphaDropout": {
-        "short name": "FeatureAlphaDropout",
+        "class": "FeatureAlphaDropout",
         "parameters": {
             "p": "0.5",
             "inplace": "False"
         }
     },
     "torch.nn.Embedding": {
-        "short name": "Embedding",
+        "class": "Embedding",
         "parameters": {
             "num_embeddings": null,
             "embedding_dim": null,
@@ -2693,13 +2202,11 @@
             "sparse": "False",
             "_weight": "None",
             "device": "None",
-            "dtype": "None",
-            "embeddings": null,
-            "freeze": "True"
+            "dtype": "None"
         }
     },
     "torch.nn.EmbeddingBag": {
-        "short name": "EmbeddingBag",
+        "class": "EmbeddingBag",
         "parameters": {
             "num_embeddings": null,
             "embedding_dim": null,
@@ -2712,23 +2219,18 @@
             "include_last_offset": "False",
             "padding_idx": "None",
             "device": "None",
-            "dtype": "None",
-            "input": null,
-            "offsets": "None",
-            "per_sample_weights": "None",
-            "embeddings": null,
-            "freeze": "True"
+            "dtype": "None"
         }
     },
     "torch.nn.CosineSimilarity": {
-        "short name": "CosineSimilarity",
+        "class": "CosineSimilarity",
         "parameters": {
             "dim": "1",
             "eps": "1e-08"
         }
     },
     "torch.nn.PairwiseDistance": {
-        "short name": "PairwiseDistance",
+        "class": "PairwiseDistance",
         "parameters": {
             "p": "2.0",
             "eps": "1e-06",
@@ -2736,7 +2238,7 @@
         }
     },
     "torch.nn.L1Loss": {
-        "short name": "L1Loss",
+        "class": "L1Loss",
         "parameters": {
             "size_average": "None",
             "reduce": "None",
@@ -2744,7 +2246,7 @@
         }
     },
     "torch.nn.MSELoss": {
-        "short name": "MSELoss",
+        "class": "MSELoss",
         "parameters": {
             "size_average": "None",
             "reduce": "None",
@@ -2752,7 +2254,7 @@
         }
     },
     "torch.nn.CrossEntropyLoss": {
-        "short name": "CrossEntropyLoss",
+        "class": "CrossEntropyLoss",
         "parameters": {
             "weight": "None",
             "size_average": "None",
@@ -2763,7 +2265,7 @@
         }
     },
     "torch.nn.CTCLoss": {
-        "short name": "CTCLoss",
+        "class": "CTCLoss",
         "parameters": {
             "blank": "0",
             "reduction": "'mean'",
@@ -2771,7 +2273,7 @@
         }
     },
     "torch.nn.NLLLoss": {
-        "short name": "NLLLoss",
+        "class": "NLLLoss",
         "parameters": {
             "weight": "None",
             "size_average": "None",
@@ -2781,7 +2283,7 @@
         }
     },
     "torch.nn.PoissonNLLLoss": {
-        "short name": "PoissonNLLLoss",
+        "class": "PoissonNLLLoss",
         "parameters": {
             "log_input": "True",
             "full": "False",
@@ -2792,7 +2294,7 @@
         }
     },
     "torch.nn.GaussianNLLLoss": {
-        "short name": "GaussianNLLLoss",
+        "class": "GaussianNLLLoss",
         "parameters": {
             "*": null,
             "full": "False",
@@ -2801,7 +2303,7 @@
         }
     },
     "torch.nn.KLDivLoss": {
-        "short name": "KLDivLoss",
+        "class": "KLDivLoss",
         "parameters": {
             "size_average": "None",
             "reduce": "None",
@@ -2810,7 +2312,7 @@
         }
     },
     "torch.nn.BCELoss": {
-        "short name": "BCELoss",
+        "class": "BCELoss",
         "parameters": {
             "weight": "None",
             "size_average": "None",
@@ -2819,7 +2321,7 @@
         }
     },
     "torch.nn.BCEWithLogitsLoss": {
-        "short name": "BCEWithLogitsLoss",
+        "class": "BCEWithLogitsLoss",
         "parameters": {
             "weight": "None",
             "size_average": "None",
@@ -2829,7 +2331,7 @@
         }
     },
     "torch.nn.MarginRankingLoss": {
-        "short name": "MarginRankingLoss",
+        "class": "MarginRankingLoss",
         "parameters": {
             "margin": "0.0",
             "size_average": "None",
@@ -2838,7 +2340,7 @@
         }
     },
     "torch.nn.HingeEmbeddingLoss": {
-        "short name": "HingeEmbeddingLoss",
+        "class": "HingeEmbeddingLoss",
         "parameters": {
             "margin": "1.0",
             "size_average": "None",
@@ -2847,7 +2349,7 @@
         }
     },
     "torch.nn.MultiLabelMarginLoss": {
-        "short name": "MultiLabelMarginLoss",
+        "class": "MultiLabelMarginLoss",
         "parameters": {
             "size_average": "None",
             "reduce": "None",
@@ -2855,14 +2357,14 @@
         }
     },
     "torch.nn.HuberLoss": {
-        "short name": "HuberLoss",
+        "class": "HuberLoss",
         "parameters": {
             "reduction": "'mean'",
             "delta": "1.0"
         }
     },
     "torch.nn.SmoothL1Loss": {
-        "short name": "SmoothL1Loss",
+        "class": "SmoothL1Loss",
         "parameters": {
             "size_average": "None",
             "reduce": "None",
@@ -2871,7 +2373,7 @@
         }
     },
     "torch.nn.SoftMarginLoss": {
-        "short name": "SoftMarginLoss",
+        "class": "SoftMarginLoss",
         "parameters": {
             "size_average": "None",
             "reduce": "None",
@@ -2879,7 +2381,7 @@
         }
     },
     "torch.nn.MultiLabelSoftMarginLoss": {
-        "short name": "MultiLabelSoftMarginLoss",
+        "class": "MultiLabelSoftMarginLoss",
         "parameters": {
             "weight": "None",
             "size_average": "None",
@@ -2888,7 +2390,7 @@
         }
     },
     "torch.nn.CosineEmbeddingLoss": {
-        "short name": "CosineEmbeddingLoss",
+        "class": "CosineEmbeddingLoss",
         "parameters": {
             "margin": "0.0",
             "size_average": "None",
@@ -2897,7 +2399,7 @@
         }
     },
     "torch.nn.MultiMarginLoss": {
-        "short name": "MultiMarginLoss",
+        "class": "MultiMarginLoss",
         "parameters": {
             "p": "1",
             "margin": "1.0",
@@ -2908,7 +2410,7 @@
         }
     },
     "torch.nn.TripletMarginLoss": {
-        "short name": "TripletMarginLoss",
+        "class": "TripletMarginLoss",
         "parameters": {
             "margin": "1.0",
             "p": "2.0",
@@ -2920,7 +2422,7 @@
         }
     },
     "torch.nn.TripletMarginWithDistanceLoss": {
-        "short name": "TripletMarginWithDistanceLoss",
+        "class": "TripletMarginWithDistanceLoss",
         "parameters": {
             "*": null,
             "distance_function": "None",
@@ -2930,19 +2432,19 @@
         }
     },
     "torch.nn.PixelShuffle": {
-        "short name": "PixelShuffle",
+        "class": "PixelShuffle",
         "parameters": {
             "upscale_factor": null
         }
     },
     "torch.nn.PixelUnshuffle": {
-        "short name": "PixelUnshuffle",
+        "class": "PixelUnshuffle",
         "parameters": {
             "downscale_factor": null
         }
     },
     "torch.nn.Upsample": {
-        "short name": "Upsample",
+        "class": "Upsample",
         "parameters": {
             "size": "None",
             "scale_factor": "None",
@@ -2951,27 +2453,27 @@
         }
     },
     "torch.nn.UpsamplingNearest2d": {
-        "short name": "UpsamplingNearest2d",
+        "class": "UpsamplingNearest2d",
         "parameters": {
             "size": "None",
             "scale_factor": "None"
         }
     },
     "torch.nn.UpsamplingBilinear2d": {
-        "short name": "UpsamplingBilinear2d",
+        "class": "UpsamplingBilinear2d",
         "parameters": {
             "size": "None",
             "scale_factor": "None"
         }
     },
     "torch.nn.ChannelShuffle": {
-        "short name": "ChannelShuffle",
+        "class": "ChannelShuffle",
         "parameters": {
             "groups": null
         }
     },
     "torch.nn.DataParallel": {
-        "short name": "DataParallel",
+        "class": "DataParallel",
         "parameters": {
             "module": null,
             "device_ids": "None",
@@ -2980,7 +2482,7 @@
         }
     },
     "torch.nn.parallel.DistributedDataParallel": {
-        "short name": "DistributedDataParallel",
+        "class": "DistributedDataParallel",
         "parameters": {
             "module": null,
             "device_ids": "None",
@@ -2991,194 +2493,126 @@
             "bucket_cap_mb": "25",
             "find_unused_parameters": "False",
             "check_reduction": "False",
-            "gradient_as_bucket_view": "False",
-            "divide_by_initial_world_size": "True",
-            "enable": "True",
-            "throw_on_early_termination": "False",
-            "**kwargs": null,
-            "state": null,
-            "hook": null
+            "gradient_as_bucket_view": "False"
         }
     },
     "torch.nn.utils.prune.BasePruningMethod": {
-        "short name": "BasePruningMethod",
-        "parameters": {
-            "module": null,
-            "name": null,
-            "*args": null,
-            "importance_scores": "None",
-            "**kwargs": null,
-            "t": null,
-            "default_mask": "None"
-        }
+        "class": "BasePruningMethod",
+        "parameters": {}
     },
     "torch.nn.utils.prune.PruningContainer": {
-        "short name": "PruningContainer",
+        "class": "PruningContainer",
         "parameters": {
-            "*args": null,
-            "method": null,
-            "module": null,
-            "name": null,
-            "importance_scores": "None",
-            "**kwargs": null,
-            "t": null,
-            "default_mask": "None"
+            "*args": null
         }
     },
     "torch.nn.utils.prune.Identity": {
-        "short name": "Identity",
-        "parameters": {
-            "module": null,
-            "name": null,
-            "t": null,
-            "default_mask": "None",
-            "importance_scores": "None"
-        }
+        "class": "Identity",
+        "parameters": {}
     },
     "torch.nn.utils.prune.RandomUnstructured": {
-        "short name": "RandomUnstructured",
+        "class": "RandomUnstructured",
         "parameters": {
-            "amount": null,
-            "module": null,
-            "name": null,
-            "t": null,
-            "default_mask": "None",
-            "importance_scores": "None"
+            "amount": null
         }
     },
     "torch.nn.utils.prune.L1Unstructured": {
-        "short name": "L1Unstructured",
+        "class": "L1Unstructured",
         "parameters": {
-            "amount": null,
-            "module": null,
-            "name": null,
-            "importance_scores": "None",
-            "t": null,
-            "default_mask": "None"
+            "amount": null
         }
     },
     "torch.nn.utils.prune.RandomStructured": {
-        "short name": "RandomStructured",
+        "class": "RandomStructured",
         "parameters": {
             "amount": null,
-            "dim": "- 1",
-            "module": null,
-            "name": null,
-            "t": null,
-            "default_mask": "None",
-            "importance_scores": "None"
+            "dim": "- 1"
         }
     },
     "torch.nn.utils.prune.LnStructured": {
-        "short name": "LnStructured",
+        "class": "LnStructured",
         "parameters": {
             "amount": null,
             "n": null,
-            "dim": null,
-            "module": null,
-            "name": null,
-            "importance_scores": "None",
-            "t": null,
-            "default_mask": "None"
+            "dim": "- 1"
         }
     },
     "torch.nn.utils.prune.CustomFromMask": {
-        "short name": "CustomFromMask",
+        "class": "CustomFromMask",
         "parameters": {
-            "mask": null,
-            "module": null,
-            "name": null,
-            "t": null,
-            "default_mask": "None",
-            "importance_scores": "None"
+            "mask": null
         }
     },
     "torch.nn.utils.parametrize.ParametrizationList": {
-        "short name": "ParametrizationList",
+        "class": "ParametrizationList",
         "parameters": {
             "modules": null,
             "original": null,
-            "unsafe": "False",
-            "value": null
+            "unsafe": "False"
         }
     },
     "torch.nn.utils.rnn.PackedSequence": {
-        "short name": "PackedSequence",
+        "class": "PackedSequence",
         "parameters": {
             "data": null,
             "batch_sizes": "None",
             "sorted_indices": "None",
-            "unsorted_indices": "None",
-            "value": null,
-            "start": null,
-            "stop": null,
-            "*args": null,
-            "**kwargs": null
+            "unsorted_indices": "None"
         }
     },
     "torch.nn.Flatten": {
-        "short name": "Flatten",
+        "class": "Flatten",
         "parameters": {
             "start_dim": "1",
             "end_dim": "- 1"
         }
     },
     "torch.nn.Unflatten": {
-        "short name": "Unflatten",
+        "class": "Unflatten",
         "parameters": {
             "dim": null,
             "unflattened_size": null
         }
     },
     "torch.nn.modules.lazy.LazyModuleMixin": {
-        "short name": "LazyModuleMixin",
+        "class": "LazyModuleMixin",
         "parameters": {
             "*args": null,
             "**kwargs": null
         }
     },
     "torch.cuda.StreamContext": {
-        "short name": "StreamContext",
+        "class": "StreamContext",
         "parameters": {
             "stream": null
         }
     },
     "torch.cuda.Stream": {
-        "short name": "Stream",
+        "class": "Stream",
         "parameters": {
             "device": "None",
             "priority": "0",
-            "**kwargs": null,
-            "event": null,
-            "stream": null
+            "**kwargs": null
         }
     },
     "torch.cuda.Event": {
-        "short name": "Event",
+        "class": "Event",
         "parameters": {
             "enable_timing": "False",
             "blocking": "False",
-            "interprocess": "False",
-            "end_event": null,
-            "device": null,
-            "handle": null,
-            "stream": "None"
+            "interprocess": "False"
         }
     },
     "torch.cuda.CUDAGraph": {
-        "short name": "CUDAGraph",
-        "parameters": {
-            "pool": "None"
-        }
+        "class": "CUDAGraph",
+        "parameters": {}
     },
     "torch.distributed.elastic.agent.server.ElasticAgent": {
-        "short name": "ElasticAgent",
-        "parameters": {
-            "role": "'default'"
-        }
+        "class": "ElasticAgent",
+        "parameters": {}
     },
     "torch.distributed.elastic.agent.server.WorkerSpec": {
-        "short name": "WorkerSpec",
+        "class": "WorkerSpec",
         "parameters": {
             "role": null,
             "local_world_size": null,
@@ -3195,14 +2629,13 @@
         }
     },
     "torch.distributed.elastic.agent.server.WorkerState": {
-        "short name": "WorkerState",
+        "class": "WorkerState",
         "parameters": {
-            "value": null,
-            "state": null
+            "value": null
         }
     },
     "torch.distributed.elastic.agent.server.Worker": {
-        "short name": "Worker",
+        "class": "Worker",
         "parameters": {
             "local_rank": null,
             "global_rank": "- 1",
@@ -3212,13 +2645,13 @@
         }
     },
     "torch.distributed.elastic.agent.server.WorkerGroup": {
-        "short name": "WorkerGroup",
+        "class": "WorkerGroup",
         "parameters": {
             "spec": null
         }
     },
     "torch.distributed.elastic.agent.server.local_elastic_agent.LocalElasticAgent": {
-        "short name": "LocalElasticAgent",
+        "class": "LocalElasticAgent",
         "parameters": {
             "spec": null,
             "start_method": "'spawn'",
@@ -3227,19 +2660,14 @@
         }
     },
     "torch.distributed.elastic.agent.server.SimpleElasticAgent": {
-        "short name": "SimpleElasticAgent",
+        "class": "SimpleElasticAgent",
         "parameters": {
             "spec": null,
-            "exit_barrier_timeout": "300",
-            "store": null,
-            "group_rank": null,
-            "group_world_size": null,
-            "worker_group": null,
-            "death_sig": "<Signals.SIGTERM: 15>"
+            "exit_barrier_timeout": "300"
         }
     },
     "torch.distributed.elastic.agent.server.api.RunResult": {
-        "short name": "RunResult",
+        "class": "RunResult",
         "parameters": {
             "state": null,
             "return_values": "<factory>",
@@ -3247,7 +2675,7 @@
         }
     },
     "torch.distributed.elastic.multiprocessing.api.PContext": {
-        "short name": "PContext",
+        "class": "PContext",
         "parameters": {
             "name": null,
             "entrypoint": null,
@@ -3261,7 +2689,7 @@
         }
     },
     "torch.distributed.elastic.multiprocessing.api.MultiprocessContext": {
-        "short name": "MultiprocessContext",
+        "class": "MultiprocessContext",
         "parameters": {
             "name": null,
             "entrypoint": null,
@@ -3276,7 +2704,7 @@
         }
     },
     "torch.distributed.elastic.multiprocessing.api.SubprocessContext": {
-        "short name": "SubprocessContext",
+        "class": "SubprocessContext",
         "parameters": {
             "name": null,
             "entrypoint": null,
@@ -3290,7 +2718,7 @@
         }
     },
     "torch.distributed.elastic.multiprocessing.api.RunProcsResult": {
-        "short name": "RunProcsResult",
+        "class": "RunProcsResult",
         "parameters": {
             "return_values": "<factory>",
             "failures": "<factory>",
@@ -3299,18 +2727,18 @@
         }
     },
     "torch.distributed.elastic.multiprocessing.errors.ChildFailedError": {
-        "short name": "ChildFailedError",
+        "class": "ChildFailedError",
         "parameters": {
             "name": null,
             "failures": null
         }
     },
     "torch.distributed.elastic.multiprocessing.errors.ErrorHandler": {
-        "short name": "ErrorHandler",
+        "class": "ErrorHandler",
         "parameters": {}
     },
     "torch.distributed.elastic.multiprocessing.errors.ProcessFailure": {
-        "short name": "ProcessFailure",
+        "class": "ProcessFailure",
         "parameters": {
             "local_rank": null,
             "pid": null,
@@ -3319,70 +2747,54 @@
         }
     },
     "torch.distributed.elastic.rendezvous.RendezvousParameters": {
-        "short name": "RendezvousParameters",
+        "class": "RendezvousParameters",
         "parameters": {
             "backend": null,
             "endpoint": null,
             "run_id": null,
             "min_nodes": null,
             "max_nodes": null,
-            "**kwargs": null,
-            "key": null,
-            "default": "None"
+            "**kwargs": null
         }
     },
     "torch.distributed.elastic.rendezvous.RendezvousHandlerRegistry": {
-        "short name": "RendezvousHandlerRegistry",
-        "parameters": {
-            "params": null,
-            "backend": null,
-            "creator": null
-        }
+        "class": "RendezvousHandlerRegistry",
+        "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.RendezvousHandler": {
-        "short name": "RendezvousHandler",
+        "class": "RendezvousHandler",
         "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.RendezvousError": {
-        "short name": "RendezvousError",
+        "class": "RendezvousError",
         "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.RendezvousClosedError": {
-        "short name": "RendezvousClosedError",
+        "class": "RendezvousClosedError",
         "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.RendezvousTimeoutError": {
-        "short name": "RendezvousTimeoutError",
+        "class": "RendezvousTimeoutError",
         "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.RendezvousConnectionError": {
-        "short name": "RendezvousConnectionError",
+        "class": "RendezvousConnectionError",
         "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.RendezvousStateError": {
-        "short name": "RendezvousStateError",
+        "class": "RendezvousStateError",
         "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.dynamic_rendezvous.DynamicRendezvousHandler": {
-        "short name": "DynamicRendezvousHandler",
-        "parameters": {
-            "run_id": null,
-            "store": null,
-            "backend": null,
-            "min_nodes": null,
-            "max_nodes": null,
-            "timeout": "None"
-        }
+        "class": "DynamicRendezvousHandler",
+        "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.dynamic_rendezvous.RendezvousBackend": {
-        "short name": "RendezvousBackend",
-        "parameters": {
-            "state": null,
-            "token": "None"
-        }
+        "class": "RendezvousBackend",
+        "parameters": {}
     },
     "torch.distributed.elastic.rendezvous.dynamic_rendezvous.RendezvousTimeout": {
-        "short name": "RendezvousTimeout",
+        "class": "RendezvousTimeout",
         "parameters": {
             "join": "None",
             "last_call": "None",
@@ -3391,52 +2803,43 @@
         }
     },
     "torch.distributed.elastic.rendezvous.c10d_rendezvous_backend.C10dRendezvousBackend": {
-        "short name": "C10dRendezvousBackend",
+        "class": "C10dRendezvousBackend",
         "parameters": {
             "store": null,
-            "run_id": null,
-            "state": null,
-            "token": "None"
+            "run_id": null
         }
     },
     "torch.distributed.elastic.rendezvous.etcd_rendezvous_backend.EtcdRendezvousBackend": {
-        "short name": "EtcdRendezvousBackend",
+        "class": "EtcdRendezvousBackend",
         "parameters": {
             "client": null,
             "run_id": null,
             "key_prefix": "None",
-            "ttl": "None",
-            "state": null,
-            "token": "None"
+            "ttl": "None"
         }
     },
     "torch.distributed.elastic.rendezvous.etcd_rendezvous.EtcdRendezvousHandler": {
-        "short name": "EtcdRendezvousHandler",
+        "class": "EtcdRendezvousHandler",
         "parameters": {
             "rdzv_impl": null
         }
     },
     "torch.distributed.elastic.rendezvous.etcd_store.EtcdStore": {
-        "short name": "EtcdStore",
+        "class": "EtcdStore",
         "parameters": {
             "etcd_client": null,
             "etcd_store_prefix": null,
-            "timeout": "None",
-            "key": null,
-            "num": null,
-            "keys": null,
-            "value": null,
-            "override_timeout": "None"
+            "timeout": "None"
         }
     },
     "torch.distributed.elastic.rendezvous.etcd_server.EtcdServer": {
-        "short name": "EtcdServer",
+        "class": "EtcdServer",
         "parameters": {
             "data_dir": "None"
         }
     },
     "torch.distributed.elastic.timer.LocalTimerServer": {
-        "short name": "LocalTimerServer",
+        "class": "LocalTimerServer",
         "parameters": {
             "mp_queue": null,
             "max_interval": "60",
@@ -3444,13 +2847,13 @@
         }
     },
     "torch.distributed.elastic.timer.LocalTimerClient": {
-        "short name": "LocalTimerClient",
+        "class": "LocalTimerClient",
         "parameters": {
             "mp_queue": null
         }
     },
     "torch.distributed.elastic.timer.TimerRequest": {
-        "short name": "TimerRequest",
+        "class": "TimerRequest",
         "parameters": {
             "worker_id": null,
             "scope_id": null,
@@ -3458,37 +2861,31 @@
         }
     },
     "torch.distributed.elastic.timer.TimerServer": {
-        "short name": "TimerServer",
+        "class": "TimerServer",
         "parameters": {
             "request_queue": null,
             "max_interval": null,
-            "daemon": "True",
-            "worker_ids": null,
-            "deadline": null,
-            "timer_requests": null
+            "daemon": "True"
         }
     },
     "torch.distributed.elastic.timer.TimerClient": {
-        "short name": "TimerClient",
-        "parameters": {
-            "scope_id": null,
-            "expiration_time": null
-        }
+        "class": "TimerClient",
+        "parameters": {}
     },
     "torch.distributed.elastic.metrics.api.MetricHandler": {
-        "short name": "MetricHandler",
+        "class": "MetricHandler",
         "parameters": {}
     },
     "torch.distributed.elastic.metrics.api.ConsoleMetricHandler": {
-        "short name": "ConsoleMetricHandler",
+        "class": "ConsoleMetricHandler",
         "parameters": {}
     },
     "torch.distributed.elastic.metrics.api.NullMetricHandler": {
-        "short name": "NullMetricHandler",
+        "class": "NullMetricHandler",
         "parameters": {}
     },
     "torch.distributed.elastic.events.api.Event": {
-        "short name": "Event",
+        "class": "Event",
         "parameters": {
             "name": null,
             "source": null,
@@ -3497,166 +2894,101 @@
         }
     },
     "torch.distributed.elastic.events.api.EventSource": {
-        "short name": "EventSource",
+        "class": "EventSource",
         "parameters": {
             "value": null
         }
     },
     "torch.jit.ScriptModule": {
-        "short name": "ScriptModule",
-        "parameters": {
-            "name": null,
-            "module": null,
-            "fn": null,
-            "recurse": "True",
-            "device": "None",
-            "target": null,
-            "state_dict": null,
-            "strict": "True",
-            "prefix": "''",
-            "memo": "None",
-            "remove_duplicate": "True",
-            "hook": null,
-            "tensor": null,
-            "persistent": "True",
-            "param": null,
-            "requires_grad": "True",
-            "f": null,
-            "_extra_files": "{}",
-            "state": null,
-            "destination": "None",
-            "keep_vars": "False",
-            "*args": null,
-            "**kwargs": null,
-            "dtype": null,
-            "non_blocking": "False",
-            "memory_format": "torch.channels_last",
-            "*": null,
-            "mode": "True",
-            "dst_type": null,
-            "set_to_none": "False"
-        }
+        "class": "ScriptModule",
+        "parameters": {}
     },
     "torch.jit.ScriptFunction": {
-        "short name": "ScriptFunction",
-        "parameters": {
-            "self: torch._C.ScriptFunction": null,
-            "filename: str": null,
-            "_extra_files: Dict[str, str] ": " {}"
-        }
+        "class": "ScriptFunction",
+        "parameters": {}
     },
     "torch.jit.Attribute": {
-        "short name": "Attribute",
+        "class": "Attribute",
         "parameters": {
             "value": null,
-            "type": null,
-            "start": null,
-            "stop": null
+            "type": null
         }
     },
     "torch.optim.Adadelta": {
-        "short name": "Adadelta",
+        "class": "Adadelta",
         "parameters": {
             "params": null,
             "lr": "1.0",
             "rho": "0.9",
             "eps": "1e-06",
-            "weight_decay": "0",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "weight_decay": "0"
         }
     },
     "torch.optim.Adagrad": {
-        "short name": "Adagrad",
+        "class": "Adagrad",
         "parameters": {
             "params": null,
             "lr": "0.01",
             "lr_decay": "0",
             "weight_decay": "0",
             "initial_accumulator_value": "0",
-            "eps": "1e-10",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "eps": "1e-10"
         }
     },
     "torch.optim.Adam": {
-        "short name": "Adam",
+        "class": "Adam",
         "parameters": {
             "params": null,
             "lr": "0.001",
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
             "weight_decay": "0",
-            "amsgrad": "False",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "amsgrad": "False"
         }
     },
     "torch.optim.AdamW": {
-        "short name": "AdamW",
+        "class": "AdamW",
         "parameters": {
             "params": null,
             "lr": "0.001",
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
             "weight_decay": "0.01",
-            "amsgrad": "False",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "amsgrad": "False"
         }
     },
     "torch.optim.SparseAdam": {
-        "short name": "SparseAdam",
+        "class": "SparseAdam",
         "parameters": {
             "params": null,
             "lr": "0.001",
             "betas": "(0.9, 0.999)",
-            "eps": "1e-08",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "eps": "1e-08"
         }
     },
     "torch.optim.Adamax": {
-        "short name": "Adamax",
+        "class": "Adamax",
         "parameters": {
             "params": null,
             "lr": "0.002",
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
-            "weight_decay": "0",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "weight_decay": "0"
         }
     },
     "torch.optim.ASGD": {
-        "short name": "ASGD",
+        "class": "ASGD",
         "parameters": {
             "params": null,
             "lr": "0.01",
             "lambd": "0.0001",
             "alpha": "0.75",
             "t0": "1000000.0",
-            "weight_decay": "0",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "weight_decay": "0"
         }
     },
     "torch.optim.LBFGS": {
-        "short name": "LBFGS",
+        "class": "LBFGS",
         "parameters": {
             "params": null,
             "lr": "1",
@@ -3665,44 +2997,32 @@
             "tolerance_grad": "1e-07",
             "tolerance_change": "1e-09",
             "history_size": "100",
-            "line_search_fn": "None",
-            "param_group": null,
-            "state_dict": null,
-            "closure": null,
-            "set_to_none": "False"
+            "line_search_fn": "None"
         }
     },
     "torch.optim.NAdam": {
-        "short name": "NAdam",
+        "class": "NAdam",
         "parameters": {
             "params": null,
             "lr": "0.002",
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
             "weight_decay": "0",
-            "momentum_decay": "0.004",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "momentum_decay": "0.004"
         }
     },
     "torch.optim.RAdam": {
-        "short name": "RAdam",
+        "class": "RAdam",
         "parameters": {
             "params": null,
             "lr": "0.001",
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
-            "weight_decay": "0",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "weight_decay": "0"
         }
     },
     "torch.optim.RMSprop": {
-        "short name": "RMSprop",
+        "class": "RMSprop",
         "parameters": {
             "params": null,
             "lr": "0.01",
@@ -3710,187 +3030,125 @@
             "eps": "1e-08",
             "weight_decay": "0",
             "momentum": "0",
-            "centered": "False",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "centered": "False"
         }
     },
     "torch.optim.Rprop": {
-        "short name": "Rprop",
+        "class": "Rprop",
         "parameters": {
             "params": null,
             "lr": "0.01",
             "etas": "(0.5, 1.2)",
-            "step_sizes": "(1e-06, 50)",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "step_sizes": "(1e-06, 50)"
         }
     },
     "torch.optim.SGD": {
-        "short name": "SGD",
+        "class": "SGD",
         "parameters": {
             "params": null,
             "lr": "<required parameter>",
             "momentum": "0",
             "dampening": "0",
             "weight_decay": "0",
-            "nesterov": "False",
-            "param_group": null,
-            "state_dict": null,
-            "closure": "None",
-            "set_to_none": "False"
+            "nesterov": "False"
         }
     },
     "torch.optim.lr_scheduler.LambdaLR": {
-        "short name": "LambdaLR",
+        "class": "LambdaLR",
         "parameters": {
             "optimizer": null,
             "lr_lambda": null,
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.MultiplicativeLR": {
-        "short name": "MultiplicativeLR",
+        "class": "MultiplicativeLR",
         "parameters": {
             "optimizer": null,
             "lr_lambda": null,
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.StepLR": {
-        "short name": "StepLR",
+        "class": "StepLR",
         "parameters": {
             "optimizer": null,
             "step_size": null,
             "gamma": "0.1",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.MultiStepLR": {
-        "short name": "MultiStepLR",
+        "class": "MultiStepLR",
         "parameters": {
             "optimizer": null,
             "milestones": null,
             "gamma": "0.1",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.ConstantLR": {
-        "short name": "ConstantLR",
+        "class": "ConstantLR",
         "parameters": {
             "optimizer": null,
             "factor": "0.3333333333333333",
             "total_iters": "5",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.LinearLR": {
-        "short name": "LinearLR",
+        "class": "LinearLR",
         "parameters": {
             "optimizer": null,
             "start_factor": "0.3333333333333333",
             "end_factor": "1.0",
             "total_iters": "5",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.ExponentialLR": {
-        "short name": "ExponentialLR",
+        "class": "ExponentialLR",
         "parameters": {
             "optimizer": null,
             "gamma": null,
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.CosineAnnealingLR": {
-        "short name": "CosineAnnealingLR",
+        "class": "CosineAnnealingLR",
         "parameters": {
             "optimizer": null,
             "T_max": null,
             "eta_min": "0",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.ChainedScheduler": {
-        "short name": "ChainedScheduler",
+        "class": "ChainedScheduler",
         "parameters": {
-            "schedulers": null,
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "schedulers": null
         }
     },
     "torch.optim.lr_scheduler.SequentialLR": {
-        "short name": "SequentialLR",
+        "class": "SequentialLR",
         "parameters": {
             "optimizer": null,
             "schedulers": null,
             "milestones": null,
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.ReduceLROnPlateau": {
-        "short name": "ReduceLROnPlateau",
+        "class": "ReduceLROnPlateau",
         "parameters": {
             "optimizer": null,
             "mode": "'min'",
@@ -3905,7 +3163,7 @@
         }
     },
     "torch.optim.lr_scheduler.CyclicLR": {
-        "short name": "CyclicLR",
+        "class": "CyclicLR",
         "parameters": {
             "optimizer": null,
             "base_lr": null,
@@ -3920,16 +3178,11 @@
             "base_momentum": "0.8",
             "max_momentum": "0.9",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.OneCycleLR": {
-        "short name": "OneCycleLR",
+        "class": "OneCycleLR",
         "parameters": {
             "optimizer": null,
             "max_lr": null,
@@ -3945,28 +3198,18 @@
             "final_div_factor": "10000.0",
             "three_phase": "False",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     },
     "torch.optim.lr_scheduler.CosineAnnealingWarmRestarts": {
-        "short name": "CosineAnnealingWarmRestarts",
+        "class": "CosineAnnealingWarmRestarts",
         "parameters": {
             "optimizer": null,
             "T_0": null,
             "T_mult": "1",
             "eta_min": "0",
             "last_epoch": "- 1",
-            "verbose": "False",
-            "state_dict": null,
-            "is_verbose": null,
-            "group": null,
-            "lr": null,
-            "epoch": "None"
+            "verbose": "False"
         }
     }
 }

@@ -81,6 +81,16 @@ from sklearn.model_selection.tests.common import OneTimeSplitter
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import ParameterGrid as PG
 
+SimpleImputer(missing_values=np.nan)
+
+p = Pipeline(
+    [
+        ("imputer", SimpleImputer(strategy="mean", missing_values=np.nan)),
+        ("classifier", MockClassifier()),
+    ]
+)
+
+x = y.x(sklearn.impute._base.SimpleImputer(PG(2)) + PG(3)) + BBB.SimpleImputer(88888)
 sklearn.impute.SimpleImputer(2)
 SimpleImputer(2)
 PG()

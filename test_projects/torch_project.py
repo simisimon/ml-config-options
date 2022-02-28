@@ -43,7 +43,8 @@ from torch.testing._internal.logging_tensor import no_dispatch
 
 import pickle
 
-
+torch.distributed.algorithms.Join(joinables=1, enable=True, blabla1 = 1, blabla2 = 2 )
+torch.distributed.optim.DistributedOptimizer(1, 2, 3, 4)
 def graph_desc(fn):
     if fn is None:
         return 'None'

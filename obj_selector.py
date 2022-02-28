@@ -76,7 +76,6 @@ class CodeObjects:
             else:
                 self.import_other_objects[import_obj] = all_import_objects[import_obj]
 
-
     def get_objects_from_library(self):
         for obj in self.first_level_objects:
             self.get_object(obj)
@@ -140,6 +139,15 @@ class CodeObjects:
                             else:
                                 indices.remove(index)
                         if class_occurence > 0:
+                            obj_code = obj_code.replace("temp_class(", class_string)
+                            lineno = obj.lineno
+                            end_lineno = obj.end_lineno
+                            try:
+                                obj = ast.parse(obj_code).body[0]
+                            except:
+                                obj = ast.parse("{0}[]".format(obj_code)).body[0]
+                            obj.lineno = lineno
+                            obj.end_lineno = end_lineno
                             lib_class_obj = {"class": import_class_values["path"], "class alias": class_string[:-1], "object": obj, "parameter variables": None}
                             self.class_objects_from_library.append(lib_class_obj)
 
@@ -178,10 +186,12 @@ class CodeObjects:
                                             obj_code = obj_code.replace("temp_class(", class_string)
                                             lineno = obj.lineno
                                             end_lineno = obj.end_lineno
-                                            obj = ast.parse(obj_code).body[0]
+                                            try:
+                                                obj = ast.parse(obj_code).body[0]
+                                            except:
+                                                obj = ast.parse("{0}[]".format(obj_code)).body[0]
                                             obj.lineno = lineno
                                             obj.end_lineno = end_lineno
-                                            x = 2
 
                                     lib_class_obj = {"class": class_, "class alias": class_string[:-1], "object": obj,
                                                      "parameter variables": None}
@@ -229,10 +239,10 @@ class TorchObjects(CodeObjects):
 
 
 def main():
-    project = "test_projects/another_test_project.py"
-    # project = "test_projects/torch_project.py"
-    ast_objects = SklearnObjects(project).get_objects()
-    # ast_objects = TorchObjects(project).get_objects()
+    #project = "test_projects/another_test_project.py"
+    project = "test_projects/torch_project.py"
+    #ast_objects = SklearnObjects(project).get_objects()
+    ast_objects = TorchObjects(project).get_objects()
 
     pprint(ast_objects, width=75)
 

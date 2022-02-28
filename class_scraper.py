@@ -138,7 +138,7 @@ class TorchScraper(ClassScraper):
             if "id" in data_table.attrs:
                 class_path = data_table.attrs["id"]
                 class_ = class_path[class_path.rfind(".") + 1:]
-                elements = desc_element.findAll("em", {"class": "sig-param"})
+                elements = data_table.findAll("em", {"class": "sig-param"})
                 parameters = self.scrape_parameters(elements)
                 self.classes[class_path] = {"class": class_, "parameters": parameters}
 
