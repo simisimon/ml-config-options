@@ -1,0 +1,686 @@
+[
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.Model",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "artifact_path": "'some/path'",
+            "run_id": "'123'",
+            "flavors": "{'flavor1': {'a': 1, 'b': 2}, 'flavor2': {'x': 1, 'y': 2}}",
+            "signature": "ModelSignature(inputs=Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')]), outputs=Schema([ColSpec(name=None, type='double')]))",
+            "saved_input_example_info": "{'x': 1, 'y': 2}"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec('integer', 'x'), ColSpec('integer', 'y')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'y'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 22,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'x'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.Model",
+        "line_no": 34,
+        "variable": null,
+        "parameter": {
+            "artifact_path": "'some/other/path'",
+            "run_id": "'1234'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.Model",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "artifact_path": "'some/path'",
+            "run_id": "'123'",
+            "flavors": "{'flavor1': {'a': 1, 'b': 2}, 'flavor2': {'x': 1, 'y': 2}}",
+            "signature": "ModelSignature(inputs=Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')]), outputs=Schema([ColSpec(name=None, type='double')]))",
+            "saved_input_example_info": "{'x': 1, 'y': 2}"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec('integer', 'x'), ColSpec('integer', 'y')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'y'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 38,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'x'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 89,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 89,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 89,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec('integer', 'x'), ColSpec('integer', 'y')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 89,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 89,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'y'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 89,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'x'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 116,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 116,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 116,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec('integer', 'x'), ColSpec('integer', 'y')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 116,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 116,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'y'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 116,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'x'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 156,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([ColSpec('integer', 'x'), ColSpec('integer', 'y')])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 156,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 156,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec('integer', 'x'), ColSpec('integer', 'y')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 156,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 156,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'y'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 156,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'x'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([ColSpec('integer', 'a'), ColSpec('string', 'b'), ColSpec('boolean', 'c'), ColSpec('string', 'd'), ColSpec('datetime', 'e')])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec('integer', 'a'), ColSpec('string', 'b'), ColSpec('boolean', 'c'), ColSpec('string', 'd'), ColSpec('datetime', 'e')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "type": "'datetime'",
+            "name": "'e'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "type": "'string'",
+            "name": "'d'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "type": "'boolean'",
+            "name": "'c'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "type": "'string'",
+            "name": "'b'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 179,
+        "variable": null,
+        "parameter": {
+            "type": "'integer'",
+            "name": "'a'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 219,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([TensorSpec(type=input_example.dtype, shape=input_example.shape)])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 219,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 219,
+        "variable": null,
+        "parameter": {
+            "inputs": "[TensorSpec(type=input_example.dtype, shape=input_example.shape)]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 219,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.TensorSpec",
+        "line_no": 219,
+        "variable": null,
+        "parameter": {
+            "type": "input_example.dtype",
+            "shape": "input_example.shape"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 235,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([TensorSpec(type=input_example.data.dtype, shape=input_example.shape)])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 235,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 235,
+        "variable": null,
+        "parameter": {
+            "inputs": "[TensorSpec(type=input_example.data.dtype, shape=input_example.shape)]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 235,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.TensorSpec",
+        "line_no": 235,
+        "variable": null,
+        "parameter": {
+            "type": "input_example.data.dtype",
+            "shape": "input_example.shape"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 251,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([TensorSpec(type=input_example.dtype, shape=input_example.shape)])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 251,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 251,
+        "variable": null,
+        "parameter": {
+            "inputs": "[TensorSpec(type=input_example.dtype, shape=input_example.shape)]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 251,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.TensorSpec",
+        "line_no": 251,
+        "variable": null,
+        "parameter": {
+            "type": "input_example.dtype",
+            "shape": "input_example.shape"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.ModelSignature",
+        "line_no": 273,
+        "variable": null,
+        "parameter": {
+            "inputs": "Schema([TensorSpec(type=input_example.dtype, shape=input_example.shape)])",
+            "outputs": "Schema([ColSpec(name=None, type='double')])"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 273,
+        "variable": null,
+        "parameter": {
+            "inputs": "[ColSpec(name=None, type='double')]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.Schema",
+        "line_no": 273,
+        "variable": null,
+        "parameter": {
+            "inputs": "[TensorSpec(type=input_example.dtype, shape=input_example.shape)]"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.ColSpec",
+        "line_no": 273,
+        "variable": null,
+        "parameter": {
+            "name": "None",
+            "type": "'double'"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.types.TensorSpec",
+        "line_no": 273,
+        "variable": null,
+        "parameter": {
+            "type": "input_example.dtype",
+            "shape": "input_example.shape"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.Model",
+        "line_no": 295,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/mlflow_project.py",
+        "class": "mlflow.models.Model",
+        "line_no": 299,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    }
+]

@@ -32,6 +32,14 @@
     },
     {
         "project": "test_projects/another_test_project.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "line_no": 93,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
         "class": "sklearn.model_selection.ParameterGrid",
         "line_no": 93,
         "variable": null,
@@ -48,14 +56,6 @@
         "parameter": {
             "param_grid": "2"
         },
-        "parameter_values": {}
-    },
-    {
-        "project": "test_projects/another_test_project.py",
-        "class": "sklearn.impute.SimpleImputer",
-        "line_no": 93,
-        "variable": null,
-        "parameter": {},
         "parameter_values": {}
     },
     {
@@ -100,6 +100,14 @@
     },
     {
         "project": "test_projects/another_test_project.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "line_no": 99,
+        "variable": null,
+        "parameter": {},
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/another_test_project.py",
         "class": "sklearn.model_selection.ParameterGrid",
         "line_no": 99,
         "variable": null,
@@ -116,14 +124,6 @@
         "parameter": {
             "param_grid": "2"
         },
-        "parameter_values": {}
-    },
-    {
-        "project": "test_projects/another_test_project.py",
-        "class": "sklearn.impute.SimpleImputer",
-        "line_no": 99,
-        "variable": null,
-        "parameter": {},
         "parameter_values": {}
     },
     {

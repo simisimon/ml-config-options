@@ -9,13 +9,18 @@ class ClassScraper:
         self.classes = {}
         self.library = ""
 
+    def get_classes(self):
+        self.scrape_class_urls()
+        self.scrape_classes()
+        self.create_json()
+
     def scrape_parameters(self, elements):
         parameters = {}
         for e in elements:
             split = e.text.split("=", 1)
-            param = split[0]
+            param = split[0].split(":")[0]
             if len(split) > 1:
-                default_value = split[1]
+                default_value = split[1].strip()
                 parameters[param] = default_value
             else:
                 parameters[param] = None
@@ -30,11 +35,6 @@ class SklearnScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
         self.library = "sklearn"
-
-    def get_classes(self):
-        self.scrape_class_urls()
-        self.scrape_classes()
-        self.create_json()
 
     def scrape_class_urls(self):
         link = "https://scikit-learn.org/stable/modules/classes.html#"
@@ -143,10 +143,46 @@ class TorchScraper(ClassScraper):
                 self.classes[class_path] = {"class": class_, "parameters": parameters}
 
 
+class MLflowScraper(ClassScraper):
+    def __init__(self):
+        ClassScraper.__init__(self)
+        self.library = "mlflow"
+
+    def scrape_class_urls(self):
+        link = "https://mlflow.org/docs/latest/python_api/index.html"
+        html = urlopen(link)
+        soup = BeautifulSoup(html, "html.parser")
+
+        div = soup.find("div", {"class": "section"})
+        li = div.findAll("li", {"class": "toctree-l1"})
+
+        for element in li:
+            url = element.find("a").attrs["href"]
+            self.class_urls.append(url)
+
+    def scrape_classes(self):
+        for url in self.class_urls:
+            link = "https://mlflow.org/docs/latest/python_api/" + url
+            html = urlopen(link)
+            soup = BeautifulSoup(html, "html.parser")
+
+            dl = soup.findAll("dl", {"class": "py class"})
+            for element in dl:
+                dt = element.find("dt")
+                full_class_name = dt.attrs["id"]
+                class_ = full_class_name[full_class_name.rfind(".") + 1:]
+                em = dt.findAll("em", {"class": "sig-param"})
+                parameters = self.scrape_parameters(em)
+                self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
+        self.classes["mlflow.models.Model"]["parameters"] = {"artifact_path": "None", "run_id": "None", "utc_time_created": "None",
+                                                             "flavors": "None", "signature": "None", "saved_input_example_info": "None",
+                                                             "model_uuid": "<function Model.<lambda>>", "**kwargs": "None"}
+
+
 def main():
     #SklearnScraper().get_classes()
-    TorchScraper().get_classes()
-
+    #TorchScraper().get_classes()
+    MLflowScraper().get_classes()
 
 if __name__ == "__main__":
     main()

@@ -59,19 +59,21 @@ class CodeObjects:
 
         for import_obj in all_import_objects:
             is_class = False
-            for class_ in self.classes:
-                if class_ == all_import_objects[import_obj]["path"]:
+            for class_ in self.classes.items():
+                if class_[1]["short name"] == import_obj:
                     is_class = True
                     break
 
             splitted_import_obj = import_obj.split(".")
-            splitted_import_obj[0] = "id='{0}'".format(splitted_import_obj[0]) #fehler wegen ID!!
+            splitted_import_obj[0] = "id='{0}'".format(splitted_import_obj[0])  # fehler wegen ID!!
             for sio in enumerate(splitted_import_obj):
                 if sio[0] > 0:
                     splitted_import_obj[sio[0]] = "attr='{0}'".format(sio[1])
             all_import_objects[import_obj].update({"ast style": splitted_import_obj})
 
             if is_class:
+                if all_import_objects[import_obj]["path"] != class_[0]:
+                    all_import_objects[import_obj].update({"path": class_[0]})
                 self.import_classes[import_obj] = all_import_objects[import_obj]
             else:
                 self.import_other_objects[import_obj] = all_import_objects[import_obj]
@@ -117,6 +119,7 @@ class CodeObjects:
                     break
 
     def get_objects_containing_classes(self):
+        library_name_import = False
         for import_name, import_obj_values in self.import_other_objects.items():     # to detect classes that are not declared as the common path
             if import_obj_values['path'] == self.library:
                 library_name_import = True
@@ -163,7 +166,7 @@ class CodeObjects:
                                 for index in indices:
                                     if index == 0 or not (obj_code[index - 1].isalnum() or obj_code[index - 1] == "."):
                                         class_occurence += 1
-                                        dump_ast_obj = dump_ast_obj.replace(import_value, "id='temp_class'", 1)
+                                        dump_ast_obj = dump_ast_obj.replace("attr='{0}'".format(import_name.split(".")[-1]), "attr='temp_class'", 1)
                                         obj_code = obj_code.replace(class_string, "temp_class(", 1)
                                 if class_occurence > 0:
                                     if library_name_import:
@@ -238,13 +241,20 @@ class TorchObjects(CodeObjects):
         self.library = "torch"
 
 
+class MLflowObjects(CodeObjects):
+    def __init__(self, project):
+        CodeObjects.__init__(self, project)
+        self.library = "mlflow"
+
+
 def main():
     #project = "test_projects/another_test_project.py"
-    project = "test_projects/torch_project.py"
-    #ast_objects = SklearnObjects(project).get_objects()
-    ast_objects = TorchObjects(project).get_objects()
-
-    pprint(ast_objects, width=75)
+    #objects = SklearnObjects(project).get_objects()
+    #project = "test_projects/torch_project.py"
+    #objects = TorchObjects(project).get_objects()
+    project = "test_projects/mlflow_project.py"
+    objects = MLflowObjects(project).get_objects()
+    pprint(objects, width=75)
 
 
 if __name__ == "__main__":

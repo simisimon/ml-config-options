@@ -1,7 +1,7 @@
 import ast
 import json
 
-from obj_selector import TorchObjects, SklearnObjects
+from obj_selector import TorchObjects, SklearnObjects, MLflowObjects
 
 
 class NodeObjects:
@@ -92,13 +92,7 @@ class NodeObjects:
                         "variable": None,
                         "parameter": obj["parameter"],
                         "parameter_values": obj["value of parameter variables"]}
-            if len(obj["variable"]) == 0:
-                json_nodes.append(dict_obj)
-            else:
-                for var in obj["variable"]:
-                    dict_obj["variable"] = var
-                    dict_copy = dict_obj.copy()
-                    json_nodes.append(dict_copy)
+            json_nodes.append(dict_obj)
 
         with open("{0}_nodes.txt".format(self.library), 'w') as outfile:
             json.dump(json_nodes, outfile, indent=4)
@@ -118,6 +112,14 @@ class TorchNodes(NodeObjects):
         self.library = "torch"
         self.classes = TorchObjects(project).read_json()
         self.class_objects_from_library = TorchObjects(project).get_objects()
+
+
+class MLflowNodes(NodeObjects):
+    def __init__(self, project):
+        NodeObjects.__init__(self, project)
+        self.library = "mlflow"
+        self.classes = MLflowObjects(project).read_json()
+        self.class_objects_from_library = MLflowObjects(project).get_objects()
 
 
 class NodeObject:
@@ -410,11 +412,14 @@ class NodeObject:
 
 
 def main():
-    project = "test_projects/another_test_project.py"
-    SklearnNodes(project).get_nodes()
+    #project = "test_projects/another_test_project.py"
+    #SklearnNodes(project).get_nodes()
 
     #project = "test_projects/torch_project.py"
     #TorchNodes(project).get_nodes()
+
+    project = "test_projects/mlflow_project.py"
+    MLflowNodes(project).get_nodes()
 
 
 

@@ -1,0 +1,274 @@
+{
+    "mlflow.ActiveRun": {
+        "short name": "ActiveRun",
+        "parameters": {
+            "run": null
+        }
+    },
+    "mlflow.deployments.BaseDeploymentClient": {
+        "short name": "BaseDeploymentClient",
+        "parameters": {
+            "target_uri": null
+        }
+    },
+    "mlflow.entities.Experiment": {
+        "short name": "Experiment",
+        "parameters": {
+            "experiment_id": null,
+            "name": null,
+            "artifact_location": null,
+            "lifecycle_stage": null,
+            "tags": "None"
+        }
+    },
+    "mlflow.entities.ExperimentTag": {
+        "short name": "ExperimentTag",
+        "parameters": {
+            "key": null,
+            "value": null
+        }
+    },
+    "mlflow.entities.FileInfo": {
+        "short name": "FileInfo",
+        "parameters": {
+            "path": null,
+            "is_dir": null,
+            "file_size": null
+        }
+    },
+    "mlflow.entities.LifecycleStage": {
+        "short name": "LifecycleStage",
+        "parameters": {}
+    },
+    "mlflow.entities.Metric": {
+        "short name": "Metric",
+        "parameters": {
+            "key": null,
+            "value": null,
+            "timestamp": null,
+            "step": null
+        }
+    },
+    "mlflow.entities.Param": {
+        "short name": "Param",
+        "parameters": {
+            "key": null,
+            "value": null
+        }
+    },
+    "mlflow.entities.Run": {
+        "short name": "Run",
+        "parameters": {
+            "run_info": null,
+            "run_data": null
+        }
+    },
+    "mlflow.entities.RunData": {
+        "short name": "RunData",
+        "parameters": {
+            "metrics": "None",
+            "params": "None",
+            "tags": "None"
+        }
+    },
+    "mlflow.entities.RunInfo": {
+        "short name": "RunInfo",
+        "parameters": {
+            "run_uuid": null,
+            "experiment_id": null,
+            "user_id": null,
+            "status": null,
+            "start_time": null,
+            "end_time": null,
+            "lifecycle_stage": null,
+            "artifact_uri": "None",
+            "run_id": "None"
+        }
+    },
+    "mlflow.entities.RunStatus": {
+        "short name": "RunStatus",
+        "parameters": {}
+    },
+    "mlflow.entities.RunTag": {
+        "short name": "RunTag",
+        "parameters": {
+            "key": null,
+            "value": null
+        }
+    },
+    "mlflow.entities.SourceType": {
+        "short name": "SourceType",
+        "parameters": {}
+    },
+    "mlflow.entities.ViewType": {
+        "short name": "ViewType",
+        "parameters": {}
+    },
+    "mlflow.entities.model_registry.ModelVersion": {
+        "short name": "ModelVersion",
+        "parameters": {
+            "name": null,
+            "version": null,
+            "creation_timestamp": null,
+            "last_updated_timestamp": "None",
+            "description": "None",
+            "user_id": "None",
+            "current_stage": "None",
+            "source": "None",
+            "run_id": "None",
+            "status": "'READY'",
+            "status_message": "None",
+            "tags": "None",
+            "run_link": "None"
+        }
+    },
+    "mlflow.entities.model_registry.ModelVersionTag": {
+        "short name": "ModelVersionTag",
+        "parameters": {
+            "key": null,
+            "value": null
+        }
+    },
+    "mlflow.entities.model_registry.RegisteredModel": {
+        "short name": "RegisteredModel",
+        "parameters": {
+            "name": null,
+            "creation_timestamp": "None",
+            "last_updated_timestamp": "None",
+            "description": "None",
+            "latest_versions": "None",
+            "tags": "None"
+        }
+    },
+    "mlflow.entities.model_registry.RegisteredModelTag": {
+        "short name": "RegisteredModelTag",
+        "parameters": {
+            "key": null,
+            "value": null
+        }
+    },
+    "mlflow.store.entities.PagedList": {
+        "short name": "PagedList",
+        "parameters": {
+            "items": null,
+            "token": null
+        }
+    },
+    "mlflow.models.EvaluationArtifact": {
+        "short name": "EvaluationArtifact",
+        "parameters": {
+            "uri": null,
+            "content": "None"
+        }
+    },
+    "mlflow.models.EvaluationResult": {
+        "short name": "EvaluationResult",
+        "parameters": {
+            "metrics": null,
+            "artifacts": null
+        }
+    },
+    "mlflow.models.FlavorBackend": {
+        "short name": "FlavorBackend",
+        "parameters": {
+            "config": null,
+            "**kwargs": null
+        }
+    },
+    "mlflow.models.Model": {
+        "short name": "Model",
+        "parameters": {
+            "artifact_path": "None",
+            "run_id": "None",
+            "utc_time_created": "None",
+            "flavors": "None",
+            "signature": "None",
+            "saved_input_example_info": "None",
+            "model_uuid": "<function Model.<lambda>>",
+            "**kwargs": "None"
+        }
+    },
+    "mlflow.models.ModelSignature": {
+        "short name": "ModelSignature",
+        "parameters": {
+            "inputs": null,
+            "outputs": "None"
+        }
+    },
+    "mlflow.models.model.ModelInfo": {
+        "short name": "ModelInfo",
+        "parameters": {
+            "artifact_path": null,
+            "flavors": null,
+            "model_uri": null,
+            "model_uuid": null,
+            "run_id": null,
+            "saved_input_example_info": null,
+            "signature_dict": null,
+            "utc_time_created": null
+        }
+    },
+    "mlflow.projects.SubmittedRun": {
+        "short name": "SubmittedRun",
+        "parameters": {}
+    },
+    "mlflow.pyfunc.PyFuncModel": {
+        "short name": "PyFuncModel",
+        "parameters": {
+            "model_meta": null,
+            "model_impl": null
+        }
+    },
+    "mlflow.pyfunc.PythonModelContext": {
+        "short name": "PythonModelContext",
+        "parameters": {}
+    },
+    "mlflow.pyfunc.PythonModel": {
+        "short name": "PythonModel",
+        "parameters": {}
+    },
+    "mlflow.sagemaker.SageMakerDeploymentClient": {
+        "short name": "SageMakerDeploymentClient",
+        "parameters": {
+            "target_uri": null
+        }
+    },
+    "mlflow.statsmodels.AutologHelpers": {
+        "short name": "AutologHelpers",
+        "parameters": {}
+    },
+    "mlflow.tracking.MlflowClient": {
+        "short name": "MlflowClient",
+        "parameters": {
+            "tracking_uri": "None",
+            "registry_uri": "None"
+        }
+    },
+    "mlflow.types.ColSpec": {
+        "short name": "ColSpec",
+        "parameters": {
+            "type": null,
+            "name": "None"
+        }
+    },
+    "mlflow.types.DataType": {
+        "short name": "DataType",
+        "parameters": {
+            "value": null
+        }
+    },
+    "mlflow.types.Schema": {
+        "short name": "Schema",
+        "parameters": {
+            "inputs": null
+        }
+    },
+    "mlflow.types.TensorSpec": {
+        "short name": "TensorSpec",
+        "parameters": {
+            "type": null,
+            "shape": null,
+            "name": "None"
+        }
+    }
+}
