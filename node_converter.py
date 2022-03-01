@@ -415,11 +415,11 @@ def main():
     #project = "test_projects/another_test_project.py"
     #SklearnNodes(project).get_nodes()
 
-    #project = "test_projects/torch_project.py"
-    #TorchNodes(project).get_nodes()
+    project = "test_projects/torch_project.py"
+    TorchNodes(project).get_nodes()
 
-    project = "test_projects/mlflow_project.py"
-    MLflowNodes(project).get_nodes()
+    #project = "test_projects/mlflow_project.py"
+    #MLflowNodes(project).get_nodes()
 
 
 

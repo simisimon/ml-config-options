@@ -1,6 +1,8 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import bs4
 import json
+import ast
 
 
 class ClassScraper:
@@ -68,7 +70,7 @@ class TorchScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
         self.library = "torch"
-        self.module_urls = []
+
         self.desc_elements = []
 
     def get_classes(self):
@@ -140,7 +142,7 @@ class TorchScraper(ClassScraper):
                 class_ = class_path[class_path.rfind(".") + 1:]
                 elements = data_table.findAll("em", {"class": "sig-param"})
                 parameters = self.scrape_parameters(elements)
-                self.classes[class_path] = {"class": class_, "parameters": parameters}
+                self.classes[class_path] = {"short name": class_, "parameters": parameters}
 
 
 class MLflowScraper(ClassScraper):
@@ -174,15 +176,101 @@ class MLflowScraper(ClassScraper):
                 em = dt.findAll("em", {"class": "sig-param"})
                 parameters = self.scrape_parameters(em)
                 self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
-        self.classes["mlflow.models.Model"]["parameters"] = {"artifact_path": "None", "run_id": "None", "utc_time_created": "None",
-                                                             "flavors": "None", "signature": "None", "saved_input_example_info": "None",
-                                                             "model_uuid": "<function Model.<lambda>>", "**kwargs": "None"}
+        self.classes["mlflow.models.Model"]["parameters"] = {"artifact_path": "None", "run_id": "None",
+                                                             "utc_time_created": "None",
+                                                             "flavors": "None", "signature": "None",
+                                                             "saved_input_example_info": "None",
+                                                             "model_uuid": "<function Model.<lambda>>",
+                                                             "**kwargs": "None"}
+
+
+class TensorFlowScraper(ClassScraper):
+    def __init__(self):
+        ClassScraper.__init__(self)
+        self.library = "tf"
+        self.module_urls = []
+
+    def get_classes(self):
+        self.scrape_class_urls()
+        self.scrape_classes()
+        self.create_json()
+
+    def scrape_class_urls(self):
+        link = "https://www.tensorflow.org/api_docs/python/tf"
+        self.module_urls.append(link)
+        for url in self.module_urls:
+            html = urlopen(url)
+            soup = BeautifulSoup(html, "html.parser")
+
+            self.scrape_urls(soup, "modules")
+            self.scrape_urls(soup, "classes")
+
+    def scrape_urls(self, soup, type):
+        element = soup.find("h2", {"id": type})
+        if element is None:
+            element = soup.find("h2", {"id": "{0}_2".format(type)})
+            if element is None:
+                return
+        while True:
+            element = element.nextSibling
+            if element is None:
+                break
+            if isinstance(element, bs4.Tag):
+                if element.name == "h2":
+                    break
+                try:
+                    url = element.find("a").attrs["href"]
+                except:
+                    continue
+                if type == "modules":
+                    if url not in self.module_urls:
+                        self.module_urls.append(url)
+                elif type == "classes":
+                    if url not in self.class_urls:
+                        self.class_urls.append(url)
+
+    def scrape_classes(self):
+        for url in self.class_urls:
+            html = urlopen(url)
+            soup = BeautifulSoup(html, "html.parser")
+
+            full_class_name = soup.find("h1", {"class": "devsite-page-title"}).text
+            class_ = full_class_name[full_class_name.rfind(".") + 1:]
+            pre = soup.find("pre")
+            parameters = self.scrape_parameters(pre, full_class_name)
+            self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
+
+    def scrape_parameters(self, pre, full_class_name):
+        parameters = {}
+        if pre is not None:
+            if pre.text.startswith("\n{0}".format(full_class_name)):
+                try:
+                    ast_obj = ast.parse(pre.text).body[0].value
+                    for arg in ast_obj.args:
+                        parameters[ast.unparse(arg)] = None
+                    for keyword in ast_obj.keywords:
+                        if ast.unparse(keyword.value) != "kwargs":
+                            parameters[keyword.arg] = ast.unparse(keyword.value)
+                        else:
+                            parameters["**kwargs"] = None
+                except:
+                    if full_class_name == "tf.lite.experimental.QuantizationDebugOptions":
+                        parameters = {"layer_debug_metrics": None, "model_debug_metrics": None,
+                                      "layer_direct_compare_metrics": None,"denylisted_ops": None,
+                                      "denylisted_nodes": None, "fully_quantize": False}
+                    elif full_class_name == "tf.lite.experimental.QuantizationDebugger":
+                        parameters = {"quant_debug_model_path": None, "quant_debug_model_content": None,
+                                      "float_model_path": None, "float_model_content": None,
+                                      "debug_dataset": None, "debug_options": None, "converter": None}
+        return parameters
 
 
 def main():
-    #SklearnScraper().get_classes()
-    #TorchScraper().get_classes()
-    MLflowScraper().get_classes()
+    # SklearnScraper().get_classes()
+    # TorchScraper().get_classes()
+    # MLflowScraper().get_classes()
+    TensorFlowScraper().get_classes()
+
 
 if __name__ == "__main__":
     main()

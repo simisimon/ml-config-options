@@ -311,6 +311,7 @@ Scope fürs Variablentracking:
     - alle Assignments auf erster Ebene
         - dafür in obj_selector: alle Funktionen finden.
 
+Variable.SaveSliceInfo fehlt irgendwie
 
 
 
@@ -324,7 +325,7 @@ torch.profiler.profile(*, activities=None, schedule=None, on_trace_ready=None, r
 class
 torch.autograd.profiler.profile(enabled=True, *, use_cuda=False, record_shapes=False, with_flops=False, profile_memory=False, with_stack=False, with_modules=False, use_kineto=False, use_cpu=True)
 
-
+handle of class variables: e.g. https://www.tensorflow.org/api_docs/python/tf/AggregationMethod
 
 
 

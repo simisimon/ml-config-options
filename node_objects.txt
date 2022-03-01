@@ -1,8 +1,36 @@
 [
     {
         "project": "test_projects/torch_project.py",
-        "class": "BatchNorm1d",
-        "line_no": 767,
+        "class": "torch.distributed.algorithms.Join",
+        "line_no": 46,
+        "variable": null,
+        "parameter": {
+            "joinables": "1",
+            "enable": "True",
+            "blabla1": "1",
+            "blabla2": "2"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "torch.distributed.optim.DistributedOptimizer",
+        "line_no": 47,
+        "variable": null,
+        "parameter": {
+            "optimizer_class": "1",
+            "params_rref": "2",
+            "*args": [
+                "3",
+                "4"
+            ]
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "torch.nn.BatchNorm1d",
+        "line_no": 768,
         "variable": null,
         "parameter": {
             "num_features": "5",
@@ -12,64 +40,68 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Identity",
-        "line_no": 2419,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 2807,
         "variable": null,
-        "parameter": {},
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 2810,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 2821,
         "variable": null,
-        "parameter": {},
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 2824,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 2874,
         "variable": null,
-        "parameter": {},
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 2877,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 2899,
         "variable": null,
-        "parameter": {},
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 2902,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 2921,
         "variable": null,
-        "parameter": {},
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 2924,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 2976,
         "variable": null,
-        "parameter": {},
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 2979,
-        "variable": null,
-        "parameter": {},
-        "parameter_values": {}
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 3006,
+        "class": "torch.nn.Linear",
+        "line_no": 3003,
         "variable": null,
         "parameter": {
             "in_features": "20",
@@ -79,8 +111,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 3007,
+        "class": "torch.nn.Linear",
+        "line_no": 3004,
         "variable": null,
         "parameter": {
             "in_features": "30",
@@ -90,65 +122,77 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 3009,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 3006,
         "variable": null,
         "parameter": {
-            "record_shapes": "True"
+            "record_shapes": "True",
+            "use_kineto": "kineto_available()"
         },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "LSTM",
-        "line_no": 3028,
+        "class": "torch.nn.LSTM",
+        "line_no": 3025,
         "variable": null,
         "parameter": {
-            "*args": "10",
-            "**kwargs": "20"
+            "*args": [
+                "10",
+                "20",
+                "2"
+            ]
         },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 3030,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 3027,
         "variable": null,
         "parameter": {
-            "record_shapes": "True"
+            "record_shapes": "True",
+            "use_kineto": "kineto_available()"
         },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 3076,
-        "variable": null,
-        "parameter": {},
-        "parameter_values": {}
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "profile",
-        "line_no": 3101,
-        "variable": null,
-        "parameter": {},
-        "parameter_values": {}
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "Sequential",
-        "line_no": 3168,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 3073,
         "variable": null,
         "parameter": {
-            "*args": "nn.InstanceNorm2d(2)"
+            "use_kineto": "kineto_available()"
         },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "ReLU",
-        "line_no": 3168,
+        "class": "torch.autograd.profiler.profile",
+        "line_no": 3098,
+        "variable": null,
+        "parameter": {
+            "use_kineto": "kineto_available()"
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "torch.nn.Sequential",
+        "line_no": 3165,
+        "variable": null,
+        "parameter": {
+            "*args": [
+                "nn.InstanceNorm2d(2)",
+                "nn.ReLU(True)"
+            ]
+        },
+        "parameter_values": {}
+    },
+    {
+        "project": "test_projects/torch_project.py",
+        "class": "torch.nn.ReLU",
+        "line_no": 3165,
         "variable": null,
         "parameter": {
             "inplace": "True"
@@ -157,8 +201,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "InstanceNorm2d",
-        "line_no": 3168,
+        "class": "torch.nn.InstanceNorm2d",
+        "line_no": 3165,
         "variable": null,
         "parameter": {
             "num_features": "2"
@@ -167,118 +211,94 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3274,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3270,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3281,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3277,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3336,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3332,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3343,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3339,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3372,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3368,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3388,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3384,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3417,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3413,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "detect_anomaly",
-        "line_no": 3483,
+        "class": "torch.autograd.detect_anomaly",
+        "line_no": 3479,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Sequential",
-        "line_no": 4398,
+        "class": "torch.nn.Sequential",
+        "line_no": 4393,
         "variable": null,
         "parameter": {
-            "*args": "nn.Linear(nz_inp, nz_bottleneck)"
+            "*args": [
+                "nn.Linear(nz_inp, nz_bottleneck)",
+                "nn.ReLU()",
+                "nn.Linear(nz_bottleneck, nz_inp)"
+            ]
         },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "ReLU",
-        "line_no": 4398,
+        "class": "torch.nn.ReLU",
+        "line_no": 4393,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4398,
-        "variable": null,
-        "parameter": {
-            "in_features": "nz_bottleneck",
-            "out_features": "nz_inp"
-        },
-        "parameter_values": {
-            "nz_bottleneck": "1000",
-            "nz_inp": "10"
-        }
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4398,
-        "variable": null,
-        "parameter": {
-            "in_features": "nz_inp",
-            "out_features": "nz_bottleneck"
-        },
-        "parameter_values": {
-            "nz_inp": "10",
-            "nz_bottleneck": "1000"
-        }
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4398,
+        "class": "torch.nn.Linear",
+        "line_no": 4393,
         "variable": null,
         "parameter": {
             "in_features": "nz_bottleneck",
@@ -291,8 +311,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4398,
+        "class": "torch.nn.Linear",
+        "line_no": 4393,
         "variable": null,
         "parameter": {
             "in_features": "nz_inp",
@@ -305,26 +325,30 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Sequential",
-        "line_no": 4428,
+        "class": "torch.nn.Sequential",
+        "line_no": 4423,
         "variable": null,
         "parameter": {
-            "*args": "nn.Linear(nz_inp, nz_bottleneck)"
+            "*args": [
+                "nn.Linear(nz_inp, nz_bottleneck)",
+                "nn.ReLU()",
+                "nn.Linear(nz_bottleneck, nz_inp)"
+            ]
         },
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "ReLU",
-        "line_no": 4428,
+        "class": "torch.nn.ReLU",
+        "line_no": 4423,
         "variable": null,
         "parameter": {},
         "parameter_values": {}
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4428,
+        "class": "torch.nn.Linear",
+        "line_no": 4423,
         "variable": null,
         "parameter": {
             "in_features": "nz_bottleneck",
@@ -337,8 +361,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4428,
+        "class": "torch.nn.Linear",
+        "line_no": 4423,
         "variable": null,
         "parameter": {
             "in_features": "nz_inp",
@@ -351,36 +375,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4428,
-        "variable": null,
-        "parameter": {
-            "in_features": "nz_bottleneck",
-            "out_features": "nz_inp"
-        },
-        "parameter_values": {
-            "nz_bottleneck": "1000",
-            "nz_inp": "10"
-        }
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4428,
-        "variable": null,
-        "parameter": {
-            "in_features": "nz_inp",
-            "out_features": "nz_bottleneck"
-        },
-        "parameter_values": {
-            "nz_inp": "10",
-            "nz_bottleneck": "1000"
-        }
-    },
-    {
-        "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4475,
+        "class": "torch.nn.Linear",
+        "line_no": 4470,
         "variable": null,
         "parameter": {
             "in_features": "2",
@@ -391,8 +387,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4476,
+        "class": "torch.nn.Linear",
+        "line_no": 4471,
         "variable": null,
         "parameter": {
             "in_features": "2",
@@ -403,8 +399,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "Linear",
-        "line_no": 4534,
+        "class": "torch.nn.Linear",
+        "line_no": 4529,
         "variable": null,
         "parameter": {
             "in_features": "2",
@@ -415,8 +411,8 @@
     },
     {
         "project": "test_projects/torch_project.py",
-        "class": "DataParallel",
-        "line_no": 4553,
+        "class": "torch.nn.DataParallel",
+        "line_no": 4548,
         "variable": null,
         "parameter": {
             "module": "deepcopy(model)"
