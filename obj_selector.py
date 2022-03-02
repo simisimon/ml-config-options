@@ -235,7 +235,7 @@ class SklearnObjects(CodeObjects):
         self.library = "sklearn"
 
 
-class TorchObjects(CodeObjects):
+class PyTorchObjects(CodeObjects):
     def __init__(self, project):
         CodeObjects.__init__(self, project)
         self.library = "torch"
@@ -247,13 +247,21 @@ class MLflowObjects(CodeObjects):
         self.library = "mlflow"
 
 
+class TensorFlowObjects(CodeObjects):
+    def __init__(self, project):
+        CodeObjects.__init__(self, project)
+        self.library = "tensorflow"
+
+
 def main():
     #project = "test_projects/another_test_project.py"
     #objects = SklearnObjects(project).get_objects()
     #project = "test_projects/torch_project.py"
     #objects = TorchObjects(project).get_objects()
-    project = "test_projects/mlflow_project.py"
-    objects = MLflowObjects(project).get_objects()
+    #project = "test_projects/mlflow_project.py"
+    #objects = MLflowObjects(project).get_objects()
+    project = "test_projects/tf_project.py"
+    objects = TensorFlowObjects(project).get_objects()
     pprint(objects, width=75)
 
 

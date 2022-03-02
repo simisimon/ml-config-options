@@ -1,7 +1,7 @@
 import ast
 import json
 
-from obj_selector import TorchObjects, SklearnObjects, MLflowObjects
+from obj_selector import PyTorchObjects, SklearnObjects, MLflowObjects, TensorFlowObjects
 
 
 class NodeObjects:
@@ -106,12 +106,12 @@ class SklearnNodes(NodeObjects):
         self.class_objects_from_library = SklearnObjects(project).get_objects()
 
 
-class TorchNodes(NodeObjects):
+class PyTorchNodes(NodeObjects):
     def __init__(self, project):
         NodeObjects.__init__(self, project)
         self.library = "torch"
-        self.classes = TorchObjects(project).read_json()
-        self.class_objects_from_library = TorchObjects(project).get_objects()
+        self.classes = PyTorchObjects(project).read_json()
+        self.class_objects_from_library = PyTorchObjects(project).get_objects()
 
 
 class MLflowNodes(NodeObjects):
@@ -120,6 +120,14 @@ class MLflowNodes(NodeObjects):
         self.library = "mlflow"
         self.classes = MLflowObjects(project).read_json()
         self.class_objects_from_library = MLflowObjects(project).get_objects()
+
+
+class TensorFlowNodes(NodeObjects):
+    def __init__(self, project):
+        NodeObjects.__init__(self, project)
+        self.library = "tensorflow"
+        self.classes = TensorFlowObjects(project).read_json()
+        self.class_objects_from_library = TensorFlowObjects(project).get_objects()
 
 
 class NodeObject:
@@ -416,7 +424,7 @@ def main():
     #SklearnNodes(project).get_nodes()
 
     project = "test_projects/torch_project.py"
-    TorchNodes(project).get_nodes()
+    PyTorchNodes(project).get_nodes()
 
     #project = "test_projects/mlflow_project.py"
     #MLflowNodes(project).get_nodes()

@@ -66,7 +66,7 @@ class SklearnScraper(ClassScraper):
             self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
 
 
-class TorchScraper(ClassScraper):
+class PyTorchScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
         self.library = "torch"
@@ -187,7 +187,7 @@ class MLflowScraper(ClassScraper):
 class TensorFlowScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
-        self.library = "tf"
+        self.library = "tensorflow"
         self.module_urls = []
 
     def get_classes(self):
@@ -199,6 +199,7 @@ class TensorFlowScraper(ClassScraper):
         link = "https://www.tensorflow.org/api_docs/python/tf"
         self.module_urls.append(link)
         for url in self.module_urls:
+            print(self.module_urls.index(url), " / ", len(self.module_urls))
             html = urlopen(url)
             soup = BeautifulSoup(html, "html.parser")
 
@@ -231,6 +232,7 @@ class TensorFlowScraper(ClassScraper):
 
     def scrape_classes(self):
         for url in self.class_urls:
+            print(self.class_urls.index(url), " / ", len(self.class_urls))
             html = urlopen(url)
             soup = BeautifulSoup(html, "html.parser")
 
@@ -238,6 +240,7 @@ class TensorFlowScraper(ClassScraper):
             class_ = full_class_name[full_class_name.rfind(".") + 1:]
             pre = soup.find("pre")
             parameters = self.scrape_parameters(pre, full_class_name)
+            full_class_name = "full_class_name".replace(full_class_name[:2], "tensorflow")
             self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
 
     def scrape_parameters(self, pre, full_class_name):
@@ -267,7 +270,7 @@ class TensorFlowScraper(ClassScraper):
 
 def main():
     # SklearnScraper().get_classes()
-    # TorchScraper().get_classes()
+    # PyTorchScraper().get_classes()
     # MLflowScraper().get_classes()
     TensorFlowScraper().get_classes()
 
