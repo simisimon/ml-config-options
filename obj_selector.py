@@ -4,10 +4,10 @@ import json
 
 
 class CodeObjects:
-    def __init__(self, project):
+    def __init__(self, file):
         self.library = ""
         self.classes = {}
-        self.project = project
+        self.file = file
         self.first_level_objects = []
         self.import_classes = {}
         self.import_other_objects = {}
@@ -30,7 +30,7 @@ class CodeObjects:
         return self.classes
 
     def get_first_level_objects(self):
-        with open(self.project, "r") as source:
+        with open(self.file, "r") as source:
             tree = ast.parse(source.read())
         self.first_level_objects = tree.body
 
@@ -151,7 +151,8 @@ class CodeObjects:
                                 obj = ast.parse("{0}[]".format(obj_code)).body[0]
                             obj.lineno = lineno
                             obj.end_lineno = end_lineno
-                            lib_class_obj = {"class": import_class_values["path"], "class alias": class_string[:-1], "object": obj, "parameter variables": None}
+                            lib_class_obj = {"file": self.file, "class": import_class_values["path"],
+                                             "class alias": class_string[:-1], "object": obj, "parameter variables": None}
                             self.class_objects_from_library.append(lib_class_obj)
 
             for import_name, import_obj_values in self.import_other_objects.items():
@@ -196,8 +197,8 @@ class CodeObjects:
                                             obj.lineno = lineno
                                             obj.end_lineno = end_lineno
 
-                                    lib_class_obj = {"class": class_, "class alias": class_string[:-1], "object": obj,
-                                                     "parameter variables": None}
+                                    lib_class_obj = {"file": self.file, "class": class_, "class alias": class_string[:-1],
+                                                     "object": obj, "parameter variables": None}
                                     self.class_objects_from_library.append(lib_class_obj)
 
     def get_param_variables(self):
@@ -230,38 +231,38 @@ class CodeObjects:
 
 
 class SklearnObjects(CodeObjects):
-    def __init__(self, project):
-        CodeObjects.__init__(self, project)
+    def __init__(self, file):
+        CodeObjects.__init__(self, file)
         self.library = "sklearn"
 
 
 class PyTorchObjects(CodeObjects):
-    def __init__(self, project):
-        CodeObjects.__init__(self, project)
+    def __init__(self, file):
+        CodeObjects.__init__(self, file)
         self.library = "torch"
 
 
 class MLflowObjects(CodeObjects):
-    def __init__(self, project):
-        CodeObjects.__init__(self, project)
+    def __init__(self, file):
+        CodeObjects.__init__(self, file)
         self.library = "mlflow"
 
 
 class TensorFlowObjects(CodeObjects):
-    def __init__(self, project):
-        CodeObjects.__init__(self, project)
+    def __init__(self, file):
+        CodeObjects.__init__(self, file)
         self.library = "tensorflow"
 
 
 def main():
-    #project = "test_projects/another_test_project.py"
-    #objects = SklearnObjects(project).get_objects()
-    #project = "test_projects/torch_project.py"
-    #objects = TorchObjects(project).get_objects()
-    #project = "test_projects/mlflow_project.py"
-    #objects = MLflowObjects(project).get_objects()
-    project = "test_projects/tf_project.py"
-    objects = TensorFlowObjects(project).get_objects()
+    #file = "test_projects/another_test_project.py"
+    #objects = SklearnObjects(file).get_objects()
+    #file = "test_projects/torch_project.py"
+    #objects = TorchObjects(file).get_objects()
+    #file = "test_projects/mlflow_project.py"
+    #objects = MLflowObjects(file).get_objects()
+    file = "test_projects/tf_project.py"
+    objects = TensorFlowObjects(file).get_objects()
     pprint(objects, width=75)
 
 

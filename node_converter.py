@@ -1,21 +1,32 @@
 import ast
 import json
-
+from os import walk, path
 from obj_selector import PyTorchObjects, SklearnObjects, MLflowObjects, TensorFlowObjects
 
 
 class NodeObjects:
-    def __init__(self, project):
+    def __init__(self, repo):
         self.library = ""
         self.classes = {}
-        self.project = project
+        self.repo = repo
         self.class_objects_from_library = []
         self.node_objects = []
 
     def get_nodes(self):
+        self.get_class_objects()
         self.get_parameters()
         self.merge_parameter()
         self.convert_into_node_structure()
+
+    def get_class_objects(self):
+        py_files = []
+        for root, dirs, files in walk(self.repo):
+            for filename in files:
+                if filename.endswith(".py"):
+                    file = path.join(root, filename)
+                    py_files.append(file)
+        for file in py_files:
+            self.class_objects_from_library.extend(TensorFlowObjects(file).get_objects())
 
     def get_parameters(self):
         for obj in self.class_objects_from_library:
@@ -36,11 +47,11 @@ class NodeObjects:
                             stop = start + len(obj["class alias"])
                             obj_code = "".join((obj_code[:start], "temp", obj_code[stop:]))
                     try:
-                        new_obj = {"class": obj["class"], "class alias": obj["class alias"],
+                        new_obj = {"file": obj["file"], "class": obj["class"], "class alias": obj["class alias"],
                                    "object": ast.parse(obj_code).body[0],
                                    "parameter variables": obj["parameter variables"]}
                     except:
-                        new_obj = {"class": obj["class"], "class alias": obj["class alias"],
+                        new_obj = {"file": obj["file"], "class": obj["class"], "class alias": obj["class alias"],
                                    "object": ast.parse("{0}[]".format(obj_code)).body[0],
                                    "parameter variables": obj["parameter variables"]}
                     node_obj = NodeObject(new_obj).get_objects(new_obj["object"])
@@ -86,7 +97,7 @@ class NodeObjects:
     def convert_into_node_structure(self):
         json_nodes = []
         for obj in self.node_objects:
-            dict_obj = {"project": self.project,
+            dict_obj = {"file": obj["file"].split("/", 1)[-1],
                         "class": obj["class"],
                         "line_no": obj["line_no"],
                         "variable": None,
@@ -99,39 +110,36 @@ class NodeObjects:
 
 
 class SklearnNodes(NodeObjects):
-    def __init__(self, project):
-        NodeObjects.__init__(self, project)
+    def __init__(self, repo):
+        NodeObjects.__init__(self, repo)
         self.library = "sklearn"
-        self.classes = SklearnObjects(project).read_json()
-        self.class_objects_from_library = SklearnObjects(project).get_objects()
+        self.classes = SklearnObjects("").read_json()
 
 
 class PyTorchNodes(NodeObjects):
-    def __init__(self, project):
-        NodeObjects.__init__(self, project)
+    def __init__(self, repo):
+        NodeObjects.__init__(self, repo)
         self.library = "torch"
-        self.classes = PyTorchObjects(project).read_json()
-        self.class_objects_from_library = PyTorchObjects(project).get_objects()
+        self.classes = PyTorchObjects("").read_json()
 
 
 class MLflowNodes(NodeObjects):
-    def __init__(self, project):
-        NodeObjects.__init__(self, project)
+    def __init__(self, repo):
+        NodeObjects.__init__(self, repo)
         self.library = "mlflow"
-        self.classes = MLflowObjects(project).read_json()
-        self.class_objects_from_library = MLflowObjects(project).get_objects()
+        self.classes = MLflowObjects("").read_json()
 
 
 class TensorFlowNodes(NodeObjects):
-    def __init__(self, project):
-        NodeObjects.__init__(self, project)
+    def __init__(self, repo):
+        NodeObjects.__init__(self, repo)
         self.library = "tensorflow"
-        self.classes = TensorFlowObjects(project).read_json()
-        self.class_objects_from_library = TensorFlowObjects(project).get_objects()
+        self.classes = TensorFlowObjects("").read_json()
 
 
 class NodeObject:
     def __init__(self, obj):
+        self.file = obj["file"]
         self.class_ = obj["class"]
         self.class_alias = obj["class alias"].split(".")[-1]
         self.obj = obj["object"]
@@ -142,7 +150,7 @@ class NodeObject:
 
     def get_objects(self, obj):
         self.get_value(obj)
-        obj_dict = {"object": type(self.obj), "code": ast.unparse(self.obj), "class": self.class_,
+        obj_dict = {"file": self.file, "object": type(self.obj), "code": ast.unparse(self.obj), "class": self.class_,
                     "variable": self.variable, "parameter": self.parameter, "line_no": self.obj.lineno,
                     "value of parameter variables": self.variable_value}
         return obj_dict
@@ -357,10 +365,11 @@ class NodeObject:
             print(str(type(self.obj)) + ": dummy " + ast.unparse(self.obj))
 
     def get_variable_scope(self, obj):
-        for assign in self.parameter_variables:
-            for target in assign.targets:
-                if ast.unparse(target) == ast.unparse(obj):
-                    self.variable_value[ast.unparse(obj)] = ast.unparse(assign.value)
+        if self.parameter_variables is not None:
+            for assign in self.parameter_variables:
+                for target in assign.targets:
+                    if ast.unparse(target) == ast.unparse(obj):
+                        self.variable_value[ast.unparse(obj)] = ast.unparse(assign.value)
 
     obj_type = {ast.Name: extract_unparse_obj,
                 ast.Constant: extract_unparse_obj,
@@ -420,17 +429,11 @@ class NodeObject:
 
 
 def main():
-    #project = "test_projects/another_test_project.py"
+    repo = "test_repo"
     #SklearnNodes(project).get_nodes()
-
-    #project = "test_projects/torch_project.py"
     #PyTorchNodes(project).get_nodes()
-
-    #project = "test_projects/mlflow_project.py"
     #MLflowNodes(project).get_nodes()
-
-    project = "test_projects/tf_project.py"
-    TensorFlowNodes(project).get_nodes()
+    TensorFlowNodes(repo).get_nodes()
 
 
 
