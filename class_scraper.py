@@ -29,7 +29,7 @@ class ClassScraper:
         return parameters
 
     def create_json(self):
-        with open("{0}.txt".format(self.library), "w") as outfile:
+        with open("classes/{0}.txt".format(self.library), "w") as outfile:
             json.dump(self.classes, outfile, indent=4)
 
 
@@ -199,7 +199,6 @@ class TensorFlowScraper(ClassScraper):
         link = "https://www.tensorflow.org/api_docs/python/tf"
         self.module_urls.append(link)
         for url in self.module_urls:
-            print(self.module_urls.index(url), " / ", len(self.module_urls))
             html = urlopen(url)
             soup = BeautifulSoup(html, "html.parser")
 
@@ -232,7 +231,6 @@ class TensorFlowScraper(ClassScraper):
 
     def scrape_classes(self):
         for url in self.class_urls:
-            print(self.class_urls.index(url), " / ", len(self.class_urls))
             html = urlopen(url)
             soup = BeautifulSoup(html, "html.parser")
 
@@ -240,7 +238,7 @@ class TensorFlowScraper(ClassScraper):
             class_ = full_class_name[full_class_name.rfind(".") + 1:]
             pre = soup.find("pre")
             parameters = self.scrape_parameters(pre, full_class_name)
-            full_class_name = "full_class_name".replace(full_class_name[:2], "tensorflow")
+            full_class_name = full_class_name.replace(full_class_name[:2], "tensorflow")
             self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
 
     def scrape_parameters(self, pre, full_class_name):
@@ -271,8 +269,8 @@ class TensorFlowScraper(ClassScraper):
 def main():
     # SklearnScraper().get_classes()
     # PyTorchScraper().get_classes()
-    # MLflowScraper().get_classes()
-    TensorFlowScraper().get_classes()
+    MLflowScraper().get_classes()
+    #TensorFlowScraper().get_classes()
 
 
 if __name__ == "__main__":

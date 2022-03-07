@@ -25,7 +25,7 @@ class CodeObjects:
         return self.class_objects_from_library
 
     def read_json(self):
-        with open("{0}.txt".format(self.library)) as json_file:
+        with open("classes/{0}.txt".format(self.library)) as json_file:
             self.classes = json.load(json_file)
         return self.classes
 

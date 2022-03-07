@@ -94,7 +94,7 @@ class NodeObjects:
                         "parameter_values": obj["value of parameter variables"]}
             json_nodes.append(dict_obj)
 
-        with open("{0}_nodes.txt".format(self.library), 'w') as outfile:
+        with open("nodes/{0}_nodes.txt".format(self.library), 'w') as outfile:
             json.dump(json_nodes, outfile, indent=4)
 
 
@@ -423,11 +423,14 @@ def main():
     #project = "test_projects/another_test_project.py"
     #SklearnNodes(project).get_nodes()
 
-    project = "test_projects/torch_project.py"
-    PyTorchNodes(project).get_nodes()
+    #project = "test_projects/torch_project.py"
+    #PyTorchNodes(project).get_nodes()
 
     #project = "test_projects/mlflow_project.py"
     #MLflowNodes(project).get_nodes()
+
+    project = "test_projects/tf_project.py"
+    TensorFlowNodes(project).get_nodes()
 
 
 

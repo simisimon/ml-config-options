@@ -1,0 +1,15 @@
+[
+    {
+        "project": "test_projects/tf_project.py",
+        "class": "tensorflow.CriticalSection",
+        "line_no": 7,
+        "variable": null,
+        "parameter": {
+            "name": "cuong",
+            "shared_name": "cualicia",
+            "critical_section_def": "3",
+            "import_scope": "5"
+        },
+        "parameter_values": {}
+    }
+]
