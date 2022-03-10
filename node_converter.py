@@ -9,24 +9,23 @@ class NodeObjects:
         self.library = ""
         self.classes = {}
         self.repo = repo
+        self.py_files = []
         self.class_objects_from_library = []
         self.node_objects = []
 
     def get_nodes(self):
+        self.get_py_files()
         self.get_class_objects()
         self.get_parameters()
         self.merge_parameter()
         self.convert_into_node_structure()
 
-    def get_class_objects(self):
-        py_files = []
+    def get_py_files(self):
         for root, dirs, files in walk(self.repo):
             for filename in files:
                 if filename.endswith(".py"):
                     file = path.join(root, filename)
-                    py_files.append(file)
-        for file in py_files:
-            self.class_objects_from_library.extend(TensorFlowObjects(file).get_objects())
+                    self.py_files.append(file)
 
     def get_parameters(self):
         for obj in self.class_objects_from_library:
@@ -115,12 +114,20 @@ class SklearnNodes(NodeObjects):
         self.library = "sklearn"
         self.classes = SklearnObjects("").read_json()
 
+    def get_class_objects(self):
+        for file in self.py_files:
+            self.class_objects_from_library.extend(SklearnObjects(file).get_objects())
+
 
 class PyTorchNodes(NodeObjects):
     def __init__(self, repo):
         NodeObjects.__init__(self, repo)
         self.library = "torch"
         self.classes = PyTorchObjects("").read_json()
+
+    def get_class_objects(self):
+        for file in self.py_files:
+            self.class_objects_from_library.extend(PyTorchObjects(file).get_objects())
 
 
 class MLflowNodes(NodeObjects):
@@ -129,12 +136,20 @@ class MLflowNodes(NodeObjects):
         self.library = "mlflow"
         self.classes = MLflowObjects("").read_json()
 
+    def get_class_objects(self):
+        for file in self.py_files:
+            self.class_objects_from_library.extend(MLflowObjects(file).get_objects())
+
 
 class TensorFlowNodes(NodeObjects):
     def __init__(self, repo):
         NodeObjects.__init__(self, repo)
         self.library = "tensorflow"
         self.classes = TensorFlowObjects("").read_json()
+
+    def get_class_objects(self):
+        for file in self.py_files:
+            self.class_objects_from_library.extend(TensorFlowObjects(file).get_objects())
 
 
 class NodeObject:
@@ -430,10 +445,10 @@ class NodeObject:
 
 def main():
     repo = "test_repo"
-    #SklearnNodes(project).get_nodes()
+    SklearnNodes(repo).get_nodes()
     #PyTorchNodes(project).get_nodes()
     #MLflowNodes(project).get_nodes()
-    TensorFlowNodes(repo).get_nodes()
+    #TensorFlowNodes(repo).get_nodes()
 
 
 
