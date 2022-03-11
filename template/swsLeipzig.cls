@@ -231,7 +231,8 @@
   \global\thesisfrontmatterkeywords{Keywords}
 }{}
 \ifthenelse{\equal{\documentlanguage}{ngerman}}{%
-  \global\thesisfrontpagefaculty{Fakult\"at f\"ur Mathematik und Informatik}
+  \global\thesisfrontpagefaculty{Fakult\"at f\"ur Mathematik und Informatik\\
+    Wirtschaftswissenschaftliche Fakult\"at}
   \global\thesisfrontpagecourse{Studiengang }
   \global\thesisfrontpagetypename{arbeit}
   \global\thesisfrontpagestudentnumber{Matrikelnummer}

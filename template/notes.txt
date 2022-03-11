@@ -1,0 +1,41 @@
+Gliederung:
+    (1. Abstract
+        - Arbeit kurz darstellen, was ist interessant, was sind die Ergebnisse
+        - Leser anregen weiter zu lesen)
+    2. Einleitung
+        - Inhalt
+            - Begründung der Arbeit
+            - Art und Umfang des Problems und Teilprobleme beschreiben
+            - Übersicht über die wichtigste Literatur zu Orientierung des Lesers
+            - Untersuchungsmethode und Gründe für Wahl der Methode nennen
+            - Wichtigste Ergebnisse nennen
+            - Grundsätzliche Schlussfolgerungen nennen (bewertet)
+            - Am Ende: Übersicht übr Struktur der Arbeit
+        - Aufbau
+            - Bereich festlegen
+                - Zentralität befestigen
+                - aktueller Wissensstand
+            - Zusammenfassung der bisherigen Forschung
+                - Themen in der Literatur skizzieren
+            - Aktuelle Forschung vorbereiten
+                - Lücke aufzeigen
+                - Frage aufwerfen
+            - Einführung in aktuelle Forschung
+                - Zweck angeben
+                - Überblick über derzeitige Forschung
+        - Checklist
+            - Was ist das allgemeine Problem und warum ist es wichtig?
+            - Was ist das spezifische Problem und sollte es den Leser interessieren?
+            - Wie unterscheidet sich die Arbeit von früheren Arbeiten?
+            - Was sind die Ziele/Beiträge und inwiefern sind die neu?
+            - Was sind die wichtigsten Ergebnisse?
+            - Was ist der allgemeine Ansatz/Grundriss
+    3. Hintergrund / Literaturübersicht
+    4. Problembeschreibung / Aufgabenstellung / Forschunsfrage
+    5. Methoden
+    6. Präsentation der Daten
+    7. Interpretation
+    8. Diskussion
+    9. Abschluss
+    10. Referenzen
+
