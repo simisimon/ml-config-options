@@ -54,6 +54,8 @@
 % Some other packages must be loaded before, some after hyperref
 % Additional options to the hyperref package can be provided in the braces []
 \usehyperref[backref] % This will add back references in the bibliography
+\usepackage[utf8]{inputenc}
+\setcitestyle{authoryear,close={)}}
 
 \begin{document}
 \begin{frontmatter}
@@ -77,11 +79,10 @@
 \end{frontmatter}
 
 \chapter{Einleitung}\label{Einleitung}
-Diese Arbeit entsteht am Institut f\"ur Informatik an der Universit\"at Leipzig in der Abteilung \glqq Softwaresysteme\grqq.
+Diese Arbeit entsteht am Institut für Informatik an der Universit\"at Leipzig in der Abteilung \glqq Softwaresysteme\grqq.
 Im Folgenden wird die zugrundeliegende Problemstellung und Relevanz erl\"autert.
-Anschlie\ss end wird dieses Problem auf einen konkreten Anwendungsbereich begrenzt und auf die Zielsetzung der Arbeit eingegangen.
+Anschlie\ss end wird dieses Problem auf einen konkreten Anwendungsbereich \"ubertragen und auf die Zielsetzung der Arbeit eingegangen.\\
 
-\section{Problem- und Relevanzdarstellung}
 Moderne Softwaresysteme erm\"oglichen den Nutzenden ein breites Spektrum unterschiedlicher Konfigurationsoptionen.
 Anhand dieser Konfigurationsoptionen sind die Nutzenden in der Lage, viele Aspekte der Ausgestaltung einer Software zu steuern.
 Konfigurationsoptionen k\"onnen dabei ganz unterschiedliche Funktionen besitzen, die von den Nutzenden nach den eigenen Bed\"urfnissen angepasst werden k\"onnen.\\
@@ -92,7 +93,14 @@ Besonders problematisch wird es, wenn Konfigurationsoptionen auf unvorhergesehen
 Solche Abh\"angigkeiten sind in einem wachsenden Spielraum m\"oglicher Kombinationen schwer zu entdecken und zu verstehen.
 Entwickelnde m\"ussen die Konfigurationsoptionen innerhalb der Software verfolgen, um festzustellen,
 welche Codefragmente von einer Option betroffen sind und wo und wie sie mit ihr interagieren.
-Die verschiedenen m\"oglichen Auspr\"agungen einer Konfigurationsoption erschweren hierbei die Nachvollziehbarkeit des Kontrollflusses einer Software.
+Die verschiedenen m\"oglichen Auspr\"agungen einer Konfigurationsoption erschweren hierbei die Nachvollziehbarkeit des Kontrollflusses der Software.\\
+
+Konfigurationsoptionen werden meist als Key-Value Pair entworfen und gesammelt in einer Konfigurationsdatei gespeichert.
+Dem Namen der Konfigurationsoption (Key) werden dabei Einstellungsmöglichkeiten beliebigen Typs zugeordnet (Value).
+Zur Speicherung verwenden einige Systeme, wie das Big Data-Framework Hadoop, strukturierte XML-Formate oder auch JSON-Dateien.
+Ein einheitliches Schema zur Speicherung als Konfigurationsdatei gibt es jedoch nicht, weshalb sich diese von der Struktur und Syntax unterscheiden. \cite[S. 131]{10.1145/1985793.1985812}.\\
+
+Über den Source Code einer Software können die Konfigurationsoptionen eingelesen und bearbeitet werden.
 
 \section{Anwendungsbereich und Zielsetzung}
 
