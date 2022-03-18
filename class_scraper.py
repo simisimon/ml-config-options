@@ -21,7 +21,10 @@ class ClassScraper:
         for e in elements:
             split = e.text.split("=", 1)
             param = split[0].split(":")[0]
-            if len(split) > 1:
+            if param[0].isnumeric():
+                last_key = list(parameters)[-1]
+                parameters[last_key] += ", {0}".format(param)
+            elif len(split) > 1:
                 default_value = split[1].strip()
                 parameters[param] = default_value
             else:
@@ -267,9 +270,9 @@ class TensorFlowScraper(ClassScraper):
 
 
 def main():
-    # SklearnScraper().get_classes()
+    SklearnScraper().get_classes()
     # PyTorchScraper().get_classes()
-    MLflowScraper().get_classes()
+    #MLflowScraper().get_classes()
     #TensorFlowScraper().get_classes()
 
 
