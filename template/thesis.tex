@@ -95,12 +95,19 @@ Entwickelnde m\"ussen die Konfigurationsoptionen innerhalb der Software verfolge
 welche Codefragmente von einer Option betroffen sind und wo und wie sie mit ihr interagieren.
 Die verschiedenen m\"oglichen Auspr\"agungen einer Konfigurationsoption erschweren hierbei die Nachvollziehbarkeit des Kontrollflusses der Software.\\
 
-Konfigurationsoptionen werden meist als Key-Value Pair entworfen und gesammelt in einer Konfigurationsdatei gespeichert.
+In einer empirischen Studie über Konfigurationsfehler stellten \citeauthor{10.1145/2043556.2043572} (\citeyear{10.1145/2043556.2043572}, S. 160)  fest,
+dass in kommerziellen Softwareunternehmen für Speicherlösungen, knapp ein Drittel aller Ursachen von Kundenproblemen auf Konfigurationsfehler zurückzuführen sind (siehe Tabelle 3).
+Bei Konfigurationsfehler sind Source Code und die Eingabe zwar korrekt, es wird jedoch ein falscher Wert für eine Konfigurationsoption verwendet,
+sodass sich die Software nicht wie gewünscht verhält \cite[S. 152]{10.1145/2568225.2568251}. Solche Fehler können dazu führen, dass die Software abstürzt,
+eine fehlerhafte Ausgabe erzeugt oder nur unzureichend funktioniert \cite[S. 152]{10.1145/2568225.2568251}.\\
+
+Konfigurationsoptionen können in verschiedenen Teilen eines Softwareprojekts verarbeitet, definiert und beschrieben werden:
+im Source Code, in der Konfigurationsdatei und in der Dokumentation \cite[S. 185]{7774519}.
+Sie werden meist als Key-Value Pair entworfen und gesammelt in einer Konfigurationsdatei gespeichert.
 Dem Namen der Konfigurationsoption (Key) werden dabei Einstellungsmöglichkeiten beliebigen Typs zugeordnet (Value).
 Zur Speicherung verwenden einige Systeme, wie das Big Data-Framework Hadoop, strukturierte XML-Formate oder auch JSON-Dateien.
-Ein einheitliches Schema zur Speicherung als Konfigurationsdatei gibt es jedoch nicht, weshalb sich diese von der Struktur und Syntax unterscheiden. \cite[S. 131]{10.1145/1985793.1985812}.\\
-
-Über den Source Code einer Software können die Konfigurationsoptionen eingelesen und bearbeitet werden.
+Ein einheitliches Schema zur Speicherung als Konfigurationsdatei gibt es jedoch nicht, weshalb sich diese von der Struktur und Syntax unterscheiden. \cite[S. 131]{10.1145/1985793.1985812}.
+Über den Source Code einer Software können die Konfigurationsoptionen eingelesen und bearbeitet werden \cite[S. 185]{7774519}.
 
 \section{Anwendungsbereich und Zielsetzung}
 
