@@ -112,7 +112,7 @@ eine fehlerhafte Ausgabe erzeugt oder nur unzureichend funktioniert \cite[S. 152
 
 
 \section{Anwendungsbereich und Zielsetzung}
-Das Ziel dieser Arbeit ist es, Konfigurationsoptionen im Source Code zu erkennen und mitsamt der Parameter zu extrahieren. \\
+Das Ziel dieser Arbeit ist es, Konfigurationsoptionen im Source Code zu erkennen und zu extrahieren. \\
 
 Es existieren bereits einige Forschungsansätze zur Ermittlung und Verarbeitung von Konfigurationsoptionen im Source Code.
 Viel zitiert wird dabei der Ansatz von \citeauthor{10.1145/1985793.1985812}, den sie \citeyear{10.1145/1985793.1985812} publizierten.
@@ -121,7 +121,22 @@ im Source Code zu tracken.
 Dabei fokussierten sie sich auf die Programmiersprache Java, die nach dem TIOBE-Index jahrelang als beliebteste Programmiersprache galt (\citeyear{enwiki:1077809155}).
 Der TIOBE-Index misst die Popularität von Programmiersprachen auf der Grundlage von Suchanfragen auf beliebten Websites und in Suchmaschinen (\citeyear{enwiki:1077809155}).
 Im Februar 2022 ist in diesem Ranking Python erstmals zur beliebtesten Programmiersprache aufgestiegen (\citeyear{enwiki:1077809155}).
-Für Python ist dieses Thema jedoch bislang scheinbar noch wenig beleuchtet.
+Für Python ist diese Thematik jedoch bislang allerdings noch wenig beleuchtet. \\
+
+Die Programmiersprache Python ist für ihre Benutzerfreundlichkeit bekannt und obwohl Python eine interpretierte High-Level-Programmiersprache ist,
+ist sie in der Lage, bei Bedarf die Leistung von Programmiersprachen auf Systemebene zu nutzen \cite[S. 2]{2020}.
+Insbesondere im Bereich wissenschaftliches Rechnen (Scientific Computing) gewann Python in den letzten Jahren enorm an Popularität,
+weshalb viele Bibliotheken für maschinelles Lernen auf Python basieren \cite[S. 2]{2020}. \\
+
+Gegenstand dieser Arbeit werden daher Konfigurationsoptionen sein, die in Python Source Code vorliegen.
+Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe stat): TensorFlow, PyTorch und scikit-learn.
+Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecylce Plattform Mlflow untersucht.
+
+% Umsetzung gleidert isch in 3 Schritte: WEbscrping, nochmal auf Klassen eingehen, Statische Code-Analyse mit ReadPoint, und extrahieren der Parameter,
+% Am Ende einfpelgen in s Cg net
+
+
+
 
 
 
