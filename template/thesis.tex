@@ -157,6 +157,42 @@ Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecy
 % Umsetzung gleidert isch in 3 Schritte: WEbscrping, nochmal auf Klassen eingehen, Statische Code-Analyse mit ReadPoint, und extrahieren der Parameter,
 % Am Ende einfpelgen in s Cg net
 
+\chapter{Hintergrund}\label{Hintergrund}
+
+\section{Statische Code-Analyse}
+
+Das wichtigste Werkzeug dieser Arbeit ist die statische Code-Analyse,
+mit der Software-Projekte unabhängig von der Ausführungsumgebung untersucht werden können.
+Die statische Code-Analyse ist ein Werkzeug, um Fehler in einer Softwareanwendung zu reduzieren \cite[S. 99]{bardas2010static}.
+So ermöglichen sie den Anwendenden, Fehler in einem Programm zu finden, die für den Compiler nicht sichtbar sind \cite[S. 99]{bardas2010static}.\\
+
+Im Gegensatz zur dynamischen Analyse wird die statische Analyse zur Übersetzungszeit durchgeführt
+und setzt damit bereits vor der tatsächlichen Ausführung des Source Codes an \cite[S. 2]{gomes2009overview}.
+Die erzeugten Ergebnisse der statischen Analyse lassen sich besser Verallgemeinern, da sie nicht abhängig von den Eingaben sind,
+mit denen das Programm während der dynamischen Analyse ausgeführt wurde \cite[S. 6]{gomes2009overview}.\\
+
+Für das Aufspüren von Konfigurationsoptionen bietet sich eine statische Code-Analyse daher aus mehreren Gründen an.
+So kann es viele Optionen geben, die nur in bestimmten Modulen oder als Folge bestimmter Eingaben verwendet werden.
+Es ist unwahrscheinlich, dass mittels dynamischen Testens alle Verwendungen der gesuchten Konfigurationsoptionen gefunden werden.
+Dies würde zudem bei größeren Softwareprojekten eine sehr komplexe Test-Suite erfordern, um möglichst alle Fälle abdecken zu können.
+Mit der statischen Code-Analyse kann eine hohe Abdeckung hingegen deutlich leichter erreicht werden.
+Gleichzeitig verstecken sind hinter den Methoden und Klassen, der zu untersuchenden Machine Learning Bibliotheken,
+teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehrere Tage laufen könnten.
+Aus Kosten-Nutzen-Gründen ist hier eine dynamische Analyse nur bedingt sinnvoll.\\
+
+
+\section{Machine Learning}
+
+\subsection{Grundlagen}
+
+\subsection{Python-Bibliotheken}
+% Vorteile von Biblitoheken
+% Grafik mit populärsten ML-Bibliotheken
+
+\subsection{Konfigurationsoptionen}
+
+
+\section{Web Scraping}
 
 
 % Showing natbib citation commands
