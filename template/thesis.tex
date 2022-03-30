@@ -176,14 +176,62 @@ So kann es viele Optionen geben, die nur in bestimmten Modulen oder als Folge be
 Es ist unwahrscheinlich, dass mittels dynamischen Testens alle Verwendungen der gesuchten Konfigurationsoptionen gefunden werden.
 Dies würde zudem bei größeren Softwareprojekten eine sehr komplexe Test-Suite erfordern, um möglichst alle Fälle abdecken zu können.
 Mit der statischen Code-Analyse kann eine hohe Abdeckung hingegen deutlich leichter erreicht werden.
-Gleichzeitig verstecken sind hinter den Methoden und Klassen, der zu untersuchenden Machine Learning Bibliotheken,
+Gleichzeitig verbergen sich hinter den Methoden und Klassen, der zu untersuchenden Machine Learning Bibliotheken,
 teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehrere Tage laufen könnten.
 Aus Kosten-Nutzen-Gründen ist hier eine dynamische Analyse nur bedingt sinnvoll.\\
 
 
 \section{Machine Learning}
+%Maschinelles Lernen (ML) wird eingesetzt, um Maschinen beizubringen, wie sie Daten effizienter verarbeiten können.
+%Manchmal können wir nach der Sichtung der Daten die Informationen, die wir aus den Daten gewinnen, nicht interpretieren.
+%In diesem Fall wenden wir maschinelles Lernen an.
+%Mit der Fülle der verfügbaren Datensätze steigt auch die Nachfrage nach maschinellem Lernen.
+%Viele Branchen setzen maschinelles Lernen ein, um relevante Daten zu extrahieren.
+%Der Zweck des maschinellen Lernens besteht darin, aus den Daten zu lernen.
+%Es wurden viele Studien darüber durchgeführt, wie Maschinen selbständig lernen können, ohne explizit programmiert zu werden.
+%Viele Mathematiker und Programmierer wenden verschiedene Ansätze an, um eine Lösung für dieses Problem zu finden, das riesige Datensätze umfasst.
 
 \subsection{Grundlagen}
+Die künstliche Intelligenz (KI) ist ein Teilgebiet der Informatik und befasst sich mit der Entwicklung von Computerprogrammen und Maschinen,
+die in der Lage sind, Aufgaben auszuführen, die Menschen von Natur aus gut beherrschen \cite[S. 1]{2020}.
+Dazu gehören zum Beispiel die Verarbeitung von natürlicher Sprache (Natural Language Processing) oder Bilderkennung (Computer Vision).
+In der Mitte des 20. Jahrhunderts entstand das maschinelle Lernen (ML) als Teilbereich der KI und schlug eine neue Richtung
+für die Entwicklung von künstlicher Intelligenz ein, inspiriert vom konzeptionellen Verständnis der Funktionsweise des menschlichen Gehirns \cite[S. 1]{2020}.\\
+
+Pionier Arthur Samuel definiert maschinelles Lernen als ein Fachgebiet, das Computern die Fähigkeit verleiht, zu lernen,
+ohne ausdrücklich programmiert zu werden \cite[S. 381]{mahesh2020machine}.
+Es befasst sich mit der wissenschaftlichen Untersuchung von Algorithmen und statistischen Modellen,
+die Computersysteme verwenden, um eine Aufgabe zu lösen \cite[S. 381]{mahesh2020machine}.
+Dabei werden statistische Methoden verwendet, um aus Daten zu lernen und Muster zu erkennen. \\
+
+%% schreiben über zunehmende Anforderungen und wie wichtig, ML nun ist
+
+Im Allgemeinen werden die Ansätze des maschinellen Lernens in drei große Kategorien unterteilt, je nach Art des \textit{Signals}
+oder \textit{Feedbacks}, das dem lernenden System zur Verfügung steht \cite[S. 2]{cite-key}:
+\begin{itemize}
+ \item Überwachtes Lernen (supervised learning)
+ \item Unüberwachtes Lernen (unsupervised learning)
+ \item Bestärkendes Lernen (reinforcement learning)
+\end{itemize}
+
+Das \textit{überwachte Lernen} erfordert ein Training mit gelabelten Daten, die Eingaben und gewünschte Ausgaben haben \cite[S. 2]{cite-key}.
+So weiß das Modell zum Beispiel, ob auf einem bestimmten Foto ein Hund abgebildet ist oder wie viel ein bestimmtes Haus kostet.
+Auf dieser Grundlage kann es dann so trainiert werden, dass es neue Hunde erkennt und den Preis für neue Häuser schätzt. \\
+
+Im Gegensatz dazu erfordert das \textit{unüberwachte Lernen} keine markierten Trainingsdaten und erhält lediglich Eingabedaten \cite[S. 2]{cite-key}.
+Die richtige Antwort ist entweder nicht bekannt oder existiert nicht.
+Stattdessen sucht das Modell nach sinnvollen Strukturen in den Daten, um neue Erkenntnisse über ein Thema zu gewinnen \cite[S. 383]{mahesh2020machine}.
+Unüberwachtes Lernen kann zum Beispiel dazu verwendet werden, Kunden zu finden, die einen ähnlichen Geschmack haben,
+und ihnen Artikel empfehlen, die diese Kunden gekauft haben. \\
+
+Das \textit{bestärkende Lernen} hingegen unterscheidet sich sehr deutlich von den beiden vorherigen Kategorien.
+Das Modell ist hier ein aktiver Akteur, der mit seiner externen Umgebung interagiert
+und positives oder negatives Feedback für seine Handlungen erhält \cite[S. 2]{cite-key}.
+Aus diesen Rückmeldungen erlernt es optimale Handlungsstrategien für seine Umgebung zu entwickeln \cite[S. 384]{mahesh2020machine}.
+Solche Modelle können zum Beipiel für selbstfahrende Autos verwendet werden oder auch um einer Maschine Gesellschaftsspiele beizubringen.
+
+
+
 
 \subsection{Python-Bibliotheken}
 % Vorteile von Biblitoheken
