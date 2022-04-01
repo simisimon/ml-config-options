@@ -181,17 +181,7 @@ teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehrere Tage la
 Aus Kosten-Nutzen-Gründen ist hier eine dynamische Analyse nur bedingt sinnvoll.\\
 
 
-\section{Machine Learning}
-%Maschinelles Lernen (ML) wird eingesetzt, um Maschinen beizubringen, wie sie Daten effizienter verarbeiten können.
-%Manchmal können wir nach der Sichtung der Daten die Informationen, die wir aus den Daten gewinnen, nicht interpretieren.
-%In diesem Fall wenden wir maschinelles Lernen an.
-%Mit der Fülle der verfügbaren Datensätze steigt auch die Nachfrage nach maschinellem Lernen.
-%Viele Branchen setzen maschinelles Lernen ein, um relevante Daten zu extrahieren.
-%Der Zweck des maschinellen Lernens besteht darin, aus den Daten zu lernen.
-%Es wurden viele Studien darüber durchgeführt, wie Maschinen selbständig lernen können, ohne explizit programmiert zu werden.
-%Viele Mathematiker und Programmierer wenden verschiedene Ansätze an, um eine Lösung für dieses Problem zu finden, das riesige Datensätze umfasst.
-
-\subsection{Grundlagen}
+\section{Maschinelles Lernen}
 Die künstliche Intelligenz (KI) ist ein Teilgebiet der Informatik und befasst sich mit der Entwicklung von Computerprogrammen und Maschinen,
 die in der Lage sind, Aufgaben auszuführen, die Menschen von Natur aus gut beherrschen \cite[S. 1]{2020}.
 Dazu gehören zum Beispiel die Verarbeitung von natürlicher Sprache (Natural Language Processing) oder Bilderkennung (Computer Vision).
@@ -204,10 +194,42 @@ Es befasst sich mit der wissenschaftlichen Untersuchung von Algorithmen und stat
 die Computersysteme verwenden, um eine Aufgabe zu lösen \cite[S. 381]{mahesh2020machine}.
 Dabei werden statistische Methoden verwendet, um aus Daten zu lernen und Muster zu erkennen. \\
 
-%% schreiben über zunehmende Anforderungen und wie wichtig, ML nun ist
+%Maschinelles Lernen (ML) wird eingesetzt, um Maschinen beizubringen, wie sie Daten effizienter verarbeiten können.
+%Manchmal können wir nach der Sichtung der Daten die Informationen, die wir aus den Daten gewinnen, nicht interpretieren.
+%In diesem Fall wenden wir maschinelles Lernen an.
+%Mit der Fülle der verfügbaren Datensätze steigt auch die Nachfrage nach maschinellem Lernen.
+%Viele Branchen setzen maschinelles Lernen ein, um relevante Daten zu extrahieren.
+%Der Zweck des maschinellen Lernens besteht darin, aus den Daten zu lernen.
+%Es wurden viele Studien darüber durchgeführt, wie Maschinen selbständig lernen können, ohne explizit programmiert zu werden.
+%Viele Mathematiker und Programmierer wenden verschiedene Ansätze an, um eine Lösung für dieses Problem zu finden, das riesige Datensätze umfasst.
 
+\subsection{Ursprung}
+Der Ursprung des maschinellen Lernens liegt bereits in der Mitte des 20. Jahrhunderts, als der Psychologoe Frank Rosenblatt
+von seiner Arbeitsgruppe eine Maschine zur Erkennung von Buchstaben des Alphabets bauen ließ \cite[S. 1385]{FRADKOV20201385}.
+Das Konzept der Maschine basiert auf der Verarbeitung von Signalen analog zum menschliche Nervensystem, weshalb sie
+als Prototyp der modernen künstlichen neuronalen Netze gilt \cite[S. 1385]{FRADKOV20201385}.
+Der kommerzielle Durchbruch ließ dennoch bis auf den Anfang 21. Jahrhundert auf sich warten.
+Nach \citeauthor{FRADKOV20201385} ist dies auf drei Trends zurückzuführen, die zusammen einen spürbaren Synergieeffekt bewirkten. \\
+
+Unter anderem durch den Erfolg und Möglichkeiten des Internets ist nicht nur das Vorhandensein von Daten enorm gewachsen,
+auch ihre Heterogenität führt dazu, dass herkömmliche Methode zur Verarbeitung und Informationsgewinnung nicht mehr ausreichen \cite[S. 1387]{FRADKOV20201385}.
+Durch das Aufkommen von \textit{Big Data} werden neue Ansätze des maschinellen Lernens nicht nur aus dem Motiv des wissenschaftlichen Erkenntnisgewinns entwickelt,
+sondern auch aufgrund der praktischen und kommerziellen Notwendigkeit. \\
+
+Ein weiterer entscheidender Faktor ist die Senkung der Kosten für parallele Berechnung und Speicher.
+Dies umfasst die Weiterentwicklung und Verwendung von Grafikprozessoren (vor allem von Nvidia),
+die zu erheblichen Verbesserungen der Rechenleistung führen \cite[S. 1387]{FRADKOV20201385}.
+Gleichzeitig sinken die Kosten für Arbeitsspeicher stetig, was die Verarbeitung großer Datenmengen zusätzlich erleichtert \cite[S. 1387]{FRADKOV20201385}.
+Aus Softwaresicht kommt schließlich die MapReduce-Technologie von Google bzw. später auch Hadoop dazu, die es ermöglicht,
+die komplexe Berechnungen auf mehrere Prozessoren zu verteilen\cite[S. 1387]{FRADKOV20201385}. \\
+
+Der dritte Trend ist die Entwicklung künstlicher neuronaler Netze, die um ein Vielzahl an Zwischenschichten erweitert wurden
+und so noch komplexere Berechnungen ausführen können.
+In diesem Zusammenhang spricht man auch von \textit{Deep Learning}. \\
+
+\subsection{Algorithmische Ansätze}
 Im Allgemeinen werden die Ansätze des maschinellen Lernens in drei große Kategorien unterteilt, je nach Art des \textit{Signals}
-oder \textit{Feedbacks}, das dem lernenden System zur Verfügung steht \cite[S. 2]{cite-key}:
+oder \textit{Feedbacks}, das dem lernenden System zur Verfügung steht \cite[S. 2]{FRADKOV20201385}:
 \begin{itemize}
  \item Überwachtes Lernen (supervised learning)
  \item Unüberwachtes Lernen (unsupervised learning)
@@ -230,17 +252,18 @@ und positives oder negatives Feedback für seine Handlungen erhält \cite[S. 2]{
 Aus diesen Rückmeldungen erlernt es optimale Handlungsstrategien für seine Umgebung zu entwickeln \cite[S. 384]{mahesh2020machine}.
 Solche Modelle können zum Beipiel für selbstfahrende Autos verwendet werden oder auch um einer Maschine Gesellschaftsspiele beizubringen.
 
-
-
-
 \subsection{Python-Bibliotheken}
 % Vorteile von Biblitoheken
 % Grafik mit populärsten ML-Bibliotheken
+% Basieren auf C++
 
 \subsection{Konfigurationsoptionen}
 
 
 \section{Web Scraping}
+
+
+\section{Abstract Syntax Trees}
 
 
 % Showing natbib citation commands
