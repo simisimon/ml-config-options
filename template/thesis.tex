@@ -57,6 +57,9 @@
 \usehyperref[backref] % This will add back references in the bibliography
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns}
+\usepackage{float}
 \setcitestyle{authoryear,close={)}}
 
 \begin{document}
@@ -70,9 +73,9 @@
   %\chapter*{Acknowledgements} % optional
   %I thank the authors of the swsLeipzig template for their excellent work!
 
-  %\listoffigures % optional
+  \listoffigures % optional
 
-  %\listoftables % optional
+  \listoftables % optional
 
   %\listofalgorithms % optional
   %    requires package algorithm2e
@@ -149,7 +152,7 @@ weshalb viele Bibliotheken für maschinelles Lernen auf Python basieren \cite[S.
 Gegenstand dieser Arbeit werden daher Konfigurationsoptionen sein, die in Python Source Code vorliegen und mittels statischer Code-Analyse erkannt werden.
 Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen gelsesen und ermittelt für jede dieser Stellen den Namen,
 sowie die übergebenen Werte der Option.
-Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe stat): TensorFlow, PyTorch und scikit-learn.
+Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe \autoref{fig:kaggle}): TensorFlow, PyTorch und scikit-learn.
 Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecylce Plattform Mlflow untersucht. \\
 
 
@@ -214,7 +217,7 @@ Nach \citeauthor{FRADKOV20201385} ist dies auf drei Trends zurückzuführen, die
 Unter anderem durch den Erfolg und Möglichkeiten des Internets ist nicht nur das Vorhandensein von Daten enorm gewachsen,
 auch ihre Heterogenität führt dazu, dass herkömmliche Methode zur Verarbeitung und Informationsgewinnung nicht mehr ausreichen \cite[S. 1387]{FRADKOV20201385}.
 Durch das Aufkommen von \textit{Big Data} werden neue Ansätze des maschinellen Lernens nicht nur aus dem Motiv des wissenschaftlichen Erkenntnisgewinns entwickelt,
-sondern auch aufgrund der praktischen und kommerziellen Notwendigkeit. \\
+sondern auch aufgrund der praktischen und kommerziellen Notwendigkeit, die rasant wachsenden generierten Datenmengen leistungsfähig verarbeiten zu können. \\
 
 Ein weiterer entscheidender Faktor ist die Senkung der Kosten für parallele Berechnung und Speicher.
 Dies umfasst die Weiterentwicklung und Verwendung von Grafikprozessoren (vor allem von Nvidia),
@@ -271,8 +274,34 @@ aber auch den Aufruf von Funktionen, sowie die Verwendung von Variablen und Klas
 Dadurch können kritische Teile des Codes um ein Vielfaches beschleunigt werden. \\
 
 Einer der Hauptgründe für die Populärität von Python ist das riesige Ökosystem, das aus einer Vielzahl
-von umfangreichen und leistungsfähigen Bibliotheken besteht, über die eben angesprochene Algorithmen aufgerufen werden können \cite[S. 2]{2020}.
-So kann die Benutzendenfreundlichkeit bei gleichzeitiger Effizienz in der Performanz gewahrt bleiben.
+von umfangreichen und leistungsfähigen Bibliotheken besteht, über die eben angesprochene Algorithmen aufgerufen werden können,
+wodurch die Benutzendenfreundlichkeit bei gleichzeitiger Effizienz in der Performanz gewahrt bleiben kann \cite[S. 2]{2020}.
+So sind nach einer jährlich von der Data Science-Plattform \citeauthor{kaggle} durchgeführten Umfrage unter rund 25.000 ML-Engineers
+und Data Scientists, die Python Bibliotheken mit großem Abstand die am meisten genutzten Frameworks für maschinelles Lernen \cite[]{kaggle}.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        xbar,
+        xmax=100,
+        nodes near coords,
+        xlabel={Angaben in \%},
+        symbolic y coords={Caret,Prophet,Huggingface,CatBoost,LightGBM,PyTorch,Keras,Xgboost,TensorFlow,scikit-learn},
+        ytick = data,
+  ]
+  \addplot [pattern=crosshatch dots,pattern color=black] coordinates { (82.3,scikit-learn)(52.6,TensorFlow)(47.9,Xgboost)(47.3,Keras)(33.7,PyTorch)(25.1,LightGBM)(14.1,CatBoost)(10.6,Huggingface)(10.1,Prophet)(9.8,Caret)};
+  \end{axis}
+\end{tikzpicture}
+\caption{Nutzung von ML-Frameworks \cite[]{kaggle}} \label{fig:kaggle}
+\end{center}
+\end{figure}
+
+Aus der Grafik lassen sich drei der zu untersuchenden Python Bibliotheken entnehmen.
+Zum einen scikit-learn, das aufgrund der Vielzahl an implementierten Algorithmen wie ein \glqq schweizer Taschenmesser\grqq{}
+für die meisten Projekte eingesetzt werden kann und von über 80\% der Befragten verwendet wird \cite[]{kaggle}.
+
+
 
 
 % Vorteile von Biblitoheken
