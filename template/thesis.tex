@@ -150,10 +150,15 @@ Insbesondere im Bereich wissenschaftliches Rechnen (Scientific Computing) gewann
 weshalb viele Bibliotheken für maschinelles Lernen auf Python basieren \cite[S. 2]{2020}. \\
 
 Gegenstand dieser Arbeit werden daher Konfigurationsoptionen sein, die in Python Source Code vorliegen und mittels statischer Code-Analyse erkannt werden.
-Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen gelsesen und ermittelt für jede dieser Stellen den Namen,
+Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen gelesesen und ermittelt für jede dieser Stellen den Namen,
 sowie die übergebenen Werte der Option.
-Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe \autoref{fig:kaggle}): TensorFlow, PyTorch und scikit-learn.
-Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecylce Plattform Mlflow untersucht. \\
+Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe \autoref{fig:kaggle}):
+\begin{itemize}
+ \item TensorFlow
+ \item PyTorch
+ \item scikit-learn
+\end{itemize}
+Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecylce Plattform \textit{MLflow} untersucht. \\
 
 
 \section{Aufbau dieser Arbeit und methodisches Vorgehen}
@@ -298,15 +303,28 @@ und Data Scientists, die Python Bibliotheken mit großem Abstand die am meisten 
 \end{figure}
 
 Aus der Grafik lassen sich drei der zu untersuchenden Python Bibliotheken entnehmen.
-Zum einen scikit-learn, das aufgrund der Vielzahl an implementierten Algorithmen wie ein \glqq schweizer Taschenmesser\grqq{}
+Zum einen \textit{scikit-learn}, das aufgrund der Vielzahl an implementierten Algorithmen wie ein \glqq schweizer Taschenmesser\grqq{}
 für die meisten Projekte eingesetzt werden kann und von über 80\% der Befragten verwendet wird \cite[]{kaggle}.
+Die Vorteile von scikit-learn ist die benutzerfreundliche Struktur und Dokumentation mit der maschinelles Lernen
+auch für unerfahrene oder fachfremde Menschen zugänglich gemacht wird \cite[S.29]{10.1145/2786984.2786995}.\\
+
+Bei der zweiten zu untersuchenden Bibliothek handelt es sich um \textit{TensorFlow}.
+Nachdem es 2015 von Forschern bei Google ursprünglich für interne Zwecke entwickelt wurde, hat sich TensorFlow vor allem im Bereich
+Deep Learning als populäres Werkzeug bewährt \cite[S. 227]{doi:10.3102/1076998619872761}.
+So bietet TensorFlow Projekte, die viel Customizing erfordern, eine leistungsfähige und flexible Umgebung, die das Trainieren
+künstlicher neuronaler Netze vereinfacht und beschleunigt \cite[S. 227]{doi:10.3102/1076998619872761}.\\
+
+Die dritte zu untersuchende Bibliothek \textit{PyTorch} wird zwar insgesamt weniger häufig verwendet, verzeichnet
+jedoch Jahr für Jahr ein starkes Wachstum in der Nutzung \cite[]{kaggle}.
+PyTorch ist vor allem nützlich beim Umgang mit künstlichen neuronalen Netzen, weshalb es 2019 auch die
+meistgenutzte Deep Learning-Bibliothek auf allen großen Deep Learning-Konferenzen war \cite[S. 23]{2020}.\\
+
+\textit{MLflow} ist wie die eben aufgeführten Bibliotheken Open Source und wurde vom Silicon Valley Startup databricks 2018 ins Leben gerufen \cite[S. 39]{zaharia2018accelerating}.
+Ziel der Plattform ist dabei den Lebenszyklus von ML-Projekten ganzheitlich zu strukturieren \cite[S. 39]{zaharia2018accelerating}.
+Dabei werden über die ML-Algorithmen hinaus, den Anwendenden Werkzeuge mit in die Hand zu geben, um den Herausforderungen
+von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begegnen \cite[S. 44]{zaharia2018accelerating}.
 
 
-
-
-% Vorteile von Biblitoheken
-% Grafik mit populärsten ML-Bibliotheken
-% Basieren auf C++
 
 \subsection{Konfigurationsoptionen}
 
