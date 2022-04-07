@@ -297,7 +297,7 @@ class NodeObject:
             for arg in obj.args:
                 if type(arg) == ast.Name:
                     self.get_variable_scope(arg)
-                argument = self.get_value(arg)
+                argument = ast.unparse(arg)
                 self.parameter.append((None, argument))
             for param in obj.keywords:
                 argument = str(param.arg)
@@ -445,10 +445,10 @@ class NodeObject:
 
 def main():
     repo = "test_repo"
-    SklearnNodes(repo).get_nodes()
+    #SklearnNodes(repo).get_nodes()
     #PyTorchNodes(project).get_nodes()
     #MLflowNodes(project).get_nodes()
-    #TensorFlowNodes(repo).get_nodes()
+    TensorFlowNodes(repo).get_nodes()
 
 
 
