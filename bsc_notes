@@ -328,4 +328,16 @@ torch.autograd.profiler.profile(enabled=True, *, use_cuda=False, record_shapes=F
 handle of class variables: e.g. https://www.tensorflow.org/api_docs/python/tf/AggregationMethod
 
 
+Datenfluss:
+    - prüfen ob variable als Parameter übergeben wird
+    - alle Variablenzuweisungen (auch aug und so) rausfiltern
+    - alle übergeordnete Objekte der Variablen rausfiltern
 
+Limits:
+    - Aufrufe wie diesen (x_param() erkennt er nicht
+    onehotencoder = OneHotEncoder(categorical_features=x_param())
+    - augassign manuell nochmal jedes mal ändern
+    - zu lang
+    - with macht er gar nicht : dafür immer extra variable "with_python_as_p"
+
+    xonstant progpagation auch mit erwähnrn und cfg

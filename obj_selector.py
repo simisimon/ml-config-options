@@ -1,6 +1,7 @@
 import ast
 from pprint import pprint
 import json
+import copy
 
 
 class CodeObjects:
@@ -85,14 +86,15 @@ class CodeObjects:
     def get_object(self, obj):
         if hasattr(obj, 'body'):
             if type(obj) == ast.FunctionDef or type(obj) == ast.AsyncFunctionDef:
-                assignments = []
-                for body_obj in obj.body:
-                    if type(body_obj) == ast.Assign:
-                        assignments.append(body_obj)
-                func = {"line no": obj.lineno, "line no end": obj.end_lineno, "assignments": assignments}
-                self.function_objects.append(func)
+                #assignments = []
+                #for body_obj in obj.body:
+                #    if type(body_obj) == ast.Assign:
+                #        assignments.append(body_obj)
+                #func = {"line no": obj.lineno, "line no end": obj.end_lineno, "assignments": assignments}
+                #self.function_objects.append(func)
+                self.function_objects.append(copy.deepcopy(obj))
 
-            for body_obj in obj.body:  # func, async func, class, with, async with, except handler
+            for body_obj in obj.body:  # func, async func, class, with, async with, except handler, if...
                 self.get_object(body_obj)
             obj.body = []
 
@@ -206,27 +208,31 @@ class CodeObjects:
         for obj in self.first_level_objects:
             if type(obj) == ast.Assign:
                 global_assignments.append(obj)
-        self.function_objects = sorted(self.function_objects, key=lambda d: d["line no end"])
+        #self.function_objects = sorted(self.function_objects, key=lambda d: d["line no end"])
         for obj in self.class_objects_from_library:
             for func in self.function_objects:
-                if func["line no"] <= obj["object"].lineno:
-                    if obj["object"].lineno <= func["line no end"]:
-                        assigns_before_obj = []
-                        for assign in func["assignments"]:
-                            if assign.lineno < obj["object"].lineno:
-                                assigns_before_obj.append(assign)
-                            else:
-                                break
-                        obj["parameter variables"] = assigns_before_obj
+                #if func["line no"] <= obj["object"].lineno:
+                if func.lineno <= obj["object"].lineno:
+                    #if obj["object"].lineno <= func["line no end"]:
+                    if obj["object"].lineno <= func.end_lineno:
+                        #assigns_before_obj = []
+                        #for assign in func["assignments"]:
+                        #    if assign.lineno < obj["object"].lineno:
+                        #        assigns_before_obj.append(assign)
+                        #    else:
+                        #        break
+                        #obj["parameter variables"] = assigns_before_obj
+                        obj["parameter variables"] = func
                         break
                 else:
-                    global_assigns_before_obj = []
-                    for assign in global_assignments:
-                        if assign.lineno < obj["object"].lineno:
-                            global_assigns_before_obj.append(assign)
-                        else:
-                            break
-                    obj["parameter variables"] = global_assigns_before_obj
+                    #global_assigns_before_obj = []
+                    #for assign in global_assignments:
+                    #    if assign.lineno < obj["object"].lineno:
+                    #        global_assigns_before_obj.append(assign)
+                    #    else:
+                    #        break
+                    #obj["parameter variables"] = global_assigns_before_obj
+                    obj["parameter variables"] = func
                     break
 
 
