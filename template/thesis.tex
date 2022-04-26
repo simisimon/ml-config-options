@@ -84,9 +84,9 @@
 \end{frontmatter}
 
 \chapter{Einleitung}\label{Einleitung}
-Diese Arbeit entsteht am Institut für Informatik an der Universit\"at Leipzig in der Abteilung \glqq Softwaresysteme\grqq.
-Im Folgenden wird die zugrundeliegende Problemstellung und Relevanz erl\"autert.
-Anschlie\ss end wird dieses Problem auf einen konkreten Anwendungsbereich \"ubertragen und auf die Zielsetzung der Arbeit eingegangen.\\
+%Diese Arbeit entsteht am Institut für Informatik an der Universit\"at Leipzig in der Abteilung \glqq Softwaresysteme\grqq.
+%Im Folgenden wird die zugrundeliegende Problemstellung und Relevanz erl\"autert.
+%Anschlie\ss end wird dieses Problem auf einen konkreten Anwendungsbereich \"ubertragen und auf die Zielsetzung der Arbeit eingegangen.\\
 
 \section{Motivation}
 Moderne Softwaresysteme erm\"oglichen den Nutzenden ein breites Spektrum unterschiedlicher Konfigurationsoptionen.
@@ -101,13 +101,13 @@ Zur Speicherung von Konfigurationsoptionen verwenden einige Systeme, wie das Big
 Ein einheitliches Schema zur Speicherung als Konfigurationsdatei gibt es jedoch nicht, weshalb sich diese von der Struktur und Syntax unterscheiden. \cite[S. 131]{10.1145/1985793.1985812}.
 Im Source Code können die Konfigurationsoptionen eingelesen und bearbeitet werden \cite[S. 185]{7774519}.\\
 
-W\"ahrend die Vielf\"altigkeit und Individualisierbarkeit der Software gr\"o\ss er wird, erh\"oht sich auch die Komplexit\"at der Software f\"ur Entwickelnde.
-Vor allem das Warten und Testen gestaltet sich nun umfangreicher.
+W\"ahrend die Vielf\"altigkeit und Individualisierbarkeit der Software gr\"o\ss er wird, erh\"oht sich auch die Komplexit\"at der Software f\"ur Entwickler und Entwicklerinnen.
+Vor allem das Warten und Testen der Konfigurationsmöglichkeiten gestaltet sich nun umfangreicher.
 Besonders problematisch wird es, wenn Konfigurationsoptionen auf unvorhergesehene Weise interagieren.
 Solche Abh\"angigkeiten sind in einem wachsenden Spielraum m\"oglicher Kombinationen schwer zu entdecken und zu verstehen.
-Entwickelnde m\"ussen die Konfigurationsoptionen innerhalb der Software verfolgen, um festzustellen,
+Entwickler und Entwicklerinnen m\"ussen die Konfigurationsoptionen innerhalb der Software verfolgen, um festzustellen,
 welche Codefragmente von einer Option betroffen sind und wo und wie sie mit ihr interagieren.
-Des Weiteren kann es vorkommen, dass Entwickelnde Werte von Konfigurationsoptionen nicht aktualisieren, was dazu führen kann,
+Des Weiteren kann es vorkommen, dass Entwickler und Entwicklerinnen Werte von Konfigurationsoptionen nicht aktualisieren, was dazu führen kann,
 dass über mehrere Module hinweg, unbemerkt mit falschen Werten gearbeitet wird \cite[S. 185]{7774519}.
 Die verschiedenen m\"oglichen Auspr\"agungen einer Konfigurationsoption erschweren hierbei die Nachvollziehbarkeit des Kontrollflusses der Software.\\
 
@@ -118,7 +118,7 @@ sodass sich die Software nicht wie gewünscht verhält \cite[S. 152]{10.1145/256
 Solche Fehler können dazu führen, dass die Software abstürzt, eine fehlerhafte Ausgabe erzeugt oder nur unzureichend funktioniert \cite[S. 152]{10.1145/2568225.2568251}.\\
 
 Konfigurationsfehler entstehen zum Beispiel durch die Verwendung unterschiedlicher Versionen einer Software.
-Im folgendem Codeausschnitt wird die scikit-learn Klasse \textit{LogisticRegression} initialisiert und der Variable \textit{clf} zugewiesen:\\
+Im folgendem Codeausschnitt wird die Klasse \textit{LogisticRegression} der Machine Learning-Bibliothek \textit{scikit-learn} initialisiert und der Variable \textit{clf} zugewiesen:\\
 
 \begin{lstlisting}[language=Python, frame=single]
   from sklearn.linear_model import LogisticRegression
@@ -131,6 +131,17 @@ Da keine Parameter angegeben werden, wird die Klasse mit den Default-Werten init
 In der Version \textit{scikit-learn 0.21.3} wird für den Parameter \textit{multi\_class} als Default noch der Wert \textit{ovr} zugewiesen (\citeyear{sklearn}).
 Für alle nachfolgenden Versionen ist der Default-Wert für diesen Parameter jedoch \textit{auto} (\citeyear{sklearn}).
 Folglich führt die Verwendung dieser Klasse ohne explizite Parameterangabe, nach Verwendung unterschiedlicher Versionen, zu schwer nachvollziehbaren Programmverhalten.\\
+
+Bei den Parametern eines solchen Machine Learning Algorithmus, die vor Beginn des Lernprozesses festgelegt werden,
+spricht man dabei von sogenannten \textit{Hyperparametern}.
+Sie werden als Parameter an die jeweilige Klasse übergeben und bieten den Nutzenden Konfigurationsmöglichkeiten für
+das Training des Modells.
+In dem obigen Fall können so beispielsweise über den Parameter \textit{max\_iter} die Anzahl der Trainingsiterationen
+der Logistischen Regression festgelegt werden und über \textit{n\_jobs} die maximale Anzahl der parallel zu verwendenden CPU-Kernen.
+Durch das Extrahieren dieser Konfigurationswerte, können die Parameter statisch geprüft werden, was für den Nutzenden
+eine Zeitersparnis bedeutet, wenn sonst ein falscher Konfigurationswert einen langen Batch-Job zum Scheitern bringt oder das Ergebnis unbrauchbar werden lässt. \\
+
+
 
 \section{Anwendungsbereich und Zielsetzung}
 Das Ziel dieser Arbeit ist es, Konfigurationsoptionen im Source Code zu erkennen und zu extrahieren. \\
@@ -150,7 +161,7 @@ Insbesondere im Bereich wissenschaftliches Rechnen (Scientific Computing) gewann
 weshalb viele Bibliotheken für maschinelles Lernen auf Python basieren \cite[S. 2]{2020}. \\
 
 Gegenstand dieser Arbeit werden daher Konfigurationsoptionen sein, die in Python Source Code vorliegen und mittels statischer Code-Analyse erkannt werden.
-Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen gelesesen und ermittelt für jede dieser Stellen den Namen,
+Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen gelesen und ermittelt für jede dieser Stellen den Namen,
 sowie die übergebenen Werte der Option.
 Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe \autoref{fig:kaggle}):
 \begin{itemize}
@@ -180,8 +191,8 @@ mit denen das Programm während der dynamischen Analyse ausgeführt wurde \cite[
 
 Für das Aufspüren von Konfigurationsoptionen bietet sich eine statische Code-Analyse daher aus mehreren Gründen an.
 So kann es viele Optionen geben, die nur in bestimmten Modulen oder als Folge bestimmter Eingaben verwendet werden.
-Es ist unwahrscheinlich, dass mittels dynamischen Testens alle Verwendungen der gesuchten Konfigurationsoptionen gefunden werden.
-Dies würde zudem bei größeren Softwareprojekten eine sehr komplexe Test-Suite erfordern, um möglichst alle Fälle abdecken zu können.
+%Es ist unwahrscheinlich, dass mittels dynamischen Testens alle Verwendungen der gesuchten Konfigurationsoptionen gefunden werden.
+%Dies würde zudem bei größeren Softwareprojekten eine sehr komplexe Test-Suite erfordern, um möglichst alle Fälle abdecken zu können.
 Mit der statischen Code-Analyse kann eine hohe Abdeckung hingegen deutlich leichter erreicht werden.
 Gleichzeitig verbergen sich hinter den Methoden und Klassen, der zu untersuchenden Machine Learning Bibliotheken,
 teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehrere Tage laufen könnten.
@@ -261,7 +272,7 @@ Aus diesen Rückmeldungen erlernt es optimale Handlungsstrategien für seine Umg
 Solche Modelle können zum Beispiel für selbstfahrende Autos verwendet werden oder um einer Maschine Gesellschaftsspiele beizubringen.
 
 \subsection{Python-Bibliotheken}
-Fürs maschinelle Lernen gilt Python schon seit langem als erste Wahl für Entwickelnde.
+Fürs maschinelle Lernen gilt Python schon seit langem als erste Wahl für Entwickler und Entwicklerinnen.
 Eine im Mai \citeyear{nugget} veröffentlichte Umfrage vom Portal \citeauthor{nugget} ergab, dass Python in der Kategorie
 \glqq Top Analytics, Data Science, Machine Learning Tools\grqq{} von rund 66\% der Teilnehmenden verwendet wird
 und damit die populärste Programmiersprache in diesem Bereich ist \cite{nugget}. \\
