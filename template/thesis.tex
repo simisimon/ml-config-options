@@ -44,6 +44,8 @@
 \usepackage{xcolor}
 \usepackage{soul}
 \usepackage{listings}
+\usepackage[euler]{textgreek}
+\usepackage{graphicx}
 \newcommand{\bscom}[2]{%
   % #1 Original text.
   % #2 Replacement text.
@@ -121,7 +123,7 @@ Konfigurationsfehler entstehen zum Beispiel durch die Verwendung unterschiedlich
 Im folgendem Codeausschnitt wird die Klasse \textit{LogisticRegression} der Machine Learning-Bibliothek \textit{scikit-learn} initialisiert und der Variable \textit{clf} zugewiesen:\\
 
 \begin{lstlisting}[language=Python, frame=single]
-  from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 clf = LogisticRegression()
 \end{lstlisting}
 \
@@ -132,14 +134,15 @@ In der Version \textit{scikit-learn 0.21.3} wird für den Parameter \textit{mult
 Für alle nachfolgenden Versionen ist der Default-Wert für diesen Parameter jedoch \textit{auto} (\citeyear{sklearn}).
 Folglich führt die Verwendung dieser Klasse ohne explizite Parameterangabe, nach Verwendung unterschiedlicher Versionen, zu schwer nachvollziehbaren Programmverhalten.\\
 
-Bei den Parametern eines solchen Machine Learning Algorithmus, die vor Beginn des Lernprozesses festgelegt werden,
+Bei den Parametern eines solchen Machine Learning Algorithmus, die vor Beginn des Lernprozesses vom Nutzenden festgelegt werden können,
 spricht man dabei von sogenannten \textit{Hyperparametern}.
 Sie werden als Parameter an die jeweilige Klasse übergeben und bieten den Nutzenden Konfigurationsmöglichkeiten für
 das Training des Modells.
 In dem obigen Fall können so beispielsweise über den Parameter \textit{max\_iter} die Anzahl der Trainingsiterationen
 der Logistischen Regression festgelegt werden und über \textit{n\_jobs} die maximale Anzahl der parallel zu verwendenden CPU-Kernen.
 Durch das Extrahieren dieser Konfigurationswerte, können die Parameter statisch geprüft werden, was für den Nutzenden
-eine Zeitersparnis bedeutet, wenn sonst ein falscher Konfigurationswert einen langen Batch-Job zum Scheitern bringt oder das Ergebnis unbrauchbar werden lässt. \\
+eine Zeitersparnis bedeutet, wenn sonst ein falscher Konfigurationswert einen langen Batch-Job zum Scheitern bringt
+oder das Ergebnis nicht den Erwartungen entspricht. \\
 
 
 
@@ -161,9 +164,11 @@ Insbesondere im Bereich wissenschaftliches Rechnen (Scientific Computing) gewann
 weshalb viele Bibliotheken für maschinelles Lernen auf Python basieren \cite[S. 2]{2020}. \\
 
 Gegenstand dieser Arbeit werden daher Konfigurationsoptionen sein, die in Python Source Code vorliegen und mittels statischer Code-Analyse erkannt werden.
-Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen gelesen und ermittelt für jede dieser Stellen den Namen,
-sowie die übergebenen Werte der Option.
-Dabei liegt der Fokus auf drei der populärsten Machine Learning Bibliotheken in dieser Sprache (siehe \autoref{fig:kaggle}):
+Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen der zu untersuchenden Bibliotheken gelesen werden
+und ermittelt für jede dieser Stellen den Namen der Option.
+Darauf aufbauend erfolgt eine Datenflussanalyse, um auch für Optionen, die in Form von Variablen als Parameter übergeben werden,
+die möglichen Werte zu ermitteln.
+Der Fokus auf drei der populärsten Machine Learning Bibliotheken in Python (siehe \autoref{fig:kaggle}):
 \begin{itemize}
  \item TensorFlow
  \item PyTorch
@@ -199,6 +204,52 @@ teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehrere Tage la
 Aus Kosten-Nutzen-Gründen ist hier eine dynamische Analyse nur bedingt sinnvoll.\\
 
 \section{Datenflussanalyse}
+Die Datenflussanalyse ist ein Werkzeug, um Informationen über die möglichen Werte, die an verschiedenen
+Stellen in einem Codesegment berechnet werden, zu erfassen \cite[S. 1537]{58766}.
+Es handelt sich um eine statische Analysetechnik mit dem Ziel, das Programmverhalten schon zur Übersetzungszeit,
+also bevor es ausgeführt wurde, zu bestimmen.
+Der Datenfluss kann mittels eines Kontrollflussgraphens dargestellt werden und dem Betrachtenden
+Rückschlüsse über das Verhalten des Programms geben.
+Der Graph zeigt an, an welchen Stellen eine Variable verwendet wird und welche Werte sie annehmen kann.\\
+
+Es gibt verschiedene Techniken, die innerhalb der Datenflussanalyse eingesetzt werden, um den Wert von Variablen zu bestimmen.
+Eine von ihnen ist \textit{Constant Propagation}.
+Das Ziel von Constant Propagation ist zu bestimmen, an welchen Stellen im Programm, eine Variable einen konstanten Wert besitzt.
+So kann zum Beispiel toter Code, also redundanter Code, der im weiteren Programmverlauf nicht weiter verarbeitet wird, gefunden werden.\\
+
+Eine weitere Technik ist \textit{Static Single Assignment}.
+Bei dieser Methodik werden die Variablen im Verlauf des Übersetzungsprozesses in eine Zwischenform überführt, in der jede Variable
+genau einmal zugewiesen wird.
+Die Variablen werden in Versionen aufgeteilt und in der Regel mit einem aufsteigendem Index versehen,
+sodass jede Definition ihre eigene Version erhält.\\
+
+Die beide Techniken Static Single Assignment und Constant Propagation werden in dem statischen Analyse-Framework
+\textit{Scalpel} kombiniert.
+Aus dem folgenden Codebeispiel geht hervor, dass die Variable \textit{a} zwei unterschiedliche Werte annehmen kann.\\
+
+\begin{lstlisting}[language=Python, frame=single]
+c = 10
+a = -1
+if c > 0:
+    a = a + 1
+else:
+    a = 0
+total = c + a
+\end{lstlisting}
+\
+
+Der daraus resultierende Kontrollflussgraph besteht charakteristisch aus Knoten, die die jeweilige Code-Objekte beinhalten und gerichtete Kanten als Übergang
+zwischen den Knoten, die den Programmablauf darstellen.
+Mittels Constant Propagation werden die tatsächlichen Werte der Variablen an den jeweiligen Verwendungszeitpunkten erkannt
+und über die \textPhi-Funktion kann durch Static Single Assignment abgeleitet werden, dass es zwei mögliche Rückgabewerte gibt.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=0.8]{ssa_diagram}
+ \caption{Kontrollflussgraph \cite[]{li2022scalpel}}
+ \label{fig:scalpel}
+\end{figure}
+
 
 \section{Maschinelles Lernen}
 Die künstliche Intelligenz (KI) ist ein Teilgebiet der Informatik und befasst sich mit der Entwicklung von Computerprogrammen und Maschinen,
