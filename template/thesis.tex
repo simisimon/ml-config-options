@@ -320,7 +320,7 @@ Das \textit{bestärkende Lernen} hingegen unterscheidet sich sehr deutlich von d
 Das Modell ist hier ein aktiver Akteur, das mit seiner externen Umgebung interagiert
 und positives oder negatives Feedback für seine Handlungen erhält \cite[S. 2]{cite-key}.
 Aus diesen Rückmeldungen erlernt es optimale Handlungsstrategien für seine Umgebung zu entwickeln \cite[S. 384]{mahesh2020machine}.
-Solche Modelle können zum Beispiel für selbstfahrende Autos verwendet werden oder um einer Maschine Gesellschaftsspiele beizubringen.
+Solche Modelle können zum Beispiel für selbstfahrende Autos verwendet werden oder um einer Maschine Gesellschaftsspiele beizubringen.\\
 
 \subsection{Python-Bibliotheken}
 Fürs maschinelle Lernen gilt Python schon seit langem als erste Wahl für Entwickler und Entwicklerinnen.
@@ -384,11 +384,45 @@ meistgenutzte Deep Learning-Bibliothek auf allen großen Deep Learning-Konferenz
 \textit{MLflow} ist wie die eben aufgeführten Bibliotheken Open Source und wurde vom Silicon Valley Startup databricks 2018 ins Leben gerufen \cite[S. 39]{zaharia2018accelerating}.
 Ziel der Plattform ist dabei den Lebenszyklus von ML-Projekten ganzheitlich zu strukturieren \cite[S. 39]{zaharia2018accelerating}.
 Dabei werden über die ML-Algorithmen hinaus, den Anwendenden Werkzeuge mit in die Hand zu geben, um den Herausforderungen
-von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begegnen \cite[S. 44]{zaharia2018accelerating}.
-
+von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begegnen \cite[S. 44]{zaharia2018accelerating}.\\
 
 
 \subsection{Konfigurationsoptionen}
+In objektorientierten Programmiersprachen wie Python sind Klassen einer der grundlegenden Bausteine, die bei der Entwicklung und Anwendung
+von maschinellem Lernen eingesetzt werden.
+Sie bieten die Möglichkeit, Daten und Funktionen zu kombinieren und dem Nutzenden von Machine Learning Bibliotheken,
+bereits vorformulierte Algorithmen aufzurufen.
+Dabei werden die Konfigurationsoptionen beim Aufruf der jeweiligen Klasse als Parameter übergeben, sodass die Algorithmen
+an die Bedürfnisse des Anwendenen angepasst werden können.
+So kann die zielgerichtete Nutzung effizienter und komplexer Algorithmen bei gleichzeitiger Konfigurierbarkeit gewährleistet werden. \\
+
+Bei den Konfigurationsparametern von Lernalgorithmen handelt es sich um sogenannte \textit{Hyperparameter}.
+Lernalgorithmen ermöglichen einem Computerprogramm den menschlichen Lernprozess mittels statistischer Methoden zu imitieren.
+Sie werden zur Mustererkennung, Klassifizierung und Vorhersage verwendet, indem sie aus einem vorhandenen Trainingsdatensatz
+lernen.
+Hyperparameter werden festgelegt bevor der Lernprozess beginnt und um den Lernprozess zu steuern \cite[S. 280]{hype}.
+Da sich die Algorithmen oft sehr unterschiedlich verhalten, wenn sie mit verschiedenen Hyperparameter instanziiert werden,
+wurden in den letzten Jahren eine Vielzahl an Hyperparameter-Optimierungsverfahren entwickelt \cite[S. 1]{pmlr-v32-hutter14}.
+Optimierte Hyperparameter können die Leistungsfähigkeit eines Modells oder die Geschwindigkeit und Qualität Lernprozesses stark beeinflussen \cite[S. 280]{hype}.\\
+
+Im folgenden Codebeispiel wird der \textit{Gradient Boosting Classifier} aus der scikit-learn Bibliothek betrachtet.\\
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single]
+from sklearn.ensemble import GradientBoostingClassifier
+
+gbc = GradientBoostingClassifier(n_estimators=20,
+        learning_rate=0.05, max_features=2, max_depth=2,
+        random_state=0)
+\end{lstlisting}
+\end{minipage}
+\
+
+Es wird eine Instanz dieser Klasse erzeugt und der Variable \textit{gbc} zugewiesen.
+Die Klasse verfügt über 20 Parameter (Version 1.0.2), die, sofern bei der Instanziierung für den jeweiligen Parameter
+kein neuer Wert zugewiesen wird, mit einem eigenen Default-Wert initialisiert werden.
+So werden im Beispiel, den Hyperparametern wie \textit{n\_estimators}, \textit{learning\_rate} oder \textit{max\_depth}
+Zahlenwerte übergeben, die von den Default-Werten abweichen.\\
 
 
 \section{Web Scraping}
