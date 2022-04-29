@@ -426,9 +426,44 @@ Zahlenwerte übergeben, die von den Default-Werten abweichen.\\
 
 
 \section{Web Scraping}
+Web Scraping ist eine Technik, um Daten aus dem World Wide Web zu extrahieren, um sie später abrufen oder analysieren zu können \cite[S. 1]{zhao2017web}.
+Dafür werden die Webdaten über das Hypertext Transfer Protocol (HTTP) oder über einen Webbrowser ausgelesen \cite[S. 1]{zhao2017web}.
+Dies kann entweder manuell durch den jeweiligen Benutzenden oder automatisch durch einen Bot oder Webcrawler erfolgen \cite[S. 1]{zhao2017web}.
+Ein Web Scraper simuliert das menschliche Browsing-Verhalten im Web, um aus verschiedenen Websites
+detaillierte Informationen in einer vorgegebenen Struktur zu sammeln \cite[S. 6040]{9005594}.
+Durch die Möglichkeit für eine bestimmte Website-Struktur systematisch ausgerichtet und programmiert zu werden, liegt der Vorteil
+eines Web Scrapers in seiner Automatisierungsfähigkeit und Geschwindigkeit \cite[S. 6040]{9005594}.
+Mögliche Anwendungsfälle sind zum Beispiel das Überwachen von Preis-Änderungen in Online-Shops oder das Auslesen und Kopieren
+von Kontaktinformationen.\\
+
+Ein Web Scraping-Prozess gliedert sich üblicherweise in zwei Schritten \cite[S. 1]{zhao2017web}:
+\begin{enumerate}
+ \item Erfassen der Webressourcen
+ \item Extrahieren der gewünschten Informationen aus den erfassten Daten
+\end{enumerate}
+Zunächst wird die Kommunikation zur Ziel-Website über das HTTP-Protokoll hergestellt \cite[S. 789]{10.1093/bib/bbt026}.
+Über die HTTP-Anfrage ist der Scraper in der Lage, die Ressourcen der jeweiligen Website zu erfassen \cite[S. 1]{zhao2017web}.
+Dies erfolgt entweder als URL mit einer GET-Abfrage für Ressourcenanfragen oder als HTTP-Nachricht mit einer
+POST-Abfrage für die Übermittlung von Formularen \cite[S. 789]{10.1093/bib/bbt026}.
+Nachdem die Anfrage erfolgreich empfangen und von der Ziel-Website verarbeitet wurde, wird die angeforderte Ressource
+von der Website aufgerufen und an das Web Scraping-Programm zurückgesendet \cite[S. 1]{zhao2017web}.
+Die Ressource kann in verschiedenen Formaten vorliegen:
+In Auszeichnungssprachen wie HTML (Hypertext Markup Language) oder XML (Extensible Markup Language), JSON-Format
+(JavaScript Object Notation) oder in Form von Multimedia-Daten wie Bilder-, Audio oder Videodateien \cite[S. 1]{zhao2017web}.\\
+
+Im zweiten Schritt folgt der Extraktionsprozess.
+Die heruntergeladenen Daten können nun geparst werden, um die benötigten Information zu filtern und in ein geeignetes Format
+umzuwandeln \cite[S. 790]{10.1093/bib/bbt026}.
+Die Daten können nun weiterverarbeitet werden, indem sie beispielsweise analysiert oder in eine gewünschte Struktur
+organisiert werden.\\
 
 
 \section{Abstract Syntax Trees}
+Als eine interpretierte High-Level-Programmiersprache wird Python Code nicht kompiliert, sondern vom
+Python Interpreter nach einer bestimmten Abfolge von Schritten in Anweisungen übersetzt, die eine Maschine ausführen kann.
+Der Code wird
+
+\section{Verwandte Arbeiten}
 
 
 % Showing natbib citation commands
