@@ -122,7 +122,7 @@ Solche Fehler können dazu führen, dass die Software abstürzt, eine fehlerhaft
 Konfigurationsfehler entstehen zum Beispiel durch die Verwendung unterschiedlicher Versionen einer Software.
 Im folgendem Codeausschnitt wird die Klasse \textit{LogisticRegression} der Machine Learning-Bibliothek \textit{scikit-learn} initialisiert und der Variable \textit{clf} zugewiesen:\\
 
-\begin{lstlisting}[language=Python, frame=single]
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
 from sklearn.linear_model import LogisticRegression
 clf = LogisticRegression()
 \end{lstlisting}
@@ -227,7 +227,7 @@ Die beide Techniken Static Single Assignment und Constant Propagation werden in 
 \textit{Scalpel} kombiniert.
 Aus dem folgenden Codebeispiel geht hervor, dass die Variable \textit{a} zwei unterschiedliche Werte annehmen kann.\\
 
-\begin{lstlisting}[language=Python, frame=single]
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
 c = 10
 a = -1
 if c > 0:
@@ -387,7 +387,7 @@ Dabei werden über die ML-Algorithmen hinaus, den Anwendenden Werkzeuge mit in d
 von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begegnen \cite[S. 44]{zaharia2018accelerating}.\\
 
 
-\subsection{Konfigurationsoptionen}
+\subsection{Konfigurationsoptionen} \label{Konfigurationsoptionen}
 In objektorientierten Programmiersprachen wie Python sind Klassen einer der grundlegenden Bausteine, die bei der Entwicklung und Anwendung
 von maschinellem Lernen eingesetzt werden.
 Sie bieten die Möglichkeit, Daten und Funktionen zu kombinieren und dem Nutzenden von Machine Learning Bibliotheken,
@@ -408,7 +408,7 @@ Optimierte Hyperparameter können die Leistungsfähigkeit eines Modells oder die
 Im folgenden Codebeispiel wird der \textit{Gradient Boosting Classifier} aus der scikit-learn Bibliothek betrachtet.\\
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[language=Python, frame=single]
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
 from sklearn.ensemble import GradientBoostingClassifier
 
 gbc = GradientBoostingClassifier(n_estimators=20,
@@ -459,9 +459,32 @@ organisiert werden.\\
 
 
 \section{Abstract Syntax Trees}
-Als eine interpretierte High-Level-Programmiersprache wird Python Code nicht kompiliert, sondern vom
-Python Interpreter nach einer bestimmten Abfolge von Schritten in Anweisungen übersetzt, die eine Maschine ausführen kann.
-Der Code wird
+Um die Bedeutung von Abstract Syntax Trees (AST) zu verstehen, ist es hilfreich sich zu vergegenwärtigen, welche Prozesse
+bei der Ausführung eines Python-Skripts im Hintergrund ablaufen.
+Als eine interpretierte High-Level-Programmiersprache wird der Source Code in Python nicht kompiliert, sondern vom
+Python Interpreter nach einer bestimmten Abfolge von Schritten in Anweisungen übersetzt.
+Dabei wird der Python Code in Bytecode umgewandelt, sodass dieser von der Python Virtual Machine
+übersetzt und ausgeführt werden kann. \\
+
+Zunächst wird der Code geparst und in sogenannte Tokens unterteilt.
+Diese Tokens unterliegen einer Reihe von Regeln, damit die verschiedenen Programmierkonstrukte unterschiedlich erkannt
+und behandelt werden können.
+Die Liste an Tokens werden dann in eine Baumstruktur, den sogenannten abstrakten Syntaxbaum (Abstract Syntax Tree), umgewandelt.
+Ein AST ist eine baumartige Darstellung des Codes, bestehend aus einer Sammlung von Knoten, die, basierend auf der Grammatik
+in Python, miteinander verbunden sind.
+Der Baum wird in maschinenlesbaren Binärcode umgewandelt und Anweisungen in Bytecode an den Python Interpreter übermittelt.
+Der Python Interpreter kann den Code nun ausführen und Systemaufrufe an den Kernel starten, um das Programm zu starten. \\
+
+Während Bytecode eher für Maschinen gemacht ist, sind Abstract Syntax Trees strukturiert aufgebaut und auch für den Menschen lesbar.
+Im Anhang befindet sich das Codebeispiel aus \ref{Konfigurationsoptionen}, nachdem es als AST geparst wurde.
+Aus der AST-Syntax lassen sich Typ und Struktur einzelner Python Komponenten direkt ablesen.
+So besteht das Modul aus zwei Codeobjekten vom Typ \textit{ImportFrom} und \textit{Assign}, die sich jeweils in kleinere
+Objekte verschiedenen Typs unterteilen lassen.
+Diese Datenstruktur stellt alle relevanten Informationen für die Ausführung des Codes bereit.
+Jeder Knoten des Baumes kann nun besucht werden, um seine Daten zu verarbeiten und entsprechende Aktionen einzuleiten.
+Über das \textit{ast}-Modul in Python kann der Code als AST verarbeitet und visualisiert werden, sodass er von
+Entwicklern und Entwicklerinnen entsprechend seiner AST-Syntax analysiert und manipuliert werden kann.\\
+
 
 \section{Verwandte Arbeiten}
 
@@ -498,8 +521,59 @@ Der Code wird
 
 % Appendix
 \appendix
-\chapter{My First Appendix}
-This was just missing.
+\chapter{Abstract Syntax Tree}
+%\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+Module(
+    body=[
+        ImportFrom(
+            module='sklearn.ensemble',
+            names=[
+                alias(
+                    name='GradientBoostingClassifier')],
+            level=0),
+        Assign(
+            targets=[
+                Name(
+                    id='gbc',
+                    ctx=Store())],
+            value=Call(
+                func=Name(
+                    id='GradientBoostingClassifier',
+                    ctx=Load()),
+                args=[],
+                keywords=[
+                    keyword(
+                        arg='n_estimators',
+                        value=Constant(
+                            value=20)),
+                    keyword(
+                        arg='learning_rate',
+                        value=Constant(
+                            value=0.05)),
+                    keyword(
+                        arg='max_features',
+                        value=Constant(
+                            value=2)),
+                    keyword(
+                        arg='max_depth',
+                        value=Constant(
+                            value=2)),
+                    keyword(
+                        arg='random_state',
+                        value=Constant(
+                            value=0))]))])
+\end{lstlisting}
+%\end{minipage}
+\
+
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=0.5]{Digraph-20}
+ \caption{Abstract Syntax Tree}
+ \label{fig:asdt}
+\end{figure}
 
 % Bibliography
 \bibliographystyle{plainnat} % requires package natbib. An alternative is apalike
