@@ -487,8 +487,42 @@ Entwicklern und Entwicklerinnen entsprechend seiner AST-Syntax analysiert und ma
 
 
 \section{Verwandte Arbeiten}
+Zwar wurden bereits einige Ansätze zum Auffinden von Konfigurationsoptionen publiziert, jedoch ist diese Thematik im Rahmen von
+maschinellem Lernen kaum beleuchtet.
+Die meisten Ansätze, wie der von \citeauthor{10.1145/1985793.1985812} aus dem Jahre \citeyear{10.1145/1985793.1985812},
+behandeln Anwendungen in der Programmiersprache Java und ermitteln Konfigurationsoptionen mittels statischer Code-Analyse.
+Der von \citeauthor{10.1145/1985793.1985812} entwickelte \textit{Confalyzer} ist vermutlich einer der ersten bekannteren
+Tools, die sich mit der Thematik befassen.
+Unter der Annahme, das Konfigurationsoptionen als Key-Value Pair vorliegen, betrachtet der Confalyzer Methoden, die mit
+dem für Java typischen Schlüsselwort \textit{get} in der Konfigurationsklasse beginnen \cite[S. 131]{10.1145/1985793.1985812}.
+Mittels eines Aufrufgraphens (Call Graph) identifiziert der Confalyzer, wo die Methoden im Source Code aufgerufen werden.
+An den jeweiligen Aufrufstellen kann er dann die Konfigurationsoptionen aus den String-Parametern ablesen \cite[S. 131]{10.1145/1985793.1985812}.
+Der Ansatz beruht auf der Annahme, dass viele Konfigurationsoptionen auf ähnliche Weise verwendet werden und bestimmte
+Muster ableitbar sind \cite[S. 131]{10.1145/1985793.1985812}.\\
+
+Der von \citeauthor{7774519} entwickelte \textit{ORPLocator} orientiert sich an dem Confalyzer und vergleicht sich mit diesem \cite[S. 193]{7774519}.
+Der ORPLocator untersuchte dieselben Java-Frameworks wie beispielsweise Hadoop und konnte mehr dokumentierte
+Optionen und dementsprechend auch mehr Verwendungen im Source Code finden \cite[S. 193]{7774519}.
+Dies liegt unter anderem daran, dass der gesamte Source Code nach Aufrufstellen von Konfigurationsschnittstellen durchsucht wird,
+während der Confalyzer einen Aufrufgraphen erstellt, der manche Optionen nicht erfasst \cite[S. 193]{7774519}.\\
+
+Einen anderen Ansatz verfolgten \citeauthor{8049300} bei der Entwicklung von \textit{Lotrack}.
+Lotrack ist ein Tool, das mittels einer erweiterten Taint-Analyse, einer Datenflussanalyse, die externe Daten
+(Eingabedaten) über den gesamten Kontrollfluss verfolgt, eine Konfigurations-Map erstellt \cite[S. 445]{8049300}.
+Die Konfigurations-Map beschreibt, welche Codefragmente von Konfigurationsoptionen abhängen und hilft dabei die
+Beziehungen zwischen dem konkreten Programmverhalten und der Konfiguration zu finden \cite[S. 447]{8049300}.
+Der Fokus liegt auf Anwendungen, die auf Android-Systemen laufen \cite[S. 445]{8049300}. \\
+
+Weitere Ansätze wie der \textit{PrefFinder} von \citeauthor{10.1145/2642937.2643009} verwenden zusätzlich auch dynamische
+Analysetechniken, um Konfigurationsoptionen nicht nur zu extrahieren, sondern auch in einer Datenbank zur Abfrage und
+Verwendung zu speichern \cite[S. 151]{10.1145/2642937.2643009}.
+Der \textit{Software Configuration Inconsistency Checker} (SCIC) hingegen von \citeauthor{10.1145/2786805.2786869}
+erweitert die Extraktion von Konfigurationsoptionen im Key-Value-Modell des Confalyzer um ein baumstrukturiertes Modell \cite[S. 295]{10.1145/2786805.2786869}.
+Im Gegensatz zu anderen Tools, ist dieses auch in der Lage mehrere Programmiersprachen zu verarbeiten \cite[S. 295]{10.1145/2786805.2786869}.
+Ziel dieses Tools ist Konfigurationsfehler zu identifizieren \cite[S. 295]{10.1145/2786805.2786869}.
 
 
+\chapter{Methodik}\label{Methodik}
 % Showing natbib citation commands
 %Let us get started by citing \citet{manning:1999}!
 %So what did \citeauthor{manning:1999} do in \citeyear{manning:1999}?
