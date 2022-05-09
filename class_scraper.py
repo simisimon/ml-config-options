@@ -7,6 +7,7 @@ import ast
 
 class ClassScraper:
     def __init__(self):
+        self.module_urls = []
         self.class_urls = []
         self.classes = {}
         self.library = ""
@@ -73,7 +74,6 @@ class PyTorchScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
         self.library = "torch"
-
         self.desc_elements = []
 
     def get_classes(self):
@@ -153,7 +153,12 @@ class MLflowScraper(ClassScraper):
         ClassScraper.__init__(self)
         self.library = "mlflow"
 
-    def scrape_class_urls(self):
+    def get_classes(self):
+        self.scrape_module_urls()
+        self.scrape_classes()
+        self.create_json()
+
+    def scrape_module_urls(self):
         link = "https://mlflow.org/docs/latest/python_api/index.html"
         html = urlopen(link)
         soup = BeautifulSoup(html, "html.parser")
@@ -163,10 +168,10 @@ class MLflowScraper(ClassScraper):
 
         for element in li:
             url = element.find("a").attrs["href"]
-            self.class_urls.append(url)
+            self.module_urls.append(url)
 
     def scrape_classes(self):
-        for url in self.class_urls:
+        for url in self.module_urls:
             link = "https://mlflow.org/docs/latest/python_api/" + url
             html = urlopen(link)
             soup = BeautifulSoup(html, "html.parser")
@@ -179,6 +184,7 @@ class MLflowScraper(ClassScraper):
                 em = dt.findAll("em", {"class": "sig-param"})
                 parameters = self.scrape_parameters(em)
                 self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
+
         self.classes["mlflow.models.Model"]["parameters"] = {"artifact_path": "None", "run_id": "None",
                                                              "utc_time_created": "None",
                                                              "flavors": "None", "signature": "None",
@@ -191,7 +197,6 @@ class TensorFlowScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
         self.library = "tensorflow"
-        self.module_urls = []
 
     def get_classes(self):
         self.scrape_class_urls()
@@ -270,9 +275,9 @@ class TensorFlowScraper(ClassScraper):
 
 
 def main():
-    SklearnScraper().get_classes()
+    #SklearnScraper().get_classes()
     # PyTorchScraper().get_classes()
-    #MLflowScraper().get_classes()
+    MLflowScraper().get_classes()
     #TensorFlowScraper().get_classes()
 
 
