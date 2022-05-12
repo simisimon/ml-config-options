@@ -1,5 +1,7 @@
 import ast
 import json
+import git
+import sys
 from os import walk, path
 from obj_selector import PyTorchObjects, SklearnObjects, MLflowObjects, TensorFlowObjects
 from node import NodeObject
@@ -160,12 +162,27 @@ class TensorFlowNodes(NodeObjects):
             self.class_objects_from_library.extend(TensorFlowObjects(file).get_objects())
 
 
+lib_dict = {"sklearn": SklearnNodes,
+            "scikit-learn": SklearnNodes,
+            "skl": SklearnNodes,
+            "tensorflow": TensorFlowNodes,
+            "tf": TensorFlowNodes,
+            "mlflow": MLflowNodes,
+            "pytorch": PyTorchNodes,
+            "torch": PyTorchNodes}
+
+
 def main():
-    repo = "test_repo"
-    SklearnNodes(repo).get_nodes()
-    #PyTorchNodes(repo).get_nodes()
-    #MLflowNodes(repo).get_nodes()
-    #TensorFlowNodes(repo).get_nodes()
+    repo_path = sys.argv[1]
+    library = sys.argv[2]
+
+    repo_name = repo_path.split('/')[-1]
+    is_directory = path.isdir(repo_name)
+    if not is_directory:
+        git.Repo.clone_from('https://github.com/mj-support/coop.git', repo_name)
+
+    nodes = lib_dict[library]
+    nodes(repo_name).get_nodes()
 
 
 if __name__ == "__main__":

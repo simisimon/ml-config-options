@@ -618,7 +618,7 @@ Die scikit-learn-Klasse \textit{StratifiedGroupKFold} wird demnach wie folgt ges
 \end{minipage}
 \
 
-Im Gegensatz zu den anderen Modulen ist der Web Scraping Vorgang nur einmalig notwendig und muss nicht für jedes Projekt
+Im Gegensatz zu den anderen Modulen ist der Web Scraping Vorgang nur einmal je Bibliothek notwendig und muss nicht für jedes Projekt
 von neuem gestartet werden.
 Die am Ende erzeugte JSON-Datei bildet die Basis für das Extrahieren von Konfigurationsoptionen und kann für beliebige viele
 Projekte verwendet werden.
@@ -626,6 +626,14 @@ Da bei diesem Vorgang eine Vielzahl an Websites angesteuert werden, handelt es s
 
 
 \subsection{Parsen der Repositorys}
+Der erste Schritt, um Konfigurationsoptionen extrahieren zu können, ist eine Umgebung zu schaffen, in der ein zu untersuchendes
+Git-Repository vorliegt.
+Über die \textit{GitPython}-Bibliothek wird das Repository geklont, sodass es lokal für die Analyse verfügbar ist.
+Da sich die Analyse auf Source Code in Python bezieht, werden im nächsten Schritt alle Ordner sukzessiv nach Dateien mit
+einer \textit{.py}-Endung durchsucht.
+Diese Python-Dateien werden in einer Liste gespeichert, durch die in der Folge iteriert wird, um jeweils die folgenden
+Schritte anzuwenden. \\
+
 
 \subsection{Extraktion der ML-Klassen}
 

@@ -1,4 +1,5 @@
 from urllib.request import urlopen
+import sys
 from bs4 import BeautifulSoup
 import bs4
 import json
@@ -265,7 +266,7 @@ class TensorFlowScraper(ClassScraper):
                 except:
                     if full_class_name == "tf.lite.experimental.QuantizationDebugOptions":
                         parameters = {"layer_debug_metrics": None, "model_debug_metrics": None,
-                                      "layer_direct_compare_metrics": None,"denylisted_ops": None,
+                                      "layer_direct_compare_metrics": None, "denylisted_ops": None,
                                       "denylisted_nodes": None, "fully_quantize": False}
                     elif full_class_name == "tf.lite.experimental.QuantizationDebugger":
                         parameters = {"quant_debug_model_path": None, "quant_debug_model_content": None,
@@ -274,11 +275,20 @@ class TensorFlowScraper(ClassScraper):
         return parameters
 
 
+lib_dict = {"sklearn": SklearnScraper,
+            "scikit-learn": SklearnScraper,
+            "skl": SklearnScraper,
+            "tensorflow": TensorFlowScraper,
+            "tf": TensorFlowScraper,
+            "mlflow": MLflowScraper,
+            "pytorch": PyTorchScraper,
+            "torch": PyTorchScraper}
+
+
 def main():
-    #SklearnScraper().get_classes()
-    # PyTorchScraper().get_classes()
-    MLflowScraper().get_classes()
-    #TensorFlowScraper().get_classes()
+    library = sys.argv[1]
+    scraper = lib_dict[library]
+    scraper().get_classes()
 
 
 if __name__ == "__main__":
