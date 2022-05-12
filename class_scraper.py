@@ -276,12 +276,23 @@ class TensorFlowScraper(ClassScraper):
 
 
 lib_dict = {"sklearn": SklearnScraper,
+            "Sklearn": SklearnScraper,
             "scikit-learn": SklearnScraper,
+            "Scikit-learn": SklearnScraper,
+            "Scikitlearn": SklearnScraper,
             "skl": SklearnScraper,
             "tensorflow": TensorFlowScraper,
+            "TensorFlow": TensorFlowScraper,
+            "Tensorflow": TensorFlowScraper,
             "tf": TensorFlowScraper,
             "mlflow": MLflowScraper,
+            "MLFLow": MLflowScraper,
+            "MlFlow": MLflowScraper,
+            "MLflow": MLflowScraper,
             "pytorch": PyTorchScraper,
+            "PyTorch": PyTorchScraper,
+            "Pytorch": PyTorchScraper,
+            "Torch": PyTorchScraper,
             "torch": PyTorchScraper}
 
 

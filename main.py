@@ -163,11 +163,23 @@ class TensorFlowNodes(NodeObjects):
 
 
 lib_dict = {"sklearn": SklearnNodes,
+            "Sklearn": SklearnNodes,
+            "Scikit-learn": SklearnNodes,
             "scikit-learn": SklearnNodes,
+            "Scikitlearn": SklearnNodes,
             "skl": SklearnNodes,
             "tensorflow": TensorFlowNodes,
+            "TensorFlow": TensorFlowNodes,
+            "Tensorflow": TensorFlowNodes,
             "tf": TensorFlowNodes,
             "mlflow": MLflowNodes,
+            "MLFLow": MLflowNodes,
+            "MlFlow": MLflowNodes,
+            "MLflow": MLflowNodes,
+            "pytorch": PyTorchNodes,
+            "PyTorch": PyTorchNodes,
+            "Pytorch": PyTorchNodes,
+            "Torch": PyTorchNodes,
             "pytorch": PyTorchNodes,
             "torch": PyTorchNodes}
 

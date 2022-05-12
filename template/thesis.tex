@@ -376,7 +376,6 @@ Optimierte Hyperparameter können die Leistungsfähigkeit eines Modells oder die
 
 Im folgenden Codebeispiel wird der \textit{Gradient Boosting Classifier} aus der scikit-learn Bibliothek betrachtet.\\
 
-\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
 from sklearn.ensemble import GradientBoostingClassifier
 
@@ -384,7 +383,6 @@ gbc = GradientBoostingClassifier(n_estimators=20,
         learning_rate=0.05, max_features=2, max_depth=2,
         random_state=0)
 \end{lstlisting}
-\end{minipage}
 \
 
 Es wird eine Instanz dieser Klasse erzeugt und der Variable \textit{gbc} zugewiesen.
@@ -580,7 +578,6 @@ Diese filtern die HTML-Datei nach den jeweiligen Tags, sodass schließlich der V
 zugewiesen wird.
 Durch dieses Set wird iteriert, um für jedes Modul die Hyperlink-Referenz zu speichern.\\
 
-\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
 def scrape_module_urls(self):
     link = "mlflow.org/docs/latest/python_api/index.html"
@@ -594,7 +591,6 @@ def scrape_module_urls(self):
         url = element.find("a").attrs["href"]
         self.module_urls.append(url)
 \end{lstlisting}
-\end{minipage}
 \
 
 Im Anschluss kann nun nach einem ähnlichen Prinzip durch die Liste der Modul-URLs iteriert werden.
@@ -604,7 +600,6 @@ In der JSON-Datei wird für jede Klasse der gesamte Pfad als eindeutiger Schlüs
 Zusätzlich zum Klassen- und zu den Parameternamen, werden die Default-Werte der einzelnen Parameter aufgeführt.
 Die scikit-learn-Klasse \textit{StratifiedGroupKFold} wird demnach wie folgt gespeichert:\\
 
-\begin{minipage}{\linewidth}
 \begin{lstlisting}[frame=single, basicstyle=\small]
 "sklearn.model_selection.StratifiedGroupKFold": {
     "short name": "StratifiedGroupKFold",
@@ -615,7 +610,6 @@ Die scikit-learn-Klasse \textit{StratifiedGroupKFold} wird demnach wie folgt ges
     }
 }
 \end{lstlisting}
-\end{minipage}
 \
 
 Im Gegensatz zu den anderen Modulen ist der Web Scraping Vorgang nur einmal je Bibliothek notwendig und muss nicht für jedes Projekt
@@ -624,6 +618,22 @@ Die am Ende erzeugte JSON-Datei bildet die Basis für das Extrahieren von Konfig
 Projekte verwendet werden.
 Da bei diesem Vorgang eine Vielzahl an Websites angesteuert werden, handelt es sich hierbei um das Modul mit der längsten Laufzeit.\\
 
+Das Python-Skript kann sowohl über eine Entwicklungsumbgebung, als auch über die Kommandozeile ausgeführt werden.
+Um Python-Dateien über die Kommandozeile auszuführen, muss man lediglich den Befehl \textit{python3} oder bei älteren
+Versionen \textit{python}, gefolgt vom Namen der Python-Datei eingeben.
+Zusätzlich ist es möglich neben diesem Befehl noch weitere Werte hinzugefügt werden.
+Diese sogenannten Argumente können im Source Code verarbeitet werden, um den Anwendenen eine Gestaltungsspielraum für
+die Ausführung zu überlassen.
+In diesem konkreten Fall wird über die Eingabe des Namens der Bibliothek entschieden, von welcher Bibliothek die
+Klassen gescraped werden sollen.
+Damit auch bei unterschiedlichen Schreibweisen einer Bibliothek das Programm ausgeführt wird, sind im Source Code für jede
+Bibliothek mehrere Möglichkeiten hinterlegt.
+Das Scraping von mlflow-Klassen erfolgt zum Beispiel über folgenden Befehl:\\
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
+python3 class_scraper.py mlflow
+\end{lstlisting}
+\
 
 \subsection{Parsen der Repositorys}
 Der erste Schritt, um Konfigurationsoptionen extrahieren zu können, ist eine Umgebung zu schaffen, in der ein zu untersuchendes
@@ -634,6 +644,15 @@ einer \textit{.py}-Endung durchsucht.
 Diese Python-Dateien werden in einer Liste gespeichert, durch die in der Folge iteriert wird, um jeweils die folgenden
 Schritte anzuwenden. \\
 
+Analog zum Web Scraping kann der gesamte Parse- und Extraktionsprozess ebenfalls über die Kommandezeile gestartet werden.
+Die zu übergebenen Argumente sind zum Einen der Link des zu untersuchenden Repositorys und zum Anderen die ML-Bibliothek, dessen
+Konfigurationselemente gefunden werden sollen.
+Der entsprechende Befehl sieht für ein Beispielprojekt mit mlflow demnach wie folgt aus: \\
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
+python3 https://github.com/user/project mlflow
+\end{lstlisting}
+\
 
 \subsection{Extraktion der ML-Klassen}
 
