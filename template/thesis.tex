@@ -631,7 +631,7 @@ Bibliothek mehrere Möglichkeiten hinterlegt.
 Das Scraping von mlflow-Klassen erfolgt zum Beispiel über folgenden Befehl:\\
 
 \begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
-python3 class_scraper.py mlflow
+python3 scraping.py mlflow
 \end{lstlisting}
 \
 
@@ -641,20 +641,62 @@ Git-Repository vorliegt.
 Über die \textit{GitPython}-Bibliothek wird das Repository geklont, sodass es lokal für die Analyse verfügbar ist.
 Da sich die Analyse auf Source Code in Python bezieht, werden im nächsten Schritt alle Ordner sukzessiv nach Dateien mit
 einer \textit{.py}-Endung durchsucht.
-Diese Python-Dateien werden in einer Liste gespeichert, durch die in der Folge iteriert wird, um jeweils die folgenden
-Schritte anzuwenden. \\
+Diese Python-Dateien werden in einer Liste gespeichert, durch die in der Folge iteriert wird, um die Konfigurationsoptionen auszulesen. \\
 
-Analog zum Web Scraping kann der gesamte Parse- und Extraktionsprozess ebenfalls über die Kommandezeile gestartet werden.
-Die zu übergebenen Argumente sind zum Einen der Link des zu untersuchenden Repositorys und zum Anderen die ML-Bibliothek, dessen
+Analog zum Web Scraping kann der gesamte Parse- und Extraktionsprozess ebenfalls über die Kommandozeile gestartet werden.
+Die zu übergebenen Argumente sind zum Einen der Link des zu untersuchenden Git-Repositorys und zum Anderen die ML-Bibliothek, dessen
 Konfigurationselemente gefunden werden sollen.
-Der entsprechende Befehl sieht für ein Beispielprojekt mit mlflow demnach wie folgt aus: \\
+Der entsprechende Befehl für ein Beispielprojekt mit mlflow sieht demnach wie folgt aus: \\
 
 \begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
 python3 https://github.com/user/project mlflow
 \end{lstlisting}
 \
 
+Im Gegensatz zum Web Scraping erfolgt der gesamte Parse- und Extraktionsprozess für die zu untersuchenden Bibliotheken generisch.
+Die Klasse \textit{ConfigOptions} enthält alle Methoden, um aus den Repositorys die Konfigurationsoptions auszulesen.
+Für jede der vier Bibliotheken gibt es eine Klasse, die von der \textit{ConfigOptions} abgeleitet ist und ihre Funktionen erbt.
+Dadurch lässt sich dieses Tool beliebig auf andere Bibliotheken erweitern.
+Voraussetzung ist jedoch, dass eine JSON-Datei mit den gescrapten Klassen der jeweiligen Biblithek im entsprechendem Format vorliegt.
+Möchte man beispielsweise die Funktionalitäten dieses Tools auf die ML-Bibliothek \textit{Keras} anwenden, muss man nach erfolgreichem Scraping,
+lediglich folgende Codezeilen zur \textit{main.py}-Datei hinzufügen.\\
+
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+class KerasOptions(ConfigOptions):
+    def __init__(self, repo):
+        ConfigOptions.__init__(self, repo)
+        self.library = "keras"
+\end{lstlisting}
+\
+
+
 \subsection{Extraktion der ML-Klassen}
+Im nächsten Schritt werden die Klassen der jeweiligen ML-Bibliothek aus dem Source Code extrahiert.
+Dafür wird durch die Liste mit Python-Dateien iteriert und entlang der AST-Struktur nach den entsprechenden Klassen gesucht.
+Zunächst muss dafür der Python-Code über die \textit{ast}-Bibliothek in das AST-Format umgewandelt werden.
+Die Traversierung des Syntax-Baumes erfolgt stets nach dem Preoder-Verfahren, sodass jeder Knoten eines Teilbaums vollständig
+durchlaufen wird, bevor der nächste Knoten auf der gleichen Stufe betrachtet wird. \\
+
+Im ersten Schritt werden alle Import-Objekte rausgefiltert, um festzustellen, ob und wie die ML-Bibliothek verwendet wird.
+Es gibt verschiedene Möglichkeiten wie Elemente einer ML-Bibliothek zugänglich gemacht werden können.
+Das folgende Codebeispiel zeigt fünf Möglichkeiten, die die Verwendung der TensorFlow-Klasse \textit{LinearRegressor}
+über einen jeweils anderen Pfad im Code ermöglichen. \\
+
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+import tensorflow                                       # A
+import tensorflow as tf                                 # B
+import tensorflow.estimator                             # C
+from tensorflow.estimator import LinearRegressor        # D
+from tensorflow.estimator import LinearRegressor as LR  # E
+
+tensorflow.estimator.LinearRegressor()                  # A
+tf.estimator.LinearRegressor()                          # B
+estimator.LinearRegressor()                             # C
+LinearRegressor()                                       # D
+LR()                                                    # E
+\end{lstlisting}
+\
+
 
 \subsection{Extraktion und Verarbeitung der Konfigurationsoptionen}
 

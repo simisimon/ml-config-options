@@ -3,21 +3,22 @@ import json
 import git
 import sys
 from os import walk, path
-from obj_selector import PyTorchObjects, SklearnObjects, MLflowObjects, TensorFlowObjects
+from objects import ClassObjects
 from node import NodeObject
 from dataflow import DataFlowAnalysis
 
 
-class NodeObjects:
+class ConfigOptions:
     def __init__(self, repo):
         self.library = ""
-        self.classes = {}
+        self.classes = ""
         self.repo = repo
         self.py_files = []
         self.class_objects_from_library = []
         self.node_objects = []
 
-    def get_nodes(self):
+    def get_config_options(self):
+        self.classes = ClassObjects(None, self.library).read_json()
         self.get_py_files()
         self.get_class_objects()
         self.get_parameters()
@@ -31,6 +32,10 @@ class NodeObjects:
                 if filename.endswith(".py"):
                     file = path.join(root, filename)
                     self.py_files.append(file)
+
+    def get_class_objects(self):
+        for file in self.py_files:
+            self.class_objects_from_library.extend(ClassObjects(file, self.library).get_objects())
 
     def get_parameters(self):
         for obj in self.class_objects_from_library:
@@ -118,83 +123,63 @@ class NodeObjects:
             json.dump(json_nodes, outfile, indent=4)
 
 
-class SklearnNodes(NodeObjects):
+class SklearnOptions(ConfigOptions):
     def __init__(self, repo):
-        NodeObjects.__init__(self, repo)
+        ConfigOptions.__init__(self, repo)
         self.library = "sklearn"
-        self.classes = SklearnObjects("").read_json()
-
-    def get_class_objects(self):
-        for file in self.py_files:
-            self.class_objects_from_library.extend(SklearnObjects(file).get_objects())
 
 
-class PyTorchNodes(NodeObjects):
+class PyTorchOptions(ConfigOptions):
     def __init__(self, repo):
-        NodeObjects.__init__(self, repo)
+        ConfigOptions.__init__(self, repo)
         self.library = "torch"
-        self.classes = PyTorchObjects("").read_json()
-
-    def get_class_objects(self):
-        for file in self.py_files:
-            self.class_objects_from_library.extend(PyTorchObjects(file).get_objects())
 
 
-class MLflowNodes(NodeObjects):
+class MLflowOptions(ConfigOptions):
     def __init__(self, repo):
-        NodeObjects.__init__(self, repo)
+        ConfigOptions.__init__(self, repo)
         self.library = "mlflow"
-        self.classes = MLflowObjects("").read_json()
-
-    def get_class_objects(self):
-        for file in self.py_files:
-            self.class_objects_from_library.extend(MLflowObjects(file).get_objects())
 
 
-class TensorFlowNodes(NodeObjects):
+class TensorFlowOptions(ConfigOptions):
     def __init__(self, repo):
-        NodeObjects.__init__(self, repo)
+        ConfigOptions.__init__(self, repo)
         self.library = "tensorflow"
-        self.classes = TensorFlowObjects("").read_json()
-
-    def get_class_objects(self):
-        for file in self.py_files:
-            self.class_objects_from_library.extend(TensorFlowObjects(file).get_objects())
 
 
-lib_dict = {"sklearn": SklearnNodes,
-            "Sklearn": SklearnNodes,
-            "Scikit-learn": SklearnNodes,
-            "scikit-learn": SklearnNodes,
-            "Scikitlearn": SklearnNodes,
-            "skl": SklearnNodes,
-            "tensorflow": TensorFlowNodes,
-            "TensorFlow": TensorFlowNodes,
-            "Tensorflow": TensorFlowNodes,
-            "tf": TensorFlowNodes,
-            "mlflow": MLflowNodes,
-            "MLFLow": MLflowNodes,
-            "MlFlow": MLflowNodes,
-            "MLflow": MLflowNodes,
-            "pytorch": PyTorchNodes,
-            "PyTorch": PyTorchNodes,
-            "Pytorch": PyTorchNodes,
-            "Torch": PyTorchNodes,
-            "pytorch": PyTorchNodes,
-            "torch": PyTorchNodes}
+lib_dict = {"sklearn": SklearnOptions,
+            "Sklearn": SklearnOptions,
+            "Scikit-learn": SklearnOptions,
+            "scikit-learn": SklearnOptions,
+            "Scikitlearn": SklearnOptions,
+            "skl": SklearnOptions,
+            "tensorflow": TensorFlowOptions,
+            "TensorFlow": TensorFlowOptions,
+            "Tensorflow": TensorFlowOptions,
+            "tf": TensorFlowOptions,
+            "mlflow": MLflowOptions,
+            "MLFLow": MLflowOptions,
+            "MlFlow": MLflowOptions,
+            "MLflow": MLflowOptions,
+            "pytorch": PyTorchOptions,
+            "PyTorch": PyTorchOptions,
+            "Pytorch": PyTorchOptions,
+            "Torch": PyTorchOptions,
+            "pytorch": PyTorchOptions,
+            "torch": PyTorchOptions}
 
 
 def main():
-    repo_path = sys.argv[1]
-    library = sys.argv[2]
+    repo_path = 'https://github.com/mj-support/coop' #sys.argv[1]
+    library = 'tf' #sys.argv[2]
 
     repo_name = repo_path.split('/')[-1]
     is_directory = path.isdir(repo_name)
     if not is_directory:
-        git.Repo.clone_from('https://github.com/mj-support/coop.git', repo_name)
+        git.Repo.clone_from(repo_path, repo_name)
 
-    nodes = lib_dict[library]
-    nodes(repo_name).get_nodes()
+    options = lib_dict[library]
+    options(repo_name).get_config_options()
 
 
 if __name__ == "__main__":

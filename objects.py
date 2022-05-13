@@ -1,12 +1,11 @@
 import ast
-from pprint import pprint
 import json
 import copy
 
 
-class CodeObjects:
-    def __init__(self, file):
-        self.library = ""
+class ClassObjects:
+    def __init__(self, file, library):
+        self.library = library
         self.classes = {}
         self.file = file
         self.first_level_objects = []
@@ -234,43 +233,3 @@ class CodeObjects:
                     #obj["parameter variables"] = global_assigns_before_obj
                     obj["parameter variables"] = func
                     break
-
-
-class SklearnObjects(CodeObjects):
-    def __init__(self, file):
-        CodeObjects.__init__(self, file)
-        self.library = "sklearn"
-
-
-class PyTorchObjects(CodeObjects):
-    def __init__(self, file):
-        CodeObjects.__init__(self, file)
-        self.library = "torch"
-
-
-class MLflowObjects(CodeObjects):
-    def __init__(self, file):
-        CodeObjects.__init__(self, file)
-        self.library = "mlflow"
-
-
-class TensorFlowObjects(CodeObjects):
-    def __init__(self, file):
-        CodeObjects.__init__(self, file)
-        self.library = "tensorflow"
-
-
-def main():
-    #file = "test_projects/another_test_project.py"
-    #objects = SklearnObjects(file).get_objects()
-    #file = "test_projects/torch_project.py"
-    #objects = TorchObjects(file).get_objects()
-    #file = "test_projects/mlflow_project.py"
-    #objects = MLflowObjects(file).get_objects()
-    file = "backup/test_projects/tf_project.py"
-    objects = TensorFlowObjects(file).get_objects()
-    pprint(objects, width=75)
-
-
-if __name__ == "__main__":
-    main()
