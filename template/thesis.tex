@@ -60,6 +60,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
 \usepackage{tikz,pgfplots}
+\usetikzlibrary{shapes.geometric, arrows}
 \usetikzlibrary{patterns}
 \usepackage{float}
 %\setcitestyle{authoryear,close={)}}
@@ -549,15 +550,27 @@ Aufgrund des systematischen Aufbaus der verschiedenen Websites, kann man an dies
 die gesuchten Daten automatisiert erfassen.
 Die Python-Bibliothek \textit{Beautiful Soup} stellt für diesen Zweck, das notwendige Werkzeug bereit.\\
 
-Der Scraping-Prozess lässt sich für die vier verschiedenen ML-Bibliotheken in vier Schritte einteilen, die über die Klasse
+Der Scraping-Prozess lässt sich für die vier verschiedenen ML-Bibliotheken in folgende Schritte einteilen, die über die Klasse
 \textit{ClassScraper} aufgerufen werden können.
 
-\begin{enumerate}
- \item Modul-URLs scrapen
- \item Klassen-URLs scrapen
- \item Klassen und Parameter scrapen
- \item Speichern der Daten in JSON-Datei
-\end{enumerate}
+\tikzstyle{form} = [rectangle, rounded corners, minimum height=1.67cm,text centered, text width=2.5cm, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth, text width=1.5cm, text centered]
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.75cm]
+\node (start) [form] {Modul-URLs scrapen};
+\coordinate[left of=start] (d2);
+\draw [arrow] (d2) -- node[anchor=east] {Doku-URL} (start);
+\node (first) [form, right of=start, xshift=2cm] {Klassen-URLs scrapen};
+\draw [arrow] (start) -- (first);
+\node (second) [form, right of=first, xshift=2cm] {Klassen + Parameter scrapen};
+\draw [arrow] (first) -- (second);
+\coordinate[right of=second] (d1);
+\draw [arrow] (second) -- node[anchor=west] { JSON-Datei} (d1);
+\end{tikzpicture}
+\end{center}
+\
+
 
 Je nach Komplexität der Dokumentation, werden diese Schritte teilweise in weitere kleinere Schritte unterteilt.
 Zudem werden die Informationen in einem jeweils unterschiedlichen HTML-Format abgebildet,
@@ -671,13 +684,46 @@ class KerasOptions(ConfigOptions):
 
 
 \subsection{Extraktion der ML-Klassen}
-Im nächsten Schritt werden die Klassen der jeweiligen ML-Bibliothek aus dem Source Code extrahiert.
+Als nächstes werden die Klassen der jeweiligen ML-Bibliothek aus dem Source Code extrahiert.
 Dafür wird durch die Liste mit Python-Dateien iteriert und entlang der AST-Struktur nach den entsprechenden Klassen gesucht.
-Zunächst muss dafür der Python-Code über die \textit{ast}-Bibliothek in das AST-Format umgewandelt werden.
-Die Traversierung des Syntax-Baumes erfolgt stets nach dem Preoder-Verfahren, sodass jeder Knoten eines Teilbaums vollständig
-durchlaufen wird, bevor der nächste Knoten auf der gleichen Stufe betrachtet wird. \\
+Der Extraktion-Prozess der ML-Klassen lässt sich in vier Schritte einteilen, die über die Klasse
+\textit{ASTClasses} aufgerufen werden können.
 
+\begin{enumerate}
+ \item JSON-Datei mit gescrapten Klassen einlesen
+ \item Code aus Python-Datei als AST parsen
+ \item Traversierung des AST
+\begin{enumerate}
+    \item AST-Knoten nach Import-Anweisungen der ML-Bibliothek durchsuchen
+    \item AST-Knoten, die Import-Bezeichnungen enthalten filtern
+    \item Prüfen, ob es sich um ML-Klassen handelt
+    \item ML-Klassen als Dictionairy speichern
+    \end{enumerate}
+ \item Liste mit Dictionairy zurückgeben
+\end{enumerate}
+
+%\begin{center}
+%\begin{tikzpicture}[node distance=1.75cm]
+%\node (start) [form] {Code als AST parsen};
+%\coordinate[left of=start, yshift=0.25cm] (d0);
+%\coordinate[left of=start] (d1);
+%\draw [arrow] (d0) -- node[anchor=east, yshift=0.25cm, text width=3cm] {JSON-Datei} (start);
+%\draw [arrow] (d1) -- node[anchor=east, text width=3cm] {Python-Datei} (start);
+%\node (first) [form, below of=start] {Klassen-URLs scrapen};
+%\draw [arrow] (start) -- (first);
+%\node (second) [form, below of=first] {Klassen + Parameter scrapen};
+%\draw [arrow] (first) -- (second);
+%\coordinate[right of=second] (d1);
+%\draw [arrow] (second) -- node[anchor=west] { JSON-Datei} (d1);
+%\end{tikzpicture}
+%\end{center}
+%\
+Zunächst wird die JSON-Datei mit den gescrapten Klassen eingelesen und der Python-Code über die \textit{ast}-Bibliothek in das AST-Format umgewandelt.
+Die Traversierung des Syntax-Baumes erfolgt nach dem Preoder-Verfahren, sodass jeder Knoten eines Teilbaums vollständig
+durchlaufen wird, bevor der nächste Knoten auf der gleichen Stufe betrachtet wird.
 Im ersten Schritt werden alle Import-Objekte rausgefiltert, um festzustellen, ob und wie die ML-Bibliothek verwendet wird.
+Import-Objekte, die die ML-Bibliothek betreffen, werden in einer Liste gespeichert und bilden die Basis für die Suche nach
+den ML-Klassen.
 Es gibt verschiedene Möglichkeiten wie Elemente einer ML-Bibliothek zugänglich gemacht werden können.
 Das folgende Codebeispiel zeigt fünf Möglichkeiten, die die Verwendung der TensorFlow-Klasse \textit{LinearRegressor}
 über einen jeweils anderen Pfad im Code ermöglichen. \\
@@ -685,7 +731,7 @@ Das folgende Codebeispiel zeigt fünf Möglichkeiten, die die Verwendung der Ten
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
 import tensorflow                                       # A
 import tensorflow as tf                                 # B
-import tensorflow.estimator                             # C
+from tensorflow import estimator                        # C
 from tensorflow.estimator import LinearRegressor        # D
 from tensorflow.estimator import LinearRegressor as LR  # E
 
@@ -697,6 +743,35 @@ LR()                                                    # E
 \end{lstlisting}
 \
 
+Die Eindeutigkeit des Pfades ist wichtig, um sicherzustellen, dass es sich bei dem jeweiligen Code-Objekt, um die Klasse
+einer ML-Bibliothek handelt.
+Einige Klassen haben geläufige Bezeichnungen, wie zum Beispiel \textit{Pipeline} aus scikit-learn oder \textit{Model} aus Mlflow.
+Um zu vermeiden, dass irrtümlicherweise falsche Objekte gefunden werden, werden die Code-Objekte aus dem AST auf Basis der
+Import-Anweisungen der jeweiligen ML-Bibliothek rausgefiltert.
+Für das obige Codebeispiel wird demnach der Syntaxbaum nach Knoten durchsucht, deren Name identisch mit \textit{tensorflow, tf, estimator} etc. ist.
+Ist dies zutreffend, wird geprüft, ob es sich bei diesem Knoten, um eine ML-Klasse handelt oder um einen Pfad, an dessen Ende eine ML-Klasse steht.
+Ist auch dies gegeben, wird der gesamte Pfad des Objektes beleuchtet, um die Klasse eindeutig zuordnen zu können.
+Dieser Schritt ist wichtig, da beispielsweise PyTorch über zwei unterschiedliche \textit{profiler}-Klassen verfügt.
+Die eine Klasse ist Teil des \textit{autograd}-Moduls, während die andere dem \textit{profiler}-Modul zugeordnet ist.
+Beide verfügen über unterschiedliche Konfigurationsoptionen.
+An dieser Stelle sollte man sich nicht irritieren lassen, dass die beiden Klassen kleingeschrieben sind.
+Die Namenskonvention, dass Klassen mit Großbuchstaben beginnen, wird von manchen Bibliotheken nicht immer eingehalten.\\
+
+Die gefundenen Klassen der Python-Datei werden in einer Liste gespeichert.
+Diese besteht aus je einem Dictionairy für jede Klasse und enthält alle benötigten Informationen, um im nächsten Schritt
+die Konfigurationsoptionen auszulesen.
+Dazu gehört der vollständige Pfad mit dem Namen der Klasse, der verwendete Pfad inklusive Alias, sowie die Datei, indem
+die Klasse gefunden wurde.
+Zudem wird das AST-Objekt gespeichert, aus dem sich weitere Informationen wie Parameter und Zeilennummer auslesen lassen.
+Für das Beispiel \textit{C} aus dem obigen Codesnippet ergibt sich folgender Listeneintrag.\\
+
+\begin{lstlisting}[frame=single, basicstyle=\small]
+{'class': 'tensorflow.estimator.LinearRegressor',
+  'class alias': 'tf.estimator.LinearRegressor',
+  'file': 'path/file.py',
+  'object': <ast.Expr object at 0x105e61b20>}
+\end{lstlisting}
+\
 
 \subsection{Extraktion und Verarbeitung der Konfigurationsoptionen}
 

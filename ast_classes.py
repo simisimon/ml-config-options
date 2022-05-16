@@ -1,9 +1,8 @@
 import ast
 import json
-import copy
 
 
-class ClassObjects:
+class ASTClasses:
     def __init__(self, file, library):
         self.library = library
         self.classes = {}
@@ -11,18 +10,16 @@ class ClassObjects:
         self.first_level_objects = []
         self.import_classes = {}
         self.import_other_objects = {}
-        self.function_objects = []  # scope of parameter variables
         self.objects_from_library = []
-        self.class_objects_from_library = []
+        self.ast_classes = []
 
-    def get_objects(self):
+    def get_classes(self):
         self.read_json()
         self.get_first_level_objects()
         self.get_import_objects()
         self.get_objects_from_library()
         self.get_objects_containing_classes()
-        self.get_param_variables()
-        return self.class_objects_from_library
+        return self.ast_classes
 
     def read_json(self):
         with open("classes/{0}.txt".format(self.library)) as json_file:
@@ -65,7 +62,7 @@ class ClassObjects:
                     break
 
             splitted_import_obj = import_obj.split(".")
-            splitted_import_obj[0] = "id='{0}'".format(splitted_import_obj[0])  # fehler wegen ID!!
+            splitted_import_obj[0] = "id='{0}'".format(splitted_import_obj[0])  # fehler wegen ID!
             for sio in enumerate(splitted_import_obj):
                 if sio[0] > 0:
                     splitted_import_obj[sio[0]] = "attr='{0}'".format(sio[1])
@@ -84,15 +81,6 @@ class ClassObjects:
 
     def get_object(self, obj):
         if hasattr(obj, 'body'):
-            if type(obj) == ast.FunctionDef or type(obj) == ast.AsyncFunctionDef:
-                #assignments = []
-                #for body_obj in obj.body:
-                #    if type(body_obj) == ast.Assign:
-                #        assignments.append(body_obj)
-                #func = {"line no": obj.lineno, "line no end": obj.end_lineno, "assignments": assignments}
-                #self.function_objects.append(func)
-                self.function_objects.append(copy.deepcopy(obj))
-
             for body_obj in obj.body:  # func, async func, class, with, async with, except handler, if...
                 self.get_object(body_obj)
             obj.body = []
@@ -153,8 +141,8 @@ class ClassObjects:
                             obj.lineno = lineno
                             obj.end_lineno = end_lineno
                             lib_class_obj = {"file": self.file, "class": import_class_values["path"],
-                                             "class alias": class_string[:-1], "object": obj, "parameter variables": None}
-                            self.class_objects_from_library.append(lib_class_obj)
+                                             "class alias": class_string[:-1], "object": obj}
+                            self.ast_classes.append(lib_class_obj)
 
             for import_name, import_obj_values in self.import_other_objects.items():
                 import_obj_findings = [i for i in import_obj_values["ast style"] if i in dump_ast_obj]
@@ -199,37 +187,5 @@ class ClassObjects:
                                             obj.end_lineno = end_lineno
 
                                     lib_class_obj = {"file": self.file, "class": class_, "class alias": class_string[:-1],
-                                                     "object": obj, "parameter variables": None}
-                                    self.class_objects_from_library.append(lib_class_obj)
-
-    def get_param_variables(self):
-        global_assignments = []
-        for obj in self.first_level_objects:
-            if type(obj) == ast.Assign:
-                global_assignments.append(obj)
-        #self.function_objects = sorted(self.function_objects, key=lambda d: d["line no end"])
-        for obj in self.class_objects_from_library:
-            for func in self.function_objects:
-                #if func["line no"] <= obj["object"].lineno:
-                if func.lineno <= obj["object"].lineno:
-                    #if obj["object"].lineno <= func["line no end"]:
-                    if obj["object"].lineno <= func.end_lineno:
-                        #assigns_before_obj = []
-                        #for assign in func["assignments"]:
-                        #    if assign.lineno < obj["object"].lineno:
-                        #        assigns_before_obj.append(assign)
-                        #    else:
-                        #        break
-                        #obj["parameter variables"] = assigns_before_obj
-                        obj["parameter variables"] = func
-                        break
-                else:
-                    #global_assigns_before_obj = []
-                    #for assign in global_assignments:
-                    #    if assign.lineno < obj["object"].lineno:
-                    #        global_assigns_before_obj.append(assign)
-                    #    else:
-                    #        break
-                    #obj["parameter variables"] = global_assigns_before_obj
-                    obj["parameter variables"] = func
-                    break
+                                                     "object": obj}
+                                    self.ast_classes.append(lib_class_obj)

@@ -1,7 +1,7 @@
 import ast
 
 
-class NodeObject:
+class ASTParameters:
     def __init__(self, obj):
         self.file = obj["file"]
         self.class_ = obj["class"]
@@ -9,15 +9,14 @@ class NodeObject:
         self.obj = obj["object"]
         self.variable = ""
         self.parameter = []
-        self.parameter_variables = obj["parameter variables"]
         self.variable_value = {}
 
-    def get_objects(self, obj):
+    def get_parameters(self, obj):
         self.get_value(obj)
-        obj_dict = {"file": self.file, "object": type(self.obj), "code": ast.unparse(self.obj), "class": self.class_,
-                    "variable": self.variable, "parameter": self.parameter, "line_no": self.obj.lineno,
-                    "parameter variables": self.variable_value, "parent_func": self.parameter_variables}
-        return obj_dict
+        config_object = {"file": self.file, "class": self.class_, "parameter": self.parameter, "object": obj,
+                    "parameter variables": self.variable_value, "variable": self.variable}
+                    #"object": type(self.obj), "code": ast.unparse(self.obj), "line_no": self.obj.lineno
+        return config_object
 
     def get_value(self, obj):
         ast_type = type(obj)
@@ -52,7 +51,7 @@ class NodeObject:
         value = self.get_value(obj.value)
         if value is not None:  # for case of ann_assign
             if type(obj.value) == ast.Call:
-                if ast.unparse(obj.value).startswith(self.class_alias):
+                if self.class_alias in ast.unparse(obj.value):
                     self.variable = ast.unparse(obj.targets)
         return ast.unparse(obj)
 
@@ -159,7 +158,7 @@ class NodeObject:
                 self.get_value(arg)
             for param in obj.keywords:
                 param_value = self.get_value(param.value)
-                if param_value.startswith(self.class_alias):
+                if self.class_alias in param_value:
                     self.variable = param.arg
         return ast.unparse(obj)
 
@@ -229,13 +228,7 @@ class NodeObject:
             print(str(type(self.obj)) + ": dummy " + ast.unparse(self.obj))
 
     def get_variable_scope(self, obj):
-        if self.parameter_variables is not None:
-            #for assign in self.parameter_variables:
-            #    for target in assign.targets:
-            #        if ast.unparse(target) == ast.unparse(obj):
-            #            self.variable_value[ast.unparse(obj)] = ast.unparse(assign.value)
-            self.variable_value[ast.unparse(obj)] = None
-            #self.variable_value.append(ast.unparse(obj))
+        self.variable_value[ast.unparse(obj)] = None
 
     obj_type = {ast.Name: extract_unparse_obj,
                 ast.Constant: extract_unparse_obj,

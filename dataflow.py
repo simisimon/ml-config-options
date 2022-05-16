@@ -4,13 +4,14 @@ import ast
 class DataFlowAnalysis:
     def __init__(self, obj, variable):
         self.file = obj["file"]
-        self.object_dict = {"function": obj["parent_func"], "objects": obj["parent_func"].body,
-                         "variable": variable, "line_no": obj["line_no"], "last_assign_line_no": 0}
+        self.object_dict = {"function": None, "objects": [], "variable": variable,
+                            "line_no": obj["object"].lineno, "last_assign_line_no": 0}
         self.variable_value = {}
         self.counter = 0
         self.function_parameter = None
 
     def get_parameter_value(self):
+        self.get_parent_func()
         self.remove_objects(self.object_dict)
         self.get_last_assignment(self.object_dict)
         if not self.variable_value:
@@ -23,6 +24,31 @@ class DataFlowAnalysis:
                 self.get_last_assignment(object_dict)
                 self.detect_deeper_objects(object_dict)
         return self.variable_value
+
+    def get_parent_func(self):
+        with open(self.file, "r") as source:
+            tree = ast.parse(source.read())
+
+        first_level_objects = tree.body
+        for obj in first_level_objects:
+            if obj.end_lineno < self.object_dict["line_no"]:
+                continue
+            else:
+                nodes = list(ast.walk(obj))
+                nodes.insert(0, obj)
+                for node in nodes:
+                    if obj.lineno > self.object_dict["line_no"]:
+                        break
+                    if type(node) == ast.FunctionDef or type(node) == ast.AsyncFunctionDef:
+                        if node.lineno <= self.object_dict["line_no"]:
+                            if self.object_dict["line_no"] <= node.end_lineno:
+                                self.object_dict["function"] = node
+                                self.object_dict["objects"] = node.body
+                                break
+                        else:
+                            break
+                if self.object_dict["function"] is not None:
+                    break
 
     def remove_objects(self, object_dict):
         for obj in object_dict["objects"]:
@@ -39,67 +65,68 @@ class DataFlowAnalysis:
                         self.counter += 1
 
     def check_function_parameter(self):
-        args = self.object_dict["function"].args
+        if self.object_dict["function"] is not None:
+            args = self.object_dict["function"].args
 
-        for arg in args.args:
-            if arg.arg == self.object_dict["variable"]:
-                self.function_parameter = "arg"
-                col_offset = arg.col_offset
-                for default in args.defaults:
-                    if default.col_offset > col_offset:
-                        index = args.args.index(arg)
-                        length = len(args.args) - 1
-                        if index < length:
-                            col_offset_next = args.args[index + 1].col_offset
-                            if default.col_offset < col_offset_next:
+            for arg in args.args:
+                if arg.arg == self.object_dict["variable"]:
+                    self.function_parameter = "arg"
+                    col_offset = arg.col_offset
+                    for default in args.defaults:
+                        if default.col_offset > col_offset:
+                            index = args.args.index(arg)
+                            length = len(args.args) - 1
+                            if index < length:
+                                col_offset_next = args.args[index + 1].col_offset
+                                if default.col_offset < col_offset_next:
+                                    self.variable_value[self.counter] = ast.unparse(default)
+                                    self.counter += 1
+                            else:
                                 self.variable_value[self.counter] = ast.unparse(default)
                                 self.counter += 1
-                        else:
-                            self.variable_value[self.counter] = ast.unparse(default)
-                            self.counter += 1
-                        return
-                return
-
-        if args.vararg is not None:
-            if ast.unparse(args.vararg) == self.object_dict["variable"]:
-                self.function_parameter = "vararg"
-                return
-
-        for kwonlyarg in args.kwonlyargs:
-            if kwonlyarg.arg == self.object_dict["variable"]:
-                self.function_parameter = "kwonlyarg"
-                index = args.kwonlyargs.index(kwonlyarg)
-                kw_default = args.kw_defaults[index]
-                if kw_default is not None:
-                    self.variable_value[self.counter] = ast.unparse(kw_default)
-                    self.counter += 1
+                            return
                     return
-                return
 
-        for posonlyarg in args.posonlyargs:
-            if posonlyarg.arg == self.object_dict["variable"]:
-                self.function_parameter = "posonlyarg"
-                col_offset = posonlyarg.col_offset
-                for default in args.defaults:
-                    if default.col_offset > col_offset:
-                        index = args.posonlyargs.index(posonlyarg)
-                        length = len(args.posonlyargs) - 1
-                        if index < length:
-                            col_offset_next = args.posonlyargs[index + 1].col_offset
-                            if default.col_offset < col_offset_next:
+            if args.vararg is not None:
+                if ast.unparse(args.vararg) == self.object_dict["variable"]:
+                    self.function_parameter = "vararg"
+                    return
+
+            for kwonlyarg in args.kwonlyargs:
+                if kwonlyarg.arg == self.object_dict["variable"]:
+                    self.function_parameter = "kwonlyarg"
+                    index = args.kwonlyargs.index(kwonlyarg)
+                    kw_default = args.kw_defaults[index]
+                    if kw_default is not None:
+                        self.variable_value[self.counter] = ast.unparse(kw_default)
+                        self.counter += 1
+                        return
+                    return
+
+            for posonlyarg in args.posonlyargs:
+                if posonlyarg.arg == self.object_dict["variable"]:
+                    self.function_parameter = "posonlyarg"
+                    col_offset = posonlyarg.col_offset
+                    for default in args.defaults:
+                        if default.col_offset > col_offset:
+                            index = args.posonlyargs.index(posonlyarg)
+                            length = len(args.posonlyargs) - 1
+                            if index < length:
+                                col_offset_next = args.posonlyargs[index + 1].col_offset
+                                if default.col_offset < col_offset_next:
+                                    self.variable_value[self.counter] = ast.unparse(default)
+                                    self.counter += 1
+                                    return
+                            else:
                                 self.variable_value[self.counter] = ast.unparse(default)
                                 self.counter += 1
                                 return
-                        else:
-                            self.variable_value[self.counter] = ast.unparse(default)
-                            self.counter += 1
-                            return
-                return
+                    return
 
-        if args.kwarg is not None:
-            if ast.unparse(args.kwarg) == self.object_dict["variable"]:
-                self.function_parameter = "kwarg"
-                return
+            if args.kwarg is not None:
+                if ast.unparse(args.kwarg) == self.object_dict["variable"]:
+                    self.function_parameter = "kwarg"
+                    return
 
     def detect_deeper_objects(self, object_dict):
         for obj in object_dict["objects"]:
@@ -258,9 +285,3 @@ class DataFlowAnalysis:
                                     self.counter += 1
 
         return function_calls
-
-
-
-
-
-
