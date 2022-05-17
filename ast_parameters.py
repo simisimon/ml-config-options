@@ -2,20 +2,21 @@ import ast
 
 
 class ASTParameters:
-    def __init__(self, obj):
-        self.file = obj["file"]
-        self.class_ = obj["class"]
-        self.class_alias = obj["class alias"].split(".")[-1]
-        self.obj = obj["object"]
+    def __init__(self, ast_class_dict):
+        self.file = ast_class_dict["file"]
+        self.class_ = ast_class_dict["class"]
+        self.class_alias = ast_class_dict["class alias"].split(".")[-1]
+        self.obj = ast_class_dict["object"]
+        self.scraped_parameters = ast_class_dict["scraped parameters"]["parameters"]
         self.variable = ""
         self.parameter = []
         self.variable_value = {}
 
-    def get_parameters(self, obj):
-        self.get_value(obj)
-        config_object = {"file": self.file, "class": self.class_, "parameter": self.parameter, "object": obj,
-                    "parameter variables": self.variable_value, "variable": self.variable}
-                    #"object": type(self.obj), "code": ast.unparse(self.obj), "line_no": self.obj.lineno
+    def get_parameters(self, ast_obj):
+        self.get_value(ast_obj)
+        self.merge_parameter()
+        config_object = {"file": self.file, "class": self.class_, "object": ast_obj, "parameter": self.parameter,
+                    "variable parameters": self.variable_value, "variable": self.variable}
         return config_object
 
     def get_value(self, obj):
@@ -25,7 +26,6 @@ class ASTParameters:
 
     def extract_func(self, obj):
         self.extract_args(obj.args)
-        # decorator noch offen!
         self.get_value(obj.returns)
         return ast.unparse(obj)
 
@@ -224,11 +224,56 @@ class ASTParameters:
         return ast.unparse(obj)
 
     def none(self, obj):
-        if type(obj) != type(None):
-            print(str(type(self.obj)) + ": dummy " + ast.unparse(self.obj))
+        pass
 
     def get_variable_scope(self, obj):
         self.variable_value[ast.unparse(obj)] = None
+
+    def merge_parameter(self):
+        parameter_dict = {}
+        asterisks = False
+
+
+        # wenn codeprm[0] == None:
+        # 1. prüfung: handelt es sich bei scraped um *
+        # 2. prüfung: wenn nein: handelt es sich um *args
+
+        for code_prm in self.parameter:
+            if code_prm[0] is None and not asterisks:
+                for scraped_prm in list(self.scraped_parameters):
+                    if scraped_prm[0] == "*" and len(scraped_prm) > 1:
+                        if scraped_prm[1].isalpha():  # handling of *args
+                            if scraped_prm not in parameter_dict:
+                                if self.parameter.index(code_prm) == len(self.parameter) - 1:
+                                    parameter_dict[scraped_prm] = code_prm[1]
+                                else:
+                                    prm_tupel = "("
+                                    for code_prm2 in self.parameter[self.parameter.index(code_prm):]:
+                                        if code_prm2[1][0] != "*":
+                                            prm_tupel += code_prm2[1] + ", "
+                                    prm_tupel = prm_tupel[:-2] + ")"
+                                    parameter_dict[scraped_prm] = prm_tupel
+                        break
+                    elif len(parameter_dict) <= list(self.scraped_parameters).index(scraped_prm):
+                        if scraped_prm == "*":
+                            asterisks = True
+                            break
+                        else:
+                            if code_prm[1][0] == '*' and len(code_prm[1]) > 1:
+                                if code_prm[1][1] != '*':
+                                    continue
+                            else:
+                                parameter_dict[scraped_prm] = code_prm[1]
+                                break
+            else:
+                for scraped_prm in list(self.scraped_parameters):
+                    if scraped_prm == code_prm[0]:
+                        parameter_dict[scraped_prm] = code_prm[1]
+                        break
+                    elif scraped_prm[:2] == "**":  # handling of **kwargs
+                        parameter_dict[code_prm[0]] = code_prm[1]
+
+        self.parameter = parameter_dict
 
     obj_type = {ast.Name: extract_unparse_obj,
                 ast.Constant: extract_unparse_obj,

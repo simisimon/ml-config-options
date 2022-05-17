@@ -540,7 +540,7 @@ von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begeg
 
 \section{Vorgehen}
 
-\subsection{Web Scraping der ML-Klassen}
+\subsection{Web Scraping der ML-Klassen}\label{scrape}
 Bevor im Source Code nach den Konfigurationsoptionen gesucht werden kann, ist es erforderlich, sich einen Überblick über
 die zu untersuchenden Bibliotheken zu verschaffen.
 Über die Dokumentation der Websites der Bibliotheken erhält man einen Einblick in die jeweilige Modul- und Klassenstruktur.
@@ -683,7 +683,7 @@ class KerasOptions(ConfigOptions):
 \
 
 
-\subsection{Extraktion der ML-Klassen}
+\subsection{Extraktion der ML-Klassen}\label{Classes}
 Als nächstes werden die Klassen der jeweiligen ML-Bibliothek aus dem Source Code extrahiert.
 Dafür wird durch die Liste mit Python-Dateien iteriert und entlang der AST-Struktur nach den entsprechenden Klassen gesucht.
 Der Extraktion-Prozess der ML-Klassen lässt sich in vier Schritte einteilen, die über die Klasse
@@ -697,9 +697,9 @@ Der Extraktion-Prozess der ML-Klassen lässt sich in vier Schritte einteilen, di
     \item AST-Knoten nach Import-Anweisungen der ML-Bibliothek durchsuchen
     \item AST-Knoten, die Import-Bezeichnungen enthalten filtern
     \item Prüfen, ob es sich um ML-Klassen handelt
-    \item ML-Klassen als Dictionairy speichern
+    \item ML-Klassen als Dictionary speichern
     \end{enumerate}
- \item Liste mit Dictionairy zurückgeben
+ \item Liste mit Dictionaries zurückgeben
 \end{enumerate}
 
 %\begin{center}
@@ -725,21 +725,21 @@ Im ersten Schritt werden alle Import-Objekte rausgefiltert, um festzustellen, ob
 Import-Objekte, die die ML-Bibliothek betreffen, werden in einer Liste gespeichert und bilden die Basis für die Suche nach
 den ML-Klassen.
 Es gibt verschiedene Möglichkeiten wie Elemente einer ML-Bibliothek zugänglich gemacht werden können.
-Das folgende Codebeispiel zeigt fünf Möglichkeiten, die die Verwendung der TensorFlow-Klasse \textit{LinearRegressor}
+Das folgende Codebeispiel zeigt fünf Möglichkeiten, die die Verwendung derselben scikit-learn-Klasse \textit{KNeighborsRegressor}
 über einen jeweils anderen Pfad im Code ermöglichen. \\
 
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
-import tensorflow                                       # A
-import tensorflow as tf                                 # B
-from tensorflow import estimator                        # C
-from tensorflow.estimator import LinearRegressor        # D
-from tensorflow.estimator import LinearRegressor as LR  # E
+import sklearn                                           # A
+import sklearn as skl                                    # B
+from sklearn import neighbors                            # C
+from sklearn.neighbors import KNeighborsRegressor        # D
+from klearn.neighbors import KNeighborsRegressor as KNN  # E
 
-tensorflow.estimator.LinearRegressor()                  # A
-tf.estimator.LinearRegressor()                          # B
-estimator.LinearRegressor()                             # C
-LinearRegressor()                                       # D
-LR()                                                    # E
+sklearn.neighbors.KNeighborsRegressor()                  # A
+skl.neighbors.KNeighborsRegressor()                      # B
+neighbors.KNeighborsRegressor()                          # C
+KNeighborsRegressor()                                    # D
+KNN()                                                    # E
 \end{lstlisting}
 \
 
@@ -747,33 +747,148 @@ Die Eindeutigkeit des Pfades ist wichtig, um sicherzustellen, dass es sich bei d
 einer ML-Bibliothek handelt.
 Einige Klassen haben geläufige Bezeichnungen, wie zum Beispiel \textit{Pipeline} aus scikit-learn oder \textit{Model} aus Mlflow.
 Um zu vermeiden, dass irrtümlicherweise falsche Objekte gefunden werden, werden die Code-Objekte aus dem AST auf Basis der
-Import-Anweisungen der jeweiligen ML-Bibliothek rausgefiltert.
-Für das obige Codebeispiel wird demnach der Syntaxbaum nach Knoten durchsucht, deren Name identisch mit \textit{tensorflow, tf, estimator} etc. ist.
+Import-Anweisungen der jeweiligen ML-Bibliothek rausgefiltert.\\
+
+Angenommen das folgende Codebeispiel wird auf Klassen der aus der scikit-learn-Bibliothek untersucht.\\
+
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+from sklearn.neighbors import KNeighborsRegressor
+
+def knn_func():
+    n_neighbors = 6
+    knn = KNeighborsRegressor(n_neighbors, leaf_size=25)
+    return knn
+\end{lstlisting}
+\
+
+Für das obige Codebeispiel wird der Syntaxbaum nach Knoten durchsucht, deren Name identisch mit \textit{KNeighborsRegressor} ist und
+vom AST-Typ \textit{Call} ist.
+Der AST-Typ versichert, dass ein (Klassen-)Aufruf vorliegt und nicht beispielsweise ein gleichnamiger String ohne Klassenbezug.
 Ist dies zutreffend, wird geprüft, ob es sich bei diesem Knoten, um eine ML-Klasse handelt oder um einen Pfad, an dessen Ende eine ML-Klasse steht.
 Ist auch dies gegeben, wird der gesamte Pfad des Objektes beleuchtet, um die Klasse eindeutig zuordnen zu können.
-Dieser Schritt ist wichtig, da beispielsweise PyTorch über zwei unterschiedliche \textit{profiler}-Klassen verfügt.
+Dieser Schritt ist wichtig, da Klassenamen nicht immer eindeutig sind.
+So verfügt beispielsweise PyTorch über zwei unterschiedliche \textit{profiler}-Klassen.
 Die eine Klasse ist Teil des \textit{autograd}-Moduls, während die andere dem \textit{profiler}-Modul zugeordnet ist.
 Beide verfügen über unterschiedliche Konfigurationsoptionen.
 An dieser Stelle sollte man sich nicht irritieren lassen, dass die beiden Klassen kleingeschrieben sind.
 Die Namenskonvention, dass Klassen mit Großbuchstaben beginnen, wird von manchen Bibliotheken nicht immer eingehalten.\\
 
-Die gefundenen Klassen der Python-Datei werden in einer Liste gespeichert.
-Diese besteht aus je einem Dictionairy für jede Klasse und enthält alle benötigten Informationen, um im nächsten Schritt
+Die gefundenen Klasse aus dem Codebeispiel wird als Listenelement in Form eines Dictionaries gespeichert.
+Das Dictionary enthält nun alle benötigten Informationen, um im nächsten Schritt
 die Konfigurationsoptionen auszulesen.
 Dazu gehört der vollständige Pfad mit dem Namen der Klasse, der verwendete Pfad inklusive Alias, sowie die Datei, indem
 die Klasse gefunden wurde.
 Zudem wird das AST-Objekt gespeichert, aus dem sich weitere Informationen wie Parameter und Zeilennummer auslesen lassen.
-Für das Beispiel \textit{C} aus dem obigen Codesnippet ergibt sich folgender Listeneintrag.\\
+Für das Codebeispiel ergibt sich folgender Listeneintrag.\\
 
 \begin{lstlisting}[frame=single, basicstyle=\small]
-{'class': 'tensorflow.estimator.LinearRegressor',
-  'class alias': 'tf.estimator.LinearRegressor',
-  'file': 'path/file.py',
-  'object': <ast.Expr object at 0x105e61b20>}
+{'file': 'path/file.py',
+ 'class': 'sklearn.neighbors.KNeighborsRegressor',
+ 'class alias': 'KNeighborsRegressor',
+ 'object': <ast.Assign object at 0x106178370>}
 \end{lstlisting}
 \
 
 \subsection{Extraktion und Verarbeitung der Konfigurationsoptionen}
+Der nächste Vorgang gliedert sich in zwei Teilschritte, bei dem die Ergebnisse aus \ref{scrape} und \ref{Classes} miteinander
+verbunden werden.
+
+\begin{enumerate}
+ \item Extraktion der Parameterwerte aus AST-Objekt des Dictionaries
+ \item Zuordnung der Werte zu den gescrapten Parametern aus JSON-Datei
+\end{enumerate}
+
+Zunächst wird durch die Liste mit Dictionaries aus \ref{Classes} iteriert.
+Jedes Dictionary wird zusätzlich mit einem Eintrag zu den gescrapten Parametern der jeweiligen Klasse ergänzt und an die Methode \textit{get\_parameters()}
+der Klasse \textit{ASTParameters} übergeben.
+In dieser Klasse wird der Syntaxbaum des Code-Objekts traversiert, um die übergebenen Parameterwerte in der
+entsprechenden Reihenfolge zu extrahieren.
+Die Klasse verfügt über eine Vielzahl an Methoden, die die einzelnen Knoten des Syntaxbaums entsprechend ihres Typs
+verarbeiten können.
+Da die gesuchten Werte Parameter von Klassenaufrufen sind, ist die Behandlung von Knoten des AST-Typs \textit{Call} von
+besonderer Bedeutung.
+Hinter dem AST-Objekt des Dictionaries aus \ref{Classes} verbirgt sich folgender Syntaxbaum: \\
+
+\begin{lstlisting}[frame=single, basicstyle=\small]
+Assign(
+    targets=[
+        Name(
+            id='knn',
+            ctx=Store())],
+    value=Call(
+        func=Name(
+            id='KNeighborsRegressor',
+            ctx=Load()),
+        args=[
+            Name(
+                id='n_neighbors',
+                ctx=Load())],
+        keywords=[
+            keyword(
+                arg='leaf_size',
+                value=Constant(
+                    value=25))]))
+\end{lstlisting}
+\
+
+Ein Code-Objekt vom AST-Typ \textit{Call} besteht aus 3 Teilknoten.
+Der Knoten \textit{func} gibt den Namen Aufrufs an.
+Ist an dieser Stelle die \textit{id} des Knoten identisch zur ML-Klasse, werden im nächsten Schritt die Parameter
+extrahiert.
+Diese liegen zweigeteilt vor:
+Im Knoten \textit{args} befinden sich Argumente, die nach ihrer Position übergeben und zugeordnet werden.
+Im Gegenzug werden im Knoten \textit{keywords} Argumente zusammen mit der Parameterbezeichnung übergeben, sodass direkt kenntlich
+ist, um welchen Parameter es sich handelt. \\
+
+Im gegebenen Beispiel wird die Variable \textit{n\_neighbors} als Positionsargument vom AST-Typ \textit{Name} klassifiziert.
+Wenn Parameter vom AST-Typ \textit{Name} vorliegen, werden diese zusätzlich vermerkt, um an späterer Stelle mittels
+Datenflussanalyse mögliche Werte für die Variablen zu ermitteln.
+Das Keyword-Argument für \textit{leaf\_size} kann hingegen direkt zugeordnet werden und ist auch konstant. \\
+
+Zusätzlich zur Ermittlung der Parameter wird in der \textit{AST-Parameters}-Klasse auch geprüft, ob die Instanziierung der Klasse
+einer Variable zugewiesen wird.
+Im gegebenen Beispiel wird die Instanz der Klasse (\textit{value}) von der Variablen \textit{knn} (\textit{target}) referenziert.
+Darüber hinaus kann eine Zuweisung auch über andere Wege als Keyword-Argument erfolgen:
+bei der Definition einer Klasse oder Funktion und beim Aufruf eines Objektes.\\
+
+Im zweiten Teil werden die gefundenen Parameter im Code mit den gescrapten aus der JSON-Datei zusammengeführt.
+Zunächst wird durch die Liste an Positionsargumente iteriert, sodass die Positionsargumente der Reihe nach,
+den gescrapten Parameter zugeordnet werden können.
+Für die Keyword-Argumente wird geprüft, ob das Keyword als Parameter vorhanden ist.
+Bei falschen Keyword-Bezeichnungen, also Keywords, die es als Parameter in der Spezifikation gar nicht gibt,
+kann keine Zuordnung zu den gescrapten Parametern erfolgen. \\
+
+Darüber hinaus gibt es drei Besonderheiten in der Spezifikation, die vom Algorithmus bei der Zuordnung der Parameter
+beachtet werden müssen: \textit{*}, \textit{*args} und \textit{**kwargs}.
+Befindet sich in der Spezifikation der Parameter ein Sternchen, dürfen danach keine Positionsargumente mehr
+übergeben werden.
+Bei der Spezifikation der Parameter der \textit{KNeighborsRegressor}-Klasse befindet sich dieses Sternchen an zweiter Stelle.
+Dementsprechend müssen alle Parameter ab dem zweiten Parameter \textit{leaf\_size} als Keyword-Argumente übergeben werden.
+\textit{*args} werden verwendet, wenn die Anzahl der Übergabeparameter variabel bleiben soll oder die Parameter in Form
+eines Tupels oder einer Liste vorliegen.
+Im ersten Fall kann die Länge der übergebenen Parameter, die Länge der Parameter in der Spezifikation also überschreiten.
+Die \textit{überzähligen} Parameter werden zusammen mit dem letzten übergebenen Parameter als Tupel zusammengefasst.
+Die Übergabe als Tupel oder als Liste erfolgt mit einem anführenden Sternchen.
+\textit{**kwargs} hingegen sind eine Möglichkeit, um Dictionaries zu übergeben, die als Schlüssel Parameter der Klasse
+enthalten können. \\
+
+Nachdem die Parameter erfolgreich zugeordnet wurden, gibt die \textit{ASTParameters}-Klasse ein Dictionary zurück.
+Es enthält wie das Dictionary aus \ref{Classes} den Namen der Python-Datei, den vollständigen Pfad der Klasse und das AST-Objekt.
+Ergänzt wird das Dictionary mit Informationen zu den Parametern.
+Variable Parameter werden zusätzlich gesondert in einem Dictionary aufgeführt.
+Da die möglichen Werte der variablen Parameter noch unbekannt sind, werden diese mit \textit{None} gekennzeichnet.
+Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufgeführt, sodass sich folgendenes Dictionary ergibt:\\
+
+\begin{lstlisting}[frame=single, basicstyle=\small]
+{'file': 'path/file.py',
+ 'class': 'sklearn.neighbors.KNeighborsRegressor',
+ 'object': <ast.Assign object at 0x106178370>},
+ 'parameter': [(None, 'n_neighbors'),
+               ('leaf_size', '25')],
+ 'variable parameters': {'n_neighbors': None},
+ 'variable': 'knn'}
+\end{lstlisting}
+\
 
 \subsection{Ermittlung der variablen Konfigurationswerte}
 
