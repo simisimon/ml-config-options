@@ -22,7 +22,7 @@ class ConfigOptions:
         self.get_py_files()
         self.get_ast_classes()
         self.get_parameters()
-        self.get_parameter_values()
+        self.get_variable_parameter_values()
         self.convert_into_node_structure()
 
     def get_py_files(self):
@@ -72,7 +72,7 @@ class ConfigOptions:
                 config_object = ASTParameters(ast_class_dict).get_parameters(ast_class_dict["object"])
                 self.config_objects.append(config_object)
 
-    def get_parameter_values(self):
+    def get_variable_parameter_values(self):
         for obj in self.config_objects:
             for variable in obj["variable parameters"]:
                 obj["variable parameters"][variable] = DataFlowAnalysis(obj, variable).get_parameter_value()

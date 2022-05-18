@@ -233,11 +233,6 @@ class ASTParameters:
         parameter_dict = {}
         asterisks = False
 
-
-        # wenn codeprm[0] == None:
-        # 1. prüfung: handelt es sich bei scraped um *
-        # 2. prüfung: wenn nein: handelt es sich um *args
-
         for code_prm in self.parameter:
             if code_prm[0] is None and not asterisks:
                 for scraped_prm in list(self.scraped_parameters):

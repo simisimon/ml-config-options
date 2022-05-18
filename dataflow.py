@@ -13,7 +13,7 @@ class DataFlowAnalysis:
     def get_parameter_value(self):
         self.get_parent_func()
         self.remove_objects(self.object_dict)
-        self.get_last_assignment(self.object_dict)
+        self.get_assignments(self.object_dict)
         if not self.variable_value:
             self.check_function_parameter()
         self.detect_deeper_objects(self.object_dict)
@@ -21,7 +21,7 @@ class DataFlowAnalysis:
             function_calls = self.detect_function_calls()
             for object_dict in function_calls:
                 self.remove_objects(object_dict)
-                self.get_last_assignment(object_dict)
+                self.get_assignments(object_dict)
                 self.detect_deeper_objects(object_dict)
         return self.variable_value
 
@@ -44,25 +44,30 @@ class DataFlowAnalysis:
                             if self.object_dict["line_no"] <= node.end_lineno:
                                 self.object_dict["function"] = node
                                 self.object_dict["objects"] = node.body
-                                break
+                                return
                         else:
                             break
-                if self.object_dict["function"] is not None:
-                    break
 
     def remove_objects(self, object_dict):
         for obj in object_dict["objects"]:
             if obj.lineno > object_dict["line_no"]:
                 object_dict["objects"].remove(obj)
 
-    def get_last_assignment(self, object_dict):
+    def get_assignments(self, object_dict):
+        temp_variable_value = None
         for obj in object_dict["objects"]:
             if type(obj) == ast.Assign:
                 for target in obj.targets:
                     if ast.unparse(target) == object_dict["variable"]:
-                        self.variable_value[self.counter] = ast.unparse(obj.value)
-                        object_dict["last_assign_line_no"] = obj.lineno
-                        self.counter += 1
+                        temp_variable_value = ast.unparse(obj.value)
+                        temp_line_no = obj.lineno
+                        #self.variable_value[self.counter] = ast.unparse(obj.value)
+                        #object_dict["last_assign_line_no"] = obj.lineno
+                        #self.counter += 1
+        if temp_variable_value is not None:
+            self.variable_value[self.counter] = temp_variable_value
+            object_dict["last_assign_line_no"] = temp_line_no
+            self.counter += 1
 
     def check_function_parameter(self):
         if self.object_dict["function"] is not None:

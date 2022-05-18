@@ -789,7 +789,7 @@ Für das Codebeispiel ergibt sich folgender Listeneintrag.\\
 \end{lstlisting}
 \
 
-\subsection{Extraktion und Verarbeitung der Konfigurationsoptionen}
+\subsection{Extraktion und Verarbeitung der Konfigurationsoptionen} \label{Parameters}
 Der nächste Vorgang gliedert sich in zwei Teilschritte, bei dem die Ergebnisse aus \ref{scrape} und \ref{Classes} miteinander
 verbunden werden.
 
@@ -891,6 +891,58 @@ Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufg
 \
 
 \subsection{Ermittlung der variablen Konfigurationswerte}
+Zunächst wird durch die Liste mit Dictionaries aus \ref{Parameters} iteriert.
+Die Ermittlung der variablen Parameterewerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
+Beim Aufruf der Methode wird das Dictionary zusammen mit der Parametervariable übergeben.\\
+
+Im ersten Schritt wird die Python-Datei als AST geparst.
+Der resultierende Syntaxbaum wird traversiert und nach der Funktion gesucht, in der sich das Objekt befindet.
+Dafür wird jeder erreichte Knoten auf seinen Typ geprüft.
+Handelt es sich einen Knoten vom AST-Typ \textit{FunctionDef}, werden die Zeilennummern verglichen.
+Befindet sich das Objekt innerhalb des Funktionsraums, endet die Suche an dieser Stelle.
+In Anschluss werden die Bestandteile der gefundenen Funktion, die erst nach der Parametervariablen aufgeführt werden, rausgefiltert.
+Dafür wird durch die Liste an Objekten der Funktion iteriert und Objekte, dessen Zeilennummer größer als die Zeilennummer der Parametervariablen
+ist, entfernt.\\
+
+Für die Ermittlung möglicher Werte der Parametervariablen wird durch die gekürzte Liste mit den Funktionsobjekten iteriert, um
+Zuweisungen zu finden.
+Zu beachten ist, dass sich alle zu betrachtenden Funktionsobjekte auf der gleichen Ebene aufhalten.
+Befinden sich im Körper der einzelnen Funktionsobjekten weitere Objekte, werden sie an dieser Stelle
+nicht betrachtet.
+Handelt es sich bei einem Objekt beispielsweise um eine Kontrollstruktur vom AST-Typ \textit{If}, könnte der Körper der
+Kontrollstruktur Zuweisungen enthalten, die wir erst an späterer Stelle erfassen werden.
+Wird bei einem Iterationsvorgang eine Zuweisung gefunden, die die gesuchte Parametervariable zum Ziel hat, wird sie in der
+Variable \textit{temp\_variable\_value} zwischengespeichert.
+Falls beim einem späteren Iterationsvorgang erneut ein Objekt gefunden wird, dass der gesuchten Variable einen Wert zuweist,
+wird \textit{temp\_variable\_value} überschrieben, sodass am Ende nur der Variablenwert gespeichert wird, die der Parametervariablen am
+nächsten ist.
+Dies verhindert, dass Werte, die vor der Verwendung der Parametervariablen ohnehin überschrieben werden, als möglicher
+Variablenwert in Frage kommen. \\
+
+Falls kein möglicher Variablenwert gefunden wurde, werden die Parameter in der Definition der Funktion überprüft.
+Ist die Parametervariable in der Definition vorhanden, müssen einige Besonderheiten berücksichtigt werden.
+Die Parameter einer Funktion können fünf unterschiedliche AST-Typen besitzen: \textit{arg}, \textit{vararg}, \textit{kwonlyargs},
+\textit{Pos} oder \textit{kwarg}.
+Ähnlich wie die Argumente bei \textit{ast.Call} müssen die AST-Typen unterschiedlich behandelt werden, damit die Parametervariable
+beim Aufruf der Funktion eindeutig zugeordnet werden kann.
+Im folgenden Codebeispiel werden die verschiedenen Typen mit ihrem Namen kenntlich gemacht: \\
+
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+def func(posonlyarg1, posonlyarg2=1, /, arg1=2, arg2=3,
+         arg3=4, *vararg, kwonlyarg1, kwonlyarg2=6, **kwarg):
+    return
+
+func(0, 1, arg2=3, *[2], kwonlyarg1=5, kwonlyarg2=6,
+     **{"arg3": 4, "new_arg": 7})
+\end{lstlisting}
+\
+
+\textit{Positional-only arguments} sind Argumente, die vor der \textit{/}-Markierung stehen und dürfen nicht mit einem
+Keyword-Argument übergeben werden.
+\textit{Keyword-only arguments} sind das Gegenstück.
+Sie müssen mit einem Keyword
+Die Typen \textit{vararg} und \textit{kwarg} referenzieren die übergebenen \textit{*args}- und \textit{**kwargs}-Parameter,
+die in \ref{Classes} besprochen wurden.
 
 \subsection{ggf. Übergabe der Ergebnisse}
 
