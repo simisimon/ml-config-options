@@ -893,7 +893,7 @@ Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufg
 \subsection{Ermittlung der variablen Konfigurationswerte}
 Zunächst wird durch die Liste mit Dictionaries aus \ref{Parameters} iteriert.
 Die Ermittlung der variablen Parameterewerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
-Beim Aufruf der Methode wird das Dictionary zusammen mit der Parametervariable übergeben.\\
+Beim Aufruf der Methode wird das Dictionary zusammen mit der Parametervariable \textit{n_neighbors} übergeben.\\
 
 Im ersten Schritt wird die Python-Datei als AST geparst.
 Der resultierende Syntaxbaum wird traversiert und nach der Funktion gesucht, in der sich das Objekt befindet.
@@ -919,30 +919,58 @@ nächsten ist.
 Dies verhindert, dass Werte, die vor der Verwendung der Parametervariablen ohnehin überschrieben werden, als möglicher
 Variablenwert in Frage kommen. \\
 
-Falls kein möglicher Variablenwert gefunden wurde, werden die Parameter in der Definition der Funktion überprüft.
-Ist die Parametervariable in der Definition vorhanden, müssen einige Besonderheiten berücksichtigt werden.
+Falls kein möglicher Variablenwert gefunden wurde, wird zum einen der globale Namensraum nach Zuweisungen durchsucht und
+zum anderen die Parameter in der Definition der Funktion überprüft.
+Im ersten Vorgang lässt sich der Prozess der eben angesprochenen lokalen Zuweisungen übertragen.
+Ist die Parametervariable in der Definition der Funktion vorhanden, müssen jedoch einige Besonderheiten bei der Behandlung der Argumente
+berücksichtigt werden.
 Die Parameter einer Funktion können fünf unterschiedliche AST-Typen besitzen: \textit{arg}, \textit{vararg}, \textit{kwonlyargs},
-\textit{Pos} oder \textit{kwarg}.
+\textit{posonlyarg} oder \textit{kwarg}.
 Ähnlich wie die Argumente bei \textit{ast.Call} müssen die AST-Typen unterschiedlich behandelt werden, damit die Parametervariable
 beim Aufruf der Funktion eindeutig zugeordnet werden kann.
 Im folgenden Codebeispiel werden die verschiedenen Typen mit ihrem Namen kenntlich gemacht: \\
 
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
-def func(posonlyarg1, posonlyarg2=1, /, arg1=2, arg2=3,
-         arg3=4, *vararg, kwonlyarg1, kwonlyarg2=6, **kwarg):
+def func(posonlyarg1, posonlyarg2, /, arg1, arg2,
+         arg3 = 1, *vararg, kwonlyarg1, kwonlyarg2, **kwarg):
     return
 
-func(0, 1, arg2=3, *[2], kwonlyarg1=5, kwonlyarg2=6,
-     **{"arg3": 4, "new_arg": 7})
+func("posonlyarg1", "posonlyarg2", arg2=2, *["arg1"],
+     kwonlyarg1=1, kwonlyarg2=2, **{"arg3": 3, "new_arg": 0})
 \end{lstlisting}
 \
 
 \textit{Positional-only arguments} sind Argumente, die vor der \textit{/}-Markierung stehen und dürfen nicht mit einem
 Keyword-Argument übergeben werden.
 \textit{Keyword-only arguments} sind das Gegenstück.
-Sie müssen mit einem Keyword
+Sie müssen mit einem Keyword übergeben werden.
+\textit{Args} sind Argumente bei denen nicht festgelegt ist, ob sie mit einem Keyword übergeben werden.
+Sie werden ansonsten ihrer Position nach zugeordnet.
 Die Typen \textit{vararg} und \textit{kwarg} referenzieren die übergebenen \textit{*args}- und \textit{**kwargs}-Parameter,
 die in \ref{Classes} besprochen wurden.
+Ist die Parametervariable in der Definition der Signatur aufgeführt, besteht die Möglichkeit, dass ihr wie bei \textit{arg3} ein Default-Wert
+zugewiesen wird, der dementsprechend zur Liste möglicher Werte der Parametervariablen hinzugefügt werden muss.
+Falls dem Parameter beim Aufruf der Funktion kein Wert zugewiesen wird, würde der Wert von \textit{arg3} im Beispiel ansonsten
+\textit{3} betragen.\\
+
+Im nächsten Schritt wird erneut durch die gekürzte Liste an Funktionsobjekten iteriert.
+Dabei werden nur Objekte betrachtet, die, sofern vorhanden, nach der letzten Zuweisung eines Wertes an die
+Parametervariable im Code auftreten.
+Für jedes dieser Objekte wird der Syntaxbaum traversiert, um Zuweisungen, die sich verschachtelt im Körper eines Objektes
+befinden, zu finden.
+Dadurch können Zuweisungen gefunden werden, die sich zum Beispiel in Kontrollstrukturen wie \textit{if}- und \textit{else}-Zweigen
+in weiteren verschachtelten Funktionen oder auch in \textit{try}- und \textit{except}-Blöcken befinden.
+Werden an dieser Stelle Zuweisungen für die gesuchte Parametervariable gefunden, werden sie der Liste möglicher Werte hinzugefügt. \\
+
+Um die Suche nach möglichen Werten abzuschließen, werden, sofern die Parametervariable in der Definition der Funktion vorhanden ist,
+in der gesamten Datei nach Aufrufen der Funktion durchsucht.
+Dafür wird der Syntaxbaum des gesamten Codes der Python-Datei traversiert.
+Für jeden Aufruf der Funktion wird je nach Argumenttyp und Position der gesuchten Parametervariable, der übergebene
+Wert ausgelesen.
+Handelt es sich einem übergebenen Wert erneut um eine Variable, wird der gesamte Prozess zur Ermittlung des Variablenwerts wiederholt. \\
+
+Nach erfolgreichem Durchlauf wird für das gegebene Beispiel ein Dictionary zurückgegeben.
+
 
 \subsection{ggf. Übergabe der Ergebnisse}
 

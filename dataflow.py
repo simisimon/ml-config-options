@@ -15,6 +15,7 @@ class DataFlowAnalysis:
         self.remove_objects(self.object_dict)
         self.get_assignments(self.object_dict)
         if not self.variable_value:
+            self.get_global_assignments()
             self.check_function_parameter()
         self.detect_deeper_objects(self.object_dict)
         if self.function_parameter is not None:
@@ -67,6 +68,22 @@ class DataFlowAnalysis:
         if temp_variable_value is not None:
             self.variable_value[self.counter] = temp_variable_value
             object_dict["last_assign_line_no"] = temp_line_no
+            self.counter += 1
+
+    def get_global_assignments(self):
+        temp_variable_value = None
+        with open(self.file, "r") as source:
+            tree = ast.parse(source.read())
+        first_level_objects = tree.body
+        for obj in first_level_objects:
+            if type(obj) == ast.Assign:
+                for target in obj.targets:
+                    if ast.unparse(target) == self.object_dict["variable"]:
+                        temp_variable_value = ast.unparse(obj.value)
+                        temp_line_no = obj.lineno
+        if temp_variable_value is not None:
+            self.variable_value[self.counter] = temp_variable_value
+            self.object_dict["last_assign_line_no"] = temp_line_no
             self.counter += 1
 
     def check_function_parameter(self):
