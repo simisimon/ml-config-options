@@ -538,9 +538,8 @@ Ziel der Plattform ist dabei den Lebenszyklus von ML-Projekten ganzheitlich zu s
 Dabei werden über die ML-Algorithmen hinaus, den Anwendenden Werkzeuge mit in die Hand zu geben, um den Herausforderungen
 von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begegnen \cite[]{zaharia2018accelerating}.\\
 
-\section{Vorgehen}
 
-\subsection{Web Scraping der ML-Klassen}\label{scrape}
+\section{Web Scraping der ML-Klassen}\label{scrape}
 Bevor im Source Code nach den Konfigurationsoptionen gesucht werden kann, ist es erforderlich, sich einen Überblick über
 die zu untersuchenden Bibliotheken zu verschaffen.
 Über die Dokumentation der Websites der Bibliotheken erhält man einen Einblick in die jeweilige Modul- und Klassenstruktur.
@@ -614,12 +613,12 @@ Zusätzlich zum Klassen- und zu den Parameternamen, werden die Default-Werte der
 Die scikit-learn-Klasse \textit{StratifiedGroupKFold} wird demnach wie folgt gespeichert:\\
 
 \begin{lstlisting}[frame=single, basicstyle=\small]
-"sklearn.model_selection.StratifiedGroupKFold": {
-    "short name": "StratifiedGroupKFold",
-    "parameters": {
-        "n_splits": "5",
-        "shuffle": "False",
-        "random_state": "None"
+'sklearn.model_selection.StratifiedGroupKFold': {
+    'short name': 'StratifiedGroupKFold',
+    'parameters': {
+        'n_splits": '5',
+        'shuffle": 'False',
+        'random_state': 'None'
     }
 }
 \end{lstlisting}
@@ -648,7 +647,7 @@ python3 scraping.py mlflow
 \end{lstlisting}
 \
 
-\subsection{Parsen der Repositorys}
+\section{Parsen der Repositorys}
 Der erste Schritt, um Konfigurationsoptionen extrahieren zu können, ist eine Umgebung zu schaffen, in der ein zu untersuchendes
 Git-Repository vorliegt.
 Über die \textit{GitPython}-Bibliothek wird das Repository geklont, sodass es lokal für die Analyse verfügbar ist.
@@ -683,7 +682,7 @@ class KerasOptions(ConfigOptions):
 \
 
 
-\subsection{Extraktion der ML-Klassen}\label{Classes}
+\section{Extraktion der ML-Klassen}\label{Classes}
 Als nächstes werden die Klassen der jeweiligen ML-Bibliothek aus dem Source Code extrahiert.
 Dafür wird durch die Liste mit Python-Dateien iteriert und entlang der AST-Struktur nach den entsprechenden Klassen gesucht.
 Der Extraktion-Prozess der ML-Klassen lässt sich in vier Schritte einteilen, die über die Klasse
@@ -789,7 +788,7 @@ Für das Codebeispiel ergibt sich folgender Listeneintrag.\\
 \end{lstlisting}
 \
 
-\subsection{Extraktion und Verarbeitung der Konfigurationsoptionen} \label{Parameters}
+\section{Extraktion und Verarbeitung der Konfigurationsoptionen} \label{Parameters}
 Der nächste Vorgang gliedert sich in zwei Teilschritte, bei dem die Ergebnisse aus \ref{scrape} und \ref{Classes} miteinander
 verbunden werden.
 
@@ -890,16 +889,16 @@ Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufg
 \end{lstlisting}
 \
 
-\subsection{Ermittlung der variablen Konfigurationswerte}
+\section{Ermittlung der variablen Konfigurationswerte}
 Zunächst wird durch die Liste mit Dictionaries aus \ref{Parameters} iteriert.
-Die Ermittlung der variablen Parameterewerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
-Beim Aufruf der Methode wird das Dictionary zusammen mit der Parametervariable \textit{n_neighbors} übergeben.\\
+Die Ermittlung der variablen Parameterwerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
+Beim Aufruf der Methode wird das Dictionary zusammen mit der Parametervariable \textit{n\_neighbors} übergeben.\\
 
 Im ersten Schritt wird die Python-Datei als AST geparst.
 Der resultierende Syntaxbaum wird traversiert und nach der Funktion gesucht, in der sich das Objekt befindet.
 Dafür wird jeder erreichte Knoten auf seinen Typ geprüft.
 Handelt es sich einen Knoten vom AST-Typ \textit{FunctionDef}, werden die Zeilennummern verglichen.
-Befindet sich das Objekt innerhalb des Funktionsraums, endet die Suche an dieser Stelle.
+Befindet sich das Objekt innerhalb des Funktionskörpers, endet die Suche an dieser Stelle.
 In Anschluss werden die Bestandteile der gefundenen Funktion, die erst nach der Parametervariablen aufgeführt werden, rausgefiltert.
 Dafür wird durch die Liste an Objekten der Funktion iteriert und Objekte, dessen Zeilennummer größer als die Zeilennummer der Parametervariablen
 ist, entfernt.\\
@@ -911,7 +910,7 @@ Befinden sich im Körper der einzelnen Funktionsobjekten weitere Objekte, werden
 nicht betrachtet.
 Handelt es sich bei einem Objekt beispielsweise um eine Kontrollstruktur vom AST-Typ \textit{If}, könnte der Körper der
 Kontrollstruktur Zuweisungen enthalten, die wir erst an späterer Stelle erfassen werden.
-Wird bei einem Iterationsvorgang eine Zuweisung gefunden, die die gesuchte Parametervariable zum Ziel hat, wird sie in der
+Wird bei einem Iterationsvorgang eine Zuweisung gefunden, die die gesuchte Parametervariable zum Ziel hat, wird der Wert in der
 Variable \textit{temp\_variable\_value} zwischengespeichert.
 Falls beim einem späteren Iterationsvorgang erneut ein Objekt gefunden wird, dass der gesuchten Variable einen Wert zuweist,
 wird \textit{temp\_variable\_value} überschrieben, sodass am Ende nur der Variablenwert gespeichert wird, die der Parametervariablen am
@@ -958,7 +957,7 @@ Dabei werden nur Objekte betrachtet, die, sofern vorhanden, nach der letzten Zuw
 Parametervariable im Code auftreten.
 Für jedes dieser Objekte wird der Syntaxbaum traversiert, um Zuweisungen, die sich verschachtelt im Körper eines Objektes
 befinden, zu finden.
-Dadurch können Zuweisungen gefunden werden, die sich zum Beispiel in Kontrollstrukturen wie \textit{if}- und \textit{else}-Zweigen
+Dadurch können Zuweisungen gefunden werden, die sich zum Beispiel in Kontrollstrukturen wie \textit{if}- und \textit{else}-Zweigen,
 in weiteren verschachtelten Funktionen oder auch in \textit{try}- und \textit{except}-Blöcken befinden.
 Werden an dieser Stelle Zuweisungen für die gesuchte Parametervariable gefunden, werden sie der Liste möglicher Werte hinzugefügt. \\
 
@@ -970,9 +969,23 @@ Wert ausgelesen.
 Handelt es sich einem übergebenen Wert erneut um eine Variable, wird der gesamte Prozess zur Ermittlung des Variablenwerts wiederholt. \\
 
 Nach erfolgreichem Durchlauf wird für das gegebene Beispiel ein Dictionary zurückgegeben.
+Die Schlüssel des Dictionaries sind aufsteigende Zahlen, denen die gefundenen Werte zugeordnet werden.
+Das Dictionary wird dem Schlüssel \textit{variable\_parameters} des Dictionaries aus \ref{Parameters} als Wert zugewiesen.
+Zudem wird das AST-Objekt aus dem Dictionary entfernt und die Zeilennummer hinzugefügt.
+Schlussendlich wird eine JSON-Datei erstellt, die alle gesuchten Konfigurationsoptionen des Git-Repositories enthält.
+Für das gegebene Beispiel sieht der Eintrag wie folgt aus: \\
 
+\begin{lstlisting}[frame=single, basicstyle=\small]
+{'file': 'path/file.py',
+ 'class': 'sklearn.neighbors.KNeighborsRegressor',
+ 'parameter': {'n_neighbors': 'n_neighbors',
+               'leaf_size': '25'}
+ 'variable parameters': {'n_neighbors': {'0': '6'}},
+ 'variable': 'knn',
+ 'line no': '4'}
+\end{lstlisting}
+\
 
-\subsection{ggf. Übergabe der Ergebnisse}
 
 \chapter{Evaluation}\label{Evaluation}
 

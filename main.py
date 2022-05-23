@@ -78,18 +78,12 @@ class ConfigOptions:
                 obj["variable parameters"][variable] = DataFlowAnalysis(obj, variable).get_parameter_value()
 
     def convert_into_node_structure(self):
-        json_nodes = []
         for obj in self.config_objects:
-            dict_obj = {"file": obj["file"].split("/", 1)[-1],
-                        "class": obj["class"],
-                        "line_no": obj["object"].lineno,
-                        "variable": None,
-                        "parameter": obj["parameter"],
-                        "parameter_values": obj["variable parameters"]}
-            json_nodes.append(dict_obj)
+            obj["line no"] = obj["object"].lineno
+            obj.pop("object")
 
-        with open("nodes/{0}_nodes.txt".format(self.library), 'w') as outfile:
-            json.dump(json_nodes, outfile, indent=4)
+        with open("config_results/{0}_config_options.txt".format(self.library), 'w') as outfile:
+            json.dump(self.config_objects, outfile, indent=4)
 
 
 class SklearnOptions(ConfigOptions):
@@ -148,8 +142,8 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_path = 'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = 'scikit-learn'  # sys.argv[2]
+    repo_path = sys.argv[1]#'https://github.com/mj-support/coop'  # sys.argv[1]
+    library = sys.argv[2] #'scikit-learn'  # sys.argv[2]
 
     repo_name = clone_repo(repo_path)
     try:
