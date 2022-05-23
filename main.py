@@ -23,7 +23,7 @@ class ConfigOptions:
         self.get_ast_classes()
         self.get_parameters()
         self.get_variable_parameter_values()
-        self.convert_into_node_structure()
+        self.create_json()
 
     def get_py_files(self):
         for root, dirs, files in walk(self.repo):
@@ -77,12 +77,13 @@ class ConfigOptions:
             for variable in obj["variable parameters"]:
                 obj["variable parameters"][variable] = DataFlowAnalysis(obj, variable).get_parameter_value()
 
-    def convert_into_node_structure(self):
+    def create_json(self):
         for obj in self.config_objects:
+            obj["file"] = obj["file"][obj["file"].find('/') + 1:]
             obj["line no"] = obj["object"].lineno
             obj.pop("object")
 
-        with open("config_results/{0}_config_options.txt".format(self.library), 'w') as outfile:
+        with open("output/config_options/{0}_options.txt".format(self.library), 'w') as outfile:
             json.dump(self.config_objects, outfile, indent=4)
 
 
@@ -110,12 +111,13 @@ class TensorFlowOptions(ConfigOptions):
         self.library = "tensorflow"
 
 
-def clone_repo(repo_path):
-    repo_name = repo_path.split('/')[-1]
-    is_directory = path.isdir(repo_name)
+def clone_repo(repo_link):
+    repo_name = repo_link.split('/')[-1]
+    repo_dir = 'input_repo/{0}'.format(repo_name)
+    is_directory = path.isdir(repo_dir)
     if not is_directory:
-        git.Repo.clone_from(repo_path, repo_name)
-    return repo_name
+        git.Repo.clone_from(repo_link, repo_dir)
+    return repo_dir
 
 
 lib_dict = {"sklearn": SklearnOptions,
@@ -142,16 +144,16 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_path = sys.argv[1]#'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = sys.argv[2] #'scikit-learn'  # sys.argv[2]
+    repo_link = 'https://github.com/mj-support/coop' #'https://github.com/mj-support/coop'  # sys.argv[1]
+    library = 'scikit-learn' #'scikit-learn'  # sys.argv[2]
 
-    repo_name = clone_repo(repo_path)
+    repo_dir = clone_repo(repo_link)
     try:
         library_cap = library[0].upper() + library[1:]
-        eval("{0}Options('{1}').get_config_options()".format(library_cap, repo_name))
+        eval("{0}Options('{1}').get_config_options()".format(library_cap, repo_dir))
     except:
         options = lib_dict[library]
-        options(repo_name).get_config_options()
+        options(repo_dir).get_config_options()
 
 
 if __name__ == "__main__":

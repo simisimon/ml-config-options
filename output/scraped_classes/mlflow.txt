@@ -205,7 +205,8 @@
             "run_id": null,
             "saved_input_example_info": null,
             "signature_dict": null,
-            "utc_time_created": null
+            "utc_time_created": null,
+            "mlflow_version": null
         }
     },
     "mlflow.projects.SubmittedRun": {

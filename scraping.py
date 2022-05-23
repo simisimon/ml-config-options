@@ -34,7 +34,7 @@ class ClassScraper:
         return parameters
 
     def create_json(self):
-        with open("classes/{0}.txt".format(self.library), "w") as outfile:
+        with open("output/scraped_classes/{0}.txt".format(self.library), "w") as outfile:
             json.dump(self.classes, outfile, indent=4)
 
 

@@ -22,7 +22,7 @@ class ASTClasses:
         return self.ast_classes
 
     def read_json(self):
-        with open("classes/{0}.txt".format(self.library)) as json_file:
+        with open("output/scraped_classes/{0}.txt".format(self.library)) as json_file:
             self.classes = json.load(json_file)
         return self.classes
 
