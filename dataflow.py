@@ -226,18 +226,19 @@ class DataFlowAnalysis:
                                     col_offset_list.append(args.vararg.col_offset)
                                 col_offset_list.sort()
                                 index = col_offset_list.index(col_offset)
-                                variable_ast = node.args[index]
-                                if type(variable_ast) == ast.Name:
-                                    if hasattr(obj, 'body'):
-                                        objects = obj.body
+                                if len(node.args) >= index + 1:
+                                    variable_ast = node.args[index]
+                                    if type(variable_ast) == ast.Name:
+                                        if hasattr(obj, 'body'):
+                                            objects = obj.body
+                                        else:
+                                            objects = global_assignments
+                                        dict_obj = {"objects": objects, "variable": variable_ast.id,
+                                                    "line_no": node.lineno, "last_assign_line_no": 0}
+                                        function_calls.append(dict_obj)
                                     else:
-                                        objects = global_assignments
-                                    dict_obj = {"objects": objects, "variable": variable_ast.id,
-                                                "line_no": node.lineno, "last_assign_line_no": 0}
-                                    function_calls.append(dict_obj)
-                                else:
-                                    self.variable_value[self.counter] = ast.unparse(variable_ast)
-                                    self.counter += 1
+                                        self.variable_value[self.counter] = ast.unparse(variable_ast)
+                                        self.counter += 1
 
                         elif self.function_parameter == "kwonlyarg":
                             for keyword in node.keywords:

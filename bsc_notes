@@ -341,3 +341,44 @@ Limits:
     - with macht er gar nicht : dafür immer extra variable "with_python_as_p"
 
     xonstant progpagation auch mit erwähnrn und cfg
+
+    krieterien:
+        - Verwendung von KLassen
+        - unbekannte parameter
+        - code kann als ast geparst werden
+        - gute bewertung
+        - nicht zu viele klassen
+
+
+     https://www.dunebook.com/opensource-tensorflow-projects/
+     python3 main.py https://github.com/keras-team/keras tensorflow
+     156/205 -> 657
+     python3 main.py https://github.com/tensorpack/tensorpack tensorflow
+     149/159 -> 120
+     python3 main.py https://github.com/stellargraph/stellargraph tensorflow
+     137/250 -> 71
+     python3 main.py https://github.com/yahoo/TensorFlowOnSpark tensorflow
+     142/200 -> 33
+     python3 main.py https://github.com/tensorforce/tensorforce tensorflow
+     22/34 -> 74
+     python3 main.py https://github.com/tensorlayer/tensorlayer tensorflow
+     222/260 -> 195
+     python3 main.py https://github.com/google/prettytensor tensorflow
+     45/78 -> 30
+
+    https://www.libhunt.com/topic/pytorch
+    python3 main.py https://github.com/CorentinJ/Real-Time-Voice-Cloning torch
+    16/61 -> 20
+    python3 main.py https://github.com/ultralytics/yolov5 torch
+    28/61 -> 26
+    python3 main.py https://github.com/yunjey/pytorch-tutorial torch
+    46/110 -> 18
+    python3 main.py https://github.com/babysor/MockingBird torch
+    183/327 -> 80
+    python3 main.py https://github.com/open-mmlab/mmdetection torch
+    515/610 -> 557
+    python3 main.py https://github.com/rwightman/pytorch-image-models torch
+    641/1099 -> 171
+
+    python3 main.py https://github.com/SeldonIO/MLServer mlflow
+    30/30 -> 10

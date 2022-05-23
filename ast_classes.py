@@ -151,15 +151,20 @@ class ASTClasses:
                         class_occurence = 0
                         if import_obj_values["path"] in class_:
                             class_string = "{0}(".format(class_.replace(import_obj_values["path"], import_name))
-                            if class_string in obj_code:
+                            dump_class_name = "attr=\'{0}\',".format(class_.split(".")[-1])
+                            if class_string in obj_code or dump_class_name in dump_ast_obj:
                                 indices = [i for i in range(len(obj_code)) if obj_code.startswith(class_string, i)]
+                                if len(indices) == 0:
+                                    dump_ast = True
+                                    indices = [i for i in range(len(obj_code)) if obj_code.startswith("{0}(".format(class_.split(".")[-1]), i)]
                                 for index in indices:
-                                    if index == 0 or not (obj_code[index - 1].isalnum() or obj_code[index - 1] == "."):
+                                    if index == 0 or not (obj_code[index - 1].isalnum() or obj_code[index - 1] == ".") or dump_ast:
+                                        dump_ast = False
                                         class_occurence += 1
                                         dump_ast_obj = dump_ast_obj.replace("attr='{0}'".format(import_name.split(".")[-1]), "attr='temp_class'", 1)
                                         obj_code = obj_code.replace(class_string, "temp_class(", 1)
                                 if class_occurence > 0:
-                                    if library_name_import:
+                                    """if library_name_import:
                                         if class_.split(".")[-1] in obj_code and library_alias in obj_code:
                                             split_code = obj_code.split(library_alias)
                                             split_class = class_.split(".")[1:]
@@ -184,7 +189,7 @@ class ASTClasses:
                                             except:
                                                 obj = ast.parse("{0}[]".format(obj_code)).body[0]
                                             obj.lineno = lineno
-                                            obj.end_lineno = end_lineno
+                                            obj.end_lineno = end_lineno"""
 
                                     lib_class_obj = {"file": self.file, "class": class_, "class alias": class_string[:-1],
                                                      "object": obj}

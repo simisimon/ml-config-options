@@ -128,6 +128,14 @@ class PyTorchScraper(ClassScraper):
             except:
                 continue
 
+        autograd_urls = ["generated/torch.autograd.inference_mode.html",
+                         "generated/torch.autograd.set_grad_enabled.html",
+                         "generated/torch.autograd.enable_grad.html",
+                         "generated/torch.autograd.no_grad.html",
+                         "generated/torch.autograd.forward_ad.dual_level.html"]
+        for url in autograd_urls:
+            self.class_urls.append(url)
+
     def scrape_desc_elements(self):
         for url in self.class_urls:
             link = "https://pytorch.org/docs/stable/" + url
@@ -146,6 +154,8 @@ class PyTorchScraper(ClassScraper):
                 class_ = class_path[class_path.rfind(".") + 1:]
                 elements = data_table.findAll("em", {"class": "sig-param"})
                 parameters = self.scrape_parameters(elements)
+                if class_path == "torch.torch.device":
+                    parameters = {"type": None, "index": None}
                 self.classes[class_path] = {"short name": class_, "parameters": parameters}
 
 

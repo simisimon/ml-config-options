@@ -70,7 +70,11 @@ class ConfigOptions:
             else:
                 ast_class_dict["scraped parameters"] = scraped_parameters
                 config_object = ASTParameters(ast_class_dict).get_parameters(ast_class_dict["object"])
-                self.config_objects.append(config_object)
+                if len(self.config_objects) > 0:
+                    if config_object != self.config_objects[-1]:
+                        self.config_objects.append(config_object)
+                else:
+                    self.config_objects.append(config_object)
 
     def get_variable_parameter_values(self):
         for obj in self.config_objects:
@@ -144,8 +148,8 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_link = sys.argv[1] #'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = sys.argv[2]  #'scikit-learn'  # sys.argv[2]
+    repo_link = 'https://github.com/CorentinJ/Real-Time-Voice-Cloning'  #'https://github.com/mj-support/coop'  # sys.argv[1]
+    library = 'torch'  #'scikit-learn'  # sys.argv[2]
 
     repo_dir = clone_repo(repo_link)
     try:
