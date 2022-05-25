@@ -31,6 +31,16 @@ Gliederung:
             - Was sind die wichtigsten Ergebnisse?
             - Was ist der allgemeine Ansatz/Grundriss
     3. Hintergrund / Literaturübersicht
+        - spezifische Überschrift angebracht
+        - wichtigste Ideen des aktuellen stands der Wissenschaft darzustellen (nicht analysieren)
+        - bis hin zu eigenen brillianten Ideen
+        - Abschnitte nach Idee und nicht nach Autor gliedern
+        - Checklist Related Work:
+            - Was machen andere?
+            - Wie unterscheidet sich dies von meiner Arbeit? (mein Ansatz besser, Synergien, Kompromiisse)
+        - Checklist Hintergrund:
+            - Was ist der notwendige Hintergrund um die Arbeit zu verstehen?
+            - kann auch sehr lang ausfallen
     4. Problembeschreibung / Aufgabenstellung / Forschunsfrage
     5. Methoden
     6. Präsentation der Daten
@@ -39,3 +49,54 @@ Gliederung:
     9. Abschluss
     10. Referenzen
 
+- arten von config-optionen
+- ML-Librarys Besonderheiten mit Klassen
+
+Die Konfiguration legt beispielsweise fest, wo im lokalen Dateisystem Daten gespeichert werden sollen, an welche Ports sich ein Server binden soll
+und sogar welche Algorithmen in verschiedenen Teilen eines großen Systems verwendet werden sollen.
+Die Programmkonfiguration wird häufig in Form einer Abbildung von Optionsnamen auf Werte gespeichert.
+Einige Konfigurationsmechanismen, wie z.B. die Unix-Systemumgebung, verwenden beliebige Zeichenketten als Option.
+
+1.2
+Eingrenzung auf Source Code und Python und Machine Learning Frameworks. Siehe ORPLOcator
+
+2. Hintergrund: statische Code-Analysen, KonfigOption, machinelearning librarys (was siie sind, wifür sie genutzt)
+3. related Work ( zusammenfassen, ergebnisse, abgrenzuung zu meiner arbeit)
+4. vorgehensweise (methodogology): statische code-analyse, web-scraping (kommt auch in hintergrund, wie alle anderen techniken)
+5. evaluation (mit unit tests, testset von machinelearning projekten raussuchen und parsen),
+6. diskussiin (bewertung der ergebnisse)
+7. fazit (
+
+mACHINE LEARNING algorithmen werden konfigurirer (mit hyperparameter, defaultvalues), es geht um die ml-algorithmen ´,
+die initialisert werden udn das passier t in den klassen, iehe config of machine learming in scolar, oder blogpost bei medium,
+
+belege für komplexität erhöhung und so
+
+Problemverdeutlichung: alte Tensorflowklassen implementation vs. neue
+
+orp locator 1. seite für code
+orp locator 194 für related works
+
+Das Extrahieren von KonÞgurationswerten ermöglicht eine statische Prüfung auf diese Art von Fehlern und kann dem Benutzer Stunden an Zeit ersparen, wenn ein falscher Konfigurationswert einen langen Batch-Job zum Scheitern bringt
+
+--> Evaluation: welche konfigwerte am häufigsten auftauchen
+
+Datenfluss:
+- On Top Datenflussanalyse draufsetzen
+- Auf File Ebene
+-
+%https://www.mattlayman.com/blog/2018/decipher-python-ast/
+
+
+Scraping:
+Es gibt zwei wesentliche Module eines Web-Scraping-Programms - ein Modul für die Erstellung einer HTTP-Anfrage, z. B. Urllib2 oder Selenium, und ein weiteres für das Parsen und Extrahieren von Informationen aus rohem HTML-Code, z. B. Beautiful Soup oder Pyquery.
+
+Gliederung Methodik-Teil
+- Python Libraries
+
+Evaluation:
+- es gibt kein ground truth also keine Daten die sich mit ML-Libraries beschftigt habe nund mit denen man es abgeleichen kann.
+- Daher wird sich an anderen Papern orientiert, die es auc hso gemacht haben zum Beispiel ...
+
+arbitrary argument list
+arbitrary keyword argument dictionary

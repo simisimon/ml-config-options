@@ -942,11 +942,11 @@ func("posonlyarg1", "posonlyarg2", arg2=2, *["arg1"],
 \textit{Positional-only arguments} sind Argumente, die vor der \textit{/}-Markierung stehen und dürfen nicht mit einem
 Keyword-Argument übergeben werden.
 \textit{Keyword-only arguments} sind das Gegenstück.
-Sie müssen mit einem Keyword übergeben werden.
+Sie müssen mit einem Keyword übergeben werden und befinden sich in der Definition immer nach \textit{varargs}.
 \textit{Args} sind Argumente bei denen nicht festgelegt ist, ob sie mit einem Keyword übergeben werden.
 Sie werden ansonsten ihrer Position nach zugeordnet.
 Die Typen \textit{vararg} und \textit{kwarg} referenzieren die übergebenen \textit{*args}- und \textit{**kwargs}-Parameter,
-die in \ref{Classes} besprochen wurden.
+die in \ref{Parameters} besprochen wurden.
 Ist die Parametervariable in der Definition der Signatur aufgeführt, besteht die Möglichkeit, dass ihr wie bei \textit{arg3} ein Default-Wert
 zugewiesen wird, der dementsprechend zur Liste möglicher Werte der Parametervariablen hinzugefügt werden muss.
 Falls dem Parameter beim Aufruf der Funktion kein Wert zugewiesen wird, würde der Wert von \textit{arg3} im Beispiel ansonsten

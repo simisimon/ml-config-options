@@ -9,7 +9,10 @@
     },
     "torch.torch.device": {
         "short name": "device",
-        "parameters": {}
+        "parameters": {
+            "type": null,
+            "index": null
+        }
     },
     "torch.torch.layout": {
         "short name": "layout",
@@ -75,8 +78,9 @@
         "short name": "autocast",
         "parameters": {
             "device_type": null,
+            "dtype": "None",
             "enabled": "True",
-            "**kwargs": null
+            "cache_enabled": "None"
         }
     },
     "torch.cuda.amp.autocast": {
@@ -147,6 +151,32 @@
     "torch.distributed.algorithms.JoinHook": {
         "short name": "JoinHook",
         "parameters": {}
+    },
+    "torch.distributed.fsdp.FullyShardedDataParallel": {
+        "short name": "FullyShardedDataParallel",
+        "parameters": {
+            "module": null,
+            "process_group": "None",
+            "cpu_offload": "None",
+            "fsdp_auto_wrap_policy": "None",
+            "backward_prefetch": "None"
+        }
+    },
+    "torch.distributed.optim.DistributedOptimizer": {
+        "short name": "DistributedOptimizer",
+        "parameters": {
+            "optimizer_class": null,
+            "params_rref": null,
+            "*args": null,
+            "**kwargs": null
+        }
+    },
+    "torch.distributed.optim.PostLocalSGDOptimizer": {
+        "short name": "PostLocalSGDOptimizer",
+        "parameters": {
+            "optim": null,
+            "averager": null
+        }
     },
     "torch.distributed.optim.ZeroRedundancyOptimizer": {
         "short name": "ZeroRedundancyOptimizer",
@@ -476,6 +506,16 @@
             "validate_args": "None"
         }
     },
+    "torch.distributions.wishart.Wishart": {
+        "short name": "Wishart",
+        "parameters": {
+            "df": null,
+            "covariance_matrix": "None",
+            "precision_matrix": "None",
+            "scale_tril": "None",
+            "validate_args": "None"
+        }
+    },
     "torch.distributions.transforms.AbsTransform": {
         "short name": "AbsTransform",
         "parameters": {
@@ -622,8 +662,7 @@
         "short name": "Tracer",
         "parameters": {
             "autowrap_modules": "(math)",
-            "autowrap_functions": "()",
-            "enable_cpatching": "False"
+            "autowrap_functions": "()"
         }
     },
     "torch.fx.Proxy": {
@@ -644,6 +683,32 @@
         "short name": "Transformer",
         "parameters": {
             "module": null
+        }
+    },
+    "torch.monitor.Aggregation": {
+        "short name": "Aggregation",
+        "parameters": {}
+    },
+    "torch.monitor.Stat": {
+        "short name": "Stat",
+        "parameters": {}
+    },
+    "torch.monitor.data_value_t": {
+        "short name": "data_value_t",
+        "parameters": {}
+    },
+    "torch.monitor.Event": {
+        "short name": "Event",
+        "parameters": {}
+    },
+    "torch.monitor.EventHandlerHandle": {
+        "short name": "EventHandlerHandle",
+        "parameters": {}
+    },
+    "torch.monitor.TensorboardEventHandler": {
+        "short name": "TensorboardEventHandler",
+        "parameters": {
+            "writer": null
         }
     },
     "torch.package.PackagingError": {
@@ -675,6 +740,18 @@
         "parameters": {
             "name": null,
             "is_dir": null
+        }
+    },
+    "torch.profiler._KinetoProfile": {
+        "short name": "_KinetoProfile",
+        "parameters": {
+            "*": null,
+            "activities": "None",
+            "record_shapes": "False",
+            "profile_memory": "False",
+            "with_stack": "False",
+            "with_flops": "False",
+            "with_modules": "False"
         }
     },
     "torch.profiler.profile": {
@@ -783,24 +860,13 @@
     "torch.distributed.nn.api.remote_module.RemoteModule": {
         "short name": "RemoteModule",
         "parameters": {
-            "remote_device": null,
-            "module_cls": null,
-            "args": "None",
-            "kwargs": "None"
+            "*args": null,
+            "**kwargs": null
         }
     },
     "torch.distributed.autograd.context": {
         "short name": "context",
         "parameters": {}
-    },
-    "torch.distributed.optim.DistributedOptimizer": {
-        "short name": "DistributedOptimizer",
-        "parameters": {
-            "optimizer_class": null,
-            "params_rref": null,
-            "*args": null,
-            "**kwargs": null
-        }
     },
     "torch.DoubleStorage": {
         "short name": "DoubleStorage",
@@ -2449,7 +2515,8 @@
             "size": "None",
             "scale_factor": "None",
             "mode": "'nearest'",
-            "align_corners": "None"
+            "align_corners": "None",
+            "recompute_scale_factor": "None"
         }
     },
     "torch.nn.UpsamplingNearest2d": {
@@ -2493,7 +2560,8 @@
             "bucket_cap_mb": "25",
             "find_unused_parameters": "False",
             "check_reduction": "False",
-            "gradient_as_bucket_view": "False"
+            "gradient_as_bucket_view": "False",
+            "static_graph": "False"
         }
     },
     "torch.nn.utils.prune.BasePruningMethod": {
@@ -2592,6 +2660,14 @@
         "parameters": {
             "device": "None",
             "priority": "0",
+            "**kwargs": null
+        }
+    },
+    "torch.cuda.ExternalStream": {
+        "short name": "ExternalStream",
+        "parameters": {
+            "stream_ptr": null,
+            "device": "None",
             "**kwargs": null
         }
     },
@@ -2943,7 +3019,9 @@
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
             "weight_decay": "0",
-            "amsgrad": "False"
+            "amsgrad": "False",
+            "*": null,
+            "maximize": "False"
         }
     },
     "torch.optim.AdamW": {
@@ -2954,7 +3032,9 @@
             "betas": "(0.9, 0.999)",
             "eps": "1e-08",
             "weight_decay": "0.01",
-            "amsgrad": "False"
+            "amsgrad": "False",
+            "*": null,
+            "maximize": "False"
         }
     },
     "torch.optim.SparseAdam": {
@@ -3050,7 +3130,9 @@
             "momentum": "0",
             "dampening": "0",
             "weight_decay": "0",
-            "nesterov": "False"
+            "nesterov": "False",
+            "*": null,
+            "maximize": "False"
         }
     },
     "torch.optim.lr_scheduler.LambdaLR": {
@@ -3211,5 +3293,29 @@
             "last_epoch": "- 1",
             "verbose": "False"
         }
+    },
+    "torch.autograd.inference_mode": {
+        "short name": "inference_mode",
+        "parameters": {
+            "mode": "True"
+        }
+    },
+    "torch.autograd.set_grad_enabled": {
+        "short name": "set_grad_enabled",
+        "parameters": {
+            "mode": null
+        }
+    },
+    "torch.autograd.enable_grad": {
+        "short name": "enable_grad",
+        "parameters": {}
+    },
+    "torch.autograd.no_grad": {
+        "short name": "no_grad",
+        "parameters": {}
+    },
+    "torch.autograd.forward_ad.dual_level": {
+        "short name": "dual_level",
+        "parameters": {}
     }
 }

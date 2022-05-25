@@ -5,7 +5,7 @@ import sys
 from os import walk, path
 from ast_classes import ASTClasses
 from ast_parameters import ASTParameters
-from dataflow import DataFlowAnalysis
+from dataflow2 import DataFlowAnalysis
 
 
 class ConfigOptions:
@@ -79,7 +79,14 @@ class ConfigOptions:
     def get_variable_parameter_values(self):
         for obj in self.config_objects:
             for variable in obj["variable parameters"]:
-                obj["variable parameters"][variable] = DataFlowAnalysis(obj, variable).get_parameter_value()
+                parameter_value_list = DataFlowAnalysis(obj, variable).get_parameter_value()
+                index = 0
+                parameter_value_dict = {}
+                for value in parameter_value_list:
+                    parameter_value_dict[index] = value
+                    index += 1
+
+                obj["variable parameters"][variable] = parameter_value_dict
 
     def create_json(self):
         for obj in self.config_objects:
