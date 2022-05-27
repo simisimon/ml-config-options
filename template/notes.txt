@@ -106,3 +106,4 @@ Probleme
 x = 1
 x = 2
 ergibt 2 mal x = 2
+ausblick: verbesserungen das jede Variable erkannt wird, z.B. var = x + 2

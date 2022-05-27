@@ -143,13 +143,13 @@ class ASTParameters:
         func = self.get_value(obj.func)
         if func == self.class_alias:
             for arg in obj.args:
-                if type(arg) == ast.Name:
+                if type(arg) == ast.Name or type(arg) == ast.Attribute:
                     self.get_variable_scope(arg)
                 argument = ast.unparse(arg)
                 self.parameter.append((None, argument))
             for param in obj.keywords:
                 argument = str(param.arg)
-                if type(param.value) == ast.Name:
+                if type(param.value) == ast.Name or type(param.value) == ast.Attribute:
                     self.get_variable_scope(param.value)
                 value = ast.unparse(param.value)
                 self.parameter.append((argument, value))

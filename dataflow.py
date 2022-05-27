@@ -1,310 +1,259 @@
+from scalpel.SSA.const import SSA
+from scalpel.cfg import CFGBuilder
 import ast
+
+code_str= """
+def func(size):
+    x = size
+    
+for i in range(bla):
+    size = 999
+    func(size=2)
+"""
 
 
 class DataFlowAnalysis:
     def __init__(self, obj, variable):
-        self.file = obj["file"]
-        self.object_dict = {"function": None, "objects": [], "variable": variable,
-                            "line_no": obj["object"].lineno, "last_assign_line_no": 0}
-        self.variable_value = {}
-        self.counter = 0
-        self.function_parameter = None
+        self.file = obj["file"] #obj["file"] #obj["file"]
+        self.object = obj["object"]
+        self.variables = [variable] #variable # "b"
+        self.variable_value = []
+        self.cfg_list = []
+        self.possible_object_paths = {}
+        self.function_parameter_type = None
+        self.all_func_calls = []
 
     def get_parameter_value(self):
-        self.get_parent_func()
-        self.remove_objects(self.object_dict)
-        self.get_assignments(self.object_dict)
-        if not self.variable_value:
-            self.get_global_assignments()
-            self.check_function_parameter()
-        self.detect_deeper_objects(self.object_dict)
-        if self.function_parameter is not None:
-            function_calls = self.detect_function_calls()
-            for object_dict in function_calls:
-                self.remove_objects(object_dict)
-                self.get_assignments(object_dict)
-                self.detect_deeper_objects(object_dict)
+        #cfg = CFGBuilder().build_from_src(name="test", src=code_str)
+        cfg = CFGBuilder().build_from_file(name="test", filepath=self.file)
+        self.cfg_list.append(cfg)
+        self.get_cfgs(cfg)
+        self.get_all_func_calls()
+        self.get_all_possible_object_paths()
+
+        for variable in self.variables:
+            func_def_args = []
+            for cfg in self.cfg_list:
+                self.get_SSA(cfg, variable)
+
+            for cfg in self.cfg_list:
+                for entryblock in cfg.entryblock.statements:
+                    if type(entryblock) == ast.FunctionDef:
+                        func_def_arg = self.check_function_definition(entryblock, variable)
+                        if func_def_arg is not None:
+                            for func_cfg in cfg.functioncfgs.keys():
+                                if func_cfg[1] == entryblock.name:
+                                    func_def_arg["function paths"] = self.possible_object_paths[cfg.functioncfgs[func_cfg]]
+                                    break
+                            func_def_arg["variable"] = variable
+                            func_def_arg["parent"] = cfg
+                            func_def_args.append(func_def_arg)
+
+            for func_def_arg in func_def_args:
+                self.get_func_calls(func_def_arg)
+
+        self.variable_value = list(set(self.variable_value))
+        print("file:    ", self.file)
+        print("object:  ", ast.unparse(self.object))
+        print("lineno:  ", self.object.lineno)
+        print("variable:", self.variables)
+        print("value:   ", self.variable_value)
+        print(" ")
         return self.variable_value
 
-    def get_parent_func(self):
-        with open(self.file, "r") as source:
-            tree = ast.parse(source.read())
+    def get_cfgs(self, cfg):
+        parent = cfg
+        for class_cfg in cfg.class_cfgs.items():
+            class_cfg = class_cfg[1]
+            self.cfg_list.append(class_cfg)
+            self.possible_object_paths[class_cfg] = parent
+            self.get_cfgs(class_cfg)
 
-        first_level_objects = tree.body
-        for obj in first_level_objects:
-            if obj.end_lineno < self.object_dict["line_no"]:
-                continue
-            else:
-                nodes = list(ast.walk(obj))
-                nodes.insert(0, obj)
+        for function_cfg in cfg.functioncfgs.items():
+            function_cfg = function_cfg[1]
+            self.cfg_list.append(function_cfg)
+            self.possible_object_paths[function_cfg] = parent
+            self.get_cfgs(function_cfg)
+
+    def get_all_func_calls(self):
+        for cfg in self.cfg_list:
+            for statement in cfg.entryblock.statements:
+                nodes = list(ast.walk(statement))
                 for node in nodes:
-                    if obj.lineno > self.object_dict["line_no"]:
-                        break
+                    if type(node) == ast.Call:
+                        self.all_func_calls.append(node)
                     if type(node) == ast.FunctionDef or type(node) == ast.AsyncFunctionDef:
-                        if node.lineno <= self.object_dict["line_no"]:
-                            if self.object_dict["line_no"] <= node.end_lineno:
-                                self.object_dict["function"] = node
-                                self.object_dict["objects"] = node.body
-                                return
-                        else:
-                            break
+                        for default in node.args.defaults:
+                            nodes_prm = list(ast.walk(default))
+                            for node_prm in nodes_prm:
+                                if type(node_prm) == ast.Call:
+                                    self.all_func_calls.append(node_prm)
+                        for default in node.args.kw_defaults:
+                            if default is not None:
+                                nodes_prm = list(ast.walk(default))
+                                for node_prm in nodes_prm:
+                                    if type(node_prm) == ast.Call:
+                                        self.all_func_calls.append(node_prm)
 
-    def remove_objects(self, object_dict):
-        for obj in object_dict["objects"]:
-            if obj.lineno > object_dict["line_no"]:
-                object_dict["objects"].remove(obj)
+        list(set(self.all_func_calls))
 
-    def get_assignments(self, object_dict):
-        temp_variable_value = None
-        for obj in object_dict["objects"]:
-            if type(obj) == ast.Assign:
-                for target in obj.targets:
-                    if ast.unparse(target) == object_dict["variable"]:
-                        temp_variable_value = ast.unparse(obj.value)
-                        temp_line_no = obj.lineno
-                        #self.variable_value[self.counter] = ast.unparse(obj.value)
-                        #object_dict["last_assign_line_no"] = obj.lineno
-                        #self.counter += 1
-        if temp_variable_value is not None:
-            self.variable_value[self.counter] = temp_variable_value
-            object_dict["last_assign_line_no"] = temp_line_no
-            self.counter += 1
+    def get_all_possible_object_paths(self):
+        parent_child_relation = {}
+        for child in self.possible_object_paths.keys():
+            parents = self.parent_child_match(child)
+            init = False
 
-    def get_global_assignments(self):
-        temp_variable_value = None
-        with open(self.file, "r") as source:
-            tree = ast.parse(source.read())
-        first_level_objects = tree.body
-        for obj in first_level_objects:
-            if type(obj) == ast.Assign:
-                for target in obj.targets:
-                    if ast.unparse(target) == self.object_dict["variable"]:
-                        temp_variable_value = ast.unparse(obj.value)
-                        temp_line_no = obj.lineno
-        if temp_variable_value is not None:
-            self.variable_value[self.counter] = temp_variable_value
-            self.object_dict["last_assign_line_no"] = temp_line_no
-            self.counter += 1
+            if child.name == "__init__":
+                init = True
+                parent_child_relation[child] = [parents[0].name]
+            else:
+                parent_child_relation[child] = [child.name]
+            prev_parent = None
+            for parent in parents:
+                if init:
+                    parent_child_relation[child] = [parents[0].name]
+                    init = False
+                    continue
+                if parent == self.cfg_list[0]:
+                    continue
+                for func_parent in parent.functioncfgs.items():
+                    if prev_parent == func_parent[1]:
+                        parent_child_relation[child].remove(parent_child_relation[child][-1])
 
-    def check_function_parameter(self):
-        if self.object_dict["function"] is not None:
-            args = self.object_dict["function"].args
+                path = "{0}.{1}".format(parent.name, parent_child_relation[child][-1])
+                parent_child_relation[child].append(path)
+                prev_parent = parent
 
-            for arg in args.args:
-                if arg.arg == self.object_dict["variable"]:
-                    self.function_parameter = "arg"
-                    col_offset = arg.col_offset
-                    for default in args.defaults:
+        self.possible_object_paths = parent_child_relation
+
+    def parent_child_match(self, child):
+        parent_child_relation = []
+        parent = self.possible_object_paths[child]
+        parent_child_relation.append(parent)
+        for child in self.possible_object_paths.keys():
+            if child == parent:
+                parent_child_relation.extend(self.parent_child_match(child))
+                break
+        return parent_child_relation
+
+    def get_SSA(self, cfg, variable):
+        m_ssa = SSA()
+        _, const_dict = m_ssa.compute_SSA(cfg)
+        for name, value in const_dict.items():
+            if value is not None:
+                if name[0] == variable:
+                    if type(value) == ast.Name and ast.unparse(value) not in self.variables:
+                        self.variables.append(ast.unparse(value))
+                    if ast.unparse(value) != self.variables[0]:
+                        self.variable_value.append(ast.unparse(value))
+
+    def check_function_definition(self, function, variable):
+        args = function.args
+        func_def_arg = {}
+
+        for arg in args.args:
+            if arg.arg == variable:
+                func_def_arg["type"] = "arg"
+                if ast.unparse(args.args[0]) == "self":
+                    func_def_arg["index"] = args.args.index(arg) - 1
+                else:
+                    func_def_arg["index"] = args.args.index(arg)
+
+                col_offset = arg.col_offset
+                for default in args.defaults:
+                    if default.lineno == arg.lineno:
                         if default.col_offset > col_offset:
                             index = args.args.index(arg)
                             length = len(args.args) - 1
                             if index < length:
                                 col_offset_next = args.args[index + 1].col_offset
                                 if default.col_offset < col_offset_next:
-                                    self.variable_value[self.counter] = ast.unparse(default)
-                                    self.counter += 1
+                                    self.variable_value.append(ast.unparse(default))
+                                    return func_def_arg
                             else:
-                                self.variable_value[self.counter] = ast.unparse(default)
-                                self.counter += 1
-                            return
-                    return
+                                self.variable_value.append(ast.unparse(default))
+                                return func_def_arg
+                return func_def_arg
 
-            if args.vararg is not None:
-                if ast.unparse(args.vararg) == self.object_dict["variable"]:
-                    self.function_parameter = "vararg"
-                    return
+        if args.vararg is not None:
+            if ast.unparse(args.vararg) == variable:
+                func_def_arg["type"] = "vararg"
+                return func_def_arg
 
-            for kwonlyarg in args.kwonlyargs:
-                if kwonlyarg.arg == self.object_dict["variable"]:
-                    self.function_parameter = "kwonlyarg"
-                    index = args.kwonlyargs.index(kwonlyarg)
-                    kw_default = args.kw_defaults[index]
-                    if kw_default is not None:
-                        self.variable_value[self.counter] = ast.unparse(kw_default)
-                        self.counter += 1
-                        return
-                    return
+        for kwonlyarg in args.kwonlyargs:
+            if kwonlyarg.arg == variable:
+                func_def_arg["type"] = "kwonlyarg"
+                func_def_arg["keyword"] = kwonlyarg.arg
+                index = args.kwonlyargs.index(kwonlyarg)
+                kw_default = args.kw_defaults[index]
+                if kw_default is not None:
+                    self.variable_value.append(ast.unparse(kw_default))
+                    return func_def_arg
+                return func_def_arg
 
-            for posonlyarg in args.posonlyargs:
-                if posonlyarg.arg == self.object_dict["variable"]:
-                    self.function_parameter = "posonlyarg"
-                    col_offset = posonlyarg.col_offset
-                    for default in args.defaults:
+        for posonlyarg in args.posonlyargs:
+            if posonlyarg.arg == variable:
+                func_def_arg["type"] = "posonlyarg"
+                if ast.unparse(args.posonlyargs[0]) == "self":
+                    func_def_arg["index"] = args.posonlyargs.index(posonlyarg) - 1
+                else:
+                    func_def_arg["index"] = args.posonlyargs.index(posonlyarg)
+                col_offset = posonlyarg.col_offset
+                for default in args.defaults:
+                    if default.lineno == posonlyarg.lineno:
                         if default.col_offset > col_offset:
                             index = args.posonlyargs.index(posonlyarg)
                             length = len(args.posonlyargs) - 1
                             if index < length:
                                 col_offset_next = args.posonlyargs[index + 1].col_offset
                                 if default.col_offset < col_offset_next:
-                                    self.variable_value[self.counter] = ast.unparse(default)
-                                    self.counter += 1
-                                    return
+                                    self.variable_value.append(ast.unparse(default))
+                                    return func_def_arg
                             else:
-                                self.variable_value[self.counter] = ast.unparse(default)
-                                self.counter += 1
-                                return
-                    return
+                                self.variable_value.append(ast.unparse(default))
+                                return func_def_arg
+                return func_def_arg
 
-            if args.kwarg is not None:
-                if ast.unparse(args.kwarg) == self.object_dict["variable"]:
-                    self.function_parameter = "kwarg"
-                    return
+        if args.kwarg is not None:
+            if ast.unparse(args.kwarg) == variable:
+                func_def_arg["type"] = "kwarg"
+                return func_def_arg
 
-    def detect_deeper_objects(self, object_dict):
-        for obj in object_dict["objects"]:
-            if obj.lineno > object_dict["last_assign_line_no"]:
-                self.get_objects(obj, object_dict["variable"])
+        return None
 
-    def get_objects(self, obj, variable):
-        if hasattr(obj, 'body'):
-            for body_obj in obj.body:  # func, async func, class, with, async with, except handler, if...
-                self.get_objects(body_obj, variable)
-            if hasattr(obj, 'orelse'):  # control-flow-objects: for, if, async for, while
-                for orelse_obj in obj.orelse:
-                    self.get_objects(orelse_obj, variable)
+    def get_func_calls(self, func_def_arg):
+        variable_values = []
+        for func_call in self.all_func_calls:
+            if ast.unparse(func_call.func) in func_def_arg["function paths"]:   ## self?
+                if func_def_arg["type"] == "arg":
+                    found_keyword = False
+                    for keyword in func_call.keywords:
+                        if keyword.arg == func_def_arg["variable"]:
+                            found_keyword = True
+                            variable_values.append(keyword.value)
+                            break
+                    if not found_keyword:
+                        if len(func_call.args) > func_def_arg["index"]:
+                            variable_values.append(func_call.args[func_def_arg["index"]])
+                elif func_def_arg["type"] == "kwonlyarg":
+                    for keyword in func_call.keywords:
+                        if keyword.arg == func_def_arg["variable"]:
+                            variable_values.append(keyword.value)
+                elif func_def_arg["type"] == "posonlyarg":
+                    variable_values.append(func_call.args[func_def_arg["index"]])
+                elif func_def_arg["type"] == "vararg":
+                    for arg in func_call.args:
+                        if type(arg) == ast.Starred:
+                            variable_values.append(arg.value)
+                elif func_def_arg["type"] == "kwarg":
+                    if len(func_call.keywords) > 0:
+                        if func_call.keywords[-1].arg == None:
+                            variable_values.append(func_call.keywords[-1].value)
 
-                if hasattr(obj, 'handlers'):  # exception-objects: try
-                    for handler_obj in obj.handlers:
-                        self.get_objects(handler_obj, variable)
-                    for finalbody_obj in obj.finalbody:
-                        self.get_objects(finalbody_obj, variable)
+        for variable_value in variable_values:
+            if type(variable_value) == ast.Name and ast.unparse(variable_value) not in self.variables:  ##self?
+                self.variables.append(ast.unparse(variable_value))
+            if ast.unparse(variable_value) != self.variables[0]:
+                self.variable_value.append(ast.unparse(variable_value))
 
-        if type(obj) == ast.Assign:
-            for target in obj.targets:
-                if ast.unparse(target) == variable:
-                    self.variable_value[self.counter] = ast.unparse(obj.value)
-                    self.counter += 1
 
-    def detect_function_calls(self):
-        function_calls = []
-        global_assignments = []
-
-        with open(self.file, "r") as source:
-            tree = ast.parse(source.read())
-
-        first_level_objects = tree.body
-        for obj in first_level_objects:
-            if type(obj) == ast.Assign:
-                global_assignments.append(obj)
-            nodes = list(ast.walk(obj))
-            for node in nodes:
-                if type(node) == ast.Call:
-                    if ast.unparse(node.func) == self.object_dict["function"].name or ast.unparse(node.func) == "self.{0}".format(self.object_dict["function"].name):
-                        if self.function_parameter == "arg":
-                            found_keyword = False
-                            for keyword in node.keywords:
-                                if keyword.arg == self.object_dict["variable"]:
-                                    found_keyword = True
-                                    if type(keyword.value) == ast.Name:
-                                        if hasattr(obj, 'body'):
-                                            objects = obj.body
-                                        else:
-                                            objects = global_assignments
-                                        dict_obj = {"objects": objects, "variable": keyword.value.id,
-                                                    "line_no": node.lineno, "last_assign_line_no": 0}
-                                        function_calls.append(dict_obj)
-                                    else:
-                                        self.variable_value[self.counter] = ast.unparse(keyword.value)
-                                        self.counter += 1
-                                    break
-                            if not found_keyword:
-                                args = self.object_dict["function"].args
-                                col_offset_list = []
-                                for arg in args.args:
-                                    if arg.arg == self.object_dict["variable"]:
-                                        col_offset = arg.col_offset
-                                    if arg.arg != "self":
-                                        col_offset_list.append(arg.col_offset)
-                                if args.kwarg is not None:
-                                    col_offset_list.append(args.kwarg.col_offset)
-                                for kwonlyarg in args.kwonlyargs:
-                                    col_offset_list.append(kwonlyarg.col_offset)
-                                for posonlyarg in args.posonlyargs:
-                                    if posonlyarg.arg != "self":
-                                        col_offset_list.append(posonlyarg.col_offset)
-                                if args.vararg is not None:
-                                    col_offset_list.append(args.vararg.col_offset)
-                                col_offset_list.sort()
-                                index = col_offset_list.index(col_offset)
-                                if len(node.args) >= index + 1:
-                                    variable_ast = node.args[index]
-                                    if type(variable_ast) == ast.Name:
-                                        if hasattr(obj, 'body'):
-                                            objects = obj.body
-                                        else:
-                                            objects = global_assignments
-                                        dict_obj = {"objects": objects, "variable": variable_ast.id,
-                                                    "line_no": node.lineno, "last_assign_line_no": 0}
-                                        function_calls.append(dict_obj)
-                                    else:
-                                        self.variable_value[self.counter] = ast.unparse(variable_ast)
-                                        self.counter += 1
-
-                        elif self.function_parameter == "kwonlyarg":
-                            for keyword in node.keywords:
-                                if keyword.arg == self.object_dict["variable"]:
-                                    if type(keyword.value) == ast.Name:
-                                        if hasattr(obj, 'body'):
-                                            objects = obj.body
-                                        else:
-                                            objects = global_assignments
-                                        dict_obj = {"objects": objects, "variable": keyword.value.id,
-                                                    "line_no": node.lineno, "last_assign_line_no": 0}
-                                        function_calls.append(dict_obj)
-                                    else:
-                                        self.variable_value[self.counter] = ast.unparse(keyword.value)
-                                        self.counter += 1
-
-                        elif self.function_parameter == "vararg":
-                            pre_parameter_length = len(self.object_dict["function"].args.args) + len(self.object_dict["function"].args.posonlyargs)
-                            parameter_tuples = ()
-                            for arg in node.args[pre_parameter_length:]:
-                                parameter_tuples += (ast.unparse(arg),)
-                            if len(parameter_tuples) == 1:
-                                if type(arg) == ast.Name:
-                                    if hasattr(obj, 'body'):
-                                        objects = obj.body
-                                    else:
-                                        objects = global_assignments
-                                    dict_obj = {"objects": objects, "variable": ast.unparse(arg),
-                                                "line_no": node.lineno, "last_assign_line_no": 0}
-                                    function_calls.append(dict_obj)
-                                else:
-                                    self.variable_value[self.counter] = ast.unparse(arg)
-                                    self.counter += 1
-                            else:
-                                self.variable_value[self.counter] = parameter_tuples
-                                self.counter += 1
-
-                        elif self.function_parameter == "kwarg":
-                            if len(node.keywords) > 0:
-                                keyword = node.keywords[-1]
-                                kwonlyargs = [arg.arg for arg in self.object_dict["function"].args.kwonlyargs]
-                                if keyword.arg not in kwonlyargs:
-                                    self.counter += 1
-                                    if keyword.arg is None:
-                                        self.variable_value[self.counter] = ast.unparse(keyword.value)
-                                    else:
-                                        kwarg_dict = {keyword.arg: ast.unparse(keyword.value)}
-                                        self.variable_value[self.counter] = kwarg_dict
-
-                        elif self.function_parameter == "posonlyarg":
-                            for posonlyarg in self.object_dict["function"].args.posonlyargs:
-                                if posonlyarg.arg == self.object_dict["variable"]:
-                                    index = self.object_dict["function"].args.posonlyargs.index(posonlyarg)
-                                    break
-                            if len(node.args) > 0:
-                                posonlyarg = node.args[index]
-                                if type(posonlyarg) == ast.Name:
-                                    if hasattr(obj, 'body'):
-                                        objects = obj.body
-                                    else:
-                                        objects = global_assignments
-                                    dict_obj = {"objects": objects, "variable": posonlyarg.id,
-                                                "line_no": node.lineno, "last_assign_line_no": 0}
-                                    function_calls.append(dict_obj)
-                                else:
-                                    self.variable_value[self.counter] = ast.unparse(posonlyarg)
-                                    self.counter += 1
-
-        return function_calls

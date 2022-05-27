@@ -5,7 +5,7 @@ import sys
 from os import walk, path
 from ast_classes import ASTClasses
 from ast_parameters import ASTParameters
-from dataflow2 import DataFlowAnalysis
+from dataflow import DataFlowAnalysis
 
 
 class ConfigOptions:
