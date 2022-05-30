@@ -892,6 +892,153 @@ Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufg
 \section{Ermittlung der variablen Konfigurationswerte}
 Zunächst wird durch die Liste mit Dictionaries aus \ref{Parameters} iteriert.
 Die Ermittlung der variablen Parameterwerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
+Beim Aufruf der Methode wird für dieses Beispiel das Dictionary zusammen mit der Parametervariable \textit{n\_neighbors} übergeben.
+Die anschließende Datenflussanalyse lässt sich in zwei Bereich einteilen:
+
+\begin{enumerate}
+ \item Sammeln von Informationen: Kontrollflüsse, Aufrufpfade und Funktionsaufrufe
+ \item Analyse der Informationen: ...........
+\end{enumerate}
+
+Im ersten Schritt wird über die \textit{CFGBuilder}-Klasse des statischen-Analyse-Framework \textit{Scalpel} der
+Kontrollflussgraph für die Python Datei erstellt und in einer Liste gespeichert.
+Der Kontrollflussgraph stellt alle globalen Pfade dar, die während der Ausführung des Programms durchlaufen werden können.
+Da Klassen- und Funktionskörper sich jedoch nicht auf dieser Ebene befinden, wird zusätzlich jede Klasse und Funktion
+der globalen Ebene traversiert und die Kontrollflussgraphen dieser Objekte ebenfalls in der Liste gespeichert.
+Dieser Vorgang wiederholt sich für jede weitere Ebene bis nach und nach die Kontrollflussgraphen aller
+Klassen und Funktionen der Liste hinzugefügt wurden. \\
+
+Im nächsten Schritt werden die möglichen Pfade, mit denen man die einzelnen Klassen und Funktionen erreichen kann, ermittelt.
+Das folgende Beispiel zeigt verschiedene Möglichkeiten, um ein Objekt aufzurufen.
+Die globale Funktion \textit{func\_c} kann von überall direkt mit ihrem Namen aufgerufen werden (\textit{call 1}).
+Die Funktionen \textit{func\_a} und \textit{func\_b} der Klasse \textit{A} werden innerhalb der Klasse mit einem vorgesetzten
+\textit{self.} angesprochen (\textit{call 2}).
+Außerhalb der Klasse werden sie nur über die Angabe des jeweiligen Namens der Klasse erreicht (\textit{call 3}).
+Übergibt man einer Klasse beim Aufruf einen Wert, wird dieser Wert über die Python-Methode \textit{\_\_init\_\_()} verarbeitet.
+Um Klassen- und Funktionsaufrufe richtig zuzuordnen und die übergebenen Parameter richtig zu verarbeiten,
+ist es daher wichtig den Typ und die Objektzugehörigkeit zu kennen.
+Für jede Klasse und jede Funktion wird ein Dictionary erstellt, dessen Werte die verschiedenen Aufrufpfade sind. \\
+
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+class A:
+    def __init__(self, variable):
+        self.cls_variable = variable
+
+    def func_a(self):
+        pass
+
+    def func_b(self):
+        self.func_a()                       # call 2
+
+def func_c():
+    pass
+
+func()                                      # call 1
+A(1).func_a()                               # call 3
+\end{lstlisting}
+\
+
+Im Anschluss wird durch die Liste der Kontrollflussgraphen iteriert und alle enthaltenen Anweisungen als AST geparst.
+Der abstrakte Syntaxbaum wird traversiert, um Funktionsaufrufe rauszufiltern und in einer Liste zu speichern.
+Nachdem alle Kontrollflussgraphen durchlaufen wurden, enthält die Liste sämtliche Funktionsaufrufe der Datei im AST-Format.
+Falls nun die gesuchte Variable als Parameter in der Definition einer Funktion steht, können auf Basis der möglichen Pfade
+der Funktion, die Funktionsaufrufe gefunden werden.
+Dadurch kann der Wert einer Variable bzw. des Parameters über den gesamten Kontrollfluss der Datei verfolgt werden.\\
+
+Nachdem im ersten Teil die notwendigen Informationen gesammelt wurden, werden diese im zweiten analysiert.
+Für jeden Kontrollflussgraphen der Datei werden über die \textit{compute\_SSA()}-Methode der Scalpel-Klasse \textit{SSA} Zuweisungen
+und Werte der enthaltenen Variablen ermittelt.
+Dafür macht die Methode von den Datenflussanalyse-Techniken \textit{Static Single Assignment} und \textit{Constant Propagation}
+Gebrauch.
+Im Ergebnis erhält man eine Liste an Dictionaries.
+Die Schlüssel sind Variablen, die Ziel einer Zuweisung sind, während die Werte des Dictionaries, den jeweiligen Wert der Zuweisung
+entsprechen.
+Wird der gesuchten Variable ein Wert zugewiesen, wird dieser in der Liste möglicher Werte gespeichert.
+Handelt es sich zudem um einen variablen Wert vom AST-Typ \textit{Name} oder \textit{Attribute}, wird im Anschluss auch für diesen Wert
+der gesamte zweite Teil der Datenflussanalyse ausgeführt.
+
+In diesem Zusammenhang stößt man an mehrere Grenzen des Scalpel-Frameworks, die im folgenden Codebeispiel dargestellt werden:\\
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+class A:
+    def __init__(self):
+        a, b = 1, 2                         # issue 1
+        c = 3                               # issue 2
+        self.cls_variable = c               # issue 3
+        c = 4
+\end{lstlisting}
+\
+
+Scalpel kann keine Zuweisungen an Tupel verarbeiten, sodass für die Variablen \textit{a} und \textit{b}
+von Scalpel keine Wertzuweisungen ausgegeben werden (\textit{issue 1}).
+Zudem speichert Scalpel nur die letzte Zuweisung.
+Für die Variable \textit{c} beträgt der Wert bei der Ausgabe demnach \textit{4}, obwohl der Variable vorher ein anderer
+Wert zugewiesen wird (\textit{issue 2}).
+Das größte Problem ist jedoch, dass Scalpel Zuweisungen an Objekte des AST-Typs \textit{Attribute} nicht verarbeitet
+und den Wert für \textit{self.cls\_variable} nicht ermitteln kann (\textit{issue 3}).
+Da die Lösung dieses Problem essenziell für unsere Datenflussanalyse ist, haben wir den Source Code der \textit{compute\_SSA()}-Methode
+untersucht und verändert, sodass nun auch Zuweisungen an Instanzvariablen wie \textit{self.cls\_variables} verarbeitet werden können.
+Leider beträgt der Wert für \textit{c} wie in (\textit{issue 2}) beschrieben zum Zeitpunkt der Zuweisung der SSA-Analyse von Scalpel \textit{4}, obwohl
+\textit{3} richtig wäre.
+Für diese Probleme haben wir jeweils ein Issue, teilweise mit Lösungsansatz, im Git-Repository von Scalpel erstellt.
+Zum Zeitpunkt der Abgabe der Bachelorarbeit wurden die Probleme zwar zur Kenntnis genommen, jedoch noch nicht behoben.\\
+
+Im nächsten Schritt werden die Funktionsdefinitionen der Datei untersucht, um zu überprüfen, ob die gesuchte Variable als
+Parameter übergeben wird.
+Ist die gesuchte Variable in der Definition der Funktion vorhanden, müssen einige Besonderheiten bei der Behandlung der Argumente
+berücksichtigt werden.
+Die Parameter einer Funktion können fünf unterschiedliche AST-Typen besitzen: \textit{arg}, \textit{vararg}, \textit{kwonlyargs},
+\textit{posonlyarg} oder \textit{kwarg}.
+Ähnlich wie die Argumente bei \textit{ast.Call} aus \ref{Classes} müssen die AST-Typen unterschiedlich behandelt werden, damit die Parametervariable
+beim Aufruf der Funktion eindeutig zugeordnet werden kann.
+Im folgenden Codebeispiel werden die verschiedenen Typen mit ihrem Namen kenntlich gemacht: \\
+
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+def func(posonlyarg1, posonlyarg2, /, arg1, arg2,
+         arg3 = 1, *vararg, kwonlyarg1, kwonlyarg2, **kwarg):
+    return
+
+func("posonlyarg1", "posonlyarg2", arg2=2, *["arg1"],
+     kwonlyarg1=1, kwonlyarg2=2, **{"arg3": 3, "new_arg": 0})
+\end{lstlisting}
+\
+
+\textit{Positional-only arguments} sind Argumente, die vor der \textit{/}-Markierung stehen und dürfen nicht mit einem
+Keyword-Argument übergeben werden.
+\textit{Keyword-only arguments} sind das Gegenstück.
+Sie müssen mit einem Keyword übergeben werden und befinden sich in der Definition immer nach \textit{varargs}.
+\textit{Args} sind Argumente bei denen nicht festgelegt ist, ob sie mit einem Keyword übergeben werden.
+Sie werden ansonsten ihrer Position nach zugeordnet.
+Die Typen \textit{vararg} und \textit{kwarg} referenzieren die übergebenen \textit{*args}- und \textit{**kwargs}-Parameter,
+die in \ref{Parameters} besprochen wurden.
+Ist die gesucht Variable in der Definition der Signatur aufgeführt, besteht die Möglichkeit, dass ihr wie bei \textit{arg3} ein Default-Wert
+zugewiesen wird, der dementsprechend zur Liste möglicher Werte der Parametervariablen hinzugefügt werden muss.\\
+
+Falls die gesuchte Variable als Parameter einer Funktion übergeben wird, wird im letzten Schritt der Datenflussanalyse
+durch die Liste mit Funktionsaufrufen iteriert.
+Für jeden Aufruf der Funktion wird je nach Argumenttyp und Position der gesuchten Parametervariable, der übergebene
+Wert ausgelesen.
+Handelt es sich bei einem übergebenen Wert erneut um eine Variable, wird im Anschluss auch für diesen Wert
+der gesamte zweite Teil der Datenflussanalyse wiederholt. \\
+
+Nach erfolgreichem Durchlauf gibt die \textit{get\_parameter\_value()}-Methode der \textit{DataFlowAnalysis}-Klasse
+eine Liste mit möglichen Werten zurück.
+Die Liste wird im Anschluss in ein Dictionary umgewandelt, dessen Schlüssel aufsteigende Zahlen sind.
+Schlussendlich wird eine JSON-Datei erstellt, die alle gesuchten Konfigurationsoptionen des Git-Repositories enthält.
+Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: \\
+
+\begin{lstlisting}[frame=single, basicstyle=\small]
+{'file': 'path/file.py',
+ 'class': 'sklearn.neighbors.KNeighborsRegressor',
+ 'parameter': {'n_neighbors': 'n_neighbors',
+               'leaf_size': '25'}
+ 'variable parameters': {'n_neighbors': {'0': '6'}},
+ 'variable': 'knn',
+ 'line no': '4'}
+
+
+\section{Ermittlung der variablen Konfigurationswerte2}
+Zunächst wird durch die Liste mit Dictionaries aus \ref{Parameters} iteriert.
+Die Ermittlung der variablen Parameterwerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
 Beim Aufruf der Methode wird das Dictionary zusammen mit der Parametervariable \textit{n\_neighbors} übergeben.\\
 
 Im ersten Schritt wird die Python-Datei als AST geparst.
@@ -968,10 +1115,9 @@ Für jeden Aufruf der Funktion wird je nach Argumenttyp und Position der gesucht
 Wert ausgelesen.
 Handelt es sich einem übergebenen Wert erneut um eine Variable, wird der gesamte Prozess zur Ermittlung des Variablenwerts wiederholt. \\
 
-Nach erfolgreichem Durchlauf wird für das gegebene Beispiel ein Dictionary zurückgegeben.
-Die Schlüssel des Dictionaries sind aufsteigende Zahlen, denen die gefundenen Werte zugeordnet werden.
-Das Dictionary wird dem Schlüssel \textit{variable\_parameters} des Dictionaries aus \ref{Parameters} als Wert zugewiesen.
-Zudem wird das AST-Objekt aus dem Dictionary entfernt und die Zeilennummer hinzugefügt.
+Nach erfolgreichem Durchlauf gibt die \textit{get\_parameter\_value()}-Methode der \textit{DataFlowAnalysis}-Klasse
+eine Liste mit möglichen Werten zurück.
+Die Liste wird im Anschluss in ein Dictionary umgewandelt, dessen Schlüssel aufsteigende Zahlen sind.
 Schlussendlich wird eine JSON-Datei erstellt, die alle gesuchten Konfigurationsoptionen des Git-Repositories enthält.
 Für das gegebene Beispiel sieht der Eintrag wie folgt aus: \\
 

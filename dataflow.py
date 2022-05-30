@@ -3,14 +3,13 @@ from scalpel.cfg import CFGBuilder
 import ast
 
 code_str= """
-def func(size):
-    x = size
-    
-for i in range(bla):
-    size = 999
-    func(size=2)
+class A:
+    def __init__(self, variable):
+        a = 1                               # Assignment 1
+        self.cls_variable = a               # Assignment 2
+        b, c = 2, 3                         # Assignment 3
+        a = 4                               # Assignment 4
 """
-
 
 class DataFlowAnalysis:
     def __init__(self, obj, variable):
@@ -28,8 +27,8 @@ class DataFlowAnalysis:
         cfg = CFGBuilder().build_from_file(name="test", filepath=self.file)
         self.cfg_list.append(cfg)
         self.get_cfgs(cfg)
-        self.get_all_func_calls()
         self.get_all_possible_object_paths()
+        self.get_all_func_calls()
 
         for variable in self.variables:
             func_def_args = []
@@ -75,28 +74,6 @@ class DataFlowAnalysis:
             self.possible_object_paths[function_cfg] = parent
             self.get_cfgs(function_cfg)
 
-    def get_all_func_calls(self):
-        for cfg in self.cfg_list:
-            for statement in cfg.entryblock.statements:
-                nodes = list(ast.walk(statement))
-                for node in nodes:
-                    if type(node) == ast.Call:
-                        self.all_func_calls.append(node)
-                    if type(node) == ast.FunctionDef or type(node) == ast.AsyncFunctionDef:
-                        for default in node.args.defaults:
-                            nodes_prm = list(ast.walk(default))
-                            for node_prm in nodes_prm:
-                                if type(node_prm) == ast.Call:
-                                    self.all_func_calls.append(node_prm)
-                        for default in node.args.kw_defaults:
-                            if default is not None:
-                                nodes_prm = list(ast.walk(default))
-                                for node_prm in nodes_prm:
-                                    if type(node_prm) == ast.Call:
-                                        self.all_func_calls.append(node_prm)
-
-        list(set(self.all_func_calls))
-
     def get_all_possible_object_paths(self):
         parent_child_relation = {}
         for child in self.possible_object_paths.keys():
@@ -124,7 +101,33 @@ class DataFlowAnalysis:
                 parent_child_relation[child].append(path)
                 prev_parent = parent
 
+        for child in parent_child_relation:
+            name = parent_child_relation[child][0]
+            parent_child_relation[child].append("self.{0}".format(name))
+
         self.possible_object_paths = parent_child_relation
+
+    def get_all_func_calls(self):
+        for cfg in self.cfg_list:
+            for statement in cfg.entryblock.statements:
+                nodes = list(ast.walk(statement))
+                for node in nodes:
+                    if type(node) == ast.Call:
+                        self.all_func_calls.append(node)
+                    if type(node) == ast.FunctionDef or type(node) == ast.AsyncFunctionDef:
+                        for default in node.args.defaults:
+                            nodes_prm = list(ast.walk(default))
+                            for node_prm in nodes_prm:
+                                if type(node_prm) == ast.Call:
+                                    self.all_func_calls.append(node_prm)
+                        for default in node.args.kw_defaults:
+                            if default is not None:
+                                nodes_prm = list(ast.walk(default))
+                                for node_prm in nodes_prm:
+                                    if type(node_prm) == ast.Call:
+                                        self.all_func_calls.append(node_prm)
+
+        list(set(self.all_func_calls))
 
     def parent_child_match(self, child):
         parent_child_relation = []
@@ -142,7 +145,7 @@ class DataFlowAnalysis:
         for name, value in const_dict.items():
             if value is not None:
                 if name[0] == variable:
-                    if type(value) == ast.Name and ast.unparse(value) not in self.variables:
+                    if (type(value) == ast.Name or type(value) == ast.Attribute) and ast.unparse(value) not in self.variables:
                         self.variables.append(ast.unparse(value))
                     if ast.unparse(value) != self.variables[0]:
                         self.variable_value.append(ast.unparse(value))
@@ -251,7 +254,7 @@ class DataFlowAnalysis:
                             variable_values.append(func_call.keywords[-1].value)
 
         for variable_value in variable_values:
-            if type(variable_value) == ast.Name and ast.unparse(variable_value) not in self.variables:  ##self?
+            if (type(variable_value) == ast.Name or type(variable_value) == ast.Attribute) and ast.unparse(variable_value) not in self.variables:
                 self.variables.append(ast.unparse(variable_value))
             if ast.unparse(variable_value) != self.variables[0]:
                 self.variable_value.append(ast.unparse(variable_value))
