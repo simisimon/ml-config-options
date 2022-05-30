@@ -122,7 +122,23 @@
             "verbose": "0",
             "random_state": "None",
             "copy_x": "True",
-            "algorithm": "'auto'"
+            "algorithm": "'lloyd'"
+        }
+    },
+    "sklearn.cluster.BisectingKMeans": {
+        "short name": "BisectingKMeans",
+        "parameters": {
+            "n_clusters": "8",
+            "*": null,
+            "init": "'random'",
+            "n_init": "1",
+            "random_state": "None",
+            "max_iter": "300",
+            "verbose": "0",
+            "tol": "0.0001",
+            "copy_x": "True",
+            "algorithm": "'lloyd'",
+            "bisecting_strategy": "'biggest_inertia'"
         }
     },
     "sklearn.cluster.MiniBatchKMeans": {
@@ -421,7 +437,7 @@
             "n_components": "None",
             "*": null,
             "algorithm": "'parallel'",
-            "whiten": "True",
+            "whiten": "'warn'",
             "fun": "'logcosh'",
             "fun_args": "None",
             "max_iter": "200",
@@ -490,10 +506,11 @@
             "n_components": "None",
             "*": null,
             "alpha": "1",
-            "n_iter": "1000",
+            "n_iter": "'deprecated'",
+            "max_iter": "None",
             "fit_algorithm": "'lars'",
             "n_jobs": "None",
-            "batch_size": "3",
+            "batch_size": "'warn'",
             "shuffle": "True",
             "dict_init": "None",
             "transform_algorithm": "'omp'",
@@ -504,7 +521,10 @@
             "random_state": "None",
             "positive_code": "False",
             "positive_dict": "False",
-            "transform_max_iter": "1000"
+            "transform_max_iter": "1000",
+            "callback": "None",
+            "tol": "0.001",
+            "max_no_improvement": "10"
         }
     },
     "sklearn.decomposition.MiniBatchSparsePCA": {
@@ -529,7 +549,7 @@
         "parameters": {
             "n_components": "None",
             "*": null,
-            "init": "'warn'",
+            "init": "None",
             "solver": "'cd'",
             "beta_loss": "'frobenius'",
             "tol": "0.0001",
@@ -544,6 +564,28 @@
             "regularization": "'deprecated'"
         }
     },
+    "sklearn.decomposition.MiniBatchNMF": {
+        "short name": "MiniBatchNMF",
+        "parameters": {
+            "n_components": "None",
+            "*": null,
+            "init": "None",
+            "batch_size": "1024",
+            "beta_loss": "'frobenius'",
+            "tol": "0.0001",
+            "max_no_improvement": "10",
+            "max_iter": "200",
+            "alpha_W": "0.0",
+            "alpha_H": "'same'",
+            "l1_ratio": "0.0",
+            "forget_factor": "0.7",
+            "fresh_restarts": "False",
+            "fresh_restarts_max_iter": "30",
+            "transform_max_iter": "None",
+            "random_state": "None",
+            "verbose": "0"
+        }
+    },
     "sklearn.decomposition.PCA": {
         "short name": "PCA",
         "parameters": {
@@ -554,6 +596,8 @@
             "svd_solver": "'auto'",
             "tol": "0.0",
             "iterated_power": "'auto'",
+            "n_oversamples": "10",
+            "power_iteration_normalizer": "'auto'",
             "random_state": "None"
         }
     },
@@ -595,6 +639,8 @@
             "*": null,
             "algorithm": "'randomized'",
             "n_iter": "5",
+            "n_oversamples": "10",
+            "power_iteration_normalizer": "'auto'",
             "random_state": "None",
             "tol": "0.0"
         }
@@ -705,7 +751,7 @@
             "min_samples_split": "2",
             "min_samples_leaf": "1",
             "min_weight_fraction_leaf": "0.0",
-            "max_features": "'auto'",
+            "max_features": "'sqrt'",
             "max_leaf_nodes": "None",
             "min_impurity_decrease": "0.0",
             "bootstrap": "False",
@@ -729,7 +775,7 @@
             "min_samples_split": "2",
             "min_samples_leaf": "1",
             "min_weight_fraction_leaf": "0.0",
-            "max_features": "'auto'",
+            "max_features": "1.0",
             "max_leaf_nodes": "None",
             "min_impurity_decrease": "0.0",
             "bootstrap": "False",
@@ -746,7 +792,7 @@
         "short name": "GradientBoostingClassifier",
         "parameters": {
             "*": null,
-            "loss": "'deviance'",
+            "loss": "'log_loss'",
             "learning_rate": "0.1",
             "n_estimators": "100",
             "subsample": "1.0",
@@ -820,7 +866,7 @@
             "min_samples_split": "2",
             "min_samples_leaf": "1",
             "min_weight_fraction_leaf": "0.0",
-            "max_features": "'auto'",
+            "max_features": "'sqrt'",
             "max_leaf_nodes": "None",
             "min_impurity_decrease": "0.0",
             "bootstrap": "True",
@@ -844,7 +890,7 @@
             "min_samples_split": "2",
             "min_samples_leaf": "1",
             "min_weight_fraction_leaf": "0.0",
-            "max_features": "'auto'",
+            "max_features": "1.0",
             "max_leaf_nodes": "None",
             "min_impurity_decrease": "0.0",
             "bootstrap": "True",
@@ -927,6 +973,7 @@
         "parameters": {
             "loss": "'squared_error'",
             "*": null,
+            "quantile": "None",
             "learning_rate": "0.1",
             "max_iter": "100",
             "max_leaf_nodes": "31",
@@ -949,7 +996,7 @@
     "sklearn.ensemble.HistGradientBoostingClassifier": {
         "short name": "HistGradientBoostingClassifier",
         "parameters": {
-            "loss": "'auto'",
+            "loss": "'log_loss'",
             "*": null,
             "learning_rate": "0.1",
             "max_iter": "100",
@@ -1175,7 +1222,8 @@
         "parameters": {
             "estimator": null,
             "*": null,
-            "n_features_to_select": "None",
+            "n_features_to_select": "'warn'",
+            "tol": "None",
             "direction": "'forward'",
             "scoring": "None",
             "cv": "5",
@@ -1352,7 +1400,7 @@
             "missing_values": "nan",
             "strategy": "'mean'",
             "fill_value": "None",
-            "verbose": "0",
+            "verbose": "'deprecated'",
             "copy": "True",
             "add_indicator": "False"
         }
@@ -1399,6 +1447,17 @@
             "add_indicator": "False"
         }
     },
+    "sklearn.inspection.DecisionBoundaryDisplay": {
+        "short name": "DecisionBoundaryDisplay",
+        "parameters": {
+            "*": null,
+            "xx0": null,
+            "xx1": null,
+            "response": null,
+            "xlabel": "None",
+            "ylabel": "None"
+        }
+    },
     "sklearn.inspection.PartialDependenceDisplay": {
         "short name": "PartialDependenceDisplay",
         "parameters": {
@@ -1407,8 +1466,8 @@
             "features": null,
             "feature_names": null,
             "target_idx": null,
-            "pdp_lim": null,
             "deciles": null,
+            "pdp_lim": "'deprecated'",
             "kind": "'average'",
             "subsample": "1000",
             "random_state": "None"
@@ -2030,7 +2089,7 @@
     "sklearn.linear_model.RANSACRegressor": {
         "short name": "RANSACRegressor",
         "parameters": {
-            "base_estimator": "None",
+            "estimator": "None",
             "*": null,
             "min_samples": "None",
             "residual_threshold": "None",
@@ -2042,7 +2101,8 @@
             "stop_score": "inf",
             "stop_probability": "0.99",
             "loss": "'absolute_error'",
-            "random_state": "None"
+            "random_state": "None",
+            "base_estimator": "'deprecated'"
         }
     },
     "sklearn.linear_model.TheilSenRegressor": {
@@ -2123,6 +2183,7 @@
         "parameters": {
             "*": null,
             "n_neighbors": "5",
+            "radius": "None",
             "n_components": "2",
             "eigen_solver": "'auto'",
             "tol": "0",
@@ -2193,13 +2254,14 @@
             "n_iter_without_progress": "300",
             "min_grad_norm": "1e-07",
             "metric": "'euclidean'",
+            "metric_params": "None",
             "init": "'warn'",
             "verbose": "0",
             "random_state": "None",
             "method": "'barnes_hut'",
             "angle": "0.5",
             "n_jobs": "None",
-            "square_distances": "'legacy'"
+            "square_distances": "'deprecated'"
         }
     },
     "sklearn.metrics.DistanceMetric": {
@@ -2253,7 +2315,8 @@
             "prob_pred": null,
             "y_prob": null,
             "*": null,
-            "estimator_name": "None"
+            "estimator_name": "None",
+            "pos_label": "None"
         }
     },
     "sklearn.mixture.BayesianGaussianMixture": {
@@ -2512,7 +2575,8 @@
         "parameters": {
             "estimator": null,
             "*": null,
-            "n_jobs": "None"
+            "n_jobs": "None",
+            "verbose": "0"
         }
     },
     "sklearn.multiclass.OneVsOneClassifier": {
@@ -2892,6 +2956,7 @@
             "validate": "False",
             "accept_sparse": "False",
             "check_inverse": "True",
+            "feature_names_out": "None",
             "kw_args": "None",
             "inv_kw_args": "None"
         }
@@ -2903,7 +2968,9 @@
             "*": null,
             "encode": "'onehot'",
             "strategy": "'quantile'",
-            "dtype": "None"
+            "dtype": "None",
+            "subsample": "'warn'",
+            "random_state": "None"
         }
     },
     "sklearn.preprocessing.KernelCenterer": {
@@ -2963,7 +3030,9 @@
             "drop": "None",
             "sparse": "True",
             "dtype": "<class 'numpy.float64'>",
-            "handle_unknown": "'error'"
+            "handle_unknown": "'error'",
+            "min_frequency": "None",
+            "max_categories": "None"
         }
     },
     "sklearn.preprocessing.OrdinalEncoder": {
@@ -2973,7 +3042,8 @@
             "categories": "'auto'",
             "dtype": "<class 'numpy.float64'>",
             "handle_unknown": "'error'",
-            "unknown_value": "None"
+            "unknown_value": "None",
+            "encoded_missing_value": "nan"
         }
     },
     "sklearn.preprocessing.PolynomialFeatures": {
@@ -3045,6 +3115,7 @@
             "n_components": "'auto'",
             "*": null,
             "eps": "0.1",
+            "compute_inverse_components": "False",
             "random_state": "None"
         }
     },
@@ -3056,6 +3127,7 @@
             "density": "'auto'",
             "eps": "0.1",
             "dense_output": "False",
+            "compute_inverse_components": "False",
             "random_state": "None"
         }
     },
@@ -3266,7 +3338,7 @@
             "min_samples_split": "2",
             "min_samples_leaf": "1",
             "min_weight_fraction_leaf": "0.0",
-            "max_features": "'auto'",
+            "max_features": "'sqrt'",
             "random_state": "None",
             "max_leaf_nodes": "None",
             "min_impurity_decrease": "0.0",
@@ -3284,7 +3356,7 @@
             "min_samples_split": "2",
             "min_samples_leaf": "1",
             "min_weight_fraction_leaf": "0.0",
-            "max_features": "'auto'",
+            "max_features": "1.0",
             "random_state": "None",
             "min_impurity_decrease": "0.0",
             "max_leaf_nodes": "None",

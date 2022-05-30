@@ -82,6 +82,7 @@ class ConfigOptions:
                 parameter_value_list = DataFlowAnalysis(obj, variable).get_parameter_value()
                 index = 0
                 parameter_value_dict = {}
+                parameter_value_list.sort()
                 for value in parameter_value_list:
                     parameter_value_dict[index] = value
                     index += 1
@@ -155,10 +156,11 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_link = 'https://github.com/CorentinJ/Real-Time-Voice-Cloning'  #'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = 'torch'  #'scikit-learn'  # sys.argv[2]
+    repo_link = sys.argv[1]  #'https://github.com/mj-support/coop'  # sys.argv[1]
+    library = sys.argv[2]  #'scikit-learn'  # sys.argv[2]
 
     repo_dir = clone_repo(repo_link)
+
     try:
         library_cap = library[0].upper() + library[1:]
         eval("{0}Options('{1}').get_config_options()".format(library_cap, repo_dir))
