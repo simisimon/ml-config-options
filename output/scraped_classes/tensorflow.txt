@@ -7,7 +7,6 @@
         "short name": "CriticalSection",
         "parameters": {
             "name": "None",
-            "shared_name": "None",
             "critical_section_def": "None",
             "import_scope": "None"
         }

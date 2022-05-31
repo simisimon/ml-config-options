@@ -11,6 +11,7 @@ class A:
         a = 4                               # Assignment 4
 """
 
+
 class DataFlowAnalysis:
     def __init__(self, obj, variable):
         self.file = obj["file"] #obj["file"] #obj["file"]
@@ -258,5 +259,3 @@ class DataFlowAnalysis:
                 self.variables.append(ast.unparse(variable_value))
             if ast.unparse(variable_value) != self.variables[0]:
                 self.variable_value.append(ast.unparse(variable_value))
-
-

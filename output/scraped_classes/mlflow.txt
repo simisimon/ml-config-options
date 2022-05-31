@@ -5,7 +5,7 @@
             "run": null
         }
     },
-    "mlflow.deployments.BaseDeploymentClient": {
+    "mlflow.depl oyments.BaseDeploymentClient": {
         "short name": "BaseDeploymentClient",
         "parameters": {
             "target_uri": null

@@ -97,8 +97,8 @@ Moderne Softwaresysteme erm\"oglichen den Nutzenden ein breites Spektrum untersc
 Anhand dieser Konfigurationsoptionen sind die Nutzenden in der Lage, viele Aspekte der Ausgestaltung einer Software zu steuern.
 Konfigurationsoptionen k\"onnen dabei ganz unterschiedliche Funktionen besitzen, die von den Nutzenden nach den eigenen Bed\"urfnissen angepasst werden k\"onnen.\\
 
-Konfigurationsoptionen können in verschiedenen Teilen eines Softwareprojekts verarbeitet, definiert und beschrieben werden:
-in der Konfigurationsdatei, im Source Code und in der Dokumentation \cite[]{7774519}.
+Konfigurationsoptionen können in verschiedenen Teilen eines Softwareprojekts verarbeitet, definiert und beschrieben werden,
+wie beispielsweise in der Konfigurationsdatei, im Source Code und in der Dokumentation \cite[]{7774519}.
 Sie werden meist als Key-Value Pair entworfen und gesammelt in einer Konfigurationsdatei gespeichert.
 Dem Namen der Konfigurationsoption (Key) werden dabei Einstellungsmöglichkeiten beliebigen Typs zugeordnet (Value).
 Zur Speicherung von Konfigurationsoptionen verwenden einige Systeme, wie das Big Data-Framework Hadoop, strukturierte XML-Formate oder auch JSON-Dateien.
@@ -116,9 +116,9 @@ dass über mehrere Module hinweg, unbemerkt mit falschen Werten gearbeitet wird 
 Die verschiedenen m\"oglichen Auspr\"agungen einer Konfigurationsoption erschweren hierbei die Nachvollziehbarkeit des Kontrollflusses der Software.\\
 
 In einer empirischen Studie über Konfigurationsfehler stellen \citeauthor{10.1145/2043556.2043572} fest,
-dass in kommerziellen Softwareunternehmen für Speicherlösungen, knapp ein Drittel aller Ursachen von Kundenproblemen auf Konfigurationsfehler zurückzuführen sind (siehe Tabelle 3) \cite[]{10.1145/2043556.2043572}.
+dass in kommerziellen Softwareunternehmen für Speicherlösungen, knapp ein Drittel aller Ursachen von Kundenproblemen auf Konfigurationsfehler zurückzuführen sind (siehe Tabelle 3).
 Bei Konfigurationsfehler sind Source Code und die Eingabe zwar korrekt, es wird jedoch ein falscher Wert für eine Konfigurationsoption verwendet,
-sodass sich die Software nicht wie gewünscht verhält \cite[]{10.1145/2568225.2568251}.
+sodass sich die Software nicht wie gewünscht verhält.
 Solche Fehler können dazu führen, dass die Software abstürzt, eine fehlerhafte Ausgabe erzeugt oder nur unzureichend funktioniert \cite[]{10.1145/2568225.2568251}.\\
 
 Konfigurationsfehler entstehen zum Beispiel durch die Verwendung unterschiedlicher Versionen einer Software.
@@ -148,24 +148,24 @@ oder das Ergebnis nicht den Erwartungen entspricht. \\
 
 
 
-\section{Anwendungsbereich und Zielsetzung}
+\section{Zielsetzung}
 Das Ziel dieser Arbeit ist es, Konfigurationsoptionen im Source Code zu erkennen und zu extrahieren. \\
 
 Es existieren bereits einige Forschungsansätze zur Ermittlung und Verarbeitung von Konfigurationsoptionen im Source Code.
 Viel zitiert wird dabei der Ansatz von \citeauthor{10.1145/1985793.1985812}, den sie \citeyear{10.1145/1985793.1985812} publizierten.
 Wie auch \citeauthor{7774519} oder \citeauthor{8049300} entwickelten sie einen Ansatz, mittels statischer Code-Analyse Konfigurationsoptionen
 im Source Code zu tracken.
-Dabei fokussierten sie sich auf die Programmiersprache Java, die nach dem TIOBE-Index jahrelang als beliebteste Programmiersprache galt \cite[]{enwiki:1077809155}.
-Der TIOBE-Index misst die Popularität von Programmiersprachen auf der Grundlage von Suchanfragen auf beliebten Websites und in Suchmaschinen \cite[]{enwiki:1077809155}.
+Dabei fokussierten sie sich auf die Programmiersprache Java, die nach dem TIOBE-Index jahrelang als beliebteste Programmiersprache galt.
+Der TIOBE-Index misst die Popularität von Programmiersprachen auf der Grundlage von Suchanfragen auf beliebten Websites und in Suchmaschinen.
 Im Februar 2022 ist in diesem Ranking Python erstmals zur beliebtesten Programmiersprache aufgestiegen \cite[]{enwiki:1077809155}.
 Für Python ist diese Thematik jedoch bislang allerdings noch wenig beleuchtet. \\
 
 Die Programmiersprache Python ist für ihre Benutzendenfreundlichkeit bekannt und obwohl Python eine interpretierte High-Level-Programmiersprache ist,
-ist sie in der Lage, bei Bedarf die Leistung von Programmiersprachen auf Systemebene zu nutzen \cite[]{2020}.
+ist sie in der Lage, bei Bedarf die Leistung von Programmiersprachen auf Systemebene zu nutzen.
 Insbesondere im Bereich wissenschaftliches Rechnen (Scientific Computing) gewann Python in den letzten Jahren enorm an Popularität,
 weshalb viele Bibliotheken für maschinelles Lernen auf Python basieren \cite[]{2020}.\\
 
-Gegenstand dieser Arbeit werden daher Konfigurationsoptionen sein, die in Python Source Code vorliegen und mittels statischer Code-Analyse erkannt werden.
+Gegenstand dieser Arbeit werden daher Konfigurationsoptionen von ML Algorithmen in Python Source Code, die mittels statischer Code-Analyse erkannt werden.
 Der Ansatz identifiziert automatisch die Stellen im Source Code, an denen die Optionen der zu untersuchenden Bibliotheken gelesen werden
 und ermittelt für jede dieser Stellen den Namen der Option.
 Darauf aufbauend erfolgt eine Datenflussanalyse, um auch für Optionen, die in Form von Variablen als Parameter übergeben werden,
@@ -188,11 +188,11 @@ Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecy
 \section{Statische Code-Analyse}
 Das wichtigste Werkzeug dieser Arbeit ist die statische Code-Analyse,
 mit der Software-Projekte unabhängig von der Ausführungsumgebung untersucht werden können.
-Die statische Code-Analyse ist ein Werkzeug, um Fehler in einer Softwareanwendung zu reduzieren \cite[]{bardas2010static}.
+Die statische Code-Analyse ist ein Werkzeug, um Fehler in einer Softwareanwendung zu reduzieren.
 So ermöglichen sie den Anwendenden, Fehler in einem Programm zu finden, die für den Compiler nicht sichtbar sind \cite[]{bardas2010static}.\\
 
 Im Gegensatz zur dynamischen Analyse wird die statische Analyse zur Übersetzungszeit durchgeführt
-und setzt damit bereits vor der tatsächlichen Ausführung des Source Codes an \cite[]{gomes2009overview}.
+und setzt damit bereits vor der tatsächlichen Ausführung des Source Codes an.
 Die erzeugten Ergebnisse der statischen Analyse lassen sich besser Verallgemeinern, da sie nicht abhängig von den Eingaben sind,
 mit denen das Programm während der dynamischen Analyse ausgeführt wurde \cite[]{gomes2009overview}.\\
 
@@ -202,7 +202,7 @@ So kann es viele Optionen geben, die nur in bestimmten Modulen oder als Folge be
 %Dies würde zudem bei größeren Softwareprojekten eine sehr komplexe Test-Suite erfordern, um möglichst alle Fälle abdecken zu können.
 Mit der statischen Code-Analyse kann eine hohe Abdeckung hingegen deutlich leichter erreicht werden.
 Gleichzeitig verbergen sich hinter den Methoden und Klassen, der zu untersuchenden Machine Learning Bibliotheken,
-teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehrere Tage laufen könnten.
+teils sehr komplexe und rechenintensive Berechnungen, die bis zu mehreren Tagen laufen könnten.
 Aus Kosten-Nutzen-Gründen ist hier eine dynamische Analyse nur bedingt sinnvoll.\\
 
 \section{Datenflussanalyse}
@@ -217,7 +217,7 @@ Der Graph zeigt an, an welchen Stellen eine Variable verwendet wird und welche W
 Es gibt verschiedene Techniken, die innerhalb der Datenflussanalyse eingesetzt werden, um den Wert von Variablen zu bestimmen.
 Eine von ihnen ist \textit{Constant Propagation}.
 Das Ziel von Constant Propagation ist zu bestimmen, an welchen Stellen im Programm, eine Variable einen konstanten Wert besitzt.
-So kann zum Beispiel toter Code, also redundanter Code, der im weiteren Programmverlauf nicht weiter verarbeitet wird, gefunden werden.\\
+So kann zum Beispiel toter Code, also redundanter Code, der im weiteren Programmverlauf nicht weiterverarbeitet wird, gefunden werden.\\
 
 Eine weitere Technik ist \textit{Static Single Assignment}.
 Bei dieser Methodik werden die Variablen im Verlauf des Übersetzungsprozesses in eine Zwischenform überführt, in der jede Variable
@@ -255,13 +255,13 @@ und über die \textPhi-Funktion kann durch Static Single Assignment abgeleitet w
 
 \section{Maschinelles Lernen}
 Die künstliche Intelligenz (KI) ist ein Teilgebiet der Informatik und befasst sich mit der Entwicklung von Computerprogrammen und Maschinen,
-die in der Lage sind, Aufgaben auszuführen, die Menschen von Natur aus gut beherrschen \cite[]{2020}.
+die in der Lage sind, Aufgaben auszuführen, die Menschen von Natur aus gut beherrschen.
 Dazu gehören zum Beispiel die Verarbeitung von natürlicher Sprache (Natural Language Processing) oder Bilderkennung (Computer Vision).
 In der Mitte des 20. Jahrhunderts entstand das maschinelle Lernen (ML) als Teilbereich der KI und schlug eine neue Richtung
 für die Entwicklung von künstlicher Intelligenz ein, inspiriert vom konzeptionellen Verständnis der Funktionsweise des menschlichen Gehirns \cite[]{2020}.\\
 
 Pionier Arthur Samuel definiert maschinelles Lernen als ein Fachgebiet, das Computern die Fähigkeit verleiht, zu lernen,
-ohne ausdrücklich programmiert zu werden \cite[]{mahesh2020machine}.
+ohne ausdrücklich programmiert zu werden.
 Es befasst sich mit der wissenschaftlichen Untersuchung von Algorithmen und statistischen Modellen,
 die Computersysteme verwenden, um eine Aufgabe zu lösen \cite[]{mahesh2020machine}.
 Dabei werden statistische Methoden verwendet, um aus Daten zu lernen und Muster zu erkennen. \\
@@ -336,16 +336,16 @@ und damit die populärste Programmiersprache in diesem Bereich ist \cite[]{nugge
 Python ist eine interpretierte Programmiersprache.
 Demnach wird während der Ausführung der Python-Code zur Laufzeit interpretiert, wodurch sie im Vergleich mit kompilierten
 Programmiersprachen wie C / C++ hinsichtlich Leistung und Geschwindigkeit schlechter abschneidet.
-Ein wichtiger Vorteil von Python ist jedoch die Möglichkeit, Code aus anderen Programmiersprachen relativ einfach einzubinden \cite[]{8757088}.
+Ein wichtiger Vorteil von Python ist jedoch die Möglichkeit, Code aus anderen Programmiersprachen relativ einfach einzubinden.
 Viele Lösungen im maschinellen Lernen basieren auf numerischen und vektorisierten Berechnungen mit Bibliotheken
-wie \textit{NumPy} oder \textit{SciPy} \cite[]{8757088}.
+wie \textit{NumPy} oder \textit{SciPy}.
 Um diese Berechnungen schnell und effizient auszuführen, werden sogenannte \textit{Wrapper} verwendet,
-die Algorithmen von kompilierten Programmiersprachen implementieren \cite[]{8757088}.
+die Algorithmen von kompilierten Programmiersprachen implementieren.
 Die wahrscheinlich am häufigsten verwendete Bibliothek für diesen Zweck ist Cython, die zwar auf Python basiert,
 aber auch den Aufruf von Funktionen, sowie die Verwendung von Variablen und Klassen aus der Programmiersprache C unterstützt \cite[]{8757088}.
 Dadurch können kritische Teile des Codes um ein Vielfaches beschleunigt werden. \\
 
-Einer der Hauptgründe für die Populärität von Python ist das riesige Ökosystem, das aus einer Vielzahl
+Einer der Hauptgründe für die Popularität von Python ist das riesige Ökosystem, das aus einer Vielzahl
 von umfangreichen und leistungsfähigen Bibliotheken besteht, über die ML-Algorithmen aufgerufen werden können,
 wodurch die Benutzendenfreundlichkeit bei gleichzeitiger Effizienz in der Performanz gewahrt bleiben kann \cite[]{2020}.
 So sind nach einer jährlich von der Data Science-Plattform \citeauthor{kaggle} durchgeführten Umfrage unter rund 25.000 ML-Engineers
@@ -363,11 +363,11 @@ von maschinellem Lernen eingesetzt werden.
 Sie bieten die Möglichkeit, Daten und Funktionen zu kombinieren und dem Nutzenden von Machine Learning Bibliotheken,
 bereits vorformulierte Algorithmen aufzurufen.
 Dabei werden die Konfigurationsoptionen beim Aufruf der jeweiligen Klasse als Parameter übergeben, sodass die Algorithmen
-an die Bedürfnisse des Anwendenen angepasst werden können.
+an die Bedürfnisse des Anwendenden angepasst werden können.
 So kann die zielgerichtete Nutzung effizienter und komplexer Algorithmen bei gleichzeitiger Konfigurierbarkeit gewährleistet werden. \\
 
 Bei den Konfigurationsparametern von Lernalgorithmen handelt es sich um sogenannte \textit{Hyperparameter}.
-Lernalgorithmen ermöglichen einem Computerprogramm den menschlichen Lernprozess mittels statistischer Methoden zu imitieren.
+Lernalgorithmen ermöglichen einem Computerprogramm, den menschlichen Lernprozess mittels statistischer Methoden zu imitieren.
 Sie werden zur Mustererkennung, Klassifizierung und Vorhersage verwendet, indem sie aus einem vorhandenen Trainingsdatensatz
 lernen.
 Hyperparameter werden festgelegt bevor der Lernprozess beginnt und um den Lernprozess zu steuern \cite[]{hype}.
@@ -394,12 +394,12 @@ Zahlenwerte übergeben, die von den Default-Werten abweichen.\\
 
 
 \section{Web Scraping}
-Web Scraping ist eine Technik, um Daten aus dem World Wide Web zu extrahieren, um sie später abrufen oder analysieren zu können \cite[]{zhao2017web}.
-Dafür werden die Webdaten über das Hypertext Transfer Protocol (HTTP) oder über einen Webbrowser ausgelesen \cite[]{zhao2017web}.
+Web Scraping ist eine Technik, um Daten aus dem World Wide Web zu extrahieren, um sie später abrufen oder analysieren zu können.
+Dafür werden die Webdaten über das Hypertext Transfer Protocol (HTTP) oder über einen Webbrowser ausgelesen.
 Dies kann entweder manuell durch den jeweiligen Benutzenden oder automatisch durch einen Bot oder Webcrawler erfolgen \cite[]{zhao2017web}.
 Ein Web Scraper simuliert das menschliche Browsing-Verhalten im Web, um aus verschiedenen Websites
-detaillierte Informationen in einer vorgegebenen Struktur zu sammeln \cite[]{9005594}.
-Durch die Möglichkeit für eine bestimmte Website-Struktur systematisch ausgerichtet und programmiert zu werden, liegt der Vorteil
+detaillierte Informationen in einer vorgegebenen Struktur zu sammeln.
+Durch die Möglichkeit, für eine bestimmte Website-Struktur systematisch ausgerichtet und programmiert zu werden, liegt der Vorteil
 eines Web Scrapers in seiner Automatisierungsfähigkeit und Geschwindigkeit \cite[]{9005594}.
 Mögliche Anwendungsfälle sind zum Beispiel das Überwachen von Preis-Änderungen in Online-Shops oder das Auslesen und Kopieren
 von Kontaktinformationen.\\
@@ -414,13 +414,13 @@ Zunächst wird die Kommunikation zur Ziel-Website über das HTTP-Protokoll herge
 Dies erfolgt entweder als URL mit einer GET-Abfrage für Ressourcenanfragen oder als HTTP-Nachricht mit einer
 POST-Abfrage für die Übermittlung von Formularen \cite[]{10.1093/bib/bbt026}.
 Nachdem die Anfrage erfolgreich empfangen und von der Ziel-Website verarbeitet wurde, wird die angeforderte Ressource
-von der Website aufgerufen und an das Web Scraping-Programm zurückgesendet \cite[]{zhao2017web}.
+von der Website aufgerufen und an das Web Scraping-Programm zurückgesendet.
 Die Ressource kann in verschiedenen Formaten vorliegen:
 In Auszeichnungssprachen wie HTML (Hypertext Markup Language) oder XML (Extensible Markup Language), JSON-Format
 (JavaScript Object Notation) oder in Form von Multimedia-Daten wie Bilder-, Audio oder Videodateien \cite[]{zhao2017web}.\\
 
 Im zweiten Schritt folgt der Extraktionsprozess.
-Die heruntergeladenen Daten können nun geparst werden, um die benötigten Information zu filtern und in ein geeignetes Format
+Die heruntergeladenen Daten können nun geparst werden, um die benötigten Informationen zu filtern und in ein geeignetes Format
 umzuwandeln \cite[]{10.1093/bib/bbt026}.
 Die Daten können nun weiterverarbeitet werden, indem sie beispielsweise analysiert oder in eine gewünschte Struktur
 organisiert werden.\\
@@ -462,32 +462,32 @@ behandeln Anwendungen in der Programmiersprache Java und ermitteln Konfiguration
 Der von \citeauthor{10.1145/1985793.1985812} entwickelte \textit{Confalyzer} ist vermutlich einer der ersten bekannteren
 Tools, die sich mit der Thematik befassen.
 Unter der Annahme, das Konfigurationsoptionen als Key-Value Pair vorliegen, betrachtet der Confalyzer Methoden, die mit
-dem für Java typischen Schlüsselwort \textit{get} in der Konfigurationsklasse beginnen \cite[]{10.1145/1985793.1985812}.
+dem für Java typischen Schlüsselwort \textit{get} in der Konfigurationsklasse beginnen.
 Mittels eines Aufrufgraphens (Call Graph) identifiziert der Confalyzer, wo die Methoden im Source Code aufgerufen werden.
-An den jeweiligen Aufrufstellen kann er dann die Konfigurationsoptionen aus den String-Parametern ablesen \cite[]{10.1145/1985793.1985812}.
+An den jeweiligen Aufrufstellen kann er dann die Konfigurationsoptionen aus den String-Parametern ablesen.
 Der Ansatz beruht auf der Annahme, dass viele Konfigurationsoptionen auf ähnliche Weise verwendet werden und bestimmte
 Muster ableitbar sind \cite[]{10.1145/1985793.1985812}.\\
 
-Der von \citeauthor{7774519} entwickelte \textit{ORPLocator} orientiert sich an dem Confalyzer und vergleicht sich mit diesem \cite[]{7774519}.
+Der von \citeauthor{7774519} entwickelte \textit{ORPLocator} orientiert sich an dem Confalyzer und vergleicht sich mit diesem.
 Der ORPLocator untersuchte dieselben Java-Frameworks wie beispielsweise Hadoop und konnte mehr dokumentierte
-Optionen und dementsprechend auch mehr Verwendungen im Source Code finden \cite[]{7774519}.
+Optionen und dementsprechend auch mehr Verwendungen im Source Code finden.
 Dies liegt unter anderem daran, dass der gesamte Source Code nach Aufrufstellen von Konfigurationsschnittstellen durchsucht wird,
 während der Confalyzer einen Aufrufgraphen erstellt, der manche Optionen nicht erfasst \cite[]{7774519}.\\
 
 Einen anderen Ansatz verfolgten \citeauthor{8049300} bei der Entwicklung von \textit{Lotrack}.
 Lotrack ist ein Tool, das mittels einer erweiterten Taint-Analyse, einer Datenflussanalyse, die externe Daten
-(Eingabedaten) über den gesamten Kontrollfluss verfolgt, eine Konfigurations-Map erstellt \cite[]{8049300}.
+(Eingabedaten) über den gesamten Kontrollfluss verfolgt, eine Konfigurations-Map erstellt.
 Die Konfigurations-Map beschreibt, welche Codefragmente von Konfigurationsoptionen abhängen und hilft dabei die
-Beziehungen zwischen dem konkreten Programmverhalten und der Konfiguration zu finden \cite[]{8049300}.
+Beziehungen zwischen dem konkreten Programmverhalten und der Konfiguration zu finden.
 Der Fokus liegt auf Anwendungen, die auf Android-Systemen laufen \cite[]{8049300}. \\
 
 Weitere Ansätze wie der \textit{PrefFinder} von \citeauthor{10.1145/2642937.2643009} verwenden zusätzlich auch dynamische
 Analysetechniken, um Konfigurationsoptionen nicht nur zu extrahieren, sondern auch in einer Datenbank zur Abfrage und
-Verwendung zu speichern \cite[]{10.1145/2642937.2643009}.
+Verwendung zu speichern.
 Der \textit{Software Configuration Inconsistency Checker} (SCIC) hingegen von \citeauthor{10.1145/2786805.2786869}
-erweitert die Extraktion von Konfigurationsoptionen im Key-Value-Modell des Confalyzer um ein baumstrukturiertes Modell \cite[]{10.1145/2786805.2786869}.
-Im Gegensatz zu anderen Tools, ist dieses auch in der Lage mehrere Programmiersprachen zu verarbeiten \cite[]{10.1145/2786805.2786869}.
-Ziel dieses Tools ist Konfigurationsfehler zu identifizieren \cite[]{10.1145/2786805.2786869}.\\
+erweitert die Extraktion von Konfigurationsoptionen im Key-Value-Modell des Confalyzer um ein baumstrukturiertes Modell.
+Im Gegensatz zu anderen Tools, ist dieses auch in der Lage, mehrere Programmiersprachen zu verarbeiten.
+Ziel dieses Tools ist die Identifikation von Konfigurationsfehlern \cite[]{10.1145/2786805.2786869}.\\
 
 
 \chapter{Methodik}\label{Methodik}
@@ -517,14 +517,14 @@ Im folgenden Abschnitt werden Repositorys beleuchtet, die diese Bibliotheken imp
 \end{figure}
 
 Aus der Grafik lassen sich drei der zu untersuchenden Python Bibliotheken entnehmen.
-Zum einen \textit{scikit-learn}, das aufgrund der Vielzahl an implementierten Algorithmen wie ein \glqq schweizer Taschenmesser\grqq{}
+Zum einen \textit{scikit-learn}, das aufgrund der Vielzahl an implementierten Algorithmen wie ein \glqq Schweizer Taschenmesser\grqq{}
 für die meisten Projekte eingesetzt werden kann und von über 80\% der Befragten verwendet wird \cite[]{kaggle}.
 Die Vorteile von scikit-learn ist die benutzerfreundliche Struktur und Dokumentation mit der maschinelles Lernen
 auch für unerfahrene oder fachfremde Menschen zugänglich gemacht wird \cite[]{10.1145/2786984.2786995}.\\
 
 Bei der zweiten zu untersuchenden Bibliothek handelt es sich um \textit{TensorFlow}.
 Nachdem es 2015 von Forschern bei Google ursprünglich für interne Zwecke entwickelt wurde, hat sich TensorFlow vor allem im Bereich
-Deep Learning als populäres Werkzeug bewährt \cite[]{doi:10.3102/1076998619872761}.
+Deep Learning als populäres Werkzeug bewährt.
 So bietet TensorFlow Projekte, die viel Customizing erfordern, eine leistungsfähige und flexible Umgebung, die das Trainieren
 künstlicher neuronaler Netze vereinfacht und beschleunigt \cite[]{doi:10.3102/1076998619872761}.\\
 
@@ -533,8 +533,8 @@ jedoch Jahr für Jahr ein starkes Wachstum in der Nutzung \cite[]{kaggle}.
 PyTorch ist vor allem nützlich beim Umgang mit künstlichen neuronalen Netzen, weshalb es 2019 auch die
 meistgenutzte Deep Learning-Bibliothek auf allen großen Deep Learning-Konferenzen war \cite[]{2020}.\\
 
-\textit{MLflow} ist wie die eben aufgeführten Bibliotheken Open Source und wurde vom Silicon Valley Startup databricks 2018 ins Leben gerufen \cite[]{zaharia2018accelerating}.
-Ziel der Plattform ist dabei den Lebenszyklus von ML-Projekten ganzheitlich zu strukturieren \cite[]{zaharia2018accelerating}.
+\textit{MLflow} ist wie die eben aufgeführten Bibliotheken Open Source und wurde vom Silicon Valley Startup databricks 2018 ins Leben gerufen.
+Ziel der Plattform ist dabei, den Lebenszyklus von ML-Projekten ganzheitlich zu strukturieren.
 Dabei werden über die ML-Algorithmen hinaus, den Anwendenden Werkzeuge mit in die Hand zu geben, um den Herausforderungen
 von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begegnen \cite[]{zaharia2018accelerating}.\\
 
@@ -543,8 +543,8 @@ von ML-Projekten gegenüber herkömmlicher Softwareentwicklungsprozesse zu begeg
 Bevor im Source Code nach den Konfigurationsoptionen gesucht werden kann, ist es erforderlich, sich einen Überblick über
 die zu untersuchenden Bibliotheken zu verschaffen.
 Über die Dokumentation der Websites der Bibliotheken erhält man einen Einblick in die jeweilige Modul- und Klassenstruktur.
-Da die gesuchten Optionen als Parameter von ML-Klassen übergeben werden, ist es für diesen Ansatz ausreichend, alle Klassen
-mitsamt der möglichen Parameter in einer Liste festzuhalten.
+Da die gesuchten Optionen als Parameter von ML-Klassen übergeben werden, zielt dieser Ansatz darauf ab, alle Klassen
+mitsamt der möglichen Parameter mithilfe von Webscraping zu extrahieren.
 Aufgrund des systematischen Aufbaus der verschiedenen Websites, kann man an dieser Stelle mit technischer Unterstützung
 die gesuchten Daten automatisiert erfassen.
 Die Python-Bibliothek \textit{Beautiful Soup} stellt für diesen Zweck, das notwendige Werkzeug bereit.\\
@@ -630,14 +630,14 @@ Die am Ende erzeugte JSON-Datei bildet die Basis für das Extrahieren von Konfig
 Projekte verwendet werden.
 Da bei diesem Vorgang eine Vielzahl an Websites angesteuert werden, handelt es sich hierbei um das Modul mit der längsten Laufzeit.\\
 
-Das Python-Skript kann sowohl über eine Entwicklungsumbgebung, als auch über die Kommandozeile ausgeführt werden.
+Das Python-Skript kann sowohl über eine Entwicklungsumgebung, als auch über die Kommandozeile ausgeführt werden.
 Um Python-Dateien über die Kommandozeile auszuführen, muss man lediglich den Befehl \textit{python3} oder bei älteren
 Versionen \textit{python}, gefolgt vom Namen der Python-Datei eingeben.
 Zusätzlich ist es möglich neben diesem Befehl noch weitere Werte hinzugefügt werden.
-Diese sogenannten Argumente können im Source Code verarbeitet werden, um den Anwendenen eine Gestaltungsspielraum für
+Diese sogenannten Argumente können im Source Code verarbeitet werden, um den Anwendenden eine Gestaltungsspielraum für
 die Ausführung zu überlassen.
 In diesem konkreten Fall wird über die Eingabe des Namens der Bibliothek entschieden, von welcher Bibliothek die
-Klassen gescraped werden sollen.
+Klassen  \textit{gescraped} werden sollen.
 Damit auch bei unterschiedlichen Schreibweisen einer Bibliothek das Programm ausgeführt wird, sind im Source Code für jede
 Bibliothek mehrere Möglichkeiten hinterlegt.
 Das Scraping von mlflow-Klassen erfolgt zum Beispiel über folgenden Befehl:\\
@@ -648,7 +648,7 @@ python3 scraping.py mlflow
 \
 
 \section{Parsen der Repositorys}
-Der erste Schritt, um Konfigurationsoptionen extrahieren zu können, ist eine Umgebung zu schaffen, in der ein zu untersuchendes
+Der erste Schritt, um die Konfigurationsoptionen zu extrahieren, ist eine Umgebung zu schaffen, in der ein zu untersuchendes
 Git-Repository vorliegt.
 Über die \textit{GitPython}-Bibliothek wird das Repository geklont, sodass es lokal für die Analyse verfügbar ist.
 Da sich die Analyse auf Source Code in Python bezieht, werden im nächsten Schritt alle Ordner sukzessiv nach Dateien mit
@@ -661,15 +661,15 @@ Konfigurationselemente gefunden werden sollen.
 Der entsprechende Befehl für ein Beispielprojekt mit mlflow sieht demnach wie folgt aus: \\
 
 \begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
-python3 https://github.com/user/project mlflow
+python3 main.py https://github.com/user/project scikit-learn
 \end{lstlisting}
 \
 
 Im Gegensatz zum Web Scraping erfolgt der gesamte Parse- und Extraktionsprozess für die zu untersuchenden Bibliotheken generisch.
-Die Klasse \textit{ConfigOptions} enthält alle Methoden, um aus den Repositorys die Konfigurationsoptions auszulesen.
+Die Klasse \textit{ConfigOptions} enthält alle Methoden, um aus den Repositorys die Konfigurationsoptionen auszulesen.
 Für jede der vier Bibliotheken gibt es eine Klasse, die von der \textit{ConfigOptions} abgeleitet ist und ihre Funktionen erbt.
 Dadurch lässt sich dieses Tool beliebig auf andere Bibliotheken erweitern.
-Voraussetzung ist jedoch, dass eine JSON-Datei mit den gescrapten Klassen der jeweiligen Biblithek im entsprechendem Format vorliegt.
+Voraussetzung ist jedoch, dass eine JSON-Datei mit den gescrapten Klassen der jeweiligen Bibliothek im entsprechendem Format vorliegt.
 Möchte man beispielsweise die Funktionalitäten dieses Tools auf die ML-Bibliothek \textit{Keras} anwenden, muss man nach erfolgreichem Scraping,
 lediglich folgende Codezeilen zur \textit{main.py}-Datei hinzufügen.\\
 
@@ -876,7 +876,7 @@ Es enthält wie das Dictionary aus \ref{Classes} den Namen der Python-Datei, den
 Ergänzt wird das Dictionary mit Informationen zu den Parametern.
 Variable Parameter werden zusätzlich gesondert in einem Dictionary aufgeführt.
 Da die möglichen Werte der variablen Parameter noch unbekannt sind, werden diese mit \textit{None} gekennzeichnet.
-Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufgeführt, sodass sich folgendenes Dictionary ergibt:\\
+Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufgeführt, sodass sich folgendes Dictionary ergibt:\\
 
 \begin{lstlisting}[frame=single, basicstyle=\small]
 {'file': 'path/file.py',
@@ -889,7 +889,7 @@ Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufg
 \end{lstlisting}
 \
 
-\section{Ermittlung der variablen Konfigurationswerte}
+\section{Ermittlung variabler Konfigurationswerte}
 Zunächst wird durch die Liste mit Dictionaries aus \ref{Parameters} iteriert.
 Die Ermittlung der variablen Parameterwerte erfolgt über die Methode \textit{get\_parameter\_value()} der \textit{DataFlowAnalysis}-Klasse.
 Beim Aufruf der Methode wird für dieses Beispiel das Dictionary zusammen mit der Parametervariable \textit{n\_neighbors} übergeben.
@@ -905,7 +905,7 @@ Kontrollflussgraph für die Python Datei erstellt und in einer Liste gespeichert
 Der Kontrollflussgraph stellt alle globalen Pfade dar, die während der Ausführung des Programms durchlaufen werden können.
 Da Klassen- und Funktionskörper sich jedoch nicht auf dieser Ebene befinden, wird zusätzlich jede Klasse und Funktion
 der globalen Ebene traversiert und die Kontrollflussgraphen dieser Objekte ebenfalls in der Liste gespeichert.
-Dieser Vorgang wiederholt sich für jede weitere Ebene bis nach und nach die Kontrollflussgraphen aller
+Dieser Vorgang wiederholt sich für jede weitere Ebene bis schließlich alle Kontrollflussgraphen der
 Klassen und Funktionen der Liste hinzugefügt wurden. \\
 
 Im nächsten Schritt werden die möglichen Pfade, mit denen man die einzelnen Klassen und Funktionen erreichen kann, ermittelt.
@@ -916,7 +916,7 @@ Die Funktionen \textit{func\_a} und \textit{func\_b} der Klasse \textit{A} werde
 Außerhalb der Klasse werden sie nur über die Angabe des jeweiligen Namens der Klasse erreicht (\textit{call 3}).
 Übergibt man einer Klasse beim Aufruf einen Wert, wird dieser Wert über die Python-Methode \textit{\_\_init\_\_()} verarbeitet.
 Um Klassen- und Funktionsaufrufe richtig zuzuordnen und die übergebenen Parameter richtig zu verarbeiten,
-ist es daher wichtig den Typ und die Objektzugehörigkeit zu kennen.
+ist es daher wichtig, den Typ und die Objektzugehörigkeit zu kennen.
 Für jede Klasse und jede Funktion wird ein Dictionary erstellt, dessen Werte die verschiedenen Aufrufpfade sind. \\
 
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
@@ -950,7 +950,7 @@ Für jeden Kontrollflussgraphen der Datei werden über die \textit{compute\_SSA(
 und Werte der enthaltenen Variablen ermittelt.
 Dafür macht die Methode von den Datenflussanalyse-Techniken \textit{Static Single Assignment} und \textit{Constant Propagation}
 Gebrauch.
-Im Ergebnis erhält man eine Liste an Dictionaries.
+Als Ergebnis erhält man eine Liste an Dictionaries.
 Die Schlüssel sind Variablen, die Ziel einer Zuweisung sind, während die Werte des Dictionaries, den jeweiligen Wert der Zuweisung
 entsprechen.
 Wird der gesuchten Variable ein Wert zugewiesen, wird dieser in der Liste möglicher Werte gespeichert.
@@ -968,18 +968,18 @@ class A:
 \end{lstlisting}
 \
 
-Scalpel kann keine Zuweisungen an Tupel verarbeiten, sodass für die Variablen \textit{a} und \textit{b}
+Die aktuelle Version von Scalpel (Version ???) kann keine Zuweisungen an Tupel verarbeiten, sodass für die Variablen \textit{a} und \textit{b}
 von Scalpel keine Wertzuweisungen ausgegeben werden (\textit{issue 1}).
 Zudem speichert Scalpel nur die letzte Zuweisung.
 Für die Variable \textit{c} beträgt der Wert bei der Ausgabe demnach \textit{4}, obwohl der Variable vorher ein anderer
 Wert zugewiesen wird (\textit{issue 2}).
 Das größte Problem ist jedoch, dass Scalpel Zuweisungen an Objekte des AST-Typs \textit{Attribute} nicht verarbeitet
 und den Wert für \textit{self.cls\_variable} nicht ermitteln kann (\textit{issue 3}).
-Da die Lösung dieses Problems essenziell für unsere Datenflussanalyse ist, haben wir den Source Code der \textit{compute\_SSA()}-Methode
-untersucht und verändert, sodass nun auch Zuweisungen an Instanzvariablen wie \textit{self.cls\_variables} verarbeitet werden können.
+Da die Lösung dieses Problems essenziell für die Datenflussanalyse ist, wurde der Source Code der \textit{compute\_SSA()}-Methode
+untersucht und angepasst, sodass nun auch Zuweisungen an Instanzvariablen wie \textit{self.cls\_variables} verarbeitet werden können.
 Leider beträgt der Wert für \textit{c} wie in \textit{issue 2} beschrieben zum Zeitpunkt der Zuweisung der SSA-Analyse von Scalpel \textit{4}, obwohl
 \textit{3} richtig ist.
-Für diese Probleme haben wir jeweils ein Issue, teilweise mit Lösungsansatz, im Git-Repository von Scalpel erstellt.
+Für diese Probleme wurden jeweils ein Issue, teilweise mit Lösungsansatz, im Git-Repository von Scalpel erstellt.
 Zum Zeitpunkt der Abgabe der Bachelorarbeit wurden die Probleme zwar zur Kenntnis genommen, jedoch noch nicht behoben.\\
 
 Im nächsten Schritt werden die Funktionsdefinitionen der Datei untersucht, um zu überprüfen, ob die gesuchte Variable als
@@ -1015,7 +1015,7 @@ zugewiesen wird, der dementsprechend zur Liste möglicher Werte der Parametervar
 
 Im letzten Schritt der Datenflussanalyse wird, sofern die gesuchte Variable ein Funktionsparameter ist,
 durch die Liste mit Funktionsaufrufen iteriert.
-Jeder Funktionsaufruf wird mit den möglichen Werten aus der Liste an Dicitonaries mit möglichen Aufrufspfaden verglichen und
+Jeder Funktionsaufruf wird mit den möglichen Werten aus der Liste an Dictionaries mit möglichen Aufrufspfaden verglichen und
 einer Funktion zugeordnet.
 Für jeden Aufruf der Funktion wird je nach Argumenttyp und Position der gesuchten Parametervariable, der übergebene
 Wert ausgelesen.
@@ -1040,25 +1040,11 @@ Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: 
 \
 
 \chapter{Evaluation}\label{Evaluation}
-Im folgendem Kapitel wird das soeben beschriebene Tool evaluiert.
-Da die Verwendung von Konfigurationsoptionen von ML-Bibliotheken im Source nicht umfassend erforscht ist, gibt es keine
-Datensätze oder Vergleichswerte, um die Genauigkeit des Algoritmhus bewerten zu können.
-Um dennoch eine aussagekräftige Bewertung abgeben zu können, wird sich am Evaluationsansatz von \citeauthor{10.1145/1985793.1985812}
-orientiert.
-Dafür werden verschiedene Softwareprojekte mit unserem Ansatz analysiert und das Ergebnis mit einer manuellen Analyse verglichen.
-Für die manuelle Analyse wird der Source Code auf die Verwendung von Konfigurationsoptionen der zu untersuchenden ML-Bibliothek
-händisch untersucht.\\
+Im folgenden Kapitel wird das soeben beschriebene Tool evaluiert.
+In der Tabelle \ref{scrapresults} wird für jede ML-Bibliothek die Anzahl an Klassen und Parameter dargestellt.
 
-Die Auswahl an Softwareprojekten erfolgt nach folgenden Kriterien:
-\begin{itemize}
- \item Open Source Git Repository mit mindestens 200 Sternen
- \item Verwendung von mindestens 25-100 Klassen einer ML-Bibliothek
- \item Verwendung von variablen Parametern beim Aufruf der Klassen
- \item Code ist syntaktisch fehlerfrei und kann als AST geparst werden
-\end{itemize}
-
-
-\centering
+\begin{table}[H]
+\begin{center}
 \begin{tabular}[h]{c|c|c|c}
 ML-Bibliothek & Version & Klassen & Parameter\\
 \hline
@@ -1067,7 +1053,77 @@ PyTorch & 1.11.0 & 408 & 1340\\
 scikit-learn & 1.1.1 & 262 & 2081\\
 Mlflow & 1.26.1 & 29 & 96
 \end{tabular}
-\
+\caption{Scraping Ergebnisse der ML-Dokumentation} \label{scrapresults}
+\end{center}
+\end{table}
+
+Die Anzahl der Klassen steht im Verhältnis zum Dauer des Scraping-Prozesses.
+Während das Scraping der Klassen aus Mlflow-Dokumentation die geringste Laufzeit hatte, dauerte der Prozess bei TensorFlow
+deutlich am längsten an.
+Zu beachten ist, dass der Erfolg und Reproduzierbarkeit des Scraping-Moduls stark mit der Website-Struktur der Dokumentation zusammenhängen,
+da es nicht Robust gegenüber Änderungen ist.
+Ändert sich das Layout indem beispielsweise HTML-Elemente anders strukturiert werden, so kann es sein, dass der Scraping-Algorithmus nicht mehr die
+gewünschten Ergebnisse liefert.
+Gleichzeitig mussten insgesamt acht Klassen von TensorFlow, PyTorch und Mlflow manuell zum Scraping-Ergebnis hinzugefügt werden,
+da sie nicht wie die anderen Klassen in die Dokumentation eingebettet und mit den gleichen HTML-Tags versehen wurden.\\
+
+Die Verwendung von Konfigurationsoptionen von ML-Bibliotheken im Source Code ist nicht umfassend erforscht,
+weshalb es keine Datensätze oder Vergleichswerte gibt, um die Genauigkeit des Algorithmus bewerten zu können.
+Im \textit{???}-Ordner des Git-Repositorys befinden sich verschiedene Codebeispiele mit Konfigurationsoptionen, die
+vom Algorithmus erkannt werden müssen.
+Mit Hilfe des \textit{pytest}-Frameworks werden die gefundenen Konfigurationsoptionen aus der JSON-Datei, die der Algorithmus als Ausgabe erzeugt,
+mit dem \textit{richtigen} Ergebnis verglichen.
+Falls sich die Ergebnisse gibt pytest eine Fehlermeldung aus.
+Um darüber hinaus eine aussagekräftige Bewertung abzugeben, wird sich am Evaluationsansatz von \citeauthor{10.1145/1985793.1985812}
+orientiert.
+Dafür werden verschiedene Softwareprojekte mit dem entwickelten Algorithmus analysiert und das Ergebnis mit einer manuellen Analyse verglichen.
+Für die manuelle Analyse wird der Source Code auf die Verwendung von Konfigurationsoptionen der zu untersuchenden ML-Bibliothek
+händisch untersucht.\\
+
+Die Auswahl der Softwareprojekte erfolgt nach folgenden Kriterien:
+\begin{itemize}
+ \item Open Source Git Repository mit mindestens 200 Sternen
+ \item Verwendung von mindestens 25-100 Klassen einer ML-Bibliothek
+ \item Verwendung von variablen Parametern beim Aufruf der Klassen
+ \item Code ist syntaktisch fehlerfrei und kann als AST geparst werden
+\end{itemize}
+
+Insgesamt werden sieben Softwareprojekte untersucht:
+\begin{itemize}
+ \item Real-Time Voice Cloning
+ \item AutoGluon
+ \item TensorForce
+ \item MLServer
+\end{itemize}
+
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}[h]{c|c|c|c|c}
+Projekt & TensorForce & RTVC & AutoGluon & MLServer\\
+\hline
+ML-Bibliothek & TensorFlow & PyTorch & scikit-learn & Mlflow \\
+ML-Klassen & 55 & 86 & 65 & 30\\
+gefunden & 55 & 86 & 65 & 30  \\
+Anteil & 100\% & 100\% & 100\% & 100\% \\
+Parameter & 105 & 165 & 98 & 57 \\
+gefunden & 105 & 165 & 98 & 57 \\
+Anteil & 100\% & 100\% & 100\% & 100\%\\
+davon variabel & 58 & 78 & 32 & 11\\
+Wertzuweisungen & 96 & 83 & 19 & - \\
+gefunden & 76 & 80 & 19 & - \\
+Anteil & 79\% & 96\% & 100\% & -\\
+
+\end{tabular}
+\caption{Gefundene Konfigurationsoptionen} \label{conf}
+\end{center}
+\end{table}
+
+% AutoGluon: zweimal eine Liste, an die was appended wurde -> die nicht erkannt
+% TensorForce: 9 mal verdeckte Zuweisungen, 11 tupel zuweisungen nicht erkannt, -> insgesamte 7 parameter betroffen zweimal alte Klassen verwendet
+% RTVC: 1 Tupel, 2 mal verschachtelt
+% Klassenaufrufe und Definitionen aus anderen Dateien -> nicht erkannt
+
 
 \chapter{Fazit}\label{Fazit}
 

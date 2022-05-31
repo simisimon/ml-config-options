@@ -25,6 +25,8 @@ class ASTParameters:
         return value
 
     def extract_func(self, obj):
+        for decorator in obj.decorator_list:
+            self.get_value(decorator)
         self.extract_args(obj.args)
         self.get_value(obj.returns)
         return ast.unparse(obj)
@@ -266,7 +268,7 @@ class ASTParameters:
                         parameter_dict[scraped_prm] = code_prm[1]
                         break
                     elif scraped_prm[:2] == "**":  # handling of **kwargs
-                        parameter_dict[code_prm[0]] = code_prm[1]
+                        parameter_dict[scraped_prm] = code_prm[1]
 
         self.parameter = parameter_dict
 
