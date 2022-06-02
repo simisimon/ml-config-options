@@ -487,3 +487,90 @@ Für das gegebene Beispiel sieht der Eintrag wie folgt aus: \\
  'line no': '4'}
 \end{lstlisting}
 \
+
+
+
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}[h]{l|c|c|c|c}
+\hline
+Projekt         & Klassen   & Parameter & variable  & zuweisungen \\
+\hline \hline
+TensorForce     & 55        & 105       & 58        & 96\\
+RTVC            & 86        & 165       & 78        & 83\\
+AutoGluon       & 65        & 98        & 32        & 19\\
+MLServer        & 30        & 57        & 11        & -\\
+\hline
+\end{tabular}
+\caption{Manuelles Ergebnis} \label{manu}
+\end{center}
+\end{table}
+
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}[h]{l|c|c|c|c|c|c|c|c}
+\hline
+Projekt         & Klassen   & \%    & Parameter & \%    & variable  & \%    & zuweisungen   & \% \\
+\hline \hline
+TensorForce     & 55        & 100\% & 105       & 100\% & 58        & 100\% & 76            & 79\% \\
+RTVC            & 86        & 100\% & 165       & 100\% & 78        & 100\% & 80            & 96\% \\
+AutoGluon       & 65        & 100\% & 98        & 100\% & 32        & 100\% & 19            & 100\% \\
+MLServer        & 30        & 100\% & 57        & 100\% & 11        & 100\% & -             & - \\
+\hline
+\end{tabular}
+\caption{Ergebnis vom Projekt} \label{algo}
+\end{center}
+\end{table}
+
+
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}[h]{c|c|c|c|c}
+\hline
+ML-Bibliothek & TensorForce & RTVC & AutoGluon & MLServer \\
+\hline \hline
+ML-Klassen & 55 & 86 & 65 & 30\\
+gefunden & 55 & 86 & 65 & 30  \\
+\hline
+Anteil & 100\% & 100\% & 100\% & 100\% \\
+\hline
+Parameter & 105 & 165 & 98 & 57 \\
+gefunden & 105 & 165 & 98 & 57 \\
+\hline
+Anteil & 100\% & 100\% & 100\% & 100\%\\
+\hline
+variable Parameter & 58 & 78 & 32 & 11\\
+Wertzuweisungen & 96 & 83 & 19 & - \\
+gefunden & 76 & 80 & 19 & - \\
+\hline
+Anteil & 79\% & 96\% & 100\% & -\\
+\hline
+\end{tabular}
+\caption{Evaluationsergebnis} \label{eval}
+\end{center}
+\end{table}
+
+
+%\begin{table}[H]
+%\begin{center}
+%\begin{tabular}[h]{c|c|c|c|c|c}
+%\hline
+%Projekt & Version & ML-Bibliothek & ML-Klassen & Parameter & var. Parameter & Wertzuweisungen\\
+%\hline \hline
+%RTVC & 55 & 86 & 65 & 30\\
+%AutoGluon & 55 & 86 & 65 & 30  \\
+%\hline
+%\end{tabular}
+%\caption{Evaluationsergebnis} \label{eval}
+%\end{center}
+%\end{table}
+
+
+02.06.
+- mehr strukturieren mit eigenen Abschnitt für die Analysen
+- Das Vererbung nicht erkannt wird mit reinnehmen
+- Typen der Parameter kategorisieren
+-

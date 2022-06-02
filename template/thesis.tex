@@ -44,8 +44,11 @@
 \usepackage{xcolor}
 \usepackage{soul}
 \usepackage{listings}
+\usepackage{multirow}
 \usepackage[euler]{textgreek}
 \usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{makecell}
 \newcommand{\bscom}[2]{%
   % #1 Original text.
   % #2 Replacement text.
@@ -764,7 +767,7 @@ Für das obige Codebeispiel wird der Syntaxbaum nach Knoten durchsucht, deren Na
 vom AST-Typ \textit{Call} ist.
 Der AST-Typ versichert, dass ein (Klassen-)Aufruf vorliegt und nicht beispielsweise ein gleichnamiger String ohne Klassenbezug.
 Ist dies zutreffend, wird geprüft, ob es sich bei diesem Knoten, um eine ML-Klasse handelt oder um einen Pfad, an dessen Ende eine ML-Klasse steht.
-Ist auch dies gegeben, wird der gesamte Pfad des Objektes beleuchtet, um die Klasse eindeutig zuordnen zu können.
+Ist auch dies gegeben, wird der gesamte Pfad des Objekts beleuchtet, um die Klasse eindeutig zuordnen zu können.
 Dieser Schritt ist wichtig, da Klassenamen nicht immer eindeutig sind.
 So verfügt beispielsweise PyTorch über zwei unterschiedliche \textit{profiler}-Klassen.
 Die eine Klasse ist Teil des \textit{autograd}-Moduls, während die andere dem \textit{profiler}-Modul zugeordnet ist.
@@ -848,7 +851,7 @@ Zusätzlich zur Ermittlung der Parameter wird in der \textit{AST-Parameters}-Kla
 einer Variable zugewiesen wird.
 Im gegebenen Beispiel wird die Instanz der Klasse (\textit{value}) von der Variablen \textit{knn} (\textit{target}) referenziert.
 Darüber hinaus kann eine Zuweisung auch über andere Wege als Keyword-Argument erfolgen:
-bei der Definition einer Klasse oder Funktion und beim Aufruf eines Objektes.\\
+bei der Definition einer Klasse oder Funktion und beim Aufruf eines Objekts.\\
 
 Im zweiten Teil werden die gefundenen Parameter im Code mit den gescrapten aus der JSON-Datei zusammengeführt.
 Zunächst wird durch die Liste an Positionsargumente iteriert, sodass die Positionsargumente der Reihe nach,
@@ -1040,90 +1043,157 @@ Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: 
 \
 
 \chapter{Evaluation}\label{Evaluation}
-Im folgenden Kapitel wird das soeben beschriebene Tool evaluiert.
 In der Tabelle \ref{scrapresults} wird für jede ML-Bibliothek die Anzahl an Klassen und Parameter dargestellt.
-
-\begin{table}[H]
-\begin{center}
-\begin{tabular}[h]{c|c|c|c}
-ML-Bibliothek & Version & Klassen & Parameter\\
-\hline
-TensorFlow & 2.9.1 & 844 & 3711\\
-PyTorch & 1.11.0 & 408 & 1340\\
-scikit-learn & 1.1.1 & 262 & 2081\\
-Mlflow & 1.26.1 & 29 & 96
-\end{tabular}
-\caption{Scraping Ergebnisse der ML-Dokumentation} \label{scrapresults}
-\end{center}
-\end{table}
-
-Die Anzahl der Klassen steht im Verhältnis zum Dauer des Scraping-Prozesses.
-Während das Scraping der Klassen aus Mlflow-Dokumentation die geringste Laufzeit hatte, dauerte der Prozess bei TensorFlow
-deutlich am längsten an.
-Zu beachten ist, dass der Erfolg und Reproduzierbarkeit des Scraping-Moduls stark mit der Website-Struktur der Dokumentation zusammenhängen,
-da es nicht Robust gegenüber Änderungen ist.
+Die Anzahl der Klassen steht in Relation zum Dauer des Scraping-Prozesses.
+Während das Web Scraping der Klassen aus der Mlflow-Dokumentation die geringste Laufzeit hatte, dauerte der Prozess bei TensorFlow am längsten an.
+Zu beachten ist, dass Erfolg und Reproduzierbarkeit des Scraping-Moduls stark mit der Website-Struktur der Dokumentation zusammenhängen,
+da das Modul nicht Robust gegenüber Änderungen ist.
 Ändert sich das Layout indem beispielsweise HTML-Elemente anders strukturiert werden, so kann es sein, dass der Scraping-Algorithmus nicht mehr die
 gewünschten Ergebnisse liefert.
 Gleichzeitig mussten insgesamt acht Klassen von TensorFlow, PyTorch und Mlflow manuell zum Scraping-Ergebnis hinzugefügt werden,
 da sie nicht wie die anderen Klassen in die Dokumentation eingebettet und mit den gleichen HTML-Tags versehen wurden.\\
 
+\begin{table}[H]
+\small
+\begin{center}
+\begin{tabular}[h]{c|c|c|c}
+\hline
+ML-Bibliothek & Version & Klassen & Parameter\\
+\hline \hline
+TensorFlow & 2.9.1 & 844 & 3711\\
+PyTorch & 1.11.0 & 408 & 1340\\
+scikit-learn & 1.1.1 & 262 & 2081\\
+Mlflow & 1.26.1 & 29 & 96 \\
+\hline
+\end{tabular}
+\caption{Scraping Ergebnisse der ML-Dokumentation} \label{scrapresults}
+\end{center}
+\end{table}
+
 Die Verwendung von Konfigurationsoptionen von ML-Bibliotheken im Source Code ist nicht umfassend erforscht,
 weshalb es keine Datensätze oder Vergleichswerte gibt, um die Genauigkeit des Algorithmus bewerten zu können.
 Im \textit{???}-Ordner des Git-Repositorys befinden sich verschiedene Codebeispiele mit Konfigurationsoptionen, die
 vom Algorithmus erkannt werden müssen.
-Mit Hilfe des \textit{pytest}-Frameworks werden die gefundenen Konfigurationsoptionen aus der JSON-Datei, die der Algorithmus als Ausgabe erzeugt,
-mit dem \textit{richtigen} Ergebnis verglichen.
-Falls sich die Ergebnisse gibt pytest eine Fehlermeldung aus.
+Mit Hilfe des \textit{pytest}-Frameworks werden die gefundenen Konfigurationsoptionen, die der Algorithmus in der JSON-Datei als Ausgabe erzeugt,
+mit dem tatsächlichen Ergebnis verglichen.
+Falls sich die Ergebnisse unterscheiden, gibt pytest eine Fehlermeldung aus.\\
+
 Um darüber hinaus eine aussagekräftige Bewertung abzugeben, wird sich am Evaluationsansatz von \citeauthor{10.1145/1985793.1985812}
 orientiert.
 Dafür werden verschiedene Softwareprojekte mit dem entwickelten Algorithmus analysiert und das Ergebnis mit einer manuellen Analyse verglichen.
 Für die manuelle Analyse wird der Source Code auf die Verwendung von Konfigurationsoptionen der zu untersuchenden ML-Bibliothek
-händisch untersucht.\\
-
-Die Auswahl der Softwareprojekte erfolgt nach folgenden Kriterien:
+händisch untersucht. Die Auswahl der Softwareprojekte erfolgt nach folgenden Kriterien:
 \begin{itemize}
  \item Open Source Git Repository mit mindestens 200 Sternen
- \item Verwendung von mindestens 25-100 Klassen einer ML-Bibliothek
+ \item Verwendung von 25-100 Klassen einer ML-Bibliothek
  \item Verwendung von variablen Parametern beim Aufruf der Klassen
  \item Code ist syntaktisch fehlerfrei und kann als AST geparst werden
 \end{itemize}
 
-Insgesamt werden sieben Softwareprojekte untersucht:
-\begin{itemize}
- \item Real-Time Voice Cloning
- \item AutoGluon
- \item TensorForce
- \item MLServer
-\end{itemize}
-
+\section{Analyse von Softwareprojekten}
+Für jede der vier ML-Bibliotheken wird jeweils ein Softwareprojekt untersucht.
+\textit{Tensorforce} ist ein \textit{Deep Reinforcement Learning} Framework, dass auf Googles TensorFlow beruht \cite[]{tensorforce}.
+Bei \textit{Real-Time Voice Cloning} handelt es ebenfalls um ein Deep Learning Framework und basiert auf PyTorch.
+Mit RTVC kann eine Stimme geklont werden kann und Sprache aus einem beliebigen Text mit dieser Stimme erzeugt werden \cite[]{Charles2013}.
+\textit{AutoGluon} verwendet scikit-learn und automatisiert Aufgaben des maschinellen Lernens, um ML-Anwendungen mit geringerem
+Aufwand entwickeln zu können \cite[]{agtabular}.
+Mit \textit{MLServer} können mit Hilfe von Mlflow ML-Modelle über eine \textit{REST}- und \textit{gRPC}-Schnittstelle bereitgestellt werden \cite[]{Charles2u013}.
+In der Tabelle \ref{projekte} können weitere Informationen zu den Projekten entnommen werden.
 
 \begin{table}[H]
+\small
 \begin{center}
-\begin{tabular}[h]{c|c|c|c|c}
-Projekt & TensorForce & RTVC & AutoGluon & MLServer\\
+\begin{tabular}[h]{l|l|c|c}
 \hline
-ML-Bibliothek & TensorFlow & PyTorch & scikit-learn & Mlflow \\
-ML-Klassen & 55 & 86 & 65 & 30\\
-gefunden & 55 & 86 & 65 & 30  \\
-Anteil & 100\% & 100\% & 100\% & 100\% \\
-Parameter & 105 & 165 & 98 & 57 \\
-gefunden & 105 & 165 & 98 & 57 \\
-Anteil & 100\% & 100\% & 100\% & 100\%\\
-davon variabel & 58 & 78 & 32 & 11\\
-Wertzuweisungen & 96 & 83 & 19 & - \\
-gefunden & 76 & 80 & 19 & - \\
-Anteil & 79\% & 96\% & 100\% & -\\
-
+Projekt & ML-Bibliothek & Version & Sterne \\
+\hline \hline
+Tensorforce & TensorFlow & 0.6.5 & 3.1k \\
+RTVC & PyTorch & vom 01.03.22 & 35k\\
+AutoGluon & scikit-learn & 0.4.2 & 4.5k\\
+MLServer & Mlflow & 1.1.0.dev6 & 244\\
+\hline
 \end{tabular}
-\caption{Gefundene Konfigurationsoptionen} \label{conf}
+\caption{Untersuchte Softwareprojekte} \label{projekte}
 \end{center}
 \end{table}
+
+Für die Evaluation wird für jedes der vier Softwareprojekte auf das Auftreten von Konfigurationsoptionen der enthaltenen ML-Bibiliothek
+untersucht.
+Dafür wird der entwickelte Algorithmus auf die Projekte angewendet und das Ausgabeergebnis der erzeugten JSON-Datei mit
+dem Ergebnis der manuellen Analyse verglichen.
+Die resultierenden Daten sind der Tabelle \ref{eval} zusammengetragen. \\
+
+Im Rahmen der manuellen Analyse wird in jeder Python-Datei nach dem Namen der ML-Bibliothek gesucht.
+Ist der Namen vorhanden, wird geprüft, welche Objekte der ML-Bibliothek importiert werden.
+Nach diesen Objekten wird in der Python-Datei gesucht und jede gefundene Verwendung des Objekts wird auf den Typ überprüft.
+Dies erfolgt durch die \textit{type()}-Methode von Python, durch die Beschreibung des Objekts in der Dokumentation
+oder über die Definition des Objekts im Source Code der ML-Bibliothek.
+Wenn es sich um eine Klasse handelt, wird geprüft, ob sich die gefundene Klasse auch in der JSON-Datei
+befindet. \\
+
+Im zweiten Schritt wird geprüft, ob die übergebenen Werte beim Aufruf der Klassen erfasst und den Parametern der
+Klasse richtig zugeordnet werden.
+Handelt es sich um variable Parameterwerte vom AST-Typ \textit{Name} oder \textit{Attribute} erfolgt eine Suche nach Zuweisungen
+von Werten für diese Variablen.
+Bei der Suche wird berücksichtigt, dass die Variablen auch über Aufrufe von Klassen und Funktionen übergeben werden können oder ihnen ebenfalls ein
+variabler Wert zugewiesen werden kann.
+Für diese Fälle werden die übergebenen Werte der jeweiligen Aufrufe betrachtet oder nach Zuweisungen für die neue Variable gesucht.
+Für jeden variablen Wert werden die manuell gefundenen Wertzuweisungen mit den Wertzuweisungen aus der JSON-Datei verglichen.
+Am Ende werden die Ergebnisse in der Tabelle \ref{eval} zusammengetragen.
+
+\begin{table}[H]
+\small
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}[h]{l|c c|c|c c|c|c c|c|c c|c} %p{7cm}
+\hline
+\multirow{3}{*}{ML-Projekt} & \multicolumn{3}{c|}{Klassen}      & \multicolumn{3}{c|}{Parameter}    & \multicolumn{6}{c}{variable Parameter}\\
+                            & \multicolumn{3}{c|}{insgesamt}    & \multicolumn{3}{c|}{insgesamt}    & \multicolumn{3}{c|}{insgesamt}       & \multicolumn{3}{c}{Zuweisungen} \\
+                            & M         & A     & \%            & M         & A     & \%            & M         & A     & \%                & M     & A     & \% \\
+\hline \hline
+Tensorforce                 & 55        & 55    & 100\%         & 105       & 105   & 100\%         & 58        & 58    & 100\%             & 96    & 76    & 79\% \\
+RTVC                        & 86        & 86    & 100\%         & 165       & 165   & 100\%         & 78        & 78    & 100\%             & 83    & 80    & 96\% \\
+AutoGluon                   & 65        & 65    & 100\%         & 98        & 98    & 100\%         & 32        & 32    & 100\%             & 19    & 19    & 100\% \\
+MLServer                    & 30        & 30    & 100\%         & 57        & 57    & 100\%         & 11        & 11    & 100\%             & -     & -     & -\\
+\hline
+\end{tabular}
+\caption{Ergebnisvergleich der manuellen Analyse (\textit{M}) mit dem Algorithmus (\textit{A})} \label{eval}
+\end{center}
+\end{table}
+
+Die Tabelle \ref{eval} stellt für jedes der vier Softwareprojekte die Anzahl der gefundenen Klassen und Parameter der beiden Analysen gegenüber.
+Darüber hinaus werden für die variablen Parameter in den letzten Spalten die Anzahl der möglichen Werte anhand
+der Wertezuweisungen angegeben.
+Die Analyse der vier Softwareprojekte ergibt, dass der Algorithmus alle Klassen und Parameter erkennen kann.
+Schwächen hat das Programm lediglich bei der Erkennung von Zuweisungen.
+Dies hat zwei Ursachen:
+Die aktuelle Version (Version ???) von Scalpel verarbeitet im Rahmen des \textit{Static Single Assignment} Zuweisungen an Tupel nur dann,
+wenn auf beiden Seiten die gleiche Anzahl an Elementen stehen.
+Steht auf der rechten Seite der Zuweisung beispielsweise eine Funktion, dessen \textit{return}-Wert einem Tupel zugewiesen wird,
+wird die Zuweisung von Scalpel aktuell nicht verarbeitet.
+Bei Tensorforce ist dies elf- und bei Real-Time Voice Cloning einmal der Fall.
+Die zweite Ursache ist die Verarbeitung mehrerer Zuweisungen an die gleiche Variable innerhalb eines Funktionskörpers.
+Scalpel gibt aktuell nur den letzten Zuweisungswert als möglichen Wert der Variable aus.
+Die vorherigen Zuweisungen des Funktionskörpers werden nicht ausgegeben.
+Neun weitere Zuweisungen von Tensorforce und zwei von Real-Time Voice Cloning werden dadurch nicht erkannt.\\
+
+Zu beachten ist, dass nur Zuweisungen betrachtet werden.
+Die Zahl möglicher Werte der Variablen kann daher deutlich höher sein.
+Verbirgt sich hinter der Variable zum Beispiel eine Liste, so wird nur der Listenwert bei der Initialisierung erfasst.
+Jede weitere Methode, die wie \textit{append()} den Inhalt der Liste verändert, liegt außerhalb des Betrachtungsrahmen.
+Parameterwerte, die nicht vom AST-Typ \textit{Name} oder \textit{Attribute} sind, können keine Werte zugewiesen werden
+und werden im Rahmen der Datenflussanalyse ebenfalls nicht weiter verfolgt oder ausgewertet.
+Des Weiteren werden nur Klassen- und Funktionsaufrufe betrachtet, die sich innerhalb derselben Python-Datei befinden wie die Parametervariable.
+Wenn sich also die gesuchte Variable in der Definition einer Klasse oder einer Funktion befindet und der Wert beim Aufruf
+dieser Objekte von außerhalb der Datei übergeben, wird er in der Analyse nicht erfasst.
+Das gleiche gilt für Parametervariablen deren Wert erst durch die Eingabe während der Ausführung eines Programms bestimmt wird.\\
+
+
 
 % AutoGluon: zweimal eine Liste, an die was appended wurde -> die nicht erkannt
 % TensorForce: 9 mal verdeckte Zuweisungen, 11 tupel zuweisungen nicht erkannt, -> insgesamte 7 parameter betroffen zweimal alte Klassen verwendet
 % RTVC: 1 Tupel, 2 mal verschachtelt
 % Klassenaufrufe und Definitionen aus anderen Dateien -> nicht erkannt
-
 
 \chapter{Fazit}\label{Fazit}
 
