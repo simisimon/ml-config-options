@@ -3,8 +3,8 @@ import json
 import git
 import sys
 from os import walk, path
-from ast_classes import ASTClasses
-from ast_parameters import ASTParameters
+from classes import MLClasses, InheritedClasses
+from parameters import MLParameters, InheritedParameters
 from dataflow import DataFlowAnalysis
 
 
@@ -18,10 +18,11 @@ class ConfigOptions:
         self.config_objects = []
 
     def get_config_options(self):
-        self.scraped_classes = ASTClasses(None, self.library).read_json()
+        self.scraped_classes = MLClasses(None, self.library).read_json()
         self.get_py_files()
         self.get_ast_classes()
         self.get_parameters()
+        self.get_inherited_classes()
         self.get_variable_parameter_values()
         self.create_json()
 
@@ -34,7 +35,7 @@ class ConfigOptions:
 
     def get_ast_classes(self):
         for file in self.py_files:
-            self.ast_classes.extend(ASTClasses(file, self.library).get_classes())
+            self.ast_classes.extend(MLClasses(file, self.library).get_classes())
 
     def get_parameters(self):
         for ast_class_dict in self.ast_classes:
@@ -64,17 +65,25 @@ class ConfigOptions:
                         new_obj = {"file": ast_class_dict["file"], "class": ast_class_dict["class"],
                                    "class alias": ast_class_dict["class alias"], "object": ast.parse("{0}[]".format(obj_code)).body[0],
                                    "scraped parameters": scraped_parameters}
-                    config_object = ASTParameters(new_obj).get_parameters(new_obj["object"])
+                    config_object = MLParameters(new_obj).get_parameters(new_obj["object"])
                     self.config_objects.append(config_object)
                     obj_code = ast.unparse(ast_class_dict["object"])
             else:
                 ast_class_dict["scraped parameters"] = scraped_parameters
-                config_object = ASTParameters(ast_class_dict).get_parameters(ast_class_dict["object"])
+                config_object = MLParameters(ast_class_dict).get_parameters(ast_class_dict["object"])
                 if len(self.config_objects) > 0:
                     if config_object != self.config_objects[-1]:
                         self.config_objects.append(config_object)
                 else:
                     self.config_objects.append(config_object)
+
+    def get_inherited_classes(self):
+        inherited_classes = []
+        for file in self.py_files:
+            inherited_classes.extend(InheritedClasses(file, self.library).get_classes())
+
+        for inherited_class in inherited_classes:
+            self.config_objects.append(InheritedParameters(inherited_class).get_parameters())
 
     def get_variable_parameter_values(self):
         for obj in self.config_objects:
@@ -82,7 +91,7 @@ class ConfigOptions:
                 parameter_value_list = DataFlowAnalysis(obj, variable).get_parameter_value()
                 index = 0
                 parameter_value_dict = {}
-                parameter_value_list.sort()
+                #parameter_value_list.sort()
                 for value in parameter_value_list:
                     parameter_value_dict[index] = value
                     index += 1
@@ -90,6 +99,7 @@ class ConfigOptions:
                 obj["variable parameters"][variable] = parameter_value_dict
 
     def create_json(self):
+        print(len(self.config_objects))
         for obj in self.config_objects:
             obj["file"] = obj["file"][obj["file"].find('/') + 1:]
             obj["line no"] = obj["object"].lineno
@@ -156,8 +166,8 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_link = sys.argv[1] #sys.argv[1]  #'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = sys.argv[2] #sys.argv[2]  #'scikit-learn'  # sys.argv[2]
+    repo_link = sys.argv[1]  #'https://github.com/mj-support/coop'  # sys.argv[1]
+    library = sys.argv[2]  #'scikit-learn'  # sys.argv[2]
 
     repo_dir = clone_repo(repo_link)
 

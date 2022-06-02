@@ -53,12 +53,14 @@ class DataFlowAnalysis:
                 self.get_func_calls(func_def_arg)
 
         self.variable_value = list(set(self.variable_value))
-        print("file:    ", self.file)
-        print("object:  ", ast.unparse(self.object))
-        print("lineno:  ", self.object.lineno)
-        print("variable:", self.variables)
-        print("value:   ", self.variable_value)
-        print(" ")
+        self.get_parameter_type()
+
+        #print("file:    ", self.file)
+        #print("object:  ", ast.unparse(self.object))
+        #print("lineno:  ", self.object.lineno)
+        #print("variable:", self.variables)
+        #print("value:   ", self.variable_value)
+        #print(" ")
         return self.variable_value
 
     def get_cfgs(self, cfg):
@@ -237,8 +239,11 @@ class DataFlowAnalysis:
                             variable_values.append(keyword.value)
                             break
                     if not found_keyword:
-                        if len(func_call.args) > func_def_arg["index"]:
-                            variable_values.append(func_call.args[func_def_arg["index"]])
+                        try:
+                            if len(func_call.args) > func_def_arg["index"]:
+                                variable_values.append(func_call.args[func_def_arg["index"]])
+                        except:
+                            continue
                 elif func_def_arg["type"] == "kwonlyarg":
                     for keyword in func_call.keywords:
                         if keyword.arg == func_def_arg["variable"]:
@@ -259,3 +264,11 @@ class DataFlowAnalysis:
                 self.variables.append(ast.unparse(variable_value))
             if ast.unparse(variable_value) != self.variables[0]:
                 self.variable_value.append(ast.unparse(variable_value))
+
+    def get_parameter_type(self):
+        for value in self.variable_value:
+            index = self.variable_value.index(value)
+            ast_value = ast.parse(value).body[0].value
+            ast_type = str(type(ast_value))
+            ast_type = ast_type[12:-2]
+            self.variable_value[index] = {'value': value, 'type': ast_type}

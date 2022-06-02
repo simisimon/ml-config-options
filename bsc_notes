@@ -574,3 +574,24 @@ Anteil & 79\% & 96\% & 100\% & -\\
 - Das Vererbung nicht erkannt wird mit reinnehmen
 - Typen der Parameter kategorisieren
 -
+
+python3 main.py https://github.com/ShusenTang/Dive-into-DL-PyTorch torch
+39
+python3 main.py https://github.com/lukemelas/EfficientNet-PyTorch torch
+38
+python3 main.py https://github.com/eriklindernoren/PyTorch-YOLOv3 torch
+27
+python3 main.py https://github.com/facebookresearch/PyTorch-BigGraph torch
+47
+python3 main.py https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection torch
+47
+python3 main.py https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning torch
+26
+python3 main.py https://github.com/fepegar/torchio torch
+30
+python3 main.py https://github.com/vacancy/Synchronized-BatchNorm-PyTorch torch
+13
+
+
+python3 main.py https://github.com/nidhaloff/igel sklearn
+12

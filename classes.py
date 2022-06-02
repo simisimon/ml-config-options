@@ -2,7 +2,7 @@ import ast
 import json
 
 
-class ASTClasses:
+class MLClasses:
     def __init__(self, file, library):
         self.library = library
         self.classes = {}
@@ -43,7 +43,8 @@ class ASTClasses:
                                 all_import_objects[package.asname] = {"path": package.name}
                             else:
                                 all_import_objects[package.name] = {"path": package.name}
-
+                            if self.library not in all_import_objects:
+                                all_import_objects[self.library] = {"path": self.library}
                 elif type(node) == ast.ImportFrom:
                     for package in node.names:
                         module = node.module
@@ -194,3 +195,44 @@ class ASTClasses:
                                     lib_class_obj = {"file": self.file, "class": class_, "class alias": class_string[:-1],
                                                      "object": obj}
                                     self.ast_classes.append(lib_class_obj)
+
+class InheritedClasses(MLClasses):
+    def __init__(self, file, library):
+        MLClasses.__init__(self, file, library)
+
+    def get_classes(self):
+        self.read_json()
+        self.get_first_level_objects()
+        self.get_import_objects()
+        self.get_inherited_classes()
+        return self.ast_classes
+
+    def get_inherited_classes(self):
+        if len(self.import_classes) > 0 or len(self.import_other_objects) > 0:
+            for first_level_obj in self.first_level_objects:
+                for obj in list(ast.walk(first_level_obj)):
+                    if type(obj) == ast.ClassDef:
+                        for ast_base in obj.bases:
+                            base = ast.unparse(ast_base)
+                            for import_class in self.import_classes:
+                                if import_class == base:
+                                    class_path = self.import_classes[import_class]['path']
+                                    config_obj = {"file": self.file, "class": class_path,
+                                                  "class alias": import_class,
+                                                  "object": obj,
+                                                  "scraped parameters": None}
+                                    self.ast_classes.append(config_obj)
+
+                            for import_obj in self.import_other_objects:
+                                if base.startswith("{0}.".format(import_obj)):
+                                    class_path = self.import_other_objects[import_obj]['path']
+                                    base = base.replace(import_obj, class_path, 1)
+                                    if base in self.classes:
+                                        config_obj = {"file": self.file, "class": base,
+                                                      "class alias": base,
+                                                      "object": obj,
+                                                      "scraped parameters": None}
+                                        self.ast_classes.append(config_obj)
+                                    elif class_path in self.classes:
+                                        self.import_other_objects[base]
+

@@ -1,7 +1,7 @@
 import ast
 
 
-class ASTParameters:
+class MLParameters:
     def __init__(self, ast_class_dict):
         self.file = ast_class_dict["file"]
         self.class_ = ast_class_dict["class"]
@@ -15,6 +15,7 @@ class ASTParameters:
     def get_parameters(self, ast_obj):
         self.get_value(ast_obj)
         self.merge_parameter()
+        self.get_parameter_type()
         config_object = {"file": self.file, "class": self.class_, "object": ast_obj, "parameter": self.parameter,
                     "variable parameters": self.variable_value, "variable": self.variable}
         return config_object
@@ -222,7 +223,6 @@ class ASTParameters:
                     if self.class_alias in ast.unparse(kw):
                         self.variable = kw_only_args[obj.kw_defaults.index(kw)]
 
-        self.get_value(obj.kwarg)
         return ast.unparse(obj)
 
     def none(self, obj):
@@ -244,12 +244,25 @@ class ASTParameters:
                                 if self.parameter.index(code_prm) == len(self.parameter) - 1:
                                     parameter_dict[scraped_prm] = code_prm[1]
                                 else:
-                                    prm_tupel = "("
-                                    for code_prm2 in self.parameter[self.parameter.index(code_prm):]:
-                                        if code_prm2[1][0] != "*":
-                                            prm_tupel += code_prm2[1] + ", "
-                                    prm_tupel = prm_tupel[:-2] + ")"
-                                    parameter_dict[scraped_prm] = prm_tupel
+                                    if code_prm[1][0] == "*":
+                                        if len(code_prm[1]) > 1:
+                                            if code_prm[1][1] != "*":
+                                                parameter_dict[scraped_prm] = code_prm[1]
+                                    else:
+                                        prm_tupel = "("
+                                        for code_prm2 in self.parameter[self.parameter.index(code_prm):]:
+                                            if code_prm2[1][0] != "*":
+                                                prm_tupel += code_prm2[1] + ", "
+                                        prm_tupel = prm_tupel[:-2] + ")"
+                                        parameter_dict[scraped_prm] = prm_tupel
+                            else:
+                                if type(parameter_dict[scraped_prm]) == list:
+                                     ls = parameter_dict[scraped_prm]
+                                else:
+                                    ls = []
+                                    ls.append(parameter_dict[scraped_prm])
+                                ls.append(code_prm[1])
+                                parameter_dict[scraped_prm] = ls
                         break
                     elif len(parameter_dict) <= list(self.scraped_parameters).index(scraped_prm):
                         if scraped_prm == "*":
@@ -271,6 +284,18 @@ class ASTParameters:
                         parameter_dict[scraped_prm] = code_prm[1]
 
         self.parameter = parameter_dict
+
+    def get_parameter_type(self):
+        for parameter in self.parameter:
+            value = self.parameter[parameter]
+            if type(value) == list:
+                ast_type = 'List'
+            else:
+                ast_value = ast.parse(value).body[0].value
+                ast_type = str(type(ast_value))
+                ast_type = ast_type[12:-2]
+            self.parameter[parameter] = {'value': value, 'type': ast_type}
+
 
     obj_type = {ast.Name: extract_unparse_obj,
                 ast.Constant: extract_unparse_obj,
@@ -302,7 +327,7 @@ class ASTParameters:
                 ast.While: extract_cond,
                 ast.If: extract_cond,
                 ast.AugAssign: extract_val,
-                ast.AnnAssign: extract_assigns,
+                ast.AnnAssign: extract_ann_assign,
                 ast.Starred: extract_val,
                 ast.Delete: extract_delete,
                 ast.Await: extract_val,
@@ -327,3 +352,37 @@ class ASTParameters:
                 ast.excepthandler: none,
                 type(None): none
                 }
+
+
+class InheritedParameters:
+    def __init__(self, inherited_class):
+        self.file = inherited_class["file"]
+        self.class_ = inherited_class["class"]
+        self.class_alias = inherited_class["class alias"].split(".")[-1]
+        self.obj = inherited_class["object"]
+        self.variable = ""
+        self.parameter = []
+        self.variable_value = {}
+
+    def get_parameters(self):
+        for obj in self.obj.body:
+            if type(obj) == ast.FunctionDef:
+                if obj.name == '__init__':
+                    for init_obj in obj.body:
+                        if type(init_obj) == ast.Assign:
+                            for target in init_obj.targets:
+                                if type(target) == ast.Attribute:
+                                    if ast.unparse(target.value) == "self":
+                                        parameter = str(target.attr)
+                                        ast_type = str(type(init_obj.value))
+                                        ast_type = ast_type[12:-2]
+                                        value = ast.unparse(init_obj.value)
+                                        self.parameter.append({parameter: {'value': value, 'type': ast_type}})
+                                        if type(init_obj.value) == ast.Name or type(init_obj.value) == ast.Attribute:
+                                            self.variable_value[value] = None
+
+        config_object = {"file": self.file, "class": self.class_, "object": self.obj, "parameter": self.parameter,
+                    "variable parameters": self.variable_value, "variable": self.variable}
+        return config_object
+
+
