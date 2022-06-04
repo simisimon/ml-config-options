@@ -1054,8 +1054,8 @@ Im folgenden Kapitel werden die Ergebnisse aus Kapitel \ref{Methodik} evaluiert.
 ML-Bibliothek & Version & Laufzeit (min) & Klassen & Parameter & P/K\\
 \hline \hline
 TensorFlow & 2.9.1 & 27:15 & 844 & 3728 & 4,4\\  %26,3
-PyTorch & 1.11.0 & 0:50 & 408 & 1340 & 3,3 \\
-scikit-learn & 1.1.1 & 0:37 & 262 & 2081 & 7,9\\
+PyTorch & 1.11.0 & 0:37 & 408 & 1340 & 3,3 \\
+scikit-learn & 1.1.1 & 0:31 & 262 & 2081 & 7,9\\
 \hline
 \end{tabular}
 \caption{Scraping Ergebnisse der ML-Dokumentation} \label{scrapresults}
@@ -1192,7 +1192,7 @@ wenn auf beiden Seiten die gleiche Anzahl an Elementen stehen.
 Steht auf der rechten Seite der Zuweisung beispielsweise eine Funktion, dessen \textit{return}-Wert einem Tupel zugewiesen wird,
 wird die Zuweisung von Scalpel aktuell nicht verarbeitet.
 Bei Tensorforce ist dies elf- und bei Real-Time Voice Cloning einmal der Fall.
-Die zweite Ursache ist die Verarbeitung mehrerer Zuweisungen an die gleiche Variable innerhalb eines Funktionskörpers.
+Die zweite Ursache ist die Verarbeitung mehhhhhhrerer Zuweisungen an die gleiche Variable innerhalb eines Funktionskörpers.
 Scalpel gibt aktuell nur den letzten Zuweisungswert als möglichen Wert der Variable aus.
 Die vorherigen Zuweisungen des Funktionskörpers werden nicht ausgegeben.
 Neun weitere Zuweisungen von Tensorforce und zwei von Real-Time Voice Cloning werden dadurch nicht erkannt.\\
