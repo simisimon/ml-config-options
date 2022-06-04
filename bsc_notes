@@ -573,7 +573,8 @@ Anteil & 79\% & 96\% & 100\% & -\\
 - mehr strukturieren mit eigenen Abschnitt für die Analysen
 - Das Vererbung nicht erkannt wird mit reinnehmen
 - Typen der Parameter kategorisieren
--
+- Begrenzung: Decorators bei Variablenwert analyse
+- Klassen die innerhalb eines Dicitioamrys haben falsche Zeilennummer
 
 python3 main.py https://github.com/ShusenTang/Dive-into-DL-PyTorch torch
 39
@@ -595,3 +596,32 @@ python3 main.py https://github.com/vacancy/Synchronized-BatchNorm-PyTorch torch
 
 python3 main.py https://github.com/nidhaloff/igel sklearn
 12
+python3 main.py https://github.com/scikit-learn-contrib/category_encoders sklearn
+39
+python3 main.py https://github.com/scikit-learn-contrib/sklearn-pandas sklearn
+36
+python3 main.py https://github.com/benedekrozemberczki/karateclub sklearn
+7
+python3 main.py https://github.com/kserve/kserve sklearn
+21
+python3 main.py https://github.com/nok/sklearn-porter sklearn
+34
+
+
+python3 main.py https://github.com/dennybritz/cnn-text-classification-tf tf
+21
+
+python3 main.py https://github.com/mozilla/DeepSpeech tf
+34
+
+python3 main.py https://github.com/thtrieu/darkflow tf
+15
+
+python3 main.py https://github.com/mljar/mljar-supervised sklearn
+33
+
+zeiten:
+- Torch: 50 sekunden
+- sklearn: 37 sekunden
+- tf:
+

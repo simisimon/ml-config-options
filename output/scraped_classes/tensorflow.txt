@@ -7,6 +7,7 @@
         "short name": "CriticalSection",
         "parameters": {
             "name": "None",
+            "shared_name": "None",
             "critical_section_def": "None",
             "import_scope": "None"
         }
@@ -1857,7 +1858,25 @@
     },
     "tensorflow.compat.v1.ConfigProto": {
         "short name": "ConfigProto",
-        "parameters": {}
+        "parameters": {
+            "allow_soft_placement": null,
+            "cluster_def": null,
+            "device_count": null,
+            "device_filters": null,
+            "experimental": null,
+            "gpu_options": null,
+            "graph_options": null,
+            "inter_op_parallelism_threads": null,
+            "intra_op_parallelism_threads": null,
+            "isolate_session_state": null,
+            "log_device_placement": null,
+            "operation_timeout_in_ms": null,
+            "placement_period": null,
+            "rpc_options": null,
+            "session_inter_op_thread_pool": null,
+            "share_cluster_devices_in_session": null,
+            "use_per_session_threads": null
+        }
     },
     "tensorflow.compat.v1.DeviceSpec": {
         "short name": "DeviceSpec",

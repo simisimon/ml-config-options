@@ -282,6 +282,15 @@ class TensorFlowScraper(ClassScraper):
                         parameters = {"quant_debug_model_path": None, "quant_debug_model_content": None,
                                       "float_model_path": None, "float_model_content": None,
                                       "debug_dataset": None, "debug_options": None, "converter": None}
+
+        if full_class_name == "tf.compat.v1.ConfigProto":
+            parameters = {"allow_soft_placement": None, "cluster_def": None, "device_count": None,
+                          "device_filters": None, "experimental": None, "gpu_options": None,
+                          "graph_options": None, "inter_op_parallelism_threads": None,
+                          "intra_op_parallelism_threads": None, "isolate_session_state": None,
+                          "log_device_placement": None, "operation_timeout_in_ms": None, "placement_period": None,
+                          "rpc_options": None, "session_inter_op_thread_pool": None,
+                          "share_cluster_devices_in_session": None, "use_per_session_threads": None}
         return parameters
 
 
@@ -307,9 +316,12 @@ lib_dict = {"sklearn": SklearnScraper,
 
 
 def main():
+    import time
+    start_time = time.time()
     library = sys.argv[1]
     scraper = lib_dict[library]
     scraper().get_classes()
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 
 if __name__ == "__main__":

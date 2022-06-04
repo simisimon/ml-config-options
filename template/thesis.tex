@@ -1043,32 +1043,52 @@ Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: 
 \
 
 \chapter{Evaluation}\label{Evaluation}
-In der Tabelle \ref{scrapresults} wird für jede ML-Bibliothek die Anzahl an Klassen und Parameter dargestellt.
-Die Anzahl der Klassen steht in Relation zum Dauer des Scraping-Prozesses.
-Während das Web Scraping der Klassen aus der Mlflow-Dokumentation die geringste Laufzeit hatte, dauerte der Prozess bei TensorFlow am längsten an.
-Zu beachten ist, dass Erfolg und Reproduzierbarkeit des Scraping-Moduls stark mit der Website-Struktur der Dokumentation zusammenhängen,
-da das Modul nicht Robust gegenüber Änderungen ist.
-Ändert sich das Layout indem beispielsweise HTML-Elemente anders strukturiert werden, so kann es sein, dass der Scraping-Algorithmus nicht mehr die
-gewünschten Ergebnisse liefert.
-Gleichzeitig mussten insgesamt acht Klassen von TensorFlow, PyTorch und Mlflow manuell zum Scraping-Ergebnis hinzugefügt werden,
-da sie nicht wie die anderen Klassen in die Dokumentation eingebettet und mit den gleichen HTML-Tags versehen wurden.\\
+Im folgenden Kapitel werden die Ergebnisse aus Kapitel \ref{Methodik} evaluiert.
 
+\section{Ergebnisse Web Scraping}
 \begin{table}[H]
 \small
 \begin{center}
-\begin{tabular}[h]{c|c|c|c}
+\begin{tabular}[h]{c|c|c|c|c|c}
 \hline
-ML-Bibliothek & Version & Klassen & Parameter\\
+ML-Bibliothek & Version & Laufzeit (min) & Klassen & Parameter & P/K\\
 \hline \hline
-TensorFlow & 2.9.1 & 844 & 3711\\
-PyTorch & 1.11.0 & 408 & 1340\\
-scikit-learn & 1.1.1 & 262 & 2081\\
-Mlflow & 1.26.1 & 29 & 96 \\
+TensorFlow & 2.9.1 & 27:15 & 844 & 3728 & 4,4\\  %26,3
+PyTorch & 1.11.0 & 0:50 & 408 & 1340 & 3,3 \\
+scikit-learn & 1.1.1 & 0:37 & 262 & 2081 & 7,9\\
 \hline
 \end{tabular}
 \caption{Scraping Ergebnisse der ML-Dokumentation} \label{scrapresults}
 \end{center}
 \end{table}
+
+In der Tabelle \ref{scrapresults} wird für jede ML-Bibliothek die Anzahl an Klassen und Parameter, sowie die durchschnittliche
+Anzahl der Parameter je Klasse für die jeweilige Version dargestellt.
+Zudem wird die Laufzeit des Web-Scraping-Vorgangs gemessen.
+Die angegebene Zeit ist der Mittelwert aus fünf Durchläufen der Anwendung und kann je nach Internetverbindung und Rechnerleistung
+stark variieren.
+Die Anzahl der Klassen steht dabei in Relation zum Dauer des Scraping-Prozesses.
+Während das Web Scraping der Klassen aus der scikit-learn-Dokumentation die geringste Laufzeit hatte,
+dauerte der Prozess bei TensorFlow deutlich am längsten an.
+Weitere Einflussfaktoren auf die Laufzeit sind zudem die Dokumentations- und Modulstruktur.
+Während in TensorFlow und scikit-learn für jede Klasse eine neue Website aufgerufen werden muss, um die Parameter zu extrahieren,
+sind bei PyTorch teilweise mehrere Klassen inklusive der Parameter auf einer Seite aufgelistet.
+TensorFlow und PyTorch weisen zudem eine hohe Zahl an Modulen auf und oft müssen mehrere Module durchlaufen werden, um zu einer Klasse zu gelangen.
+Sciki-learn hingegen verfügt über eine eher flache Modultiefe, sodass die Klassen meist über einen kürzeren Pfad erreicht werden können.
+Des Weiteren weisen die Klassen von scikit-learn im Schnitt eine deutlich höhere Zahl an Parametern und somit mehr Konfigurationsmöglichkeiten auf.
+\\
+
+Zu beachten ist, dass Erfolg und Reproduzierbarkeit des Scraping-Moduls stark mit der Website-Struktur der Dokumentation zusammenhängen,
+da das Modul nicht Robust gegenüber Änderungen ist.
+Ändert sich das Layout indem beispielsweise HTML-Elemente anders strukturiert werden, so kann es sein, dass der Scraping-Algorithmus nicht mehr die
+gewünschten Ergebnisse liefert.
+Gleichzeitig müssen insgesamt drei TensorFlow- und sechs PyTorch-Klassen einzeln zum Scraping-Ergebnis hinzugefügt werden,
+da sie nicht wie die anderen Klassen in die Dokumentation eingebettet und mit den gleichen HTML-Tags versehen sind.\\
+
+
+\section{Auswahl Subject Systems}
+
+\section{Analyse Subject Systems}
 
 Die Verwendung von Konfigurationsoptionen von ML-Bibliotheken im Source Code ist nicht umfassend erforscht,
 weshalb es keine Datensätze oder Vergleichswerte gibt, um die Genauigkeit des Algorithmus bewerten zu können.
