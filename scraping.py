@@ -316,12 +316,9 @@ lib_dict = {"sklearn": SklearnScraper,
 
 
 def main():
-    import time
-    start_time = time.time()
     library = sys.argv[1]
     scraper = lib_dict[library]
     scraper().get_classes()
-    print("--- %s seconds ---" % (time.time() - start_time))
 
 
 if __name__ == "__main__":

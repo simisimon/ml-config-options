@@ -23,3 +23,12 @@ current status:
 
 next steps: 
    - distinguish potential config options from irrelevant code in a most generic way
+
+Requirements: 
+   - Python 3.9
+   - BeautifulSoup
+   - GitPython
+   - Scalpel
+     - astor
+     - networkx
+     - graphviz

@@ -684,7 +684,6 @@ class KerasOptions(ConfigOptions):
 \end{lstlisting}
 \
 
-
 \section{Extraktion der ML-Klassen}\label{Classes}
 Als nächstes werden die Klassen der jeweiligen ML-Bibliothek aus dem Source Code extrahiert.
 Dafür wird durch die Liste mit Python-Dateien iteriert und entlang der AST-Struktur nach den entsprechenden Klassen gesucht.
@@ -1044,6 +1043,35 @@ Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: 
 
 \chapter{Evaluation}\label{Evaluation}
 Im folgenden Kapitel werden die Ergebnisse aus Kapitel \ref{Methodik} evaluiert.
+Zunächst werden die Resultate des Web-Scraping-Moduls beleuchtet bevor im Anschluss der vorgestellte Ansatz
+als Ganzes bewertet wird.
+Die Verwendung von Konfigurationsoptionen von ML-Bibliotheken im Source Code ist jedoch nicht umfassend erforscht,
+weshalb es keine Datensätze oder Vergleichswerte gibt, um die Genauigkeit beurteilen zu können.
+Dementsprechend wird der Ansatz auf zwei verschiedene Arten überprüft:
+\begin{enumerate}
+ \item Tests
+ \item Analyse von Projekten
+\end{enumerate}
+
+Tests sind ein gängiges Mittel in der Softwareentwicklung.
+Sie dienen der Qualitätssicherung, um die Funktionalität des Systems zu gewährleisten und zu untersuchen inwieweit
+die gestellten Anforderungen an eine Software auch erfüllt werden.
+Im \textit{???}-Ordner des Git-Repositorys befinden sich mehrere Codebeispiele mit Konfigurationsoptionen, die aus
+verschiedenen Softwareprojekten entnommen wurden.
+Angereichert wurden die Codebeispiele mit sogenannten \textit{edge cases}, mit denen getestet wird, ob der entwickelte
+Ansatz auch komplexere Herausforderungen bewältigen kann.
+Ziel des ganzen ist zu prüfen, ob die verwendeten ML-Klassen inklusive der Parameter richtig erkannt und zugeordnet werden.
+Zudem wird getestet, ob die Werte variabler Parameter, die teilweise auch über Klassen und Funktionen hinweg weitergegeben werden,
+bestimmt werden können.
+Mit Hilfe des \textit{pytest}-Frameworks werden die gefundenen Konfigurationsoptionen des entwickelten Ansatzes,
+mit dem tatsächlichen Ergebnis verglichen.
+Falls sich die Ergebnisse unterscheiden, gibt pytest eine Fehlermeldung aus.\\
+
+Um darüber hinaus eine aussagekräftige Bewertung abzugeben, wird sich am Evaluationsansatz von \citeauthor{10.1145/1985793.1985812}
+orientiert.
+Dafür werden verschiedene Softwareprojekte mit dem vorgestellten Ansatz analysiert und das Ergebnis mit einer manuellen Analyse verglichen.
+Für die manuelle Analyse wird der Source Code auf die Verwendung von Konfigurationsoptionen der zu untersuchenden ML-Bibliothek
+händisch untersucht.\\
 
 \section{Ergebnisse Web Scraping}
 \begin{table}[H]
@@ -1053,7 +1081,7 @@ Im folgenden Kapitel werden die Ergebnisse aus Kapitel \ref{Methodik} evaluiert.
 \hline
 ML-Bibliothek & Version & Laufzeit (min) & Klassen & Parameter & P/K\\
 \hline \hline
-TensorFlow & 2.9.1 & 27:15 & 844 & 3728 & 4,4\\  %26,3
+TensorFlow & 2.9.1 & 27:15 & 844 & 3728 & 4,4\\
 PyTorch & 1.11.0 & 0:37 & 408 & 1340 & 3,3 \\
 scikit-learn & 1.1.1 & 0:31 & 262 & 2081 & 7,9\\
 \hline
@@ -1067,7 +1095,7 @@ Anzahl der Parameter je Klasse für die jeweilige Version dargestellt.
 Zudem wird die Laufzeit des Web-Scraping-Vorgangs gemessen.
 Die angegebene Zeit ist der Mittelwert aus fünf Durchläufen der Anwendung und kann je nach Internetverbindung und Rechnerleistung
 stark variieren.
-Die Anzahl der Klassen steht dabei in Relation zum Dauer des Scraping-Prozesses.
+Die Anzahl der Klassen steht dabei in Relation zur Dauer des Scraping-Prozesses.
 Während das Web Scraping der Klassen aus der scikit-learn-Dokumentation die geringste Laufzeit hatte,
 dauerte der Prozess bei TensorFlow deutlich am längsten an.
 Weitere Einflussfaktoren auf die Laufzeit sind zudem die Dokumentations- und Modulstruktur.
@@ -1085,39 +1113,31 @@ gewünschten Ergebnisse liefert.
 Gleichzeitig müssen insgesamt drei TensorFlow- und sechs PyTorch-Klassen einzeln zum Scraping-Ergebnis hinzugefügt werden,
 da sie nicht wie die anderen Klassen in die Dokumentation eingebettet und mit den gleichen HTML-Tags versehen sind.\\
 
-
 \section{Auswahl Subject Systems}
-
-\section{Analyse Subject Systems}
-
-Die Verwendung von Konfigurationsoptionen von ML-Bibliotheken im Source Code ist nicht umfassend erforscht,
-weshalb es keine Datensätze oder Vergleichswerte gibt, um die Genauigkeit des Algorithmus bewerten zu können.
-Im \textit{???}-Ordner des Git-Repositorys befinden sich verschiedene Codebeispiele mit Konfigurationsoptionen, die
-vom Algorithmus erkannt werden müssen.
-Mit Hilfe des \textit{pytest}-Frameworks werden die gefundenen Konfigurationsoptionen, die der Algorithmus in der JSON-Datei als Ausgabe erzeugt,
-mit dem tatsächlichen Ergebnis verglichen.
-Falls sich die Ergebnisse unterscheiden, gibt pytest eine Fehlermeldung aus.\\
-
-Um darüber hinaus eine aussagekräftige Bewertung abzugeben, wird sich am Evaluationsansatz von \citeauthor{10.1145/1985793.1985812}
-orientiert.
-Dafür werden verschiedene Softwareprojekte mit dem entwickelten Algorithmus analysiert und das Ergebnis mit einer manuellen Analyse verglichen.
-Für die manuelle Analyse wird der Source Code auf die Verwendung von Konfigurationsoptionen der zu untersuchenden ML-Bibliothek
-händisch untersucht. Die Auswahl der Softwareprojekte erfolgt nach folgenden Kriterien:
+Die Auswahl der zu untersuchenden Softwaresysteme erfolgt nach folgenden Kriterien:
 \begin{itemize}
- \item Open Source Git Repository mit mindestens 200 Sternen
- \item Verwendung von 25-100 Klassen einer ML-Bibliothek
- \item Verwendung von variablen Parametern beim Aufruf der Klassen
- \item Code ist syntaktisch fehlerfrei und kann als AST geparst werden
+ \item Open Source Git Repository mit mindestens 1.000 Sternen
+ \item Verwendung mindestens zehn Klassen einer ML-Bibliothek
+ \item möglichst Verwendung von variablen Parametern beim Aufruf der Klassen
+ \item Code ist syntaktisch fehlerfrei
 \end{itemize}
 
-\section{Analyse von Softwareprojekten}
-Für jede der vier ML-Bibliotheken wird jeweils ein Softwareprojekt untersucht.
+Ein Stern für ein Repository dient sowohl als Lesezeichen als auch als Zeichen der Wertschätzung für das Projekt.
+Aus der Anzahl an Sternen kann man daher Aussagen über die Qualität eines Projektes ableiten
+Die Anzahl der Sterne eignet sich daher als Auswahlkriterium, um eine repräsentative Liste an Softwareprojekten, die die
+Bibliotheken verwenden.
+
+Damit der Code als AST geparst werden kann, muss er zudem syntaktisch fehlerfrei sein.
+
+
+
+
+Für jede der vier ML-Bibliotheken werden jeweils fünf Softwareprojekte untersucht.
 \textit{Tensorforce} ist ein \textit{Deep Reinforcement Learning} Framework, dass auf Googles TensorFlow beruht \cite[]{tensorforce}.
 Bei \textit{Real-Time Voice Cloning} handelt es ebenfalls um ein Deep Learning Framework und basiert auf PyTorch.
 Mit RTVC kann eine Stimme geklont werden kann und Sprache aus einem beliebigen Text mit dieser Stimme erzeugt werden \cite[]{Charles2013}.
 \textit{AutoGluon} verwendet scikit-learn und automatisiert Aufgaben des maschinellen Lernens, um ML-Anwendungen mit geringerem
 Aufwand entwickeln zu können \cite[]{agtabular}.
-Mit \textit{MLServer} können mit Hilfe von Mlflow ML-Modelle über eine \textit{REST}- und \textit{gRPC}-Schnittstelle bereitgestellt werden \cite[]{Charles2u013}.
 In der Tabelle \ref{projekte} können weitere Informationen zu den Projekten entnommen werden.
 
 \begin{table}[H]
@@ -1136,6 +1156,13 @@ MLServer & Mlflow & 1.1.0.dev6 & 244\\
 \caption{Untersuchte Softwareprojekte} \label{projekte}
 \end{center}
 \end{table}
+
+\section{Analyse Subject Systems}
+
+
+
+\section{Analyse von Softwareprojekten}
+
 
 Für die Evaluation wird für jedes der vier Softwareprojekte auf das Auftreten von Konfigurationsoptionen der enthaltenen ML-Bibiliothek
 untersucht.

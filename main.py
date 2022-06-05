@@ -99,7 +99,26 @@ class ConfigOptions:
                 obj["variable parameters"][variable] = parameter_value_dict
 
     def create_json(self):
+        params = 0
+        variable = 0
+        assigns = 0
+        types = []
+        for obj in self.config_objects:
+            params += len(obj['parameter'])
+            for prm in obj['parameter'].items():
+                types.append(prm[1]["type"])
+            variable += len(obj['variable parameters'])
+            for var in obj['variable parameters'].items():
+                if var[1] != {}:
+                    assigns += 1
+
+        types.sort()
         print(len(self.config_objects))
+        print(params)
+        print(variable)
+        print(assigns)
+        import pprint
+        pprint.pprint(types)
         for obj in self.config_objects:
             obj["file"] = obj["file"][obj["file"].find('/') + 1:]
             obj["line no"] = obj["object"].lineno
@@ -166,8 +185,8 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_link = sys.argv[1]  #'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = sys.argv[2]  #'scikit-learn'  # sys.argv[2]
+    repo_link = sys.argv[1] #sys.argv[1]  #'https://github.com/mj-support/coop'  # sys.argv[1]
+    library = sys.argv[2] #sys.argv[2]  #'scikit-learn'  # sys.argv[2]
 
     repo_dir = clone_repo(repo_link)
 

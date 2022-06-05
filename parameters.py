@@ -361,7 +361,7 @@ class InheritedParameters:
         self.class_alias = inherited_class["class alias"].split(".")[-1]
         self.obj = inherited_class["object"]
         self.variable = ""
-        self.parameter = []
+        self.parameter = {}
         self.variable_value = {}
 
     def get_parameters(self):
@@ -377,7 +377,7 @@ class InheritedParameters:
                                         ast_type = str(type(init_obj.value))
                                         ast_type = ast_type[12:-2]
                                         value = ast.unparse(init_obj.value)
-                                        self.parameter.append({parameter: {'value': value, 'type': ast_type}})
+                                        self.parameter[parameter]: {'value': value, 'type': ast_type}
                                         if type(init_obj.value) == ast.Name or type(init_obj.value) == ast.Attribute:
                                             self.variable_value[value] = None
 
