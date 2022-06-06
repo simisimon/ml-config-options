@@ -79,10 +79,11 @@
 
   %\chapter*{Acknowledgements} % optional
   %I thank the authors of the swsLeipzig template for their excellent work!
-  \addcontentsline{toc}{chapter}{\listfigurename}
+
   \listoffigures % optional
-  \addcontentsline{toc}{chapter}{\listtablename}
+  \addcontentsline{toc}{chapter}{\listfigurename}
   \listoftables % optional
+  \addcontentsline{toc}{chapter}{\listtablename}
   %\addcontentsline{toc}{chapter}{Listings}
   %\lstlistoflistings \label{Listings}
   %\listofalgorithms % optional
@@ -152,8 +153,6 @@ Durch das Extrahieren dieser Konfigurationswerte, können die Parameter statisch
 eine Zeitersparnis bedeutet, wenn sonst ein falscher Konfigurationswert einen langen Batch-Job zum Scheitern bringt
 oder das Ergebnis nicht den Erwartungen entspricht. \\
 
-
-
 \section{Zielsetzung}
 Das Ziel dieser Arbeit ist es, Konfigurationsoptionen im Source Code zu erkennen und zu extrahieren. \\
 
@@ -186,8 +185,15 @@ Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecy
 
 
 \section{Aufbau dieser Arbeit und methodisches Vorgehen}
-% Umsetzung gleidert isch in 3 Schritte: WEbscrping, nochmal auf Klassen eingehen, Statische Code-Analyse mit ReadPoint, und extrahieren der Parameter,
-% Am Ende einfpelgen in s Cg net
+Im ersten Teil dieser Arbeit wird der theoretischen Hintergrund dieser Arbeit vorgestellt.
+Dies umfasst die verwendeten Methoden aus der statischen Code- und Datenflussanalyse, sowie des Web Scrapings.
+Zudem erfolgt eine kurze Einführung ins maschinelle Lernen und es wird beschrieben welche Funktionen Python-Bibliotheken und
+Konfigurationsoptionen in diesem Zusammenhang erfüllen.
+Abgerundet wird der erste Teil mit einer Erläuterung zu Abstract Syntax Trees.
+Es folgt ein Exkurs zu den verwandten Arbeiten.
+Im Anschluss wird das methodische Vorgehen des entwickelten Ansatzes in seinen einzelnen Teilschritten beschrieben.
+Für die Evalutation dieser Arbeit werden die Ergebnisse zusammengetragen und mit einer manuellen Analyse verglichen.
+Diese Ergebnisse werden diskutiert und Limitationen des Ansatzes aufgezeigt, bevor zum Abschluss noch ein Fazit gibt.
 
 
 \chapter{Hintergrund}\label{Hintergrund}
@@ -1093,8 +1099,8 @@ Dementsprechend wird der Ansatz auf zwei verschiedene Arten überprüft:
 Tests sind ein gängiges Mittel in der Softwareentwicklung.
 Sie dienen der Qualitätssicherung, um die Funktionalität des Systems zu gewährleisten und zu untersuchen inwieweit
 die gestellten Anforderungen an eine Software auch erfüllt werden.
-Im \textit{???}-Ordner des Git-Repositorys befinden sich mehrere Codebeispiele mit Konfigurationsoptionen, die aus
-verschiedenen Softwareprojekten entnommen wurden.
+In der \textit{tests.py}-Datei des Git-Repositorys zu dieser Arbeit befinden sich mehrere Codebeispiele mit Konfigurationsoptionen, die aus
+verschiedenen Softwareprojekten entnommen wurden \cite[]{marco}.
 Angereichert wurden die Codebeispiele mit sogenannten \textit{edge cases}, mit denen getestet wird, ob der entwickelte
 Ansatz auch komplexere Herausforderungen bewältigen kann.
 Ziel des ganzen ist zu prüfen, ob die verwendeten ML-Klassen inklusive der Parameter richtig erkannt und zugeordnet werden.
@@ -1325,8 +1331,8 @@ sklearn-porter              & 34        & 100\%             & 34        & 100\% 
 Der Vergleich der beiden Analysen ergibt, dass der Algorithmus alle Klassen und fast alle Parameter erkennen kann.
 Schwächen hat das Programm lediglich bei der Erkennung von Zuweisungen.
 Dies hat zwei Ursachen:
-Die aktuelle Version (Version ???) von Scalpel verarbeitet im Rahmen des \textit{Static Single Assignment} Zuweisungen an Tupel nur dann,
-wenn auf beiden Seiten die gleiche Anzahl an Elementen stehen.
+Die aktuelle Version von Scalpel verarbeitet im Rahmen des \textit{Static Single Assignment} Zuweisungen an Tupel nur dann,
+wenn auf beiden Seiten die gleiche Anzahl an Elementen stehen \cite[]{li2022scalpel}.
 Steht auf der rechten Seite der Zuweisung beispielsweise eine Funktion, dessen \textit{return}-Wert einem Tupel zugewiesen wird,
 wird die Zuweisung von Scalpel aktuell nicht verarbeitet.
 Bei Tensorforce ist dies elf- und bei Real-Time Voice Cloning einmal der Fall.
@@ -1374,11 +1380,32 @@ Sobald das Git-Repository lokal geklont wurde, beträgt die Laufzeit für ein un
 % Klassenaufrufe und Definitionen aus anderen Dateien -> nicht erkannt
 
 \chapter{Fazit}\label{Fazit}
-In der vorliegenden Bachelorarbeit konnte ein Ansatz entwickelt werden, die es ermöglicht ML-Konfigurationsoptionen
-in Python Source Code zu identifizieren und extrahieren.
+In der vorliegenden Arbeit konnte ein Ansatz entwickelt werden, der es ermöglicht, Konfigurationsoptionen von ML-Bibliotheken
+aus Python Source Code zu extrahieren.
+Der Ansatz zeigt, dass mittels statischer Code-Analyse Konfigurationsoptionen mit einer hohen Genauigkeit identifiziert werden
+können.
+Ein wichtiges Hilfsinstrument ist hierbei die Verarbeitung des Codes als Abstract Syntax Tree. \\
+
+Während der Web Scraping-Prozess für die spezifische Struktur der Dokumentation einer ML-Bibliothek angepasst werden muss,
+erfolgt der Extraktionsprozess generisch.
+So lässt sich der Ansatz auf weitere ML-Bibliotheken mit nur geringem Aufwand übertragen.
+Gleichzeitig weist der Ansatz eine geringe Laufzeit auf.
+Zwar dauert das Web Scraping je nach Dokumentationsstruktur unterschiedlich lang an, jedoch bewegt sich die Dauer der statische Analyse
+und des Extraktionsprozesses im einstelligen Sekundenbereich.\\
+
+Allerdings unterliegt der Ansatz insbesondere bei der Ermittlung variabler Konfigurationswerte einigen Limitierungen.
+Zwar können die meisten Fälle erfasst werden, es werden jedoch auch Verbesserungsmöglichkeiten aufgezeigt,
+mit denen sich künftige Arbeiten beschäftigen können.
+So überrascht es, dass es für eine populäre Programmiersprache wie Python dem Anschein nach, kein ausgereiftes
+Datenflussanalyse-Tool gibt, dass ohne Workaround auch die \textit{Edge Cases} verarbeiten kann. \\
+
+Abschließend lässt sich festhalten, dass mit dem vorgestellten Ansatz nützliche Informationen bei der Verwendung
+von ML-Bibliotheken in Python mit geringem Aufwand extrahiert werden können.
+Aus diesen Informationen lassen sich bei der Analyse von Softwareprojekten im Bereich des maschinellen Lernens weitere
+Erkenntnisse gewinnen.
 
 
-
+% Reproduzierbar
 
 
 % Showing natbib citation commands
@@ -1413,10 +1440,12 @@ in Python Source Code zu identifizieren und extrahieren.
 
 % Appendix
 \appendix
-\addcontentsline{toc}{chapter}{Anhang}
 %\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
-\chapter{Abstract Syntax Tree}
+\chapter*{Anhang}
+\addcontentsline{toc}{chapter}{Anhang}
+\section*{A.1 Abstract Syntax Tree}
 %\begin{minipage}{\linewidth}
+\renewcommand{\thefigure}{A.1}
 \begin{figure}[h]
  \centering
  \includegraphics[scale=0.5]{Digraph-20}
