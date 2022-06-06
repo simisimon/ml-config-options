@@ -79,7 +79,6 @@
 
   %\chapter*{Acknowledgements} % optional
   %I thank the authors of the swsLeipzig template for their excellent work!
-
   \listoffigures % optional
 
   \listoftables % optional
@@ -186,12 +185,13 @@ Zudem wird die Verwendung von Konfigurationsoptionen der Machine Learning Lifecy
 % Umsetzung gleidert isch in 3 Schritte: WEbscrping, nochmal auf Klassen eingehen, Statische Code-Analyse mit ReadPoint, und extrahieren der Parameter,
 % Am Ende einfpelgen in s Cg net
 
+
 \chapter{Hintergrund}\label{Hintergrund}
 
 \section{Statische Code-Analyse}
 Das wichtigste Werkzeug dieser Arbeit ist die statische Code-Analyse,
 mit der Software-Projekte unabhängig von der Ausführungsumgebung untersucht werden können.
-Die statische Code-Analyse ist ein Werkzeug, um Fehler in einer Softwareanwendung zu reduzieren.
+Die statische Code-Analyse ist ein Werkzeug, um unter anderem Fehler in einer Softwareanwendung zu reduzieren.
 So ermöglichen sie den Anwendenden, Fehler in einem Programm zu finden, die für den Compiler nicht sichtbar sind \cite[]{bardas2010static}.\\
 
 Im Gegensatz zur dynamischen Analyse wird die statische Analyse zur Übersetzungszeit durchgeführt
@@ -210,29 +210,29 @@ Aus Kosten-Nutzen-Gründen ist hier eine dynamische Analyse nur bedingt sinnvoll
 
 \section{Datenflussanalyse}
 Die Datenflussanalyse ist ein Werkzeug, um Informationen über die möglichen Werte, die an verschiedenen
-Stellen in einem Codesegment berechnet werden, zu erfassen \cite[]{58766}.
+Stellen in einem Codesegment berechnet werden, zu erfassen.
 Es handelt sich um eine statische Analysetechnik mit dem Ziel, das Programmverhalten schon zur Übersetzungszeit,
 also bevor es ausgeführt wurde, zu bestimmen.
 Der Datenfluss kann mittels eines Kontrollflussgraphens dargestellt werden und dem Betrachtenden
 Rückschlüsse über das Verhalten des Programms geben.
-Der Graph zeigt an, an welchen Stellen eine Variable verwendet wird und welche Werte sie annehmen kann.\\
+Der Graph zeigt an, an welchen Stellen eine Variable verwendet wird und welche Werte sie annehmen kann \cite[]{58766}.\\
 
 Es gibt verschiedene Techniken, die innerhalb der Datenflussanalyse eingesetzt werden, um den Wert von Variablen zu bestimmen.
 Eine von ihnen ist \textit{Constant Propagation}.
 Das Ziel von Constant Propagation ist zu bestimmen, an welchen Stellen im Programm, eine Variable einen konstanten Wert besitzt.
-So kann zum Beispiel toter Code, also redundanter Code, der im weiteren Programmverlauf nicht weiterverarbeitet wird, gefunden werden.\\
-
+So kann zum Beispiel toter Code, also redundanter Code, der im weiteren Programmverlauf nicht weiterverarbeitet wird, gefunden werden.
 Eine weitere Technik ist \textit{Static Single Assignment}.
 Bei dieser Methodik werden die Variablen im Verlauf des Übersetzungsprozesses in eine Zwischenform überführt, in der jede Variable
 genau einmal zugewiesen wird.
 Die Variablen werden in Versionen aufgeteilt und in der Regel mit einem aufsteigendem Index versehen,
-sodass jede Definition ihre eigene Version erhält.\\
+sodass jede Definition ihre eigene Version erhält \cite[]{li2022scalpel}.\\
 
 Die beide Techniken Static Single Assignment und Constant Propagation werden in dem statischen Analyse-Framework
 \textit{Scalpel} kombiniert.
 Aus dem folgenden Codebeispiel geht hervor, dass die Variable \textit{a} zwei unterschiedliche Werte annehmen kann.\\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small, caption={Codebeispiel von Scalpel für Datenflussanalyse {\cite[]{li2022scalpel}}},captionpos=b]
 c = 10
 a = -1
 if c > 0:
@@ -241,6 +241,7 @@ else:
     a = 0
 total = c + a
 \end{lstlisting}
+\end{minipage}
 \
 
 Der daraus resultierende Kontrollflussgraph besteht charakteristisch aus Knoten, die die jeweilige Code-Objekte beinhalten und gerichtete Kanten als Übergang
@@ -250,7 +251,7 @@ und über die \textPhi-Funktion kann durch Static Single Assignment abgeleitet w
 
 \begin{figure}[h]
  \centering
- \includegraphics[scale=0.8]{ssa_diagram}
+ \includegraphics[scale=0.7]{ssa_diagram}
  \caption{Kontrollflussgraph \cite[]{li2022scalpel}}
  \label{fig:scalpel}
 \end{figure}
@@ -380,13 +381,15 @@ Optimierte Hyperparameter können die Leistungsfähigkeit eines Modells oder die
 
 Im folgenden Codebeispiel wird der \textit{Gradient Boosting Classifier} aus der scikit-learn Bibliothek betrachtet.\\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, label=gbccode, basicstyle=\small, caption={Nutzung einer scikit-learn Klasse},captionpos=b]
 from sklearn.ensemble import GradientBoostingClassifier
 
 gbc = GradientBoostingClassifier(n_estimators=20,
         learning_rate=0.05, max_features=2, max_depth=2,
         random_state=0)
 \end{lstlisting}
+\end{minipage}
 \
 
 Es wird eine Instanz dieser Klasse erzeugt und der Variable \textit{gbc} zugewiesen.
@@ -430,12 +433,12 @@ organisiert werden.\\
 
 
 \section{Abstract Syntax Trees}
-Um die Bedeutung von Abstract Syntax Trees (AST) zu verstehen, ist es hilfreich sich zu vergegenwärtigen, welche Prozesse
-bei der Ausführung eines Python-Skripts im Hintergrund ablaufen.
-Als eine interpretierte High-Level-Programmiersprache wird der Source Code in Python nicht kompiliert, sondern vom
+Um die Bedeutung von Abstract Syntax Trees (AST) zu verstehen, ist es hilfreich, die Prozesse, die
+bei der Ausführung eines Python-Skripts im Hintergrund ablaufen, zu kennen.
+Als eine interpretierte Programmiersprache wird der Source Code in Python nicht kompiliert, sondern vom
 Python Interpreter nach einer bestimmten Abfolge von Schritten in Anweisungen übersetzt.
 Dabei wird der Python Code in Bytecode umgewandelt, sodass dieser von der Python Virtual Machine
-übersetzt und ausgeführt werden kann. \\
+übersetzt und ausgeführt werden kann \cite[]{aycock1998compiling}. \\
 
 Zunächst wird der Code geparst und in sogenannte Tokens unterteilt.
 Diese Tokens unterliegen einer Reihe von Regeln, damit die verschiedenen Programmierkonstrukte unterschiedlich erkannt
@@ -444,10 +447,10 @@ Die Liste an Tokens werden dann in eine Baumstruktur, den sogenannten abstrakten
 Ein AST ist eine baumartige Darstellung des Codes, bestehend aus einer Sammlung von Knoten, die, basierend auf der Grammatik
 in Python, miteinander verbunden sind.
 Der Baum wird in maschinenlesbaren Binärcode umgewandelt und Anweisungen in Bytecode an den Python Interpreter übermittelt.
-Der Python Interpreter kann den Code nun ausführen und Systemaufrufe an den Kernel starten, um das Programm zu starten. \\
+Der Python Interpreter kann den Code nun ausführen und Systemaufrufe an den Kernel starten, um das Programm zu starten \cite[]{aycock1998compiling}. \\
 
 Während Bytecode eher für Maschinen gemacht ist, sind Abstract Syntax Trees strukturiert aufgebaut und auch für den Menschen lesbar.
-Im Anhang befindet sich das Codebeispiel aus \ref{Konfigurationsoptionen}, nachdem es als AST geparst wurde.
+Abbildung \ref{fig:asdt} im Anhang zeigt das Codebeispiel aus Listing \ref{gbccode}, nachdem es als AST geparst wurde.
 Aus der AST-Syntax lassen sich Typ und Struktur einzelner Python Komponenten direkt ablesen.
 So besteht das Modul aus zwei Codeobjekten vom Typ \textit{ImportFrom} und \textit{Assign}, die sich jeweils in kleinere
 Objekte verschiedenen Typs unterteilen lassen.
@@ -1041,6 +1044,7 @@ Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: 
 \end{lstlisting}
 \
 
+
 \chapter{Evaluation}\label{Evaluation}
 Im folgenden Kapitel werden die Ergebnisse aus Kapitel \ref{Methodik} evaluiert.
 Zunächst werden die Resultate des Web-Scraping-Moduls beleuchtet bevor im Anschluss der vorgestellte Ansatz
@@ -1117,28 +1121,23 @@ da sie nicht wie die anderen Klassen in die Dokumentation eingebettet und mit de
 Die Auswahl der zu untersuchenden Softwaresysteme erfolgt nach folgenden Kriterien:
 \begin{itemize}
  \item Open Source Git Repository mit mindestens 1.000 Sternen
- \item Verwendung mindestens zehn Klassen einer ML-Bibliothek
+ \item Verwendung von mindestens zehn Klassen einer ML-Bibliothek
  \item möglichst Verwendung von variablen Parametern beim Aufruf der Klassen
  \item Code ist syntaktisch fehlerfrei
 \end{itemize}
 
-Ein Stern für ein Repository dient sowohl als Lesezeichen als auch als Zeichen der Wertschätzung für das Projekt.
-Aus der Anzahl an Sternen kann man daher Aussagen über die Qualität eines Projektes ableiten
-Die Anzahl der Sterne eignet sich daher als Auswahlkriterium, um eine repräsentative Liste an Softwareprojekten, die die
+Ein vergebener Stern für ein Git-Repository kann sowohl als Lesezeichen als auch als Zeichen der Wertschätzung für das Projekt dienen.
+Aus der Anzahl an Sternen lassen sich somit Aussagen über die Qualität eines Projektes ableiten.
+Daher eignet sich die Anzahl der Sterne als Auswahlkriterium für die Erstellung einer repräsentativen Liste an Softwareprojekten, die die
 Bibliotheken verwenden.
+Um bei der Analyse auch möglichst viele verschiedene Fälle von ML-Konfigurationsoptionen abzudecken, müssen mindestens zehn
+Klassen einer ML-Bibliothek verwendet werden.
+Im besten Fall werden den ML-Klassen auch variable Parameter übergeben, um die Genauigkeit des Datenflussanalyse-Moduls
+untersuchen zu können.
+Damit der Code als AST geparst werden kann, muss er zudem syntaktisch fehlerfrei sein.\\
 
-Damit der Code als AST geparst werden kann, muss er zudem syntaktisch fehlerfrei sein.
-
-
-
-
-Für jede der vier ML-Bibliotheken werden jeweils fünf Softwareprojekte untersucht.
-\textit{Tensorforce} ist ein \textit{Deep Reinforcement Learning} Framework, dass auf Googles TensorFlow beruht \cite[]{tensorforce}.
-Bei \textit{Real-Time Voice Cloning} handelt es ebenfalls um ein Deep Learning Framework und basiert auf PyTorch.
-Mit RTVC kann eine Stimme geklont werden kann und Sprache aus einem beliebigen Text mit dieser Stimme erzeugt werden \cite[]{Charles2013}.
-\textit{AutoGluon} verwendet scikit-learn und automatisiert Aufgaben des maschinellen Lernens, um ML-Anwendungen mit geringerem
-Aufwand entwickeln zu können \cite[]{agtabular}.
-In der Tabelle \ref{projekte} können weitere Informationen zu den Projekten entnommen werden.
+Für jede der drei ML-Bibliotheken werden jeweils fünf Softwareprojekte untersucht, die in der Tabelle \ref{projekte} aufgelistet
+werden.\\
 
 \begin{table}[H]
 \small
@@ -1147,70 +1146,150 @@ In der Tabelle \ref{projekte} können weitere Informationen zu den Projekten ent
 \hline
 Projekt & ML-Bibliothek & Version & Sterne \\
 \hline \hline
-Tensorforce & TensorFlow & 0.6.5 & 3.1k \\
-RTVC & PyTorch & vom 01.03.22 & 35k\\
-AutoGluon & scikit-learn & 0.4.2 & 4.5k\\
-MLServer & Mlflow & 1.1.0.dev6 & 244\\
+DeepSpeech & \multirow{5}{*}{TensorFlow} & 0.9.3 & 19.7k\\
+Fast Style Transfer & & vom 18.09.21 & 10.5k \\
+Darkflow & & vom 25.02.21 & 6k \\
+CNN for Text Classification & & vom 21.07.18 & 5.5k \\
+Tensorforce & & 0.6.5 & 3.1k \\
+\hline
+RTVC & \multirow{5}{*}{PyTorch} & vom 01.03.22 & 35k\\
+YOLOv3 & & vom 04.04.22 & 6.7k \\
+Image Captioning Tutorial & & vom 03.06.20 & 2k \\
+Synchronized BatchNorm & & vom 08.04.21 & 1.4k \\
+TorchIO & & 0.18.0 & 1.4k \\
+\hline
+AutoGluon & \multirow{5}{*}{scikit-learn} & 0.4.2 & 4.5k\\
+igel & & 1.0.0 & 3k \\
+MLJAR & & 0.11.2 & 1.9k \\
+KServe & & 0.8.0 & 1.5k \\
+sklearn-porter & & 0.7.2 & 1.2k \\
 \hline
 \end{tabular}
 \caption{Untersuchte Softwareprojekte} \label{projekte}
 \end{center}
 \end{table}
 
+\textit{Tensorforce} ist ein \textit{Deep Reinforcement Learning}-Framework, dass auf Googles TensorFlow beruht \cite[]{tensorforce}.
+\textit{CNN for Text Classification} und \textit{Fast Style Transfer} basieren ebenfalls auf TensorFlow und verwenden
+sich faltende künstliche neuronale Netzwerke (\textit{Convolutional Neural Networks}) zur Textklassifizierung \cite[]{CNN_for_Text_Classification} und für eine
+schnelle Stilübertragung von berühmten Gemälden auf beliebige Fotos \cite[]{Fast_Style_Transfer}.
+Mit \textit{DeepSpeech} von Mozilla lässt sich Sprache zu Text auf einem Raspberry Pi verarbeiten \cite[]{DeepSpeech} und mit
+\textit{Darkflow} Objekte in Echtzeit erkennen und klassifizieren \cite[]{Darkflow}.\\
+
+Bei \textit{Real-Time Voice Cloning} handelt es sich um ein Deep Learning Framework und ist das erste von fünf
+analysierten PyTorch-Projekten \cite[]{Charles2013}.
+In \textit{YOLOv3} ist der YOLO-Algorithmus zur Bilderkennung in Echtzeit implementiert \cite[]{YOLO_v3}.
+\textit{PyTorch Tutorial to Image Captioning} ist eine Anleitung zur Bildbeschriftung \cite[]{a_PyTorch_Tutorial_to_Image_Captioning}.
+\textit{TorchIO} bietet eine Reihe von Deep Learning Werkzeugen zur medizinischen Bildgebung \cite[]{perez-garcia_torchio_2021}
+und \textit{Synchronized Batch Normalization} befasst sich mit synchronisierter Batch Normalisierung zur
+Objekterkennung in PyTorch \cite[]{Synchronized_Batchnorm}.\\
+
+\textit{AutoGluon} verwendet scikit-learn und automatisiert Aufgaben des maschinellen Lernens, um ML-Anwendungen mit geringerem
+Aufwand entwickeln zu können \cite[]{agtabular}.
+\textit{Igel} ist ein ML-Tool mit dem Modelle trainiert und verwendet werden können, ohne Code schreiben zu müssen \cite[]{igel}.
+Bei \textit{MLJAR} handelt es sich um ein Python-Paket für \textit{AutoML} auf tabellarische Daten \cite[]{mljar}.
+\textit{KServe} stellt eine benutzerdefinierte Ressourcendefinition für ML-Modelle beliebiger Frameworks
+auf \textit{Kubernetes} bereit \cite[]{KServe}.
+Mit \textit{sklearn-porter} können Schätzer von scikit-learn in andere Programmiersprachen übersetzt werden \cite[]{sklearn_porter}.
+
+
 \section{Analyse Subject Systems}
+Für die Evaluation wird für jedes der fünfzehn Softwareprojekte auf das Auftreten von Konfigurationsoptionen der enthaltenen ML-Bibiliothek
+einmal manuell und mit dem vorgestellten Ansatz untersucht.
+Das Ergebnis beider Analysen wird am Ende verglichen, um den die Genauigkeit des entwickelten Ansatzes beurteilen zu können.\\
 
-
-
-\section{Analyse von Softwareprojekten}
-
-
-Für die Evaluation wird für jedes der vier Softwareprojekte auf das Auftreten von Konfigurationsoptionen der enthaltenen ML-Bibiliothek
-untersucht.
-Dafür wird der entwickelte Algorithmus auf die Projekte angewendet und das Ausgabeergebnis der erzeugten JSON-Datei mit
-dem Ergebnis der manuellen Analyse verglichen.
-Die resultierenden Daten sind der Tabelle \ref{eval} zusammengetragen. \\
-
-Im Rahmen der manuellen Analyse wird in jeder Python-Datei nach dem Namen der ML-Bibliothek gesucht.
-Ist der Namen vorhanden, wird geprüft, welche Objekte der ML-Bibliothek importiert werden.
-Nach diesen Objekten wird in der Python-Datei gesucht und jede gefundene Verwendung des Objekts wird auf den Typ überprüft.
-Dies erfolgt durch die \textit{type()}-Methode von Python, durch die Beschreibung des Objekts in der Dokumentation
-oder über die Definition des Objekts im Source Code der ML-Bibliothek.
-Wenn es sich um eine Klasse handelt, wird geprüft, ob sich die gefundene Klasse auch in der JSON-Datei
-befindet. \\
-
-Im zweiten Schritt wird geprüft, ob die übergebenen Werte beim Aufruf der Klassen erfasst und den Parametern der
-Klasse richtig zugeordnet werden.
-Handelt es sich um variable Parameterwerte vom AST-Typ \textit{Name} oder \textit{Attribute} erfolgt eine Suche nach Zuweisungen
-von Werten für diese Variablen.
+Im Rahmen der manuellen Analyse wird in jeder Python-Datei des Softwareprojekts untersucht, ob und welche Elemente der ML-Bibliothek
+importiert werden.
+Werden Elemente der ML-Bibliothek importiert, wird in der jeweiligen Python-Datei nach ihnen gesucht.
+Bei jedem gefundenen Objekt wird geprüft, ob es sich um eine Klasse handelt.
+Dies erfolgt durch einen Abgleich der Beschreibung des Objekts in der Dokumentation oder
+über die Definition des Objekts im Source Code der ML-Bibliothek.
+Die gefundenen Klassen werden inklusive der Parameter in einer separaten Textdatei gespeichert.
+Werden variable Parameter übergeben, wird in der Python-Datei zusätzlich nach möglichen Wertzuweisungen für die Variablen gesucht.
 Bei der Suche wird berücksichtigt, dass die Variablen auch über Aufrufe von Klassen und Funktionen übergeben werden können oder ihnen ebenfalls ein
 variabler Wert zugewiesen werden kann.
 Für diese Fälle werden die übergebenen Werte der jeweiligen Aufrufe betrachtet oder nach Zuweisungen für die neue Variable gesucht.
-Für jeden variablen Wert werden die manuell gefundenen Wertzuweisungen mit den Wertzuweisungen aus der JSON-Datei verglichen.
-Am Ende werden die Ergebnisse in der Tabelle \ref{eval} zusammengetragen.
+Die gefundenen Zuweisungen werden ebenfalls in separaten Textdatei gespeichert.\\
+
+Das Ergebnis wird in der Tabelle \ref{manuell} zusammengefasst.
+Die Tabelle \ref{eval} gibt für jedes der fünfzehn Softwareprojekte die Anzahl der gefundenen Klassen und Anzahl der
+(variablen) Parameter an.
+Darüber hinaus werden für die variablen Parameter in der letzten Spalten die Anzahl der möglichen Werte anhand
+der Wertezuweisungen angegeben.
 
 \begin{table}[H]
 \small
 \begin{center}
 \setlength{\tabcolsep}{5pt}
-\begin{tabular}[h]{l|c c|c|c c|c|c c|c|c c|c} %p{7cm}
+\begin{tabular}[h]{l|c|c|c|c} %p{7cm}
 \hline
-\multirow{3}{*}{ML-Projekt} & \multicolumn{3}{c|}{Klassen}      & \multicolumn{3}{c|}{Parameter}    & \multicolumn{6}{c}{variable Parameter}\\
-                            & \multicolumn{3}{c|}{insgesamt}    & \multicolumn{3}{c|}{insgesamt}    & \multicolumn{3}{c|}{insgesamt}       & \multicolumn{3}{c}{Zuweisungen} \\
-                            & M         & A     & \%            & M         & A     & \%            & M         & A     & \%                & M     & A     & \% \\
+\multirow{2}{*}{ML-Projekt} & \multirow{2}{*}{Klassen}   & \multirow{2}{*}{Parameter} &   \multicolumn{2}{c}{variable Parameter}\\
+                            &           &           &   insgesamt   &   Zuweisungen \\
 \hline \hline
-Tensorforce                 & 55        & 55    & 100\%         & 105       & 105   & 100\%         & 58        & 58    & 100\%             & 96    & 76    & 79\% \\
-RTVC                        & 86        & 86    & 100\%         & 165       & 165   & 100\%         & 78        & 78    & 100\%             & 83    & 80    & 96\% \\
-AutoGluon                   & 65        & 65    & 100\%         & 98        & 98    & 100\%         & 32        & 32    & 100\%             & 19    & 19    & 100\% \\
-MLServer                    & 30        & 30    & 100\%         & 57        & 57    & 100\%         & 11        & 11    & 100\%             & -     & -     & -\\
+DeepSpeech                  & 34        & 47        & 24            & 31\\
+Fast Style Transfer         & 18        & 10        & 4             & 3\\
+Darkflow                    & 15        & 10        & 7             & 9\\
+Text Classification         & 21        & 30        & 11            & 4\\
+Tensorforce                 & 61        & 105       & 58            & 96\\
+\hline
+Voice Cloning               & 107       & 165       & 100           & 99\\
+YOLOv3                      & 31        & 44        & 28            & 35\\
+Image Captioning            & 32        & 49        & 34            & 26\\
+BatchNorm                   & 14        & 21        & 4             & 3\\
+TorchIO                     & 30        & 38        & 36            & 31\\
+\hline
+AutoGluon                   & 79        & 98        & 52            & 31\\
+igel                        & 12        & 8         & 34            & 26\\
+MLJAR                       & 33        & 110       & 22            & 29\\
+KServe                      & 21        & 21        & -             & -\\
+sklearn-porter              & 34        & 34        & 23            & 123\\
 \hline
 \end{tabular}
-\caption{Ergebnisvergleich der manuellen Analyse (\textit{M}) mit dem Algorithmus (\textit{A})} \label{eval}
+\caption{Ergebnis der manuellen Analyse} \label{manuell}
 \end{center}
 \end{table}
 
-Die Tabelle \ref{eval} stellt für jedes der vier Softwareprojekte die Anzahl der gefundenen Klassen und Parameter der beiden Analysen gegenüber.
-Darüber hinaus werden für die variablen Parameter in den letzten Spalten die Anzahl der möglichen Werte anhand
-der Wertezuweisungen angegeben.
+Im zweiten Schritt wird der entwickelte Ansatz auf die fünfzehn Softwareprojekte angewendet.
+Die im Ausgabeergebnis erzeugte JSON-Datei wird mit den gefundenen Klassen, Parametern und Zuweisungen der manuellen
+Analyse verglichen.
+Für jedes gefundene Objekt der manuellen Analyse wird geprüft, ob es auch vom entwickelten Ansatz gefunden wird.
+Die Tabelle \ref{analyse} listet alle gefundenen Objekte aus der JSON-Datei auf.
+Zusätzlich zur Tabelle der manuellen Analyse wird eine Prozentzahl für die Genauigkeit angegeben.
+Der Wert misst den Anteil der gefundenen Objekte im Vergleich zur manuellen Analyse.
+
+\begin{table}[H]
+\small
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}[h]{l|c|c|c|c|c|c|c|c} %p{7cm}
+\hline
+\multirow{3}{*}{ML-Projekt} & \multicolumn{2}{c|}{\multirow{2}{*}{Klassen}}  & \multicolumn{2}{c|}{\multirow{2}{*}{Parameter}}      &   \multicolumn{4}{c}{variable Parameter}\\
+                            & \multicolumn{2}{c|}{}         & \multicolumn{2}{c|}{}             & \multicolumn{2}{c|}{insgesamt}    &  \multicolumn{2}{c}{Zuweisungen} \\
+                            & Anz.      & \%                & Anz.      & \%                    & Anz.      & \%    & Anz.          & \% \\
+\hline \hline
+DeepSpeech                  & 34        & 100\%             & 47        & 100\%                 & 24        & 100\% & 30            & 97\%\\
+Fast Style Transfer         & 18        & 100\%             & 10        & 100\%                 & 4         & 100\% & 3             & 100\%\\
+Darkflow                    & 15        & 100\%             & 10        & 100\%                 & 7         & 100\% & 9             & 100\%\\
+Text Classification         & 21        & 100\%             & 30        & 100\%                 & 11        & 100\% & 4             & 100\%\\
+Tensorforce                 & 61        & 100\%             & 105       & 100\%                 & 58        & 100\% & 76            & 79\%\\
+\hline
+Voice Cloning               & 107       & 100\%             & 165       & 100\%                 & 100       & 100\% & 96            & 97\%\\
+YOLOv3                      & 31        & 100\%             & 44        & 100\%                 & 28        & 100\% & 35            & 100\%\\
+Image Captioning            & 32        & 100\%             & 49        & 100\%                 & 34        & 100\% & 25            & 96\%\\
+BatchNorm                   & 14        & 100\%             & 21        & 100\%                 & 4         & 100\% & 3             & 100\%\\
+TorchIO                     & 30        & 100\%             & 38        & 100\%                 & 36        & 100\% & 31            & 100\%\\
+\hline
+AutoGluon                   & 79        & 100\%             & 98        & 100\%                 & 52        & 100\% & 31            & 100\%\\
+igel                        & 12        & 100\%             & 8         & 100\%                 & 34        & 100\% & 26            & 100\%\\
+MLJAR                       & 33        & 100\%             & 110       & 100\%                 & 22        & 100\% & 27            & 93\%\\
+KServe                      & 21        & 100\%             & 21        & 100\%                 & -         & - & -                 & -\\
+sklearn-porter              & 34        & 100\%             & 34        & 100\%                 & 23        & 100\% & 123           & 100\%\\
+\hline
+\end{tabular}
+\caption{Ergebnis und Genauigkeit des entwickelten Ansatzes} \label{analyse}
+\end{center}
+\end{table}
+
 Die Analyse der vier Softwareprojekte ergibt, dass der Algorithmus alle Klassen und Parameter erkennen kann.
 Schwächen hat das Programm lediglich bei der Erkennung von Zuweisungen.
 Dies hat zwei Ursachen:
@@ -1219,10 +1298,25 @@ wenn auf beiden Seiten die gleiche Anzahl an Elementen stehen.
 Steht auf der rechten Seite der Zuweisung beispielsweise eine Funktion, dessen \textit{return}-Wert einem Tupel zugewiesen wird,
 wird die Zuweisung von Scalpel aktuell nicht verarbeitet.
 Bei Tensorforce ist dies elf- und bei Real-Time Voice Cloning einmal der Fall.
-Die zweite Ursache ist die Verarbeitung mehhhhhhrerer Zuweisungen an die gleiche Variable innerhalb eines Funktionskörpers.
+Die zweite Ursache ist die Verarbeitung mehrerer Zuweisungen an die gleiche Variable innerhalb eines Funktionskörpers.
 Scalpel gibt aktuell nur den letzten Zuweisungswert als möglichen Wert der Variable aus.
 Die vorherigen Zuweisungen des Funktionskörpers werden nicht ausgegeben.
-Neun weitere Zuweisungen von Tensorforce und zwei von Real-Time Voice Cloning werden dadurch nicht erkannt.\\
+Neun weitere Zuweisungen von Tensorforce, zwei von Real-Time Voice Cloning, zwei von MLJAR und
+eine Zuweisung vom PyTorch Tutorial to Image Captioning werden dadurch nicht erkannt.
+Die beiden Probleme wurden bereits den Entwicklern gemeldet und werden derzeit bearbeitet.
+Darüber hinaus wird in DeepSpeech einer Instanz der TensorFlow-Klasse \textit{SparseTensor} erzeugt und der Parameter \textit{*transcript} übergeben.
+Dass als Übergabeparameter eine Liste als \textit{*args} übergeben werden darf, ist aus der Dokumentation nicht ersichtlich
+und wurde vom entwickelten Ansatz daher nicht erkannt und verarbeitet.\\
+
+
+
+\section{Diskussion}
+
+
+\section{Analyse von Softwareprojekten}
+
+
+
 
 Zu beachten ist, dass nur Zuweisungen betrachtet werden.
 Die Zahl möglicher Werte der Variablen kann daher deutlich höher sein.
@@ -1280,52 +1374,7 @@ Das gleiche gilt für Parametervariablen deren Wert erst durch die Eingabe währ
 
 % Appendix
 \appendix
-\chapter{Abstract Syntax Tree}
 %\begin{minipage}{\linewidth}
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
-Module(
-    body=[
-        ImportFrom(
-            module='sklearn.ensemble',
-            names=[
-                alias(
-                    name='GradientBoostingClassifier')],
-            level=0),
-        Assign(
-            targets=[
-                Name(
-                    id='gbc',
-                    ctx=Store())],
-            value=Call(
-                func=Name(
-                    id='GradientBoostingClassifier',
-                    ctx=Load()),
-                args=[],
-                keywords=[
-                    keyword(
-                        arg='n_estimators',
-                        value=Constant(
-                            value=20)),
-                    keyword(
-                        arg='learning_rate',
-                        value=Constant(
-                            value=0.05)),
-                    keyword(
-                        arg='max_features',
-                        value=Constant(
-                            value=2)),
-                    keyword(
-                        arg='max_depth',
-                        value=Constant(
-                            value=2)),
-                    keyword(
-                        arg='random_state',
-                        value=Constant(
-                            value=0))]))])
-\end{lstlisting}
-%\end{minipage}
-\
-
 
 \begin{figure}[h]
  \centering
@@ -1333,6 +1382,7 @@ Module(
  \caption{Abstract Syntax Tree}
  \label{fig:asdt}
 \end{figure}
+\
 
 % Bibliography
 \bibliographystyle{plainnat} % requires package natbib. An alternative is apalike

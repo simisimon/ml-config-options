@@ -6,7 +6,7 @@ Notizen:
 	get_tracking_uri in mlflow und in mlflow.tracking
 	log_artifact in mlflow und mlflow.tracking.MlflowClient
 4. offen ist zudem wie die Config Optionen aus 3. in den echten Projekten dann auch getracket werden sollen. Möglichkeit: import mlflow und from mlflow Zeile untersuchen und dies zum Standard der Suche machen
-5. Schwierigkeit zudem wie ich die Config-Options von normalen Methoden unterscheiden. list_artifacts ist vermutlich keine Configuration Option. 
+5. Schwierigkeit zudem wie ich die Config-Options von normalen Methoden unterscheiden. list_artifacts ist vermutlich keine Configuration Option.
 6. Was ist zu dem mit den anderen dictioniairies etc.
 7. Liste aller Methoden und Klassen mit for-Schleifen erwies sich als nicht zielführend, da Tiefe der for-Schleifen unbekannt -> Lösung: Baumstruktur mit Rekursion
 8. Problem: Methoden können auf mehreren Wegen erreicht werden z.B. mlflow.h2o.mlflow.h2o.mlflow -> Gefahr von endlosen Schleifen / Rekursion
@@ -387,7 +387,25 @@ Limits:
     python3 main.py https://github.com/awslabs/autogluon sklearn
 
 
-
+\begin{table}[H]
+\small
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}[h]{l|c c|c|c c|c|c c|c|c c|c} %p{7cm}
+\hline
+\multirow{3}{*}{ML-Projekt} & \multicolumn{3}{c|}{Klassen}      & \multicolumn{3}{c|}{Parameter}    & \multicolumn{6}{c}{variable Parameter}\\
+                            & \multicolumn{3}{c|}{insgesamt}    & \multicolumn{3}{c|}{insgesamt}    & \multicolumn{3}{c|}{insgesamt}       & \multicolumn{3}{c}{Zuweisungen} \\
+                            & M         & A     & \%            & M         & A     & \%            & M         & A     & \%                & M     & A     & \% \\
+\hline \hline
+Tensorforce                 & 55        & 55    & 100\%         & 105       & 105   & 100\%         & 58        & 58    & 100\%             & 96    & 76    & 79\% \\
+RTVC                        & 86        & 86    & 100\%         & 165       & 165   & 100\%         & 78        & 78    & 100\%             & 83    & 80    & 96\% \\
+AutoGluon                   & 65        & 65    & 100\%         & 98        & 98    & 100\%         & 32        & 32    & 100\%             & 19    & 19    & 100\% \\
+MLServer                    & 30        & 30    & 100\%         & 57        & 57    & 100\%         & 11        & 11    & 100\%             & -     & -     & -\\
+\hline
+\end{tabular}
+\caption{Ergebnisvergleich der manuellen Analyse (\textit{M}) mit dem Algorithmus (\textit{A})} \label{eval}
+\end{center}
+\end{table}
 
 
 
