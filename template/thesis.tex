@@ -79,10 +79,12 @@
 
   %\chapter*{Acknowledgements} % optional
   %I thank the authors of the swsLeipzig template for their excellent work!
+  \addcontentsline{toc}{chapter}{\listfigurename}
   \listoffigures % optional
-
+  \addcontentsline{toc}{chapter}{\listtablename}
   \listoftables % optional
-
+  %\addcontentsline{toc}{chapter}{Listings}
+  %\lstlistoflistings \label{Listings}
   %\listofalgorithms % optional
   %    requires package algorithm2e
 
@@ -126,10 +128,12 @@ Solche Fehler können dazu führen, dass die Software abstürzt, eine fehlerhaft
 Konfigurationsfehler entstehen zum Beispiel durch die Verwendung unterschiedlicher Versionen einer Software.
 Im folgendem Codeausschnitt wird die Klasse \textit{LogisticRegression} der Machine Learning-Bibliothek \textit{scikit-learn} initialisiert und der Variable \textit{clf} zugewiesen:\\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small, caption={Nutzung der LogisticRegression-Klasse aus scikit-learn},captionpos=b]
 from sklearn.linear_model import LogisticRegression
 clf = LogisticRegression()
 \end{lstlisting}
+\end{minipage}
 \
 
 Da keine Parameter angegeben werden, wird die Klasse mit den Default-Werten initialisiert, zum Beispiel
@@ -382,7 +386,7 @@ Optimierte Hyperparameter können die Leistungsfähigkeit eines Modells oder die
 Im folgenden Codebeispiel wird der \textit{Gradient Boosting Classifier} aus der scikit-learn Bibliothek betrachtet.\\
 
 \noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}[language=Python, frame=single, label=gbccode, basicstyle=\small, caption={Nutzung einer scikit-learn Klasse},captionpos=b]
+\begin{lstlisting}[language=Python, frame=single, label=gbccode, basicstyle=\small, caption={Nutzung der GradientBoostingClassifier-Klasse aus scikit-learn},captionpos=b]
 from sklearn.ensemble import GradientBoostingClassifier
 
 gbc = GradientBoostingClassifier(n_estimators=20,
@@ -596,7 +600,8 @@ Diese filtern die HTML-Datei nach den jeweiligen Tags, sodass schließlich der V
 zugewiesen wird.
 Durch dieses Set wird iteriert, um für jedes Modul die Hyperlink-Referenz zu speichern.\\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, label=scrape_moduls, basicstyle=\small, caption={Web Scraping der Modul-URLs},captionpos=b]
 def scrape_module_urls(self):
     link = "mlflow.org/docs/latest/python_api/index.html"
     html = urllib.urlopen(link)
@@ -609,6 +614,7 @@ def scrape_module_urls(self):
         url = element.find("a").attrs["href"]
         self.module_urls.append(url)
 \end{lstlisting}
+\end{minipage}
 \
 
 Im Anschluss kann nun nach einem ähnlichen Prinzip durch die Liste der Modul-URLs iteriert werden.
@@ -618,7 +624,8 @@ In der JSON-Datei wird für jede Klasse der gesamte Pfad als eindeutiger Schlüs
 Zusätzlich zum Klassen- und zu den Parameternamen, werden die Default-Werte der einzelnen Parameter aufgeführt.
 Die scikit-learn-Klasse \textit{StratifiedGroupKFold} wird demnach wie folgt gespeichert:\\
 
-\begin{lstlisting}[frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[frame=single, label=json_scraping, basicstyle=\small, caption={Web Scraping Ergebnis der StratifiedGroupKFold-Klasse aus scikit-learn},captionpos=b]
 'sklearn.model_selection.StratifiedGroupKFold': {
     'short name': 'StratifiedGroupKFold',
     'parameters': {
@@ -628,6 +635,7 @@ Die scikit-learn-Klasse \textit{StratifiedGroupKFold} wird demnach wie folgt ges
     }
 }
 \end{lstlisting}
+\end{minipage}
 \
 
 Im Gegensatz zu den anderen Modulen ist der Web Scraping Vorgang nur einmal je Bibliothek notwendig und muss nicht für jedes Projekt
@@ -646,11 +654,13 @@ In diesem konkreten Fall wird über die Eingabe des Namens der Bibliothek entsch
 Klassen  \textit{gescraped} werden sollen.
 Damit auch bei unterschiedlichen Schreibweisen einer Bibliothek das Programm ausgeführt wird, sind im Source Code für jede
 Bibliothek mehrere Möglichkeiten hinterlegt.
-Das Scraping von mlflow-Klassen erfolgt zum Beispiel über folgenden Befehl:\\
+Das Scraping von scikit-learn-Klassen erfolgt zum Beispiel über folgenden Befehl:\\
 
-\begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=bash, frame=single, label=scraping_scikit-learn, basicstyle=\small, caption={Kommandozeilenbefehl für das Web Scraping von scikit-learn},captionpos=b]
 python3 scraping.py mlflow
 \end{lstlisting}
+\end{minipage}
 \
 
 \section{Parsen der Repositorys}
@@ -666,9 +676,11 @@ Die zu übergebenen Argumente sind zum Einen der Link des zu untersuchenden Git-
 Konfigurationselemente gefunden werden sollen.
 Der entsprechende Befehl für ein Beispielprojekt mit mlflow sieht demnach wie folgt aus: \\
 
-\begin{lstlisting}[language=bash, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=bash, frame=single, label=execute_coop, basicstyle=\small, caption={Kommandozeilenbefehl für die Extraktion von Konfigurationsoptionen von scikit-learn},captionpos=b]
 python3 main.py https://github.com/user/project scikit-learn
 \end{lstlisting}
+\end{minipage}
 \
 
 Im Gegensatz zum Web Scraping erfolgt der gesamte Parse- und Extraktionsprozess für die zu untersuchenden Bibliotheken generisch.
@@ -679,12 +691,14 @@ Voraussetzung ist jedoch, dass eine JSON-Datei mit den gescrapten Klassen der je
 Möchte man beispielsweise die Funktionalitäten dieses Tools auf die ML-Bibliothek \textit{Keras} anwenden, muss man nach erfolgreichem Scraping,
 lediglich folgende Codezeilen zur \textit{main.py}-Datei hinzufügen.\\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, label=keras,  basicstyle=\small, caption={Implementation einer Klasse zur Extraktion von Konfigurationsoptionen einer weiteren ML-Bibliothek},captionpos=b]
 class KerasOptions(ConfigOptions):
     def __init__(self, repo):
         ConfigOptions.__init__(self, repo)
         self.library = "keras"
 \end{lstlisting}
+\end{minipage}
 \
 
 \section{Extraktion der ML-Klassen}\label{Classes}
@@ -732,7 +746,8 @@ Es gibt verschiedene Möglichkeiten wie Elemente einer ML-Bibliothek zugänglich
 Das folgende Codebeispiel zeigt fünf Möglichkeiten, die die Verwendung derselben scikit-learn-Klasse \textit{KNeighborsRegressor}
 über einen jeweils anderen Pfad im Code ermöglichen. \\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, label=import,  basicstyle=\small, caption={Import- und Verwendungsmöglichkeiten der KNeighborsRegressor-Klasse aus scikit-learn},captionpos=b]
 import sklearn                                           # A
 import sklearn as skl                                    # B
 from sklearn import neighbors                            # C
@@ -745,6 +760,7 @@ neighbors.KNeighborsRegressor()                          # C
 KNeighborsRegressor()                                    # D
 KNN()                                                    # E
 \end{lstlisting}
+\end{minipage}
 \
 
 Die Eindeutigkeit des Pfades ist wichtig, um sicherzustellen, dass es sich bei dem jeweiligen Code-Objekt, um die Klasse
@@ -755,7 +771,8 @@ Import-Anweisungen der jeweiligen ML-Bibliothek rausgefiltert.\\
 
 Angenommen das folgende Codebeispiel wird auf Klassen der aus der scikit-learn-Bibliothek untersucht.\\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, label=knn,  basicstyle=\small, caption={Codebeispiel mit KNeighborsRegressor-Klasse},captionpos=b]
 from sklearn.neighbors import KNeighborsRegressor
 
 def knn_func():
@@ -763,6 +780,7 @@ def knn_func():
     knn = KNeighborsRegressor(n_neighbors, leaf_size=25)
     return knn
 \end{lstlisting}
+\end{minipage}
 \
 
 Für das obige Codebeispiel wird der Syntaxbaum nach Knoten durchsucht, deren Name identisch mit \textit{KNeighborsRegressor} ist und
@@ -785,12 +803,14 @@ die Klasse gefunden wurde.
 Zudem wird das AST-Objekt gespeichert, aus dem sich weitere Informationen wie Parameter und Zeilennummer auslesen lassen.
 Für das Codebeispiel ergibt sich folgender Listeneintrag.\\
 
-\begin{lstlisting}[frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[frame=single, label=class_dict, basicstyle=\small, caption={Dictionary-Eintrag der KNeighborsRegressor-Klasse},captionpos=b]
 {'file': 'path/file.py',
  'class': 'sklearn.neighbors.KNeighborsRegressor',
  'class alias': 'KNeighborsRegressor',
  'object': <ast.Assign object at 0x106178370>}
 \end{lstlisting}
+\end{minipage}
 \
 
 \section{Extraktion und Verarbeitung der Konfigurationsoptionen} \label{Parameters}
@@ -813,7 +833,8 @@ Da die gesuchten Werte Parameter von Klassenaufrufen sind, ist die Behandlung vo
 besonderer Bedeutung.
 Hinter dem AST-Objekt des Dictionaries aus \ref{Classes} verbirgt sich folgender Syntaxbaum: \\
 
-\begin{lstlisting}[frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[frame=single, label=class_dict, basicstyle=\small, caption={AST der KNeighborsRegressor-Klasse},captionpos=b]
 Assign(
     targets=[
         Name(
@@ -833,6 +854,7 @@ Assign(
                 value=Constant(
                     value=25))]))
 \end{lstlisting}
+\end{minipage}
 \
 
 Ein Code-Objekt vom AST-Typ \textit{Call} besteht aus 3 Teilknoten.
@@ -883,7 +905,8 @@ Variable Parameter werden zusätzlich gesondert in einem Dictionary aufgeführt.
 Da die möglichen Werte der variablen Parameter noch unbekannt sind, werden diese mit \textit{None} gekennzeichnet.
 Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufgeführt, sodass sich folgendes Dictionary ergibt:\\
 
-\begin{lstlisting}[frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[frame=single, label=param_dict, basicstyle=\small, caption={Dictionary-Eintrag der KNeighborsRegressor-Klasse inklusive Parameter},captionpos=b]
 {'file': 'path/file.py',
  'class': 'sklearn.neighbors.KNeighborsRegressor',
  'object': <ast.Assign object at 0x106178370>},
@@ -892,6 +915,7 @@ Sofern vorhanden, wird die Variable, die die Klasse referenziert, ebenfalls aufg
  'variable parameters': {'n_neighbors': None},
  'variable': 'knn'}
 \end{lstlisting}
+\end{minipage}
 \
 
 \section{Ermittlung variabler Konfigurationswerte}
@@ -924,7 +948,8 @@ Um Klassen- und Funktionsaufrufe richtig zuzuordnen und die übergebenen Paramet
 ist es daher wichtig, den Typ und die Objektzugehörigkeit zu kennen.
 Für jede Klasse und jede Funktion wird ein Dictionary erstellt, dessen Werte die verschiedenen Aufrufpfade sind. \\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small, label=aufrufpfade, caption={Mögliche Aufrufpfade von Klassen und Funktionen},captionpos=b]
 class A:
     def __init__(self, variable):
         self.cls_variable = variable
@@ -938,9 +963,10 @@ class A:
 def func_c():
     pass
 
-func()                                      # call 1
-A(1).func_a()                               # call 3
+func_c()                                    # call 1
+A(1).func_b()                               # call 3
 \end{lstlisting}
+\end{minipage}
 \
 
 Im Anschluss wird durch die Liste der Kontrollflussgraphen iteriert und alle enthaltenen Anweisungen als AST geparst.
@@ -963,7 +989,9 @@ Handelt es sich zudem um einen variablen Wert vom AST-Typ \textit{Name} oder \te
 der gesamte zweite Teil der Datenflussanalyse ausgeführt.\\
 
 In diesem Zusammenhang stößt man an mehrere Grenzen des Scalpel-Frameworks, die im folgenden Codebeispiel dargestellt werden:\\
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small, label=scalpel_limits, caption={Limitierungen der Datenflussanalyse},captionpos=b]
 class A:
     def __init__(self):
         a, b = 1, 2                         # issue 1
@@ -971,6 +999,7 @@ class A:
         self.cls_variable = c               # issue 3
         c = 4
 \end{lstlisting}
+\end{minipage}
 \
 
 Die aktuelle Version von Scalpel (Version ???) kann keine Zuweisungen an Tupel verarbeiten, sodass für die Variablen \textit{a} und \textit{b}
@@ -997,7 +1026,8 @@ Die Parameter einer Funktion können fünf unterschiedliche AST-Typen besitzen: 
 beim Aufruf der Funktion eindeutig zugeordnet werden kann.
 Im folgenden Codebeispiel werden die verschiedenen Typen mit ihrem Namen kenntlich gemacht: \\
 
-\begin{lstlisting}[language=Python, frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, basicstyle=\small, label=args, caption={Parametertypen von Funktionen},captionpos=b]
 def func(posonlyarg1, posonlyarg2, /, arg1, arg2,
          arg3 = 1, *vararg, kwonlyarg1, kwonlyarg2, **kwarg):
     return
@@ -1005,6 +1035,7 @@ def func(posonlyarg1, posonlyarg2, /, arg1, arg2,
 func("posonlyarg1", "posonlyarg2", arg2=2, *["arg1"],
      kwonlyarg1=1, kwonlyarg2=2, **{"arg3": 3, "new_arg": 0})
 \end{lstlisting}
+\end{minipage}
 \
 
 \textit{Positional-only arguments} sind Argumente, die vor der \textit{/}-Markierung stehen und dürfen nicht mit einem
@@ -1033,7 +1064,8 @@ Die Liste wird im Anschluss in ein Dictionary umgewandelt, dessen Schlüssel auf
 Schlussendlich wird eine JSON-Datei erstellt, die alle gesuchten Konfigurationsoptionen des Git-Repositories enthält.
 Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: \\
 
-\begin{lstlisting}[frame=single, basicstyle=\small]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[frame=single, label=final_dict, basicstyle=\small, caption={Dictionary-Eintrag der KNeighborsRegressor-Klasse mit möglichen Parameterwerten},captionpos=b]
 {'file': 'path/file.py',
  'class': 'sklearn.neighbors.KNeighborsRegressor',
  'parameter': {'n_neighbors': 'n_neighbors',
@@ -1042,6 +1074,7 @@ Für das \textit{KNeighborsRegressor}-Beispiel sieht der Eintrag wie folgt aus: 
  'variable': 'knn',
  'line no': '4'}
 \end{lstlisting}
+\end{minipage}
 \
 
 
@@ -1192,7 +1225,6 @@ Bei \textit{MLJAR} handelt es sich um ein Python-Paket für \textit{AutoML} auf 
 auf \textit{Kubernetes} bereit \cite[]{KServe}.
 Mit \textit{sklearn-porter} können Schätzer von scikit-learn in andere Programmiersprachen übersetzt werden \cite[]{sklearn_porter}.
 
-
 \section{Analyse Subject Systems}
 Für die Evaluation wird für jedes der fünfzehn Softwareprojekte auf das Auftreten von Konfigurationsoptionen der enthaltenen ML-Bibiliothek
 einmal manuell und mit dem vorgestellten Ansatz untersucht.
@@ -1211,11 +1243,11 @@ variabler Wert zugewiesen werden kann.
 Für diese Fälle werden die übergebenen Werte der jeweiligen Aufrufe betrachtet oder nach Zuweisungen für die neue Variable gesucht.
 Die gefundenen Zuweisungen werden ebenfalls in separaten Textdatei gespeichert.\\
 
-Das Ergebnis wird in der Tabelle \ref{manuell} zusammengefasst.
-Die Tabelle \ref{eval} gibt für jedes der fünfzehn Softwareprojekte die Anzahl der gefundenen Klassen und Anzahl der
-(variablen) Parameter an.
-Darüber hinaus werden für die variablen Parameter in der letzten Spalten die Anzahl der möglichen Werte anhand
-der Wertezuweisungen angegeben.
+Die Ergebnisse werden in der Tabelle \ref{manuell} zusammengefasst.
+Für jedes der fünfzehn Softwareprojekte ist die Anzahl der gefundenen Klassen und Anzahl der
+(variablen) Parameter angegeben.
+Darüber hinaus werden für die variablen Parameter in der letzten Spalte die Anzahl der möglichen Werte anhand
+der Wertezuweisungen aufgeführt.
 
 \begin{table}[H]
 \small
@@ -1226,7 +1258,7 @@ der Wertezuweisungen angegeben.
 \multirow{2}{*}{ML-Projekt} & \multirow{2}{*}{Klassen}   & \multirow{2}{*}{Parameter} &   \multicolumn{2}{c}{variable Parameter}\\
                             &           &           &   insgesamt   &   Zuweisungen \\
 \hline \hline
-DeepSpeech                  & 34        & 47        & 24            & 31\\
+DeepSpeech                  & 34        & 48        & 24            & 31\\
 Fast Style Transfer         & 18        & 10        & 4             & 3\\
 Darkflow                    & 15        & 10        & 7             & 9\\
 Text Classification         & 21        & 30        & 11            & 4\\
@@ -1267,7 +1299,7 @@ Der Wert misst den Anteil der gefundenen Objekte im Vergleich zur manuellen Anal
                             & \multicolumn{2}{c|}{}         & \multicolumn{2}{c|}{}             & \multicolumn{2}{c|}{insgesamt}    &  \multicolumn{2}{c}{Zuweisungen} \\
                             & Anz.      & \%                & Anz.      & \%                    & Anz.      & \%    & Anz.          & \% \\
 \hline \hline
-DeepSpeech                  & 34        & 100\%             & 47        & 100\%                 & 24        & 100\% & 30            & 97\%\\
+DeepSpeech                  & 34        & 100\%             & 47        & 98\%                 & 24        & 100\% & 31            & 100\%\\
 Fast Style Transfer         & 18        & 100\%             & 10        & 100\%                 & 4         & 100\% & 3             & 100\%\\
 Darkflow                    & 15        & 100\%             & 10        & 100\%                 & 7         & 100\% & 9             & 100\%\\
 Text Classification         & 21        & 100\%             & 30        & 100\%                 & 11        & 100\% & 4             & 100\%\\
@@ -1290,7 +1322,7 @@ sklearn-porter              & 34        & 100\%             & 34        & 100\% 
 \end{center}
 \end{table}
 
-Die Analyse der vier Softwareprojekte ergibt, dass der Algorithmus alle Klassen und Parameter erkennen kann.
+Der Vergleich der beiden Analysen ergibt, dass der Algorithmus alle Klassen und fast alle Parameter erkennen kann.
 Schwächen hat das Programm lediglich bei der Erkennung von Zuweisungen.
 Dies hat zwei Ursachen:
 Die aktuelle Version (Version ???) von Scalpel verarbeitet im Rahmen des \textit{Static Single Assignment} Zuweisungen an Tupel nur dann,
@@ -1308,28 +1340,33 @@ Darüber hinaus wird in DeepSpeech einer Instanz der TensorFlow-Klasse \textit{S
 Dass als Übergabeparameter eine Liste als \textit{*args} übergeben werden darf, ist aus der Dokumentation nicht ersichtlich
 und wurde vom entwickelten Ansatz daher nicht erkannt und verarbeitet.\\
 
-
-
 \section{Diskussion}
+Die Analyse der Softwareprojekte zeigt, dass der entwickelte Ansatz die Verwendung von ML-Klassen und Parameter
+mit einer sehr hohen Genauigkeit erkennt.
+Hinsichtlich der Wertebestimmung variabler Parameter werden ebenfalls viele verschiedene Fälle abdeckt.
+Gleichwohl unterliegt diese Wertebestimmung einigen Limitierungen, die auch das Ergebnis der manuellen Analyse beeinträchtigen.
+Es gibt jedoch Möglichkeiten den Algorithmus zu verbessern, an denen teilweise, wie beim
+Analyse-Frameworks Scalpel, bereits gearbeitet wird.
+So werden nur Zuweisungen betrachtet, weshalb die Zahl möglicher Werte der Variablen deutlich höher sein kann.
+Jede weitere Operation, die auf eine Variable angewendet wird, wird in diesem Ansatz nicht weiter erfasst.
+Verbirgt sich hinter der Variable zum Beispiel eine Liste oder ein Dictionary, so wird nur der Wert der Variablen bei der
+Initialisierung bestimmt.
+Weitere angewendete Operationen wie das Hinzufügen neuer Elemente an die Liste oder Einträge in das Dictionary,
+werden nicht verarbeitet.\\
 
-
-\section{Analyse von Softwareprojekten}
-
-
-
-
-Zu beachten ist, dass nur Zuweisungen betrachtet werden.
-Die Zahl möglicher Werte der Variablen kann daher deutlich höher sein.
-Verbirgt sich hinter der Variable zum Beispiel eine Liste, so wird nur der Listenwert bei der Initialisierung erfasst.
-Jede weitere Methode, die wie \textit{append()} den Inhalt der Liste verändert, liegt außerhalb des Betrachtungsrahmen.
-Parameterwerte, die nicht vom AST-Typ \textit{Name} oder \textit{Attribute} sind, können keine Werte zugewiesen werden
-und werden im Rahmen der Datenflussanalyse ebenfalls nicht weiter verfolgt oder ausgewertet.
+Parameter, die nicht vom AST-Typ \textit{Name} oder \textit{Attribute} sind, können zudem keine Werte zugewiesen werden.
+Sie werden im Rahmen der Datenflussanalyse grundsätzlich nicht weiter verfolgt oder ausgewertet.
 Des Weiteren werden nur Klassen- und Funktionsaufrufe betrachtet, die sich innerhalb derselben Python-Datei befinden wie die Parametervariable.
 Wenn sich also die gesuchte Variable in der Definition einer Klasse oder einer Funktion befindet und der Wert beim Aufruf
-dieser Objekte von außerhalb der Datei übergeben, wird er in der Analyse nicht erfasst.
-Das gleiche gilt für Parametervariablen deren Wert erst durch die Eingabe während der Ausführung eines Programms bestimmt wird.\\
+dieser Objekte von außerhalb der Datei übergeben wird, liegt dies außerhalb des Betrachtungsrahmens.
+Das gleiche gilt für Parametervariablen deren Wert erst durch die Eingabe während der Ausführung eines Programms
+oder im Dictionary eines Funktionsdekorators bestimmt wird.
+Da alle gleichnamigen Variablen erfasst werden, kann es jedoch auch vorkommen, dass im Rahmen der Datenflussanalyse
+Zuweisungen ermittelt werden, die für die gesuchte Parametervariable nicht von Bedeutung sind.
+So kann es sein, dass sich eine solche Variable zum Beispiel nur lokal in einer separaten Funktionen befindet.\\
 
-
+Hinsichtlich der Laufzeit des entwickelten Ansatz fällt lediglich die Größe des Git-Repositorys ins Gewicht.
+Sobald das Git-Repository lokal geklont wurde, beträgt die Laufzeit für ein untersuchtes Softwareprojekt maximal fünf Sekunden.
 
 % AutoGluon: zweimal eine Liste, an die was appended wurde -> die nicht erkannt
 % TensorForce: 9 mal verdeckte Zuweisungen, 11 tupel zuweisungen nicht erkannt, -> insgesamte 7 parameter betroffen zweimal alte Klassen verwendet
@@ -1337,6 +1374,8 @@ Das gleiche gilt für Parametervariablen deren Wert erst durch die Eingabe währ
 % Klassenaufrufe und Definitionen aus anderen Dateien -> nicht erkannt
 
 \chapter{Fazit}\label{Fazit}
+In der vorliegenden Bachelorarbeit konnte ein Ansatz entwickelt werden, die es ermöglicht ML-Konfigurationsoptionen
+in Python Source Code zu identifizieren und extrahieren.
 
 
 
@@ -1375,13 +1414,13 @@ Das gleiche gilt für Parametervariablen deren Wert erst durch die Eingabe währ
 % Appendix
 \appendix
 \addcontentsline{toc}{chapter}{Anhang}
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-\chapter{AST}
+%\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\chapter{Abstract Syntax Tree}
 %\begin{minipage}{\linewidth}
 \begin{figure}[h]
  \centering
  \includegraphics[scale=0.5]{Digraph-20}
- \caption{Abstract Syntax Tree}
+ \caption{AST der GradientBoostingClassifier-Klasse aus scikit-learn}
  \label{fig:asdt}
 \end{figure}
 \
