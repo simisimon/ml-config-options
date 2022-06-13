@@ -91,7 +91,6 @@ class ConfigOptions:
                 parameter_value_list = DataFlowAnalysis(obj, variable).get_parameter_value()
                 index = 0
                 parameter_value_dict = {}
-                #parameter_value_list.sort()
                 for value in parameter_value_list:
                     parameter_value_dict[index] = value
                     index += 1
@@ -113,12 +112,7 @@ class ConfigOptions:
                     assigns += len(var[1])
 
         types.sort()
-        print(len(self.config_objects))
-        print(params)
-        print(variable)
-        print(assigns)
-        import pprint
-        #pprint.pprint(types)
+
         for obj in self.config_objects:
             obj["file"] = obj["file"][obj["file"].find('/') + 1:]
             obj["line no"] = obj["object"].lineno
@@ -185,8 +179,8 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_link = 'https://github.com/CorentinJ/Real-Time-Voice-Cloning' #sys.argv[1] #sys.argv[1] #sys.argv[1]  #'https://github.com/mj-support/coop'  # sys.argv[1]
-    library = 'scikit-learn' # sys.argv[2] #sys.argv[2]  #'scikit-learn'  # sys.argv[2]
+    repo_link = sys.argv[1]     # 'https://github.com/author/repo'
+    library = sys.argv[2]       # e.g. 'scikit-learn'
 
     repo_dir = clone_repo(repo_link)
 

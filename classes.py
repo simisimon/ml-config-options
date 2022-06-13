@@ -63,7 +63,7 @@ class MLClasses:
                     break
 
             splitted_import_obj = import_obj.split(".")
-            splitted_import_obj[0] = "id='{0}'".format(splitted_import_obj[0])  # fehler wegen ID!
+            splitted_import_obj[0] = "id='{0}'".format(splitted_import_obj[0])
             for sio in enumerate(splitted_import_obj):
                 if sio[0] > 0:
                     splitted_import_obj[sio[0]] = "attr='{0}'".format(sio[1])
@@ -165,33 +165,6 @@ class MLClasses:
                                         dump_ast_obj = dump_ast_obj.replace("attr='{0}'".format(import_name.split(".")[-1]), "attr='temp_class'", 1)
                                         obj_code = obj_code.replace(class_string, "temp_class(", 1)
                                 if class_occurence > 0:
-                                    """if library_name_import:
-                                        if class_.split(".")[-1] in obj_code and library_alias in obj_code:
-                                            split_code = obj_code.split(library_alias)
-                                            split_class = class_.split(".")[1:]
-                                            for split in split_class:
-                                                split_class[split_class.index(split)] = ".{0}.".format(split)
-                                            split_class[-1] = "{0}(".format(split_class[-1][:-1])
-
-                                            for split in split_code:
-                                                split = split.split(" ")[0]
-                                                if split.startswith("."):
-                                                    findings = [i for i in split_class if i in split]
-                                                    if split_class == findings:
-                                                        start = obj_code.index(library_alias + split)
-                                                        stop = obj_code.index("(", start)
-                                                        obj_code = obj_code[:start] + "temp_class(" + obj_code[stop + 1:]
-
-                                            obj_code = obj_code.replace("temp_class(", class_string)
-                                            lineno = obj.lineno
-                                            end_lineno = obj.end_lineno
-                                            try:
-                                                obj = ast.parse(obj_code).body[0]
-                                            except:
-                                                obj = ast.parse("{0}[]".format(obj_code)).body[0]
-                                            obj.lineno = lineno
-                                            obj.end_lineno = end_lineno"""
-
                                     lib_class_obj = {"file": self.file, "class": class_, "class alias": class_string[:-1],
                                                      "object": obj}
                                     self.ast_classes.append(lib_class_obj)

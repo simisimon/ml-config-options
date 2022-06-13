@@ -644,3 +644,30 @@ zeiten:
 - sklearn: 37 sekunden
 - tf:
 
+
+\indent In einer empirischen Studie über Konfigurationsfehler stellen \citeauthor{10.1145/2043556.2043572} fest,
+dass in kommerziellen Softwareunternehmen für Speicherlösungen, knapp ein Drittel aller Ursachen von Kundenproblemen auf Konfigurationsfehler zurückzuführen sind.
+Bei Konfigurationsfehlern sind Source Code und Eingabe zwar korrekt, es wird jedoch ein falscher Wert für eine Konfigurationsoption verwendet,
+sodass sich die Software nicht wie gewünscht verhält.
+Entwickler und Entwicklerinnen müssen die Konfigurationsoptionen innerhalb der Software verfolgen, um festzustellen,
+welche Codefragmente von einer Option betroffen sind und wo und wie sie mit ihr interagieren.
+Solche Fehler können dazu führen, dass die Software abstürzt, eine fehlerhafte Ausgabe erzeugt oder nur unzureichend funktioniert \cite[]{10.1145/2568225.2568251}.
+Konfigurationsfehler entstehen zum Beispiel durch die Verwendung unterschiedlicher Versionen einer Software.
+Im Listing \ref{logreg} wird die Klasse \textit{LogisticRegression} der Machine Learning-Bibliothek scikit-learn initialisiert
+und der Variable \textit{clf} zugewiesen.
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, label = logreg, basicstyle=\small, caption={Nutzung der LogisticRegression-Klasse aus scikit-learn},captionpos=b]
+from sklearn.linear_model import LogisticRegression
+clf = LogisticRegression()
+\end{lstlisting}
+\end{minipage}
+\
+
+\noindent Da keine Parameter angegeben werden, wird die Klasse mit den Default-Werten initialisiert, zum Beispiel
+\textit{max\_iter = 100, verbose = 0, n\_jobs = 1}.
+Über den Parameter \textit{max\_iter} können beispielsweise die Anzahl der Trainingsiterationen
+der Logistischen Regression festgelegt werden und über \textit{n\_jobs} die maximale Anzahl der parallel zu verwendenden CPU-Kernen.
+In der Version 0.21.3 on scikit-learn wird für den Parameter \textit{multi\_class} als Default noch der Wert \textit{ovr} zugewiesen.
+Für alle nachfolgenden Versionen ist der Default-Wert für diesen Parameter jedoch \textit{auto} \cite[]{sklearn}.
+Folglich führt die Verwendung dieser Klasse ohne explizite Parameterangabe, nach Verwendung unterschiedlicher Versionen, zu schwer nachvollziehbaren Programmverhalten.
