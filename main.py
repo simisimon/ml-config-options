@@ -179,8 +179,8 @@ lib_dict = {"sklearn": SklearnOptions,
 
 
 def main():
-    repo_link = sys.argv[1]     # 'https://github.com/author/repo'
-    library = sys.argv[2]       # e.g. 'scikit-learn'
+    repo_link = sys.argv[1] #sys.argv[1]     # 'https://github.com/author/repo'
+    library = sys.argv[2]  # sys.argv[2]       # e.g. 'scikit-learn'
 
     repo_dir = clone_repo(repo_link)
 
