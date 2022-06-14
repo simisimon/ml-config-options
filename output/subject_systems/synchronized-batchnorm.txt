@@ -1,0 +1,251 @@
+[
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/sync_batchnorm/batchnorm.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 154
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/sync_batchnorm/batchnorm_reimpl.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.empty(num_features)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.weight",
+        "line no": 33
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/sync_batchnorm/batchnorm_reimpl.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.empty(num_features)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.bias",
+        "line no": 34
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_sync_batchnorm.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "10",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "bn",
+        "line no": 71
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_sync_batchnorm.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "10",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "bn",
+        "line no": 77
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_sync_batchnorm.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "eps": {
+                "value": "1e-05",
+                "type": "Constant"
+            },
+            "affine": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "bn",
+        "line no": 83
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_sync_batchnorm.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "eps": {
+                "value": "1e-05",
+                "type": "Constant"
+            },
+            "affine": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "bn",
+        "line no": 93
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_sync_batchnorm.py",
+        "class": "torch.nn.BatchNorm2d",
+        "parameter": {
+            "num_features": {
+                "value": "10",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "bn",
+        "line no": 103
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_numeric_batchnorm.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "momentum": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "eps": {
+                "value": "1e-05",
+                "type": "Constant"
+            },
+            "affine": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "bn",
+        "line no": 32
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_numeric_batchnorm_v2.py",
+        "class": "torch.nn.BatchNorm2d",
+        "parameter": {
+            "num_features": {
+                "value": "CHANNELS",
+                "type": "Name"
+            },
+            "momentum": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "CHANNELS": {
+                "0": {
+                    "value": "16",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "batchnorm1",
+        "line no": 30
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_numeric_batchnorm_v2.py",
+        "class": "torch.optim.SGD",
+        "parameter": {
+            "params": {
+                "value": "batchnorm1.parameters()",
+                "type": "Call"
+            },
+            "lr": {
+                "value": "0.01",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "optimizer1",
+        "line no": 31
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/tests/test_numeric_batchnorm_v2.py",
+        "class": "torch.optim.SGD",
+        "parameter": {
+            "params": {
+                "value": "batchnorm2.parameters()",
+                "type": "Call"
+            },
+            "lr": {
+                "value": "0.01",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "optimizer2",
+        "line no": 36
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/sync_batchnorm/replicate.py",
+        "class": "torch.nn.DataParallel",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 50
+    },
+    {
+        "file": "Synchronized-BatchNorm-PyTorch/sync_batchnorm/batchnorm_reimpl.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "num_features": {
+                "value": "num_features",
+                "type": "Name"
+            },
+            "eps": {
+                "value": "eps",
+                "type": "Name"
+            },
+            "momentum": {
+                "value": "momentum",
+                "type": "Name"
+            },
+            "weight": {
+                "value": "nn.Parameter(torch.empty(num_features))",
+                "type": "Call"
+            },
+            "bias": {
+                "value": "nn.Parameter(torch.empty(num_features))",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "num_features": {},
+            "eps": {
+                "0": {
+                    "value": "1e-05",
+                    "type": "Constant"
+                }
+            },
+            "momentum": {
+                "0": {
+                    "value": "0.1",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 18
+    }
+]

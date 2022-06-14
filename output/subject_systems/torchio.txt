@@ -1,0 +1,666 @@
+[
+    {
+        "file": "torchio/tests/test_utils.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "4",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "tio.SubjectsDataset(4 * [self.sample_subject])",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "loader",
+        "line no": 43
+    },
+    {
+        "file": "torchio/tests/datasets/test_medmnist.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "256",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "class_(split)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "loader",
+        "line no": 30
+    },
+    {
+        "file": "torchio/tests/transforms/test_collate.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "self.get_heterogeneous_dataset()",
+                "type": "Call"
+            },
+            "batch_size": {
+                "value": "2",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "loader",
+        "line no": 32
+    },
+    {
+        "file": "torchio/tests/transforms/test_collate.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "self.get_heterogeneous_dataset()",
+                "type": "Call"
+            },
+            "batch_size": {
+                "value": "4",
+                "type": "Constant"
+            },
+            "collate_fn": {
+                "value": "tio.utils.history_collate",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "tio.utils.history_collate": {}
+        },
+        "variable": "loader",
+        "line no": 36
+    },
+    {
+        "file": "torchio/tests/transforms/test_transforms.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "collate_fn": {
+                "value": "tio.utils.history_collate",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "tio.SubjectsDataset([subject], transform=transform)",
+                    "type": "Call"
+                }
+            },
+            "tio.utils.history_collate": {}
+        },
+        "variable": "loader",
+        "line no": 288
+    },
+    {
+        "file": "torchio/tests/data/test_queue.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "queue_dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "4",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "queue_dataset": {
+                "0": {
+                    "value": "tio.Queue(subjects_dataset, max_length=6, samples_per_volume=2, sampler=sampler, num_workers=num_workers, **kwargs)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.Queue(dataset, max_length=12, samples_per_volume=3, sampler=sampler)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "batch_loader",
+        "line no": 35
+    },
+    {
+        "file": "torchio/tests/data/test_queue.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "queue_dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "6",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "queue_dataset": {
+                "0": {
+                    "value": "tio.Queue(subjects_dataset, max_length=6, samples_per_volume=2, sampler=sampler, num_workers=num_workers, **kwargs)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.Queue(dataset, max_length=12, samples_per_volume=3, sampler=sampler)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "batch_loader",
+        "line no": 64
+    },
+    {
+        "file": "torchio/tests/data/test_subjects_dataset.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "tio.SubjectsDataset(subjects_list)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.SubjectsDataset([self.sample_subject])",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "loader",
+        "line no": 61
+    },
+    {
+        "file": "torchio/tests/data/sampler/test_label_sampler.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "labels",
+        "line no": 16
+    },
+    {
+        "file": "torchio/tests/data/sampler/test_label_sampler.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "fixture",
+        "line no": 25
+    },
+    {
+        "file": "torchio/tests/data/sampler/test_label_sampler.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "fixture",
+        "line no": 59
+    },
+    {
+        "file": "torchio/tests/data/sampler/test_random_sampler.py",
+        "class": "torch.utils.data.RandomSampler",
+        "parameter": {
+            "data_source": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "sampler",
+        "line no": 8
+    },
+    {
+        "file": "torchio/tests/data/inference/test_inference.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "grid_sampler",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "grid_sampler": {
+                "0": {
+                    "value": "GridSampler(self.sample_subject, patch_size, patch_overlap, padding_mode=padding_mode)",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {
+                "0": {
+                    "value": "6",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "patch_loader",
+        "line no": 28
+    },
+    {
+        "file": "torchio/tests/data/inference/test_aggregator.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "sampler",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "3",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "sampler": {
+                "0": {
+                    "value": "tio.data.GridSampler(subject, patch_size, patch_overlap)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.data.GridSampler(subject, patch_size, patch_overlap, padding_mode='edge')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "loader",
+        "line no": 17
+    },
+    {
+        "file": "torchio/tests/data/inference/test_aggregator.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "fixture",
+        "line no": 35
+    },
+    {
+        "file": "torchio/tests/data/inference/test_aggregator.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "fixture",
+        "line no": 44
+    },
+    {
+        "file": "torchio/tests/data/inference/test_aggregator.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "grid_sampler",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "grid_sampler": {
+                "0": {
+                    "value": "tio.inference.GridSampler(subject, patch_size, patch_overlap)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.inference.GridSampler(self.sample_subject, patch_size, patch_overlap)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "patch_loader",
+        "line no": 60
+    },
+    {
+        "file": "torchio/tests/data/inference/test_aggregator.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "grid_sampler",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "grid_sampler": {
+                "0": {
+                    "value": "tio.inference.GridSampler(subject, patch_size, patch_overlap)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.inference.GridSampler(self.sample_subject, patch_size, patch_overlap)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "patch_loader",
+        "line no": 92
+    },
+    {
+        "file": "torchio/tests/data/inference/test_aggregator.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "sampler",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "3",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "sampler": {
+                "0": {
+                    "value": "tio.data.GridSampler(subject, patch_size, patch_overlap)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tio.data.GridSampler(subject, patch_size, patch_overlap, padding_mode='edge')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "loader",
+        "line no": 121
+    },
+    {
+        "file": "torchio/docs/examples/plot_history.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "collate_fn": {
+                "value": "tio.utils.history_collate",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "tio.SubjectsDataset(subjects, transform=transform)",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {
+                "0": {
+                    "value": "4",
+                    "type": "Constant"
+                }
+            },
+            "tio.utils.history_collate": {}
+        },
+        "variable": "loader",
+        "line no": 41
+    },
+    {
+        "file": "torchio/docs/examples/plot_3d_to_2d.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "queue",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "16",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "queue": {
+                "0": {
+                    "value": "tio.Queue(dataset, max_queue_length, patches_per_volume, sampler)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "loader",
+        "line no": 33
+    },
+    {
+        "file": "torchio/tutorials/example_heteromodal.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "queue_dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "collate_fn": {
+                "value": "lambda x: x",
+                "type": "Lambda"
+            }
+        },
+        "variable parameters": {
+            "queue_dataset": {
+                "0": {
+                    "value": "Queue(subjects_dataset, queue_length, patches_per_volume, UniformSampler(patch_size))",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {
+                "0": {
+                    "value": "2",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "batch_loader",
+        "line no": 54
+    },
+    {
+        "file": "torchio/tutorials/example_heteromodal.py",
+        "class": "torch.nn.Identity",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "model",
+        "line no": 61
+    },
+    {
+        "file": "torchio/src/torchio/constants.py",
+        "class": "torch.torch.finfo",
+        "parameter": {},
+        "variable parameters": {
+            "torch.float32": {}
+        },
+        "variable": "",
+        "line no": 32
+    },
+    {
+        "file": "torchio/src/torchio/transforms/augmentation/composition.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "weights",
+        "line no": 105
+    },
+    {
+        "file": "torchio/src/torchio/transforms/augmentation/random_transform.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {
+            "results": {
+                "0": {
+                    "value": "[]",
+                    "type": "List"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 60
+    },
+    {
+        "file": "torchio/src/torchio/data/queue.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "self.subjects_dataset",
+                "type": "Attribute"
+            },
+            "num_workers": {
+                "value": "self.num_workers",
+                "type": "Attribute"
+            },
+            "batch_size": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "collate_fn": {
+                "value": "self._get_first_item",
+                "type": "Attribute"
+            },
+            "shuffle": {
+                "value": "self.shuffle_subjects",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.subjects_dataset": {
+                "0": {
+                    "value": "subjects_dataset",
+                    "type": "Name"
+                }
+            },
+            "self.num_workers": {
+                "0": {
+                    "value": "num_workers",
+                    "type": "Name"
+                }
+            },
+            "self._get_first_item": {},
+            "self.shuffle_subjects": {
+                "0": {
+                    "value": "shuffle_subjects",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "subjects_loader",
+        "line no": 276
+    },
+    {
+        "file": "torchio/src/torchio/data/sampler/label.py",
+        "class": "torch.Tensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "label_probs",
+        "line no": 127
+    },
+    {
+        "file": "torchio/src/torchio/data/queue.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "subjects_dataset": {
+                "value": "subjects_dataset",
+                "type": "Name"
+            },
+            "max_length": {
+                "value": "max_length",
+                "type": "Name"
+            },
+            "shuffle_subjects": {
+                "value": "shuffle_subjects",
+                "type": "Name"
+            },
+            "shuffle_patches": {
+                "value": "shuffle_patches",
+                "type": "Name"
+            },
+            "samples_per_volume": {
+                "value": "samples_per_volume",
+                "type": "Name"
+            },
+            "sampler": {
+                "value": "sampler",
+                "type": "Name"
+            },
+            "num_workers": {
+                "value": "num_workers",
+                "type": "Name"
+            },
+            "verbose": {
+                "value": "verbose",
+                "type": "Name"
+            },
+            "_subjects_iterable": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "num_sampled_patches": {
+                "value": "0",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "subjects_dataset": {},
+            "max_length": {},
+            "shuffle_subjects": {},
+            "shuffle_patches": {},
+            "samples_per_volume": {},
+            "sampler": {},
+            "num_workers": {},
+            "verbose": {
+                "0": {
+                    "value": "False",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 14
+    },
+    {
+        "file": "torchio/src/torchio/data/dataset.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "_subjects": {
+                "value": "subjects",
+                "type": "Name"
+            },
+            "load_getitem": {
+                "value": "load_getitem",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "subjects": {
+                "0": {
+                    "value": "get_subjects_from_batch(batch)",
+                    "type": "Call"
+                }
+            },
+            "load_getitem": {
+                "0": {
+                    "value": "True",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 10
+    }
+]

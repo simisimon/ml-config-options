@@ -1,0 +1,744 @@
+[
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.ModuleList",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "module_list",
+        "line no": 38
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Sequential",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "modules",
+        "line no": 40
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Conv2d",
+        "parameter": {
+            "in_channels": {
+                "value": "output_filters[-1]",
+                "type": "Subscript"
+            },
+            "out_channels": {
+                "value": "filters",
+                "type": "Name"
+            },
+            "kernel_size": {
+                "value": "kernel_size",
+                "type": "Name"
+            },
+            "stride": {
+                "value": "int(module_def['stride'])",
+                "type": "Call"
+            },
+            "padding": {
+                "value": "pad",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "not bn",
+                "type": "UnaryOp"
+            }
+        },
+        "variable parameters": {
+            "filters": {
+                "0": {
+                    "value": "output_filters[1:][int(module_def['from'])]",
+                    "type": "Subscript"
+                },
+                "1": {
+                    "value": "int(module_def['filters'])",
+                    "type": "Call"
+                },
+                "2": {
+                    "value": "sum([output_filters[1:][i] for i in layers]) // int(module_def.get('groups', 1))",
+                    "type": "BinOp"
+                }
+            },
+            "kernel_size": {
+                "0": {
+                    "value": "int(module_def['size'])",
+                    "type": "Call"
+                }
+            },
+            "pad": {
+                "0": {
+                    "value": "(kernel_size - 1) // 2",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 47
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.BatchNorm2d",
+        "parameter": {
+            "num_features": {
+                "value": "filters",
+                "type": "Name"
+            },
+            "momentum": {
+                "value": "0.1",
+                "type": "Constant"
+            },
+            "eps": {
+                "value": "1e-05",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "filters": {
+                "0": {
+                    "value": "output_filters[1:][int(module_def['from'])]",
+                    "type": "Subscript"
+                },
+                "1": {
+                    "value": "int(module_def['filters'])",
+                    "type": "Call"
+                },
+                "2": {
+                    "value": "sum([output_filters[1:][i] for i in layers]) // int(module_def.get('groups', 1))",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 59
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.LeakyReLU",
+        "parameter": {
+            "negative_slope": {
+                "value": "0.1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 62
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.ZeroPad2d",
+        "parameter": {
+            "padding": {
+                "value": "(0, 1, 0, 1)",
+                "type": "Tuple"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 70
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.MaxPool2d",
+        "parameter": {
+            "kernel_size": {
+                "value": "kernel_size",
+                "type": "Name"
+            },
+            "stride": {
+                "value": "stride",
+                "type": "Name"
+            },
+            "padding": {
+                "value": "int((kernel_size - 1) // 2)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "kernel_size": {
+                "0": {
+                    "value": "int(module_def['size'])",
+                    "type": "Call"
+                }
+            },
+            "stride": {
+                "0": {
+                    "value": "img_size // x.size(2)",
+                    "type": "BinOp"
+                },
+                "1": {
+                    "value": "int(module_def['stride'])",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "maxpool",
+        "line no": 71
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Sequential",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 82
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Sequential",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 86
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.MSELoss",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.mse_loss",
+        "line no": 133
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.BCELoss",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.bce_loss",
+        "line no": 134
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 304
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/test.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 115
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/test.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "shuffle": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "n_cpu",
+                "type": "Name"
+            },
+            "pin_memory": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "collate_fn": {
+                "value": "dataset.collate_fn",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "ListDataset(img_path, img_size=img_size, multiscale=False, transform=DEFAULT_TRANSFORMS)",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {
+                "0": {
+                    "value": "args.batch_size",
+                    "type": "Attribute"
+                },
+                "1": {
+                    "value": "8",
+                    "type": "Constant"
+                }
+            },
+            "n_cpu": {
+                "0": {
+                    "value": "8",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "args.n_cpu",
+                    "type": "Attribute"
+                }
+            },
+            "dataset.collate_fn": {}
+        },
+        "variable": "dataloader",
+        "line no": 152
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/train.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "n_cpu",
+                "type": "Name"
+            },
+            "pin_memory": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "collate_fn": {
+                "value": "dataset.collate_fn",
+                "type": "Attribute"
+            },
+            "worker_init_fn": {
+                "value": "worker_seed_set",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "ListDataset(img_path, img_size=img_size, multiscale=multiscale_training, transform=AUGMENTATION_TRANSFORMS)",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {
+                "0": {
+                    "value": "mini_batch_size",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "model.hyperparams['batch'] // model.hyperparams['subdivisions']",
+                    "type": "BinOp"
+                }
+            },
+            "n_cpu": {
+                "0": {
+                    "value": "args.n_cpu",
+                    "type": "Attribute"
+                }
+            },
+            "dataset.collate_fn": {},
+            "worker_seed_set": {}
+        },
+        "variable": "dataloader",
+        "line no": 49
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/train.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 94
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "params",
+                "type": "Name"
+            },
+            "lr": {
+                "value": "model.hyperparams['learning_rate']",
+                "type": "Subscript"
+            },
+            "weight_decay": {
+                "value": "model.hyperparams['decay']",
+                "type": "Subscript"
+            }
+        },
+        "variable parameters": {
+            "params": {
+                "0": {
+                    "value": "[p for p in model.parameters() if p.requires_grad]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "optimizer",
+        "line no": 134
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/train.py",
+        "class": "torch.optim.SGD",
+        "parameter": {
+            "params": {
+                "value": "params",
+                "type": "Name"
+            },
+            "lr": {
+                "value": "model.hyperparams['learning_rate']",
+                "type": "Subscript"
+            },
+            "weight_decay": {
+                "value": "model.hyperparams['decay']",
+                "type": "Subscript"
+            },
+            "momentum": {
+                "value": "model.hyperparams['momentum']",
+                "type": "Subscript"
+            }
+        },
+        "variable parameters": {
+            "params": {
+                "0": {
+                    "value": "[p for p in model.parameters() if p.requires_grad]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "optimizer",
+        "line no": 140
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/detect.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 95
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/detect.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 135
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/detect.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "shuffle": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "n_cpu",
+                "type": "Name"
+            },
+            "pin_memory": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "ImageFolder(img_path, transform=transforms.Compose([DEFAULT_TRANSFORMS, Resize(img_size)]))",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {
+                "0": {
+                    "value": "args.batch_size",
+                    "type": "Attribute"
+                },
+                "1": {
+                    "value": "8",
+                    "type": "Constant"
+                }
+            },
+            "n_cpu": {
+                "0": {
+                    "value": "8",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "args.n_cpu",
+                    "type": "Attribute"
+                }
+            }
+        },
+        "variable": "dataloader",
+        "line no": 242
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/utils/logger.py",
+        "class": "torch.utils.tensorboard.writer.SummaryWriter",
+        "parameter": {
+            "log_dir": {
+                "value": "log_dir",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "log_dir": {
+                "0": {
+                    "value": "os.path.join(log_dir, datetime.datetime.now().strftime('%Y_%m_%d__%H_%M_%S'))",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.writer",
+        "line no": 13
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/utils/loss.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 48
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/utils/loss.py",
+        "class": "torch.nn.BCEWithLogitsLoss",
+        "parameter": {
+            "pos_weight": {
+                "value": "torch.tensor([1.0], device=device)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "BCEcls",
+        "line no": 69
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/utils/loss.py",
+        "class": "torch.nn.BCEWithLogitsLoss",
+        "parameter": {
+            "pos_weight": {
+                "value": "torch.tensor([1.0], device=device)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "BCEobj",
+        "line no": 71
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "scale_factor": {
+                "value": "scale_factor",
+                "type": "Name"
+            },
+            "mode": {
+                "value": "mode",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "scale_factor": {
+                "0": {
+                    "value": "int(module_def['stride'])",
+                    "type": "Call"
+                }
+            },
+            "mode": {
+                "0": {
+                    "value": "'nearest'",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 105
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 117
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "num_anchors": {
+                "value": "len(anchors)",
+                "type": "Call"
+            },
+            "num_classes": {
+                "value": "num_classes",
+                "type": "Name"
+            },
+            "mse_loss": {
+                "value": "nn.MSELoss()",
+                "type": "Call"
+            },
+            "bce_loss": {
+                "value": "nn.BCELoss()",
+                "type": "Call"
+            },
+            "no": {
+                "value": "num_classes + 5",
+                "type": "BinOp"
+            },
+            "grid": {
+                "value": "torch.zeros(1)",
+                "type": "Call"
+            },
+            "stride": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "num_classes": {
+                "0": {
+                    "value": "int(module_def['classes'])",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 126
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "module_defs": {
+                "value": "parse_model_config(config_path)",
+                "type": "Call"
+            },
+            "yolo_layers": {
+                "value": "[layer[0] for layer in self.module_list if isinstance(layer[0], YOLOLayer)]",
+                "type": "ListComp"
+            },
+            "seen": {
+                "value": "0",
+                "type": "Constant"
+            },
+            "header_info": {
+                "value": "np.array([0, 0, 0, self.seen, 0], dtype=np.int32)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 167
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/utils/datasets.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "files": {
+                "value": "sorted(glob.glob('%s/*.*' % folder_path))",
+                "type": "Call"
+            },
+            "transform": {
+                "value": "transform",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "transform": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 33
+    },
+    {
+        "file": "PyTorch-YOLOv3/pytorchyolo/utils/datasets.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "label_files": {
+                "value": "[]",
+                "type": "List"
+            },
+            "img_size": {
+                "value": "img_size",
+                "type": "Name"
+            },
+            "max_objects": {
+                "value": "100",
+                "type": "Constant"
+            },
+            "multiscale": {
+                "value": "multiscale",
+                "type": "Name"
+            },
+            "min_size": {
+                "value": "self.img_size - 3 * 32",
+                "type": "BinOp"
+            },
+            "max_size": {
+                "value": "self.img_size + 3 * 32",
+                "type": "BinOp"
+            },
+            "batch_count": {
+                "value": "0",
+                "type": "Constant"
+            },
+            "transform": {
+                "value": "transform",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "img_size": {
+                "0": {
+                    "value": "416",
+                    "type": "Constant"
+                }
+            },
+            "multiscale": {
+                "0": {
+                    "value": "True",
+                    "type": "Constant"
+                }
+            },
+            "transform": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 58
+    }
+]

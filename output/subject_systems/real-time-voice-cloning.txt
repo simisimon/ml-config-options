@@ -1,0 +1,2664 @@
+[
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.LSTM",
+        "parameter": {
+            "**kwargs": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "mel_n_channels": {},
+            "model_hidden_size": {},
+            "model_num_layers": {}
+        },
+        "variable": "self.lstm",
+        "line no": 18
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "model_hidden_size",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "model_embedding_size",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "model_hidden_size": {},
+            "model_embedding_size": {}
+        },
+        "variable": "self.linear",
+        "line no": 22
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.ReLU",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.relu",
+        "line no": 24
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.tensor([10.0])",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.similarity_weight",
+        "line no": 27
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.tensor([-5.0])",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.similarity_bias",
+        "line no": 28
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.CrossEntropyLoss",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.loss_fn",
+        "line no": 31
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 126
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/train.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 33
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/train.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cpu'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "loss_device",
+        "line no": 35
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "model.parameters()",
+                "type": "Call"
+            },
+            "lr": {
+                "value": "learning_rate_init",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "learning_rate_init": {}
+        },
+        "variable": "optimizer",
+        "line no": 39
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "_device",
+        "line no": 28
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "device",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "device": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "_device",
+        "line no": 30
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cpu'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "_model",
+        "line no": 31
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/synthesize.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 25
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/synthesize.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cpu'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 29
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/synthesize.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "hparams.synthesis_batch_size",
+                "type": "Attribute"
+            },
+            "collate_fn": {
+                "value": "collate_fn",
+                "type": "Name"
+            },
+            "num_workers": {
+                "value": "2",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "SynthesizerDataset(metadata_fpath, mel_dir, embed_dir, hparams)",
+                    "type": "Call"
+                }
+            },
+            "hparams.synthesis_batch_size": {},
+            "collate_fn": {
+                "0": {
+                    "value": "partial(collate_synthesizer, r=r, hparams=hparams)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "data_loader",
+        "line no": 66
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/train.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 55
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/train.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cpu'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 62
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "model.parameters()",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "optimizer",
+        "line no": 83
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/train.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "collate_fn": {
+                "value": "collate_fn",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "SynthesizerDataset(metadata_fpath, mel_dir, embed_dir, hparams)",
+                    "type": "Call"
+                }
+            },
+            "batch_size": {},
+            "collate_fn": {
+                "0": {
+                    "value": "partial(collate_synthesizer, r=r, hparams=hparams)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "data_loader",
+        "line no": 140
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.device",
+        "line no": 30
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cpu'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.device",
+        "line no": 32
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "size",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "size",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "size": {
+                "0": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "channels",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "postnet_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.W1",
+        "line no": 13
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "size",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "size",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "size": {
+                "0": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "channels",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "postnet_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.W2",
+        "line no": 14
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Embedding",
+        "parameter": {
+            "num_embeddings": {
+                "value": "num_chars",
+                "type": "Name"
+            },
+            "embedding_dim": {
+                "value": "embed_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "num_chars": {
+                "0": {
+                    "value": "x.size()[1]",
+                    "type": "Subscript"
+                }
+            },
+            "embed_dims": {}
+        },
+        "variable": "self.embedding",
+        "line no": 30
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Conv1d",
+        "parameter": {
+            "in_channels": {
+                "value": "in_channels",
+                "type": "Name"
+            },
+            "out_channels": {
+                "value": "out_channels",
+                "type": "Name"
+            },
+            "kernel_size": {
+                "value": "kernel",
+                "type": "Name"
+            },
+            "stride": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "padding": {
+                "value": "kernel // 2",
+                "type": "BinOp"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "in_channels": {
+                "0": {
+                    "value": "len(self.bank_kernels) * channels",
+                    "type": "BinOp"
+                },
+                "1": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "proj_channels[0]",
+                    "type": "Subscript"
+                },
+                "4": {
+                    "value": "n_mels",
+                    "type": "Name"
+                }
+            },
+            "out_channels": {
+                "0": {
+                    "value": "postnet_dims",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "proj_channels[0]",
+                    "type": "Subscript"
+                },
+                "4": {
+                    "value": "channels",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "proj_channels[1]",
+                    "type": "Subscript"
+                }
+            },
+            "kernel": {
+                "0": {
+                    "value": "3",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "k",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "next(iter(self.bank_kernels))",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.conv",
+        "line no": 79
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "out_channels",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "out_channels": {
+                "0": {
+                    "value": "postnet_dims",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "proj_channels[0]",
+                    "type": "Subscript"
+                },
+                "4": {
+                    "value": "channels",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "proj_channels[1]",
+                    "type": "Subscript"
+                }
+            }
+        },
+        "variable": "self.bnorm",
+        "line no": 80
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.ModuleList",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.conv1d_bank",
+        "line no": 97
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.MaxPool1d",
+        "parameter": {
+            "kernel_size": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "stride": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "padding": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.maxpool",
+        "line no": 102
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "proj_channels[-1]",
+                "type": "Subscript"
+            },
+            "out_features": {
+                "value": "channels",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "channels": {
+                "0": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "postnet_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.pre_highway",
+        "line no": 110
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.ModuleList",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.highways",
+        "line no": 114
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.GRU",
+        "parameter": {
+            "*args": {
+                "value": [
+                    "(channels, channels // 2, True, True)",
+                    "channels // 2"
+                ],
+                "type": "List"
+            },
+            "**kwargs": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "channels": {
+                "0": {
+                    "value": "encoder_dims",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "cbhg_channels",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "postnet_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.rnn",
+        "line no": 119
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "in_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "fc1_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "in_dims": {
+                "0": {
+                    "value": "n_mels",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "embed_dims",
+                    "type": "Name"
+                }
+            },
+            "fc1_dims": {
+                "0": {
+                    "value": "256",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "prenet_dims[0]",
+                    "type": "Subscript"
+                }
+            }
+        },
+        "variable": "self.fc1",
+        "line no": 172
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "fc1_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "fc2_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "fc1_dims": {
+                "0": {
+                    "value": "256",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "prenet_dims[0]",
+                    "type": "Subscript"
+                }
+            },
+            "fc2_dims": {
+                "0": {
+                    "value": "128",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "prenet_dims[1]",
+                    "type": "Subscript"
+                }
+            }
+        },
+        "variable": "self.fc2",
+        "line no": 173
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "attn_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "attn_dims",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "attn_dims": {}
+        },
+        "variable": "self.W",
+        "line no": 189
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "attn_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "attn_dims": {}
+        },
+        "variable": "self.v",
+        "line no": 190
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Conv1d",
+        "parameter": {
+            "in_channels": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "out_channels": {
+                "value": "filters",
+                "type": "Name"
+            },
+            "padding": {
+                "value": "(kernel_size - 1) // 2",
+                "type": "BinOp"
+            },
+            "kernel_size": {
+                "value": "kernel_size",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "filters": {
+                "0": {
+                    "value": "32",
+                    "type": "Constant"
+                }
+            },
+            "kernel_size": {
+                "0": {
+                    "value": "31",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "self.conv",
+        "line no": 208
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "filters",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "attn_dim",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "filters": {
+                "0": {
+                    "value": "32",
+                    "type": "Constant"
+                }
+            },
+            "attn_dim": {
+                "0": {
+                    "value": "decoder_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.L",
+        "line no": 209
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "attn_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "attn_dim",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "attn_dim": {
+                "0": {
+                    "value": "decoder_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.W",
+        "line no": 210
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "attn_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "attn_dim": {
+                "0": {
+                    "value": "decoder_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.v",
+        "line no": 211
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.GRUCell",
+        "parameter": {
+            "input_size": {
+                "value": "encoder_dims + prenet_dims[1] + speaker_embedding_size",
+                "type": "BinOp"
+            },
+            "hidden_size": {
+                "value": "decoder_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "decoder_dims": {}
+        },
+        "variable": "self.attn_rnn",
+        "line no": 258
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "encoder_dims + decoder_dims + speaker_embedding_size",
+                "type": "BinOp"
+            },
+            "out_features": {
+                "value": "lstm_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "lstm_dims": {}
+        },
+        "variable": "self.rnn_input",
+        "line no": 259
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.LSTMCell",
+        "parameter": {
+            "input_size": {
+                "value": "lstm_dims",
+                "type": "Name"
+            },
+            "hidden_size": {
+                "value": "lstm_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "lstm_dims": {}
+        },
+        "variable": "self.res_rnn1",
+        "line no": 260
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.LSTMCell",
+        "parameter": {
+            "input_size": {
+                "value": "lstm_dims",
+                "type": "Name"
+            },
+            "hidden_size": {
+                "value": "lstm_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "lstm_dims": {}
+        },
+        "variable": "self.res_rnn2",
+        "line no": 261
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "lstm_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "n_mels * self.max_r",
+                "type": "BinOp"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "lstm_dims": {}
+        },
+        "variable": "self.mel_proj",
+        "line no": 262
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "encoder_dims + speaker_embedding_size + lstm_dims",
+                "type": "BinOp"
+            },
+            "out_features": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.stop_proj",
+        "line no": 263
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "encoder_dims + speaker_embedding_size",
+                "type": "BinOp"
+            },
+            "out_features": {
+                "value": "decoder_dims",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "decoder_dims": {}
+        },
+        "variable": "self.encoder_proj",
+        "line no": 340
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "postnet_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "fft_bins",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "postnet_dims": {},
+            "fft_bins": {}
+        },
+        "variable": "self.post_proj",
+        "line no": 345
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "model.parameters()",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "optimizer",
+        "line no": 44
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/train.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "VocoderDataset(metadata_fpath, mel_dir, wav_dir)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "test_loader",
+        "line no": 67
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/train.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "dataset",
+                "type": "Name"
+            },
+            "batch_size": {
+                "value": "hp.voc_batch_size",
+                "type": "Attribute"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "collate_fn": {
+                "value": "collate_vocoder",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dataset": {
+                "0": {
+                    "value": "VocoderDataset(metadata_fpath, mel_dir, wav_dir)",
+                    "type": "Call"
+                }
+            },
+            "hp.voc_batch_size": {},
+            "collate_vocoder": {}
+        },
+        "variable": "data_loader",
+        "line no": 75
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "_device",
+        "line no": 30
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/inference.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cpu'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "_device",
+        "line no": 32
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Conv1d",
+        "parameter": {
+            "in_channels": {
+                "value": "dims",
+                "type": "Name"
+            },
+            "out_channels": {
+                "value": "dims",
+                "type": "Name"
+            },
+            "kernel_size": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dims": {
+                "0": {
+                    "value": "compute_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.conv1",
+        "line no": 12
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Conv1d",
+        "parameter": {
+            "in_channels": {
+                "value": "dims",
+                "type": "Name"
+            },
+            "out_channels": {
+                "value": "dims",
+                "type": "Name"
+            },
+            "kernel_size": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "dims": {
+                "0": {
+                    "value": "compute_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.conv2",
+        "line no": 13
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dims": {
+                "0": {
+                    "value": "compute_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.batch_norm1",
+        "line no": 14
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dims": {
+                "0": {
+                    "value": "compute_dims",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.batch_norm2",
+        "line no": 15
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Conv1d",
+        "parameter": {
+            "in_channels": {
+                "value": "in_dims",
+                "type": "Name"
+            },
+            "out_channels": {
+                "value": "compute_dims",
+                "type": "Name"
+            },
+            "kernel_size": {
+                "value": "k_size",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "in_dims": {
+                "0": {
+                    "value": "feat_dims",
+                    "type": "Name"
+                }
+            },
+            "compute_dims": {},
+            "k_size": {
+                "0": {
+                    "value": "(1, scale * 2 + 1)",
+                    "type": "Tuple"
+                },
+                "1": {
+                    "value": "pad * 2 + 1",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "self.conv_in",
+        "line no": 31
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.BatchNorm1d",
+        "parameter": {
+            "num_features": {
+                "value": "compute_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "compute_dims": {}
+        },
+        "variable": "self.batch_norm",
+        "line no": 32
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.ModuleList",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.layers",
+        "line no": 33
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Conv1d",
+        "parameter": {
+            "in_channels": {
+                "value": "compute_dims",
+                "type": "Name"
+            },
+            "out_channels": {
+                "value": "res_out_dims",
+                "type": "Name"
+            },
+            "kernel_size": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "compute_dims": {},
+            "res_out_dims": {}
+        },
+        "variable": "self.conv_out",
+        "line no": 36
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.ModuleList",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.up_layers",
+        "line no": 68
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Conv2d",
+        "parameter": {
+            "in_channels": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "out_channels": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "kernel_size": {
+                "value": "k_size",
+                "type": "Name"
+            },
+            "padding": {
+                "value": "padding",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "k_size": {
+                "0": {
+                    "value": "(1, scale * 2 + 1)",
+                    "type": "Tuple"
+                },
+                "1": {
+                    "value": "pad * 2 + 1",
+                    "type": "BinOp"
+                }
+            },
+            "padding": {
+                "0": {
+                    "value": "(0, scale)",
+                    "type": "Tuple"
+                },
+                "1": {
+                    "value": "target + 2 * overlap - remaining",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "conv",
+        "line no": 73
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "feat_dims + self.aux_dims + 1",
+                "type": "BinOp"
+            },
+            "out_features": {
+                "value": "rnn_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "rnn_dims": {}
+        },
+        "variable": "self.I",
+        "line no": 108
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.GRU",
+        "parameter": {
+            "*args": {
+                "value": [
+                    "(rnn_dims, rnn_dims, True)",
+                    "rnn_dims"
+                ],
+                "type": "List"
+            },
+            "**kwargs": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "rnn_dims": {}
+        },
+        "variable": "self.rnn1",
+        "line no": 109
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.GRU",
+        "parameter": {
+            "*args": {
+                "value": [
+                    "(rnn_dims + self.aux_dims, rnn_dims, True)",
+                    "rnn_dims"
+                ],
+                "type": "List"
+            },
+            "**kwargs": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "rnn_dims": {}
+        },
+        "variable": "self.rnn2",
+        "line no": 110
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "rnn_dims + self.aux_dims",
+                "type": "BinOp"
+            },
+            "out_features": {
+                "value": "fc_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "fc_dims": {}
+        },
+        "variable": "self.fc1",
+        "line no": 111
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "fc_dims + self.aux_dims",
+                "type": "BinOp"
+            },
+            "out_features": {
+                "value": "fc_dims",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "fc_dims": {}
+        },
+        "variable": "self.fc2",
+        "line no": 112
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "fc_dims",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "self.n_classes",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "fc_dims": {},
+            "self.n_classes": {
+                "0": {
+                    "value": "30",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "2 ** bits",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "self.fc3",
+        "line no": 113
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.zeros(1).long()",
+                "type": "Call"
+            },
+            "requires_grad": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.step",
+        "line no": 115
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.distributions.categorical.Categorical",
+        "parameter": {
+            "probs": {
+                "value": "posterior",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "posterior": {
+                "0": {
+                    "value": "F.softmax(logits, dim=1)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "distrib",
+        "line no": 224
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 163
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.GRUCell",
+        "parameter": {
+            "input_size": {
+                "value": "gru.input_size",
+                "type": "Attribute"
+            },
+            "hidden_size": {
+                "value": "gru.hidden_size",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "gru.input_size": {},
+            "gru.hidden_size": {}
+        },
+        "variable": "gru_cell",
+        "line no": 266
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "self.hidden_size",
+                "type": "Attribute"
+            },
+            "out_features": {
+                "value": "3 * self.hidden_size",
+                "type": "BinOp"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "self.hidden_size": {
+                "0": {
+                    "value": "896",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "hidden_size",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "self.R",
+        "line no": 16
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "self.split_size",
+                "type": "Attribute"
+            },
+            "out_features": {
+                "value": "self.split_size",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.split_size": {
+                "0": {
+                    "value": "hidden_size // 2",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "self.O1",
+        "line no": 19
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "self.split_size",
+                "type": "Attribute"
+            },
+            "out_features": {
+                "value": "quantisation",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "self.split_size": {
+                "0": {
+                    "value": "hidden_size // 2",
+                    "type": "BinOp"
+                }
+            },
+            "quantisation": {
+                "0": {
+                    "value": "256",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "self.O2",
+        "line no": 20
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "self.split_size",
+                "type": "Attribute"
+            },
+            "out_features": {
+                "value": "self.split_size",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.split_size": {
+                "0": {
+                    "value": "hidden_size // 2",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "self.O3",
+        "line no": 21
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "self.split_size",
+                "type": "Attribute"
+            },
+            "out_features": {
+                "value": "quantisation",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "self.split_size": {
+                "0": {
+                    "value": "hidden_size // 2",
+                    "type": "BinOp"
+                }
+            },
+            "quantisation": {
+                "0": {
+                    "value": "256",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "self.O4",
+        "line no": 22
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "out_features": {
+                "value": "3 * self.split_size",
+                "type": "BinOp"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.I_coarse",
+        "line no": 25
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "3",
+                "type": "Constant"
+            },
+            "out_features": {
+                "value": "3 * self.split_size",
+                "type": "BinOp"
+            },
+            "bias": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.I_fine",
+        "line no": 26
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.zeros(self.hidden_size)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.bias_u",
+        "line no": 29
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.zeros(self.hidden_size)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.bias_r",
+        "line no": 30
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "torch.zeros(self.hidden_size)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.bias_e",
+        "line no": 31
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.distributions.categorical.Categorical",
+        "parameter": {
+            "probs": {
+                "value": "posterior",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "posterior": {
+                "0": {
+                    "value": "F.softmax(out_fine, dim=1)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "distrib",
+        "line no": 127
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.distributions.categorical.Categorical",
+        "parameter": {
+            "probs": {
+                "value": "posterior",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "posterior": {
+                "0": {
+                    "value": "F.softmax(out_fine, dim=1)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "distrib",
+        "line no": 147
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 76
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "loss_device": {
+                "value": "loss_device",
+                "type": "Name"
+            },
+            "lstm": {
+                "value": "nn.LSTM(input_size=mel_n_channels, hidden_size=model_hidden_size, num_layers=model_num_layers, batch_first=True).to(device)",
+                "type": "Call"
+            },
+            "linear": {
+                "value": "nn.Linear(in_features=model_hidden_size, out_features=model_embedding_size).to(device)",
+                "type": "Call"
+            },
+            "relu": {
+                "value": "torch.nn.ReLU().to(device)",
+                "type": "Call"
+            },
+            "similarity_weight": {
+                "value": "nn.Parameter(torch.tensor([10.0])).to(loss_device)",
+                "type": "Call"
+            },
+            "similarity_bias": {
+                "value": "nn.Parameter(torch.tensor([-5.0])).to(loss_device)",
+                "type": "Call"
+            },
+            "loss_fn": {
+                "value": "nn.CrossEntropyLoss().to(loss_device)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "loss_device": {}
+        },
+        "variable": "",
+        "line no": 12
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/model.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "loss_device": {
+                "value": "loss_device",
+                "type": "Name"
+            },
+            "lstm": {
+                "value": "nn.LSTM(input_size=mel_n_channels, hidden_size=model_hidden_size, num_layers=model_num_layers, batch_first=True).to(device)",
+                "type": "Call"
+            },
+            "linear": {
+                "value": "nn.Linear(in_features=model_hidden_size, out_features=model_embedding_size).to(device)",
+                "type": "Call"
+            },
+            "relu": {
+                "value": "torch.nn.ReLU().to(device)",
+                "type": "Call"
+            },
+            "similarity_weight": {
+                "value": "nn.Parameter(torch.tensor([10.0])).to(loss_device)",
+                "type": "Call"
+            },
+            "similarity_bias": {
+                "value": "nn.Parameter(torch.tensor([-5.0])).to(loss_device)",
+                "type": "Call"
+            },
+            "loss_fn": {
+                "value": "nn.CrossEntropyLoss().to(loss_device)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "loss_device": {}
+        },
+        "variable": "",
+        "line no": 12
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/data_objects/speaker_verification_dataset.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "root": {
+                "value": "datasets_root",
+                "type": "Name"
+            },
+            "speakers": {
+                "value": "[Speaker(speaker_dir) for speaker_dir in speaker_dirs]",
+                "type": "ListComp"
+            },
+            "speaker_cycler": {
+                "value": "RandomCycler(self.speakers)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "datasets_root": {}
+        },
+        "variable": "",
+        "line no": 10
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/encoder/data_objects/speaker_verification_dataset.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "utterances_per_speaker": {
+                "value": "utterances_per_speaker",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "utterances_per_speaker": {}
+        },
+        "variable": "",
+        "line no": 34
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/synthesizer_dataset.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "samples_fpaths": {
+                "value": "list(zip(mel_fpaths, embed_fpaths))",
+                "type": "Call"
+            },
+            "samples_texts": {
+                "value": "[x[5].strip() for x in metadata if int(x[4])]",
+                "type": "ListComp"
+            },
+            "metadata": {
+                "value": "metadata",
+                "type": "Name"
+            },
+            "hparams": {
+                "value": "hparams",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "metadata": {
+                "0": {
+                    "value": "[line.split('|') for line in metadata_file]",
+                    "type": "ListComp"
+                }
+            },
+            "hparams": {}
+        },
+        "variable": "",
+        "line no": 8
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "W1": {
+                "value": "nn.Linear(size, size)",
+                "type": "Call"
+            },
+            "W2": {
+                "value": "nn.Linear(size, size)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 10
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "embedding": {
+                "value": "nn.Embedding(num_chars, embed_dims)",
+                "type": "Call"
+            },
+            "pre_net": {
+                "value": "PreNet(embed_dims, fc1_dims=prenet_dims[0], fc2_dims=prenet_dims[1], dropout=dropout)",
+                "type": "Call"
+            },
+            "cbhg": {
+                "value": "CBHG(K=K, in_channels=cbhg_channels, channels=cbhg_channels, proj_channels=[cbhg_channels, cbhg_channels], num_highways=num_highways)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 25
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "conv": {
+                "value": "nn.Conv1d(in_channels, out_channels, kernel, stride=1, padding=kernel // 2, bias=False)",
+                "type": "Call"
+            },
+            "bnorm": {
+                "value": "nn.BatchNorm1d(out_channels)",
+                "type": "Call"
+            },
+            "relu": {
+                "value": "relu",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "relu": {
+                "0": {
+                    "value": "True",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "False",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 76
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "_to_flatten": {
+                "value": "[]",
+                "type": "List"
+            },
+            "bank_kernels": {
+                "value": "[i for i in range(1, K + 1)]",
+                "type": "ListComp"
+            },
+            "conv1d_bank": {
+                "value": "nn.ModuleList()",
+                "type": "Call"
+            },
+            "maxpool": {
+                "value": "nn.MaxPool1d(kernel_size=2, stride=1, padding=1)",
+                "type": "Call"
+            },
+            "conv_project1": {
+                "value": "BatchNormConv(len(self.bank_kernels) * channels, proj_channels[0], 3)",
+                "type": "Call"
+            },
+            "conv_project2": {
+                "value": "BatchNormConv(proj_channels[0], proj_channels[1], 3, relu=False)",
+                "type": "Call"
+            },
+            "highways": {
+                "value": "nn.ModuleList()",
+                "type": "Call"
+            },
+            "rnn": {
+                "value": "nn.GRU(channels, channels // 2, batch_first=True, bidirectional=True)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 89
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "fc1": {
+                "value": "nn.Linear(in_dims, fc1_dims)",
+                "type": "Call"
+            },
+            "fc2": {
+                "value": "nn.Linear(fc1_dims, fc2_dims)",
+                "type": "Call"
+            },
+            "p": {
+                "value": "dropout",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dropout": {
+                "0": {
+                    "value": "0.5",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 169
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "W": {
+                "value": "nn.Linear(attn_dims, attn_dims, bias=False)",
+                "type": "Call"
+            },
+            "v": {
+                "value": "nn.Linear(attn_dims, 1, bias=False)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 186
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "conv": {
+                "value": "nn.Conv1d(1, filters, padding=(kernel_size - 1) // 2, kernel_size=kernel_size, bias=True)",
+                "type": "Call"
+            },
+            "L": {
+                "value": "nn.Linear(filters, attn_dim, bias=False)",
+                "type": "Call"
+            },
+            "W": {
+                "value": "nn.Linear(attn_dim, attn_dim, bias=True)",
+                "type": "Call"
+            },
+            "v": {
+                "value": "nn.Linear(attn_dim, 1, bias=False)",
+                "type": "Call"
+            },
+            "cumulative": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "attention": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 205
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "n_mels": {
+                "value": "n_mels",
+                "type": "Name"
+            },
+            "prenet": {
+                "value": "PreNet(n_mels, fc1_dims=prenet_dims[0], fc2_dims=prenet_dims[1], dropout=dropout)",
+                "type": "Call"
+            },
+            "attn_net": {
+                "value": "LSA(decoder_dims)",
+                "type": "Call"
+            },
+            "attn_rnn": {
+                "value": "nn.GRUCell(encoder_dims + prenet_dims[1] + speaker_embedding_size, decoder_dims)",
+                "type": "Call"
+            },
+            "rnn_input": {
+                "value": "nn.Linear(encoder_dims + decoder_dims + speaker_embedding_size, lstm_dims)",
+                "type": "Call"
+            },
+            "res_rnn1": {
+                "value": "nn.LSTMCell(lstm_dims, lstm_dims)",
+                "type": "Call"
+            },
+            "res_rnn2": {
+                "value": "nn.LSTMCell(lstm_dims, lstm_dims)",
+                "type": "Call"
+            },
+            "mel_proj": {
+                "value": "nn.Linear(lstm_dims, n_mels * self.max_r, bias=False)",
+                "type": "Call"
+            },
+            "stop_proj": {
+                "value": "nn.Linear(encoder_dims + speaker_embedding_size + lstm_dims, 1)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "n_mels": {}
+        },
+        "variable": "",
+        "line no": 245
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/synthesizer/models/tacotron.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "n_mels": {
+                "value": "n_mels",
+                "type": "Name"
+            },
+            "lstm_dims": {
+                "value": "lstm_dims",
+                "type": "Name"
+            },
+            "encoder_dims": {
+                "value": "encoder_dims",
+                "type": "Name"
+            },
+            "decoder_dims": {
+                "value": "decoder_dims",
+                "type": "Name"
+            },
+            "speaker_embedding_size": {
+                "value": "speaker_embedding_size",
+                "type": "Name"
+            },
+            "encoder": {
+                "value": "Encoder(embed_dims, num_chars, encoder_dims, encoder_K, num_highways, dropout)",
+                "type": "Call"
+            },
+            "encoder_proj": {
+                "value": "nn.Linear(encoder_dims + speaker_embedding_size, decoder_dims, bias=False)",
+                "type": "Call"
+            },
+            "decoder": {
+                "value": "Decoder(n_mels, encoder_dims, decoder_dims, lstm_dims, dropout, speaker_embedding_size)",
+                "type": "Call"
+            },
+            "postnet": {
+                "value": "CBHG(postnet_K, n_mels, postnet_dims, [postnet_dims, fft_bins], num_highways)",
+                "type": "Call"
+            },
+            "post_proj": {
+                "value": "nn.Linear(postnet_dims, fft_bins, bias=False)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "n_mels": {},
+            "lstm_dims": {},
+            "encoder_dims": {},
+            "decoder_dims": {},
+            "speaker_embedding_size": {
+                "0": {
+                    "value": "speaker_embedding.size()[idx]",
+                    "type": "Subscript"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 328
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/vocoder_dataset.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "samples_fpaths": {
+                "value": "list(zip(gta_fpaths, wav_fpaths))",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 9
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "conv1": {
+                "value": "nn.Conv1d(dims, dims, kernel_size=1, bias=False)",
+                "type": "Call"
+            },
+            "conv2": {
+                "value": "nn.Conv1d(dims, dims, kernel_size=1, bias=False)",
+                "type": "Call"
+            },
+            "batch_norm1": {
+                "value": "nn.BatchNorm1d(dims)",
+                "type": "Call"
+            },
+            "batch_norm2": {
+                "value": "nn.BatchNorm1d(dims)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 9
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "conv_in": {
+                "value": "nn.Conv1d(in_dims, compute_dims, kernel_size=k_size, bias=False)",
+                "type": "Call"
+            },
+            "batch_norm": {
+                "value": "nn.BatchNorm1d(compute_dims)",
+                "type": "Call"
+            },
+            "layers": {
+                "value": "nn.ModuleList()",
+                "type": "Call"
+            },
+            "conv_out": {
+                "value": "nn.Conv1d(compute_dims, res_out_dims, kernel_size=1)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 27
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "x_scale": {
+                "value": "x_scale",
+                "type": "Name"
+            },
+            "y_scale": {
+                "value": "y_scale",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "x_scale": {
+                "0": {
+                    "value": "total_scale",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "np.cumproduct(upsample_scales)[-1]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "scale",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "next(iter(upsample_scales))",
+                    "type": "Call"
+                }
+            },
+            "y_scale": {
+                "0": {
+                    "value": "1",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 47
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "indent": {
+                "value": "pad * total_scale",
+                "type": "BinOp"
+            },
+            "resnet": {
+                "value": "MelResNet(res_blocks, feat_dims, compute_dims, res_out_dims, pad)",
+                "type": "Call"
+            },
+            "resnet_stretch": {
+                "value": "Stretch2d(total_scale, 1)",
+                "type": "Call"
+            },
+            "up_layers": {
+                "value": "nn.ModuleList()",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 60
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/fatchord_version.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "mode": {
+                "value": "mode",
+                "type": "Name"
+            },
+            "pad": {
+                "value": "pad",
+                "type": "Name"
+            },
+            "rnn_dims": {
+                "value": "rnn_dims",
+                "type": "Name"
+            },
+            "aux_dims": {
+                "value": "res_out_dims // 4",
+                "type": "BinOp"
+            },
+            "hop_length": {
+                "value": "hop_length",
+                "type": "Name"
+            },
+            "sample_rate": {
+                "value": "sample_rate",
+                "type": "Name"
+            },
+            "upsample": {
+                "value": "UpsampleNetwork(feat_dims, upsample_factors, compute_dims, res_blocks, res_out_dims, pad)",
+                "type": "Call"
+            },
+            "I": {
+                "value": "nn.Linear(feat_dims + self.aux_dims + 1, rnn_dims)",
+                "type": "Call"
+            },
+            "rnn1": {
+                "value": "nn.GRU(rnn_dims, rnn_dims, batch_first=True)",
+                "type": "Call"
+            },
+            "rnn2": {
+                "value": "nn.GRU(rnn_dims + self.aux_dims, rnn_dims, batch_first=True)",
+                "type": "Call"
+            },
+            "fc1": {
+                "value": "nn.Linear(rnn_dims + self.aux_dims, fc_dims)",
+                "type": "Call"
+            },
+            "fc2": {
+                "value": "nn.Linear(fc_dims + self.aux_dims, fc_dims)",
+                "type": "Call"
+            },
+            "fc3": {
+                "value": "nn.Linear(fc_dims, self.n_classes)",
+                "type": "Call"
+            },
+            "step": {
+                "value": "nn.Parameter(torch.zeros(1).long(), requires_grad=False)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "mode": {
+                "0": {
+                    "value": "'RAW'",
+                    "type": "Constant"
+                }
+            },
+            "pad": {
+                "0": {
+                    "value": "self.pad",
+                    "type": "Attribute"
+                },
+                "1": {
+                    "value": "(0, scale)",
+                    "type": "Tuple"
+                },
+                "2": {
+                    "value": "padding",
+                    "type": "Name"
+                },
+                "3": {
+                    "value": "target + 2 * overlap - remaining",
+                    "type": "BinOp"
+                }
+            },
+            "rnn_dims": {},
+            "hop_length": {},
+            "sample_rate": {}
+        },
+        "variable": "",
+        "line no": 88
+    },
+    {
+        "file": "Real-Time-Voice-Cloning/vocoder/models/deepmind_version.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "hidden_size": {
+                "value": "hidden_size",
+                "type": "Name"
+            },
+            "split_size": {
+                "value": "hidden_size // 2",
+                "type": "BinOp"
+            },
+            "R": {
+                "value": "nn.Linear(self.hidden_size, 3 * self.hidden_size, bias=False)",
+                "type": "Call"
+            },
+            "O1": {
+                "value": "nn.Linear(self.split_size, self.split_size)",
+                "type": "Call"
+            },
+            "O2": {
+                "value": "nn.Linear(self.split_size, quantisation)",
+                "type": "Call"
+            },
+            "O3": {
+                "value": "nn.Linear(self.split_size, self.split_size)",
+                "type": "Call"
+            },
+            "O4": {
+                "value": "nn.Linear(self.split_size, quantisation)",
+                "type": "Call"
+            },
+            "I_coarse": {
+                "value": "nn.Linear(2, 3 * self.split_size, bias=False)",
+                "type": "Call"
+            },
+            "I_fine": {
+                "value": "nn.Linear(3, 3 * self.split_size, bias=False)",
+                "type": "Call"
+            },
+            "bias_u": {
+                "value": "nn.Parameter(torch.zeros(self.hidden_size))",
+                "type": "Call"
+            },
+            "bias_r": {
+                "value": "nn.Parameter(torch.zeros(self.hidden_size))",
+                "type": "Call"
+            },
+            "bias_e": {
+                "value": "nn.Parameter(torch.zeros(self.hidden_size))",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "hidden_size": {
+                "0": {
+                    "value": "896",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 8
+    }
+]

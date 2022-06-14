@@ -1,0 +1,1609 @@
+[
+    {
+        "file": "autogluon/core/src/autogluon/core/searcher/local_grid_searcher.py",
+        "class": "sklearn.model_selection.ParameterGrid",
+        "parameter": {
+            "param_grid": {
+                "value": "self._params_space",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self._params_space": {
+                "0": {
+                    "value": "self._get_params_space()",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self._params_grid",
+        "line no": 34
+    },
+    {
+        "file": "autogluon/core/src/autogluon/core/searcher/local_random_searcher.py",
+        "class": "sklearn.model_selection.ParameterSampler",
+        "parameter": {
+            "param_distributions": {
+                "value": "self._params_space",
+                "type": "Attribute"
+            },
+            "n_iter": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "random_state": {
+                "value": "self.random_state",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self._params_space": {
+                "0": {
+                    "value": "self._get_params_space()",
+                    "type": "Call"
+                }
+            },
+            "self.random_state": {
+                "0": {
+                    "value": "np.random.RandomState(random_seed)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 47
+    },
+    {
+        "file": "autogluon/core/src/autogluon/core/augmentation/distill_utils.py",
+        "class": "sklearn.neighbors.NearestNeighbors",
+        "parameter": {
+            "n_neighbors": {
+                "value": "2",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "neighbor_finder",
+        "line no": 148
+    },
+    {
+        "file": "autogluon/tabular/tests/unittests/configs/test_config_helper.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "7",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(2, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "11",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "vectorizer",
+        "line no": 230
+    },
+    {
+        "file": "autogluon/tabular/tests/unittests/configs/test_config_helper.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "7",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(2, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "11",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "vectorizer",
+        "line no": 314
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/fastainn/quantile_helpers.py",
+        "class": "sklearn.isotonic.IsotonicRegression",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 13
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/fastainn/tabular_nn_fastai.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.y_scaler",
+        "line no": 188
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/fastainn/tabular_nn_fastai.py",
+        "class": "sklearn.preprocessing.MinMaxScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.y_scaler",
+        "line no": 190
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/imodels/imodels_models.py",
+        "class": "sklearn.preprocessing.OneHotEncoder",
+        "parameter": {
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            },
+            "handle_unknown": {
+                "value": "'ignore'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "self._ohe",
+        "line no": 31
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "impute_strategy",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "impute_strategy": {}
+        },
+        "variable": "continuous_transformer",
+        "line no": 15
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer(strategy=impute_strategy)), ('scaler', StandardScaler())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "continuous_transformer",
+        "line no": 15
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "continuous_transformer",
+        "line no": 15
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "impute_strategy",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "impute_strategy": {}
+        },
+        "variable": "power_transformer",
+        "line no": 20
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer(strategy=impute_strategy)), ('quantile', QuantileTransformer(output_distribution='normal'))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "power_transformer",
+        "line no": 20
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.preprocessing.QuantileTransformer",
+        "parameter": {
+            "output_distribution": {
+                "value": "'normal'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "power_transformer",
+        "line no": 20
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "'constant'",
+                "type": "Constant"
+            },
+            "fill_value": {
+                "value": "unique_category_str",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "unique_category_str": {}
+        },
+        "variable": "onehot_transformer",
+        "line no": 25
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('to_str', FunctionTransformer(convert_df_dtype_to_str)), ('imputer', SimpleImputer(strategy='constant', fill_value=unique_category_str)), ('onehot', OneHotMergeRaresHandleUnknownEncoder(max_levels=max_category_levels, sparse=False))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "onehot_transformer",
+        "line no": 25
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.preprocessing.FunctionTransformer",
+        "parameter": {
+            "func": {
+                "value": "convert_df_dtype_to_str",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "convert_df_dtype_to_str": {}
+        },
+        "variable": "onehot_transformer",
+        "line no": 25
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "'constant'",
+                "type": "Constant"
+            },
+            "fill_value": {
+                "value": "unique_category_str",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "unique_category_str": {}
+        },
+        "variable": "ordinal_transformer",
+        "line no": 32
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('to_str', FunctionTransformer(convert_df_dtype_to_str)), ('imputer', SimpleImputer(strategy='constant', fill_value=unique_category_str)), ('ordinal', OrdinalMergeRaresHandleUnknownEncoder(max_levels=max_category_levels))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "ordinal_transformer",
+        "line no": 32
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.preprocessing.FunctionTransformer",
+        "parameter": {
+            "func": {
+                "value": "convert_df_dtype_to_str",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "convert_df_dtype_to_str": {}
+        },
+        "variable": "ordinal_transformer",
+        "line no": 32
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/data_preprocessor.py",
+        "class": "sklearn.compose.ColumnTransformer",
+        "parameter": {
+            "transformers": {
+                "value": "transformers",
+                "type": "Name"
+            },
+            "remainder": {
+                "value": "'passthrough'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "transformers": {
+                "0": {
+                    "value": "[]",
+                    "type": "List"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 37
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.feature_extraction.text.TfidfVectorizer",
+        "parameter": {
+            "ngram_range": {
+                "value": "self.params['proc.ngram_range']",
+                "type": "Subscript"
+            },
+            "sublinear_tf": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "max_features": {
+                "value": "vect_max_features",
+                "type": "Name"
+            },
+            "tokenizer": {
+                "value": "self._tokenize",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "vect_max_features": {
+                "0": {
+                    "value": "self.params['vectorizer_dict_size']",
+                    "type": "Subscript"
+                }
+            },
+            "self._tokenize": {}
+        },
+        "variable": "pipeline",
+        "line no": 102
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('preparator', NlpDataPreprocessor(nlp_cols=feature_types['language'])), ('vectorizer', TfidfVectorizer(ngram_range=self.params['proc.ngram_range'], sublinear_tf=True, max_features=vect_max_features, tokenizer=self._tokenize))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 102
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('generator', OheFeaturesGenerator())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 108
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "self.params['proc.impute_strategy']",
+                "type": "Subscript"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 113
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer(strategy=self.params['proc.impute_strategy'])), ('scaler', StandardScaler())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 113
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 113
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('scaler', StandardScaler())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 119
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 119
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "self.params['proc.impute_strategy']",
+                "type": "Subscript"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 124
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer(strategy=self.params['proc.impute_strategy'])), ('quantile', QuantileTransformer(output_distribution='normal'))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 124
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.preprocessing.QuantileTransformer",
+        "parameter": {
+            "output_distribution": {
+                "value": "'normal'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 124
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_model.py",
+        "class": "sklearn.compose.ColumnTransformer",
+        "parameter": {
+            "transformers": {
+                "value": "transformer_list",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "transformer_list": {
+                "0": {
+                    "value": "[]",
+                    "type": "List"
+                }
+            }
+        },
+        "variable": "self._pipeline",
+        "line no": 129
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.KBinsDiscretizer",
+        "parameter": {
+            "n_bins": {
+                "value": "8",
+                "type": "Constant"
+            },
+            "encode": {
+                "value": "'ordinal'",
+                "type": "Constant"
+            },
+            "strategy": {
+                "value": "'quantile'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 150
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.RobustScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 216
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.PowerTransformer",
+        "parameter": {
+            "method": {
+                "value": "'yeo-johnson'",
+                "type": "Constant"
+            },
+            "standardize": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "copy": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 242
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.QuantileTransformer",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 264
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.KBinsDiscretizer",
+        "parameter": {
+            "n_bins": {
+                "value": "8",
+                "type": "Constant"
+            },
+            "encode": {
+                "value": "'ordinal'",
+                "type": "Constant"
+            },
+            "strategy": {
+                "value": "'quantile'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 420
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.feature_extraction.text.TfidfVectorizer",
+        "parameter": {
+            "input": {
+                "value": "'content'",
+                "type": "Constant"
+            },
+            "decode_error": {
+                "value": "'replace'",
+                "type": "Constant"
+            },
+            "strip_accents": {
+                "value": "'ascii'",
+                "type": "Constant"
+            },
+            "lowercase": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "analyzer": {
+                "value": "'word'",
+                "type": "Constant"
+            },
+            "min_df": {
+                "value": "5 / 100000",
+                "type": "BinOp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 459
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.RobustScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.scaler",
+        "line no": 478
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tab_transformer/tab_transformer_encoder.py",
+        "class": "sklearn.preprocessing.RobustScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.scaler",
+        "line no": 502
+    },
+    {
+        "file": "autogluon/features/tests/features/generators/test_auto_ml_pipeline.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "toy_vectorizer",
+        "line no": 13
+    },
+    {
+        "file": "autogluon/features/tests/features/generators/test_text_ngram.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "toy_vectorizer",
+        "line no": 32
+    },
+    {
+        "file": "autogluon/features/tests/features/generators/test_text_ngram.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "toy_vectorizer",
+        "line no": 71
+    },
+    {
+        "file": "autogluon/features/tests/features/generators/test_bulk.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "toy_vectorizer",
+        "line no": 13
+    },
+    {
+        "file": "autogluon/features/tests/features/generators/test_pipeline.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "toy_vectorizer",
+        "line no": 13
+    },
+    {
+        "file": "autogluon/features/tests/features/generators/test_pipeline.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "2",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "toy_vectorizer",
+        "line no": 149
+    },
+    {
+        "file": "autogluon/features/src/autogluon/features/vectorizers.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "30",
+                "type": "Constant"
+            },
+            "ngram_range": {
+                "value": "(1, 3)",
+                "type": "Tuple"
+            },
+            "max_features": {
+                "value": "10000",
+                "type": "Constant"
+            },
+            "dtype": {
+                "value": "np.uint8",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "np.uint8": {}
+        },
+        "variable": "",
+        "line no": 8
+    },
+    {
+        "file": "autogluon/features/src/autogluon/features/generators/text_ngram.py",
+        "class": "sklearn.feature_selection.SelectKBest",
+        "parameter": {
+            "score_func": {
+                "value": "scoring_function",
+                "type": "Name"
+            },
+            "k": {
+                "value": "self.prefilter_token_count",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "scoring_function": {
+                "0": {
+                    "value": "f_classif if problem_type == 'binary' else f_regression",
+                    "type": "IfExp"
+                }
+            },
+            "self.prefilter_token_count": {
+                "0": {
+                    "value": "prefilter_token_count",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "100",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "selector",
+        "line no": 86
+    },
+    {
+        "file": "autogluon/features/src/autogluon/features/generators/one_hot_encoder.py",
+        "class": "sklearn.preprocessing.OneHotEncoder",
+        "parameter": {
+            "dtype": {
+                "value": "dtype",
+                "type": "Name"
+            },
+            "sparse": {
+                "value": "self.sparse",
+                "type": "Attribute"
+            },
+            "handle_unknown": {
+                "value": "'ignore'",
+                "type": "Constant"
+            },
+            "drop": {
+                "value": "drop",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "dtype": {
+                "0": {
+                    "value": "np.uint8",
+                    "type": "Attribute"
+                },
+                "1": {
+                    "value": "np.promote_types(min_dtype, max_dtype)",
+                    "type": "Call"
+                },
+                "2": {
+                    "value": "np.promote_types(dtype, cur_dtype)",
+                    "type": "Call"
+                },
+                "3": {
+                    "value": "cur_dtype",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            },
+            "self.sparse": {
+                "0": {
+                    "value": "True",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "sparse",
+                    "type": "Name"
+                }
+            },
+            "drop": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "self._ohe",
+        "line no": 128
+    },
+    {
+        "file": "autogluon/examples/tabular/example_custom_model_tabular.py",
+        "class": "sklearn.naive_bayes.GaussianNB",
+        "parameter": {},
+        "variable parameters": {
+            "self.params": {}
+        },
+        "variable": "self.model",
+        "line no": 30
+    },
+    {
+        "file": "autogluon/examples/tabular/example_custom_model_tabular.py",
+        "class": "sklearn.naive_bayes.GaussianNB",
+        "parameter": {},
+        "variable parameters": {
+            "self.params": {}
+        },
+        "variable": "self.model",
+        "line no": 43
+    },
+    {
+        "file": "autogluon/text/tests/unittests/automm/test_utils.py",
+        "class": "sklearn.preprocessing.LabelEncoder",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "label_encoder",
+        "line no": 112
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.preprocessing.LabelEncoder",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self._label_generator",
+        "line no": 58
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.preprocessing.MinMaxScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self._label_scaler",
+        "line no": 65
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self._label_scaler",
+        "line no": 67
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {
+            "with_mean": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "with_std": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self._label_scaler",
+        "line no": 69
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer()), ('scaler', StandardScaler(with_mean=config['numerical']['scaler_with_mean'], with_std=config['numerical']['scaler_with_std']))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "generator",
+        "line no": 89
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "generator",
+        "line no": 89
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {
+            "with_mean": {
+                "value": "config['numerical']['scaler_with_mean']",
+                "type": "Subscript"
+            },
+            "with_std": {
+                "value": "config['numerical']['scaler_with_std']",
+                "type": "Subscript"
+            }
+        },
+        "variable parameters": {},
+        "variable": "generator",
+        "line no": 89
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/models.py",
+        "class": "sklearn.preprocessing.LabelEncoder",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "label_generator",
+        "line no": 445
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self._label_scaler",
+        "line no": 279
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "generator",
+        "line no": 293
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer()), ('scaler', StandardScaler(with_mean=cfg.numerical.scaler_with_mean, with_std=cfg.numerical.scaler_with_std))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "generator",
+        "line no": 293
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {
+            "with_mean": {
+                "value": "cfg.numerical.scaler_with_mean",
+                "type": "Attribute"
+            },
+            "with_std": {
+                "value": "cfg.numerical.scaler_with_std",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "cfg.numerical.scaler_with_mean": {
+                "0": {
+                    "value": "True",
+                    "type": "Constant"
+                }
+            },
+            "cfg.numerical.scaler_with_std": {
+                "0": {
+                    "value": "True",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "generator",
+        "line no": 293
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.preprocessing.LabelEncoder",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self._label_generator",
+        "line no": 442
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/xgboost/xgboost_utils.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "_feature_map": {
+                "value": "OrderedDict()",
+                "type": "Call"
+            },
+            "labels": {
+                "value": "OrderedDict()",
+                "type": "Call"
+            },
+            "cat_cols": {
+                "value": "[]",
+                "type": "List"
+            },
+            "other_cols": {
+                "value": "[]",
+                "type": "List"
+            },
+            "ohe_encs": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "max_levels": {
+                "value": "max_levels",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "max_levels": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 96
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/xgboost/xgboost_utils.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {
+            "_feature_map": {
+                "value": "OrderedDict()",
+                "type": "Call"
+            },
+            "labels": {
+                "value": "OrderedDict()",
+                "type": "Call"
+            },
+            "cat_cols": {
+                "value": "[]",
+                "type": "List"
+            },
+            "other_cols": {
+                "value": "[]",
+                "type": "List"
+            },
+            "ohe_encs": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "max_levels": {
+                "value": "max_levels",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "max_levels": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 96
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/rf/rf_quantile.py",
+        "class": "sklearn.tree.DecisionTreeRegressor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 182
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/rf/rf_quantile.py",
+        "class": "sklearn.tree.ExtraTreeRegressor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 303
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/categorical_encoders.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 149
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/tabular_nn/utils/categorical_encoders.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 149
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_preprocessing_utils.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_encoder": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 6
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_preprocessing_utils.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {
+            "_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_encoder": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 6
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_preprocessing_utils.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "nlp_cols": {
+                "value": "nlp_cols",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "nlp_cols": {}
+        },
+        "variable": "",
+        "line no": 24
+    },
+    {
+        "file": "autogluon/tabular/src/autogluon/tabular/models/lr/lr_preprocessing_utils.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {
+            "nlp_cols": {
+                "value": "nlp_cols",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "nlp_cols": {}
+        },
+        "variable": "",
+        "line no": 24
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {
+            "_column_types": {
+                "value": "column_types",
+                "type": "Name"
+            },
+            "_label_column": {
+                "value": "label_column",
+                "type": "Name"
+            },
+            "_config": {
+                "value": "config",
+                "type": "Name"
+            },
+            "_feature_generators": {
+                "value": "dict()",
+                "type": "Call"
+            },
+            "_fit_called": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "_ignore_columns_set": {
+                "value": "set()",
+                "type": "Call"
+            },
+            "_text_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_num_categories": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_numerical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_image_path_names": {
+                "value": "[]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {
+            "column_types": {},
+            "label_column": {},
+            "config": {}
+        },
+        "variable": "",
+        "line no": 27
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/automm/data/preprocess_dataframe.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "_column_types": {
+                "value": "column_types",
+                "type": "Name"
+            },
+            "_label_column": {
+                "value": "label_column",
+                "type": "Name"
+            },
+            "_config": {
+                "value": "config",
+                "type": "Name"
+            },
+            "_feature_generators": {
+                "value": "dict()",
+                "type": "Call"
+            },
+            "_fit_called": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "_ignore_columns_set": {
+                "value": "set()",
+                "type": "Call"
+            },
+            "_text_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_num_categories": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_numerical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_image_path_names": {
+                "value": "[]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {
+            "column_types": {},
+            "label_column": {},
+            "config": {}
+        },
+        "variable": "",
+        "line no": 27
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {
+            "_column_types": {
+                "value": "column_types",
+                "type": "Name"
+            },
+            "_label_column": {
+                "value": "label_column",
+                "type": "Name"
+            },
+            "_cfg": {
+                "value": "cfg",
+                "type": "Name"
+            },
+            "_feature_generators": {
+                "value": "dict()",
+                "type": "Call"
+            },
+            "_label_generator": {
+                "value": "label_generator",
+                "type": "Name"
+            },
+            "_label_scaler": {
+                "value": "StandardScaler()",
+                "type": "Call"
+            },
+            "_tokenizer_name": {
+                "value": "tokenizer_name",
+                "type": "Name"
+            },
+            "_tokenizer": {
+                "value": "get_tokenizer(tokenizer_name)",
+                "type": "Call"
+            },
+            "_fit_called": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "_ignore_columns_set": {
+                "value": "set()",
+                "type": "Call"
+            },
+            "_text_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_num_categories": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_numerical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {
+            "column_types": {},
+            "label_column": {},
+            "cfg": {
+                "0": {
+                    "value": "CfgNode()",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "None",
+                    "type": "Constant"
+                },
+                "2": {
+                    "value": "base_preprocess_cfg().clone_merge(cfg)",
+                    "type": "Call"
+                }
+            },
+            "label_generator": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            },
+            "tokenizer_name": {
+                "0": {
+                    "value": "state['_tokenizer_name']",
+                    "type": "Subscript"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 271
+    },
+    {
+        "file": "autogluon/text/src/autogluon/text/text_prediction/mx/preprocessing.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "_column_types": {
+                "value": "column_types",
+                "type": "Name"
+            },
+            "_label_column": {
+                "value": "label_column",
+                "type": "Name"
+            },
+            "_cfg": {
+                "value": "cfg",
+                "type": "Name"
+            },
+            "_feature_generators": {
+                "value": "dict()",
+                "type": "Call"
+            },
+            "_label_generator": {
+                "value": "label_generator",
+                "type": "Name"
+            },
+            "_label_scaler": {
+                "value": "StandardScaler()",
+                "type": "Call"
+            },
+            "_tokenizer_name": {
+                "value": "tokenizer_name",
+                "type": "Name"
+            },
+            "_tokenizer": {
+                "value": "get_tokenizer(tokenizer_name)",
+                "type": "Call"
+            },
+            "_fit_called": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "_ignore_columns_set": {
+                "value": "set()",
+                "type": "Call"
+            },
+            "_text_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_categorical_num_categories": {
+                "value": "[]",
+                "type": "List"
+            },
+            "_numerical_feature_names": {
+                "value": "[]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {
+            "column_types": {},
+            "label_column": {},
+            "cfg": {
+                "0": {
+                    "value": "CfgNode()",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "None",
+                    "type": "Constant"
+                },
+                "2": {
+                    "value": "base_preprocess_cfg().clone_merge(cfg)",
+                    "type": "Call"
+                }
+            },
+            "label_generator": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            },
+            "tokenizer_name": {
+                "0": {
+                    "value": "state['_tokenizer_name']",
+                    "type": "Subscript"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 271
+    }
+]
