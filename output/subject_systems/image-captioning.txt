@@ -1,0 +1,767 @@
+[
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 5
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Sequential",
+        "parameter": {
+            "*args": {
+                "value": "*modules",
+                "type": "Starred"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.resnet",
+        "line no": 21
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.AdaptiveAvgPool2d",
+        "parameter": {
+            "output_size": {
+                "value": "(encoded_image_size, encoded_image_size)",
+                "type": "Tuple"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.adaptive_pool",
+        "line no": 24
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "encoder_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "attention_dim",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "encoder_dim": {
+                "0": {
+                    "value": "encoder_out.size(-1)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "2048",
+                    "type": "Constant"
+                }
+            },
+            "attention_dim": {}
+        },
+        "variable": "self.encoder_att",
+        "line no": 66
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "decoder_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "attention_dim",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "decoder_dim": {},
+            "attention_dim": {}
+        },
+        "variable": "self.decoder_att",
+        "line no": 67
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "attention_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "attention_dim": {}
+        },
+        "variable": "self.full_att",
+        "line no": 68
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.ReLU",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.relu",
+        "line no": 69
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Softmax",
+        "parameter": {
+            "dim": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.softmax",
+        "line no": 70
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Embedding",
+        "parameter": {
+            "num_embeddings": {
+                "value": "vocab_size",
+                "type": "Name"
+            },
+            "embedding_dim": {
+                "value": "embed_dim",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "vocab_size": {
+                "0": {
+                    "value": "self.vocab_size",
+                    "type": "Attribute"
+                }
+            },
+            "embed_dim": {}
+        },
+        "variable": "self.embedding",
+        "line no": 114
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Dropout",
+        "parameter": {
+            "p": {
+                "value": "self.dropout",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.dropout": {
+                "0": {
+                    "value": "nn.Dropout(p=self.dropout)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.dropout",
+        "line no": 115
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.LSTMCell",
+        "parameter": {
+            "input_size": {
+                "value": "embed_dim + encoder_dim",
+                "type": "BinOp"
+            },
+            "hidden_size": {
+                "value": "decoder_dim",
+                "type": "Name"
+            },
+            "bias": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "decoder_dim": {}
+        },
+        "variable": "self.decode_step",
+        "line no": 116
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "encoder_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "decoder_dim",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "encoder_dim": {
+                "0": {
+                    "value": "encoder_out.size(-1)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "2048",
+                    "type": "Constant"
+                }
+            },
+            "decoder_dim": {}
+        },
+        "variable": "self.init_h",
+        "line no": 117
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "encoder_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "decoder_dim",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "encoder_dim": {
+                "0": {
+                    "value": "encoder_out.size(-1)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "2048",
+                    "type": "Constant"
+                }
+            },
+            "decoder_dim": {}
+        },
+        "variable": "self.init_c",
+        "line no": 118
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "decoder_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "encoder_dim",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "decoder_dim": {},
+            "encoder_dim": {
+                "0": {
+                    "value": "encoder_out.size(-1)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "2048",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "self.f_beta",
+        "line no": 119
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Sigmoid",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.sigmoid",
+        "line no": 120
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Linear",
+        "parameter": {
+            "in_features": {
+                "value": "decoder_dim",
+                "type": "Name"
+            },
+            "out_features": {
+                "value": "vocab_size",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "decoder_dim": {},
+            "vocab_size": {
+                "0": {
+                    "value": "self.vocab_size",
+                    "type": "Attribute"
+                }
+            }
+        },
+        "variable": "self.fc",
+        "line no": 121
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.parameter.Parameter",
+        "parameter": {
+            "data": {
+                "value": "embeddings",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "embeddings": {
+                "0": {
+                    "value": "self.embedding(encoded_captions)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.embedding.weight",
+        "line no": 138
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/caption.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 13
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 22
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "filter(lambda p: p.requires_grad, decoder.parameters())",
+                "type": "Call"
+            },
+            "lr": {
+                "value": "decoder_lr",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "decoder_lr": {
+                "0": {
+                    "value": "0.0004",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "decoder_optimizer",
+        "line no": 60
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "filter(lambda p: p.requires_grad, encoder.parameters())",
+                "type": "Call"
+            },
+            "lr": {
+                "value": "encoder_lr",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "encoder_lr": {
+                "0": {
+                    "value": "0.0001",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 64
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.optim.Adam",
+        "parameter": {
+            "params": {
+                "value": "filter(lambda p: p.requires_grad, encoder.parameters())",
+                "type": "Call"
+            },
+            "lr": {
+                "value": "encoder_lr",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "encoder_lr": {
+                "0": {
+                    "value": "0.0001",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "encoder_optimizer",
+        "line no": 78
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.nn.CrossEntropyLoss",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "criterion",
+        "line no": 86
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "CaptionDataset(data_folder, data_name, 'TRAIN', transform=transforms.Compose([normalize]))",
+                "type": "Call"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "workers",
+                "type": "Name"
+            },
+            "pin_memory": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "batch_size": {
+                "0": {
+                    "value": "32",
+                    "type": "Constant"
+                }
+            },
+            "workers": {
+                "0": {
+                    "value": "1",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "train_loader",
+        "line no": 91
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "CaptionDataset(data_folder, data_name, 'VAL', transform=transforms.Compose([normalize]))",
+                "type": "Call"
+            },
+            "batch_size": {
+                "value": "batch_size",
+                "type": "Name"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "workers",
+                "type": "Name"
+            },
+            "pin_memory": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "batch_size": {
+                "0": {
+                    "value": "32",
+                    "type": "Constant"
+                }
+            },
+            "workers": {
+                "0": {
+                    "value": "1",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "val_loader",
+        "line no": 94
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/train.py",
+        "class": "torch.autograd.no_grad",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 250
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/eval.py",
+        "class": "torch.torch.device",
+        "parameter": {
+            "type": {
+                "value": "'cuda' if torch.cuda.is_available() else 'cpu'",
+                "type": "IfExp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "device",
+        "line no": 16
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/eval.py",
+        "class": "torch.utils.data.DataLoader",
+        "parameter": {
+            "dataset": {
+                "value": "CaptionDataset(data_folder, data_name, 'TEST', transform=transforms.Compose([normalize]))",
+                "type": "Call"
+            },
+            "batch_size": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "shuffle": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "num_workers": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "pin_memory": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "loader",
+        "line no": 47
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "enc_image_size": {
+                "value": "encoded_image_size",
+                "type": "Name"
+            },
+            "resnet": {
+                "value": "nn.Sequential(*modules)",
+                "type": "Call"
+            },
+            "adaptive_pool": {
+                "value": "nn.AdaptiveAvgPool2d((encoded_image_size, encoded_image_size))",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "encoded_image_size": {
+                "0": {
+                    "value": "14",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 8
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "encoder_att": {
+                "value": "nn.Linear(encoder_dim, attention_dim)",
+                "type": "Call"
+            },
+            "decoder_att": {
+                "value": "nn.Linear(decoder_dim, attention_dim)",
+                "type": "Call"
+            },
+            "full_att": {
+                "value": "nn.Linear(attention_dim, 1)",
+                "type": "Call"
+            },
+            "relu": {
+                "value": "nn.ReLU()",
+                "type": "Call"
+            },
+            "softmax": {
+                "value": "nn.Softmax(dim=1)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 54
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/models.py",
+        "class": "torch.nn.Module",
+        "parameter": {
+            "encoder_dim": {
+                "value": "encoder_dim",
+                "type": "Name"
+            },
+            "attention_dim": {
+                "value": "attention_dim",
+                "type": "Name"
+            },
+            "embed_dim": {
+                "value": "embed_dim",
+                "type": "Name"
+            },
+            "decoder_dim": {
+                "value": "decoder_dim",
+                "type": "Name"
+            },
+            "vocab_size": {
+                "value": "vocab_size",
+                "type": "Name"
+            },
+            "dropout": {
+                "value": "nn.Dropout(p=self.dropout)",
+                "type": "Call"
+            },
+            "attention": {
+                "value": "Attention(encoder_dim, decoder_dim, attention_dim)",
+                "type": "Call"
+            },
+            "embedding": {
+                "value": "nn.Embedding(vocab_size, embed_dim)",
+                "type": "Call"
+            },
+            "decode_step": {
+                "value": "nn.LSTMCell(embed_dim + encoder_dim, decoder_dim, bias=True)",
+                "type": "Call"
+            },
+            "init_h": {
+                "value": "nn.Linear(encoder_dim, decoder_dim)",
+                "type": "Call"
+            },
+            "init_c": {
+                "value": "nn.Linear(encoder_dim, decoder_dim)",
+                "type": "Call"
+            },
+            "f_beta": {
+                "value": "nn.Linear(decoder_dim, encoder_dim)",
+                "type": "Call"
+            },
+            "sigmoid": {
+                "value": "nn.Sigmoid()",
+                "type": "Call"
+            },
+            "fc": {
+                "value": "nn.Linear(decoder_dim, vocab_size)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "encoder_dim": {
+                "0": {
+                    "value": "encoder_out.size(-1)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "2048",
+                    "type": "Constant"
+                }
+            },
+            "attention_dim": {},
+            "embed_dim": {},
+            "decoder_dim": {},
+            "vocab_size": {
+                "0": {
+                    "value": "self.vocab_size",
+                    "type": "Attribute"
+                }
+            },
+            "dropout": {
+                "0": {
+                    "value": "0.5",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 89
+    },
+    {
+        "file": "a-PyTorch-Tutorial-to-Image-Captioning/datasets.py",
+        "class": "torch.utils.data.Dataset",
+        "parameter": {
+            "split": {
+                "value": "split",
+                "type": "Name"
+            },
+            "h": {
+                "value": "h5py.File(os.path.join(data_folder, self.split + '_IMAGES_' + data_name + '.hdf5'), 'r')",
+                "type": "Call"
+            },
+            "imgs": {
+                "value": "self.h['images']",
+                "type": "Subscript"
+            },
+            "cpi": {
+                "value": "self.h.attrs['captions_per_image']",
+                "type": "Subscript"
+            },
+            "transform": {
+                "value": "transform",
+                "type": "Name"
+            },
+            "dataset_size": {
+                "value": "len(self.captions)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "split": {},
+            "transform": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 8
+    }
+]

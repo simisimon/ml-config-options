@@ -1,0 +1,1473 @@
+[
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.layers.Dense",
+        "parameter": {
+            "units": {
+                "value": "4",
+                "type": "Constant"
+            },
+            "activation": {
+                "value": "tf.nn.relu",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "tf.nn.relu": {}
+        },
+        "variable": "self.layer1",
+        "line no": 32
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.layers.Dense",
+        "parameter": {
+            "units": {
+                "value": "5",
+                "type": "Constant"
+            },
+            "activation": {
+                "value": "tf.nn.relu",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "tf.nn.relu": {}
+        },
+        "variable": "self.layer2",
+        "line no": 33
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.Model",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 28
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.layers.Dense",
+        "parameter": {
+            "units": {
+                "value": "4",
+                "type": "Constant"
+            },
+            "activation": {
+                "value": "tf.nn.relu",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "tf.nn.relu": {}
+        },
+        "variable": "self.layer1",
+        "line no": 46
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.layers.Embedding",
+        "parameter": {
+            "input_dim": {
+                "value": "4",
+                "type": "Constant"
+            },
+            "output_dim": {
+                "value": "4",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.layer2",
+        "line no": 47
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.layers.Dense",
+        "parameter": {
+            "units": {
+                "value": "size",
+                "type": "Name"
+            },
+            "activation": {
+                "value": "tf.nn.relu",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "size": {
+                "0": {
+                    "value": "5",
+                    "type": "Constant"
+                }
+            },
+            "tf.nn.relu": {}
+        },
+        "variable": "self.layer3",
+        "line no": 48
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.Model",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 42
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "self.name",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.name": {}
+        },
+        "variable": "self._proper_name_scope",
+        "line no": 263
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.train.Checkpoint",
+        "parameter": {
+            "**kwargs": {
+                "value": "{self.name: self}",
+                "type": "Dict"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.checkpoint",
+        "line no": 293
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.train.Checkpoint",
+        "parameter": {
+            "**kwargs": {
+                "value": "{self.name: self}",
+                "type": "Dict"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.checkpoint",
+        "line no": 300
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "initializer",
+                "type": "Name"
+            },
+            "trainable": {
+                "value": "is_trainable",
+                "type": "Name"
+            },
+            "validate_shape": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "name": {
+                "value": "name",
+                "type": "Name"
+            },
+            "dtype": {
+                "value": "spec.tf_type()",
+                "type": "Call"
+            },
+            "shape": {
+                "value": "spec.shape",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "initializer": {
+                "0": {
+                    "value": "tf_util.constant(value=initializer, dtype=spec.type, shape=spec.shape)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tf_util.zeros(shape=spec.shape, dtype=spec.type)",
+                    "type": "Call"
+                },
+                "2": {
+                    "value": "tf_util.constant(value=orthogonal.reshape(spec.shape), dtype=spec.type)",
+                    "type": "Call"
+                },
+                "3": {
+                    "value": "tf_util.constant(value=initializer, dtype=spec.type)",
+                    "type": "Call"
+                },
+                "4": {
+                    "value": "'zeros'",
+                    "type": "Constant"
+                },
+                "5": {
+                    "value": "tf_util.ones(shape=spec.shape, dtype=spec.type)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "tf.fill(dims=spec.shape, value=tf_util.constant(value=initialization_scale, dtype=spec.type))",
+                    "type": "Call"
+                },
+                "7": {
+                    "value": "-1",
+                    "type": "UnaryOp"
+                },
+                "8": {
+                    "value": "tf.random.normal(shape=spec.shape, stddev=stddev, dtype=spec.tf_type())",
+                    "type": "Call"
+                }
+            },
+            "is_trainable": {
+                "0": {
+                    "value": "False",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "True",
+                    "type": "Constant"
+                }
+            },
+            "name": {
+                "0": {
+                    "value": "name + '-summary-step'",
+                    "type": "BinOp"
+                },
+                "1": {
+                    "value": "'l2_regularization'",
+                    "type": "Constant"
+                },
+                "2": {
+                    "value": "name + '-tracking'",
+                    "type": "BinOp"
+                },
+                "3": {
+                    "value": "function.__name__",
+                    "type": "Attribute"
+                },
+                "4": {
+                    "value": "name.replace('/', '_')",
+                    "type": "Call"
+                },
+                "5": {
+                    "value": "name[0]",
+                    "type": "Subscript"
+                },
+                "6": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            },
+            "spec.shape": {}
+        },
+        "variable": "variable",
+        "line no": 643
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.Module",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 149
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/convolution.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "output_shape",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "output_shape": {
+                "0": {
+                    "value": "tf.concat(values=[tf_util.cast(x=tf.shape(input=x)[:1], dtype='int'), tf_util.constant(value=self.output_shape, dtype='int')], axis=0)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "x",
+        "line no": 406
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/convolution.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "output_shape",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "output_shape": {
+                "0": {
+                    "value": "tf.concat(values=[tf_util.cast(x=tf.shape(input=x)[:1], dtype='int'), tf_util.constant(value=self.output_shape, dtype='int')], axis=0)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "x",
+        "line no": 575
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/layer.py",
+        "class": "tensorflow.experimental.numpy.int64",
+        "parameter": {
+            "**kwargs": {
+                "value": "horizon",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "horizon": {
+                "0": {
+                    "value": "tf.minimum(x=horizon, y=tf.math.reduce_max(input_tensor=lengths, axis=0))",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "0",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "(_, final_indices, final_remaining, xs)",
+        "line no": 667
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/layer.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "horizon",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "horizon": {
+                "0": {
+                    "value": "tf.minimum(x=horizon, y=tf.math.reduce_max(input_tensor=lengths, axis=0))",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "0",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "(_, final_indices, final_remaining, x, final_internals)",
+        "line no": 687
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/rnn.py",
+        "class": "tensorflow.keras.layers.GRUCell",
+        "parameter": {
+            "units": {
+                "value": "self.size",
+                "type": "Attribute"
+            },
+            "**kwargs": {
+                "value": "kwargs",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "self.size": {},
+            "kwargs": {}
+        },
+        "variable": "self.cell",
+        "line no": 71
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/rnn.py",
+        "class": "tensorflow.keras.layers.LSTMCell",
+        "parameter": {
+            "units": {
+                "value": "self.size",
+                "type": "Attribute"
+            },
+            "**kwargs": {
+                "value": "kwargs",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "self.size": {},
+            "kwargs": {}
+        },
+        "variable": "self.cell",
+        "line no": 75
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/input_rnn.py",
+        "class": "tensorflow.keras.layers.GRU",
+        "parameter": {
+            "units": {
+                "value": "self.size",
+                "type": "Attribute"
+            },
+            "return_sequences": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "return_state": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "**kwargs": {
+                "value": "kwargs",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "self.size": {},
+            "input_spec.shape": {},
+            "kwargs": {}
+        },
+        "variable": "self.rnn",
+        "line no": 73
+    },
+    {
+        "file": "tensorforce/tensorforce/core/layers/input_rnn.py",
+        "class": "tensorflow.keras.layers.LSTM",
+        "parameter": {
+            "units": {
+                "value": "size",
+                "type": "Name"
+            },
+            "return_sequences": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "return_state": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "**kwargs": {
+                "value": "kwargs",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "size": {
+                "0": {
+                    "value": "self.size",
+                    "type": "Attribute"
+                },
+                "1": {
+                    "value": "self.size // 2",
+                    "type": "BinOp"
+                }
+            },
+            "input_spec.shape": {},
+            "kwargs": {}
+        },
+        "variable": "self.rnn",
+        "line no": 83
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/tensor_spec.py",
+        "class": "tensorflow.TensorShape",
+        "parameter": {
+            "dims": {
+                "value": "shape",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "shape": {
+                "0": {
+                    "value": "tf_util.constant(value=self.shape, dtype='int')",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "()",
+                    "type": "Tuple"
+                },
+                "2": {
+                    "value": "self.shape",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "tuple(reversed(reverse_shape))",
+                    "type": "Call"
+                },
+                "4": {
+                    "value": "other.shape",
+                    "type": "Attribute"
+                },
+                "5": {
+                    "value": "tf.concat(values=(tf.expand_dims(input=batch_size, axis=0), shape), axis=0)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "(None,) + self.shape",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "shape",
+        "line no": 147
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/tensor_spec.py",
+        "class": "tensorflow.TensorSpec",
+        "parameter": {
+            "shape": {
+                "value": "tf.TensorShape(dims=shape)",
+                "type": "Call"
+            },
+            "dtype": {
+                "value": "self.tf_type()",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 147
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/tf_util.py",
+        "class": "tensorflow.IndexedSlices",
+        "parameter": {
+            "values": {
+                "value": "binary_op(x.values, y.values)",
+                "type": "Call"
+            },
+            "indices": {
+                "value": "x.indices",
+                "type": "Attribute"
+            },
+            "dense_shape": {
+                "value": "x.dense_shape",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "x.indices": {},
+            "x.dense_shape": {}
+        },
+        "variable": "",
+        "line no": 131
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/dicts.py",
+        "class": "tensorflow.TensorSpec",
+        "parameter": {
+            "shape": {
+                "value": "(None,) + spec.shape[1:]",
+                "type": "BinOp"
+            },
+            "dtype": {
+                "value": "spec.dtype",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "spec.dtype": {}
+        },
+        "variable": "",
+        "line no": 204
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/dicts.py",
+        "class": "tensorflow.TensorSpec",
+        "parameter": {
+            "shape": {
+                "value": "(None,)",
+                "type": "Tuple"
+            },
+            "dtype": {
+                "value": "arg.indices.dtype",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "arg.indices.dtype": {}
+        },
+        "variable": "",
+        "line no": 207
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/dicts.py",
+        "class": "tensorflow.TensorSpec",
+        "parameter": {
+            "shape": {
+                "value": "(None,) + spec.shape[1:]",
+                "type": "BinOp"
+            },
+            "dtype": {
+                "value": "spec.dtype",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "spec.dtype": {}
+        },
+        "variable": "",
+        "line no": 270
+    },
+    {
+        "file": "tensorforce/tensorforce/core/utils/dicts.py",
+        "class": "tensorflow.TensorSpec",
+        "parameter": {
+            "shape": {
+                "value": "(None,)",
+                "type": "Tuple"
+            },
+            "dtype": {
+                "value": "arg.indices.dtype",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "arg.indices.dtype": {}
+        },
+        "variable": "",
+        "line no": 273
+    },
+    {
+        "file": "tensorforce/tensorforce/core/models/model.py",
+        "class": "tensorflow.train.Checkpoint",
+        "parameter": {
+            "**kwargs": {
+                "value": "{self.name: self}",
+                "type": "Dict"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.checkpoint",
+        "line no": 314
+    },
+    {
+        "file": "tensorforce/tensorforce/core/models/model.py",
+        "class": "tensorflow.train.CheckpointManager",
+        "parameter": {
+            "checkpoint": {
+                "value": "self.checkpoint",
+                "type": "Attribute"
+            },
+            "directory": {
+                "value": "self.saver_directory",
+                "type": "Attribute"
+            },
+            "max_to_keep": {
+                "value": "max_checkpoints",
+                "type": "Name"
+            },
+            "keep_checkpoint_every_n_hours": {
+                "value": "self.saver.get('max_hour_frequency')",
+                "type": "Call"
+            },
+            "checkpoint_name": {
+                "value": "self.saver_filename",
+                "type": "Attribute"
+            },
+            "step_counter": {
+                "value": "self.units[unit]",
+                "type": "Subscript"
+            },
+            "checkpoint_interval": {
+                "value": "frequency",
+                "type": "Name"
+            },
+            "init_fn": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "self.checkpoint": {
+                "0": {
+                    "value": "tf.train.Checkpoint(**{self.name: self})",
+                    "type": "Call"
+                }
+            },
+            "self.saver_directory": {
+                "0": {
+                    "value": "self.saver['directory']",
+                    "type": "Subscript"
+                }
+            },
+            "max_checkpoints": {
+                "0": {
+                    "value": "10",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "self.saver.get('max_checkpoints')",
+                    "type": "Call"
+                }
+            },
+            "self.saver_filename": {
+                "0": {
+                    "value": "self.saver.get('filename')",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "self.name",
+                    "type": "Attribute"
+                }
+            },
+            "frequency": {
+                "0": {
+                    "value": "10",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "self.saver.get('frequency')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.saver",
+        "line no": 315
+    },
+    {
+        "file": "tensorforce/tensorforce/core/models/model.py",
+        "class": "tensorflow.train.Checkpoint",
+        "parameter": {
+            "**kwargs": {
+                "value": "trackables",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "independent_act": {
+                "0": {
+                    "value": "next(iter(self._independent_act_graphs.values()))",
+                    "type": "Call"
+                }
+            },
+            "initial_internals": {},
+            "trackables": {
+                "0": {
+                    "value": "self.get_savedmodel_trackables()",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "OrderedDict(sorted(trackables.items(), key=lambda kv: kv[0]))",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "checkpoint",
+        "line no": 823
+    },
+    {
+        "file": "tensorforce/tensorforce/core/models/model.py",
+        "class": "tensorflow.train.Checkpoint",
+        "parameter": {
+            "**kwargs": {
+                "value": "{self.name: self}",
+                "type": "Dict"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.checkpoint",
+        "line no": 845
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/tf_optimizer.py",
+        "class": "tensorflow.GradientTape",
+        "parameter": {
+            "persistent": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "watch_accessed_variables": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 155
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/multi_step.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "num_steps",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "num_steps": {
+                "0": {
+                    "value": "self.num_steps.value()",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "deltas",
+        "line no": 57
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/natural_gradient.py",
+        "class": "tensorflow.GradientTape",
+        "parameter": {
+            "persistent": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "watch_accessed_variables": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 86
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/natural_gradient.py",
+        "class": "tensorflow.GradientTape",
+        "parameter": {
+            "persistent": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "watch_accessed_variables": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 83
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/natural_gradient.py",
+        "class": "tensorflow.GradientTape",
+        "parameter": {
+            "persistent": {
+                "value": "False",
+                "type": "Constant"
+            },
+            "watch_accessed_variables": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 118
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/evolutionary.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "num_samples",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "num_samples": {
+                "0": {
+                    "value": "self.num_samples.value()",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "1",
+                    "type": "Constant"
+                },
+                "2": {
+                    "value": "tf_util.cast(x=num_samples, dtype='float')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "(deltas, perturbations)",
+        "line no": 141
+    },
+    {
+        "file": "tensorforce/tensorforce/core/optimizers/solvers/iterative.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "max_iterations",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "max_iterations": {
+                "0": {
+                    "value": "self.max_iterations.value()",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "values",
+        "line no": 68
+    },
+    {
+        "file": "tensorforce/tensorforce/core/parameters/piecewise_constant.py",
+        "class": "tensorflow.keras.optimizers.schedules.PiecewiseConstantDecay",
+        "parameter": {
+            "boundaries": {
+                "value": "self.boundaries",
+                "type": "Attribute"
+            },
+            "values": {
+                "value": "self.values",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.boundaries": {
+                "0": {
+                    "value": "boundaries",
+                    "type": "Name"
+                }
+            },
+            "self.values": {
+                "0": {
+                    "value": "values",
+                    "type": "Name"
+                }
+            }
+        },
+        "variable": "parameter",
+        "line no": 77
+    },
+    {
+        "file": "tensorforce/tensorforce/core/parameters/decaying.py",
+        "class": "tensorflow.keras.optimizers.schedules.CosineDecay",
+        "parameter": {
+            "initial_learning_rate": {
+                "value": "initial_value",
+                "type": "Name"
+            },
+            "decay_steps": {
+                "value": "self.num_steps + 1",
+                "type": "BinOp"
+            },
+            "alpha": {
+                "value": "self.kwargs.get('alpha', 0.0)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "initial_value": {
+                "0": {
+                    "value": "tf_util.constant(value=self.initial_value, dtype='float')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "parameter",
+        "line no": 334
+    },
+    {
+        "file": "tensorforce/tensorforce/core/parameters/decaying.py",
+        "class": "tensorflow.keras.optimizers.schedules.CosineDecayRestarts",
+        "parameter": {
+            "initial_learning_rate": {
+                "value": "initial_value",
+                "type": "Name"
+            },
+            "first_decay_steps": {
+                "value": "self.num_steps + 1",
+                "type": "BinOp"
+            },
+            "t_mul": {
+                "value": "self.kwargs.get('t_mul', 2.0)",
+                "type": "Call"
+            },
+            "m_mul": {
+                "value": "self.kwargs.get('m_mul', 1.0)",
+                "type": "Call"
+            },
+            "alpha": {
+                "value": "self.kwargs.get('alpha', 0.0)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "initial_value": {
+                "0": {
+                    "value": "tf_util.constant(value=self.initial_value, dtype='float')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "parameter",
+        "line no": 341
+    },
+    {
+        "file": "tensorforce/tensorforce/core/parameters/decaying.py",
+        "class": "tensorflow.keras.optimizers.schedules.ExponentialDecay",
+        "parameter": {
+            "initial_learning_rate": {
+                "value": "initial_value",
+                "type": "Name"
+            },
+            "decay_steps": {
+                "value": "self.num_steps + 1",
+                "type": "BinOp"
+            },
+            "decay_rate": {
+                "value": "self.kwargs['decay_rate']",
+                "type": "Subscript"
+            },
+            "staircase": {
+                "value": "self.kwargs.get('staircase', False)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "initial_value": {
+                "0": {
+                    "value": "tf_util.constant(value=self.initial_value, dtype='float')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "parameter",
+        "line no": 349
+    },
+    {
+        "file": "tensorforce/tensorforce/core/parameters/decaying.py",
+        "class": "tensorflow.keras.optimizers.schedules.InverseTimeDecay",
+        "parameter": {
+            "initial_learning_rate": {
+                "value": "initial_value",
+                "type": "Name"
+            },
+            "decay_steps": {
+                "value": "self.num_steps + 1",
+                "type": "BinOp"
+            },
+            "decay_rate": {
+                "value": "self.kwargs['decay_rate']",
+                "type": "Subscript"
+            },
+            "staircase": {
+                "value": "self.kwargs.get('staircase', False)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "initial_value": {
+                "0": {
+                    "value": "tf_util.constant(value=self.initial_value, dtype='float')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "parameter",
+        "line no": 356
+    },
+    {
+        "file": "tensorforce/tensorforce/core/parameters/decaying.py",
+        "class": "tensorflow.keras.optimizers.schedules.PolynomialDecay",
+        "parameter": {
+            "initial_learning_rate": {
+                "value": "initial_value",
+                "type": "Name"
+            },
+            "decay_steps": {
+                "value": "self.num_steps + 1",
+                "type": "BinOp"
+            },
+            "end_learning_rate": {
+                "value": "self.kwargs['final_value']",
+                "type": "Subscript"
+            },
+            "power": {
+                "value": "self.kwargs.get('power', 1.0)",
+                "type": "Call"
+            },
+            "cycle": {
+                "value": "self.kwargs.get('cycle', False)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "initial_value": {
+                "0": {
+                    "value": "tf_util.constant(value=self.initial_value, dtype='float')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "parameter",
+        "line no": 381
+    },
+    {
+        "file": "tensorforce/tensorforce/core/memories/queue.py",
+        "class": "tensorflow.TensorShape",
+        "parameter": {
+            "dims": {
+                "value": "(None, None)",
+                "type": "Tuple"
+            }
+        },
+        "variable parameters": {},
+        "variable": "shape",
+        "line no": 353
+    },
+    {
+        "file": "tensorforce/tensorforce/core/memories/queue.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "horizon",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "horizon": {}
+        },
+        "variable": "(lengths, predecessor_indices, mask)",
+        "line no": 355
+    },
+    {
+        "file": "tensorforce/tensorforce/core/memories/queue.py",
+        "class": "tensorflow.TensorShape",
+        "parameter": {
+            "dims": {
+                "value": "(None, None)",
+                "type": "Tuple"
+            }
+        },
+        "variable parameters": {},
+        "variable": "shape",
+        "line no": 421
+    },
+    {
+        "file": "tensorforce/tensorforce/core/memories/queue.py",
+        "class": "tensorflow.experimental.numpy.int32",
+        "parameter": {
+            "**kwargs": {
+                "value": "horizon",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "horizon": {}
+        },
+        "variable": "(lengths, successor_indices, mask)",
+        "line no": 423
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/beta.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "alpha",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "alpha": {
+                "0": {
+                    "value": "tf.math.exp(x=alpha) + one",
+                    "type": "BinOp"
+                },
+                "1": {
+                    "value": "tf.reshape(tensor=alpha, shape=shape)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "digamma_alpha",
+        "line no": 247
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/beta.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "beta",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "beta": {
+                "0": {
+                    "value": "tf.reshape(tensor=beta, shape=shape)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "tf.math.exp(x=beta) + one",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "digamma_beta",
+        "line no": 248
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/beta.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "alpha_beta",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "alpha_beta": {
+                "0": {
+                    "value": "alpha + beta",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "digamma_alpha_beta",
+        "line no": 249
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/beta.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "alpha1",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "alpha1": {}
+        },
+        "variable": "digamma_alpha1",
+        "line no": 265
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/beta.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "beta1",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "beta1": {}
+        },
+        "variable": "digamma_beta1",
+        "line no": 266
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/beta.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "alpha_beta1",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "alpha_beta1": {}
+        },
+        "variable": "digamma_alpha_beta1",
+        "line no": 267
+    },
+    {
+        "file": "tensorforce/tensorforce/core/distributions/gaussian.py",
+        "class": "tensorflow.experimental.numpy.float32",
+        "parameter": {
+            "**kwargs": {
+                "value": "action",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "action": {
+                "0": {
+                    "value": "tf.cond(pred=temperature < epsilon, true_fn=fn_mode, false_fn=fn_sample)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "mean",
+                    "type": "Name"
+                },
+                "2": {
+                    "value": "tf.math.tanh(x=action)",
+                    "type": "Call"
+                },
+                "3": {
+                    "value": "tf_util.cast(x=tf.math.atanh(x=tf_util.float32(x=action)), dtype='float')",
+                    "type": "Call"
+                },
+                "4": {
+                    "value": "tf.maximum(x=min_value, y=action)",
+                    "type": "Call"
+                },
+                "5": {
+                    "value": "tf.clip_by_value(t=action, clip_value_min=-one, clip_value_max=one)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "two * (action - min_value) / (max_value - min_value) - one",
+                    "type": "BinOp"
+                },
+                "7": {
+                    "value": "tf.math.atanh(x=action)",
+                    "type": "Call"
+                },
+                "8": {
+                    "value": "tf.reshape(tensor=mean, shape=shape)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "self.mean.apply(x=x)",
+                    "type": "Call"
+                },
+                "10": {
+                    "value": "tf.minimum(x=max_value, y=action)",
+                    "type": "Call"
+                },
+                "11": {
+                    "value": "min_value + (max_value - min_value) * half * (action + one)",
+                    "type": "BinOp"
+                }
+            }
+        },
+        "variable": "action",
+        "line no": 329
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.Model",
+        "parameter": {
+            "layer1": {
+                "value": "tf.keras.layers.Dense(4, activation=tf.nn.relu)",
+                "type": "Call"
+            },
+            "layer2": {
+                "value": "tf.keras.layers.Dense(5, activation=tf.nn.relu)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 28
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.Model",
+        "parameter": {
+            "layer1": {
+                "value": "tf.keras.layers.Dense(4, activation=tf.nn.relu)",
+                "type": "Call"
+            },
+            "layer2": {
+                "value": "tf.keras.layers.Dense(5, activation=tf.nn.relu)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 28
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.Model",
+        "parameter": {
+            "layer1": {
+                "value": "tf.keras.layers.Dense(4, activation=tf.nn.relu)",
+                "type": "Call"
+            },
+            "layer2": {
+                "value": "tf.keras.layers.Embedding(4, 4)",
+                "type": "Call"
+            },
+            "layer3": {
+                "value": "tf.keras.layers.Dense(size, activation=tf.nn.relu)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 42
+    },
+    {
+        "file": "tensorforce/test/test_policies.py",
+        "class": "tensorflow.keras.Model",
+        "parameter": {
+            "layer1": {
+                "value": "tf.keras.layers.Dense(4, activation=tf.nn.relu)",
+                "type": "Call"
+            },
+            "layer2": {
+                "value": "tf.keras.layers.Embedding(4, 4)",
+                "type": "Call"
+            },
+            "layer3": {
+                "value": "tf.keras.layers.Dense(size, activation=tf.nn.relu)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 42
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.Module",
+        "parameter": {
+            "checkpoint": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "is_trainable": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "is_saved": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "is_initialized": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 149
+    },
+    {
+        "file": "tensorforce/tensorforce/core/module.py",
+        "class": "tensorflow.Module",
+        "parameter": {
+            "checkpoint": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "is_trainable": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "is_saved": {
+                "value": "None",
+                "type": "Constant"
+            },
+            "is_initialized": {
+                "value": "None",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 149
+    }
+]

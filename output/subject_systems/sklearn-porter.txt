@@ -1,0 +1,977 @@
+[
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.tree.DecisionTreeClassifier",
+        "parameter": {},
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 383
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.ensemble.AdaBoostClassifier",
+        "parameter": {
+            "base_estimator": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 394
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.ensemble.RandomForestClassifier",
+        "parameter": {
+            "n_estimators": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 405
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.ensemble.ExtraTreesClassifier",
+        "parameter": {
+            "n_estimators": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 416
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.svm.LinearSVC",
+        "parameter": {
+            "penalty": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 423
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {},
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 430
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.svm.NuSVC",
+        "parameter": {},
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 437
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.neighbors.KNeighborsClassifier",
+        "parameter": {
+            "n_neighbors": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 448
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.naive_bayes.GaussianNB",
+        "parameter": {},
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 455
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.naive_bayes.BernoulliNB",
+        "parameter": {},
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 462
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.neural_network.MLPClassifier",
+        "parameter": {
+            "hidden_layer_sizes": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 478
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/Estimator.py",
+        "class": "sklearn.neural_network.MLPRegressor",
+        "parameter": {
+            "hidden_layer_sizes": {
+                "value": "est",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "est": {
+                "0": {
+                    "value": "estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "x[np.newaxis, :]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "est._final_estimator",
+                    "type": "Attribute"
+                },
+                "3": {
+                    "value": "orig_est",
+                    "type": "Name"
+                },
+                "4": {
+                    "value": "x",
+                    "type": "Name"
+                },
+                "5": {
+                    "value": "self._extract_est(estimator)",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "est.best_estimator_",
+                    "type": "Attribute"
+                },
+                "7": {
+                    "value": "self.estimator",
+                    "type": "Attribute"
+                },
+                "8": {
+                    "value": "np.array(x)",
+                    "type": "Call"
+                },
+                "9": {
+                    "value": "[cmd + json_path + ' '.join(list(map(str, e))) for e in x]",
+                    "type": "ListComp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 496
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.tree.DecisionTreeClassifier",
+        "parameter": {
+            "random_state": {
+                "value": "0",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "tree",
+        "line no": 55
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.tree.DecisionTreeClassifier",
+        "parameter": {
+            "random_state": {
+                "value": "0",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "tree",
+        "line no": 88
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.linear_model.SGDClassifier",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "clf",
+        "line no": 96
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.preprocessing.Binarizer",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "binarizer",
+        "line no": 104
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.ensemble.AdaBoostClassifier",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "clf",
+        "line no": 112
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 264
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('SVM', SVC())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 264
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 277
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('SVM', SVC())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 277
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "search",
+        "line no": 332
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.model_selection.GridSearchCV",
+        "parameter": {
+            "estimator": {
+                "value": "SVC()",
+                "type": "Call"
+            },
+            "param_grid": {
+                "value": "params",
+                "type": "Name"
+            },
+            "cv": {
+                "value": "2",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "params": {
+                "0": {
+                    "value": "{'kernel': ('linear', 'rbf'), 'C': [1, 10, 100], 'gamma': [0.001, 0.0001]}",
+                    "type": "Dict"
+                }
+            }
+        },
+        "variable": "search",
+        "line no": 332
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "search",
+        "line no": 360
+    },
+    {
+        "file": "sklearn-porter/tests/EstimatorTest.py",
+        "class": "sklearn.model_selection.RandomizedSearchCV",
+        "parameter": {
+            "estimator": {
+                "value": "SVC()",
+                "type": "Call"
+            },
+            "param_distributions": {
+                "value": "params",
+                "type": "Name"
+            },
+            "cv": {
+                "value": "2",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "params": {
+                "0": {
+                    "value": "{'kernel': ('linear', 'rbf'), 'C': [1, 10, 100], 'gamma': [0.001, 0.0001]}",
+                    "type": "Dict"
+                }
+            }
+        },
+        "variable": "search",
+        "line no": 360
+    },
+    {
+        "file": "sklearn-porter/tests/estimator/LinearSVCTest.py",
+        "class": "sklearn.svm.LinearSVC",
+        "parameter": {
+            "loss": {
+                "value": "loss",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "max_iter": {
+                "value": "10",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "loss": {}
+        },
+        "variable": "orig_est",
+        "line no": 34
+    },
+    {
+        "file": "sklearn-porter/tests/estimator/DecisionTreeClassifierTest.py",
+        "class": "sklearn.tree.DecisionTreeClassifier",
+        "parameter": {
+            "max_depth": {
+                "value": "max_depth",
+                "type": "Name"
+            },
+            "max_leaf_nodes": {
+                "value": "max_leaf_nodes",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "max_depth": {},
+            "max_leaf_nodes": {}
+        },
+        "variable": "orig_est",
+        "line no": 32
+    },
+    {
+        "file": "sklearn-porter/tests/estimator/MLPClassifierTest.py",
+        "class": "sklearn.neural_network.MLPClassifier",
+        "parameter": {
+            "activation": {
+                "value": "activation",
+                "type": "Name"
+            },
+            "hidden_layer_sizes": {
+                "value": "hidden_layer_sizes",
+                "type": "Name"
+            },
+            "learning_rate_init": {
+                "value": "0.1",
+                "type": "Constant"
+            },
+            "random_state": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "max_iter": {
+                "value": "10",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "activation": {},
+            "hidden_layer_sizes": {}
+        },
+        "variable": "orig_est",
+        "line no": 42
+    },
+    {
+        "file": "sklearn-porter/tests/estimator/RandomForestClassifierTest.py",
+        "class": "sklearn.ensemble.RandomForestClassifier",
+        "parameter": {
+            "n_estimators": {
+                "value": "n_estimators",
+                "type": "Name"
+            },
+            "max_depth": {
+                "value": "max_depth",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "n_estimators": {},
+            "max_depth": {}
+        },
+        "variable": "orig_est",
+        "line no": 32
+    },
+    {
+        "file": "sklearn-porter/tests/estimator/SVCTest.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {
+            "kernel": {
+                "value": "kernel",
+                "type": "Name"
+            },
+            "gamma": {
+                "value": "gamma",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "kernel": {},
+            "gamma": {
+                "0": {
+                    "value": "str(gamma).replace('.', '_')",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "orig_est",
+        "line no": 35
+    },
+    {
+        "file": "sklearn-porter/examples/basics/index.pct.py",
+        "class": "sklearn.tree.DecisionTreeClassifier",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "clf",
+        "line no": 17
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/estimator/ExtraTreesClassifier/__init__.py",
+        "class": "sklearn.ensemble.RandomForestClassifier",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 11
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/estimator/NuSVC/__init__.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 9
+    },
+    {
+        "file": "sklearn-porter/sklearn_porter/estimator/MLPRegressor/__init__.py",
+        "class": "sklearn.neural_network.MLPClassifier",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 12
+    }
+]

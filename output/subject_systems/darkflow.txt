@@ -1,0 +1,224 @@
+[
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.graph",
+        "line no": 49
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.graph",
+        "line no": 70
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.GraphDef",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "graph_def",
+        "line no": 82
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.gfile.FastGFile",
+        "parameter": {
+            "name": {
+                "value": "self.FLAGS.pbLoad",
+                "type": "Attribute"
+            },
+            "mode": {
+                "value": "'rb'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "self.FLAGS.pbLoad": {}
+        },
+        "variable": "",
+        "line no": 81
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.GPUOptions",
+        "parameter": {},
+        "variable parameters": {
+            "utility": {
+                "0": {
+                    "value": "min(self.FLAGS.gpu, 1.0)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "cfg['gpu_options']",
+        "line no": 132
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.summary.FileWriter",
+        "parameter": {
+            "logdir": {
+                "value": "self.FLAGS.summary + 'train'",
+                "type": "BinOp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.writer",
+        "line no": 143
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.ConfigProto",
+        "parameter": {},
+        "variable parameters": {
+            "cfg": {
+                "0": {
+                    "value": "dict({'allow_soft_placement': False, 'log_device_placement': False})",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.sess",
+        "line no": 145
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "tf.ConfigProto(**cfg)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.sess",
+        "line no": 145
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {
+            "var_list": {
+                "value": "tf.global_variables()",
+                "type": "Call"
+            },
+            "max_to_keep": {
+                "value": "self.FLAGS.keep",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.FLAGS.keep": {}
+        },
+        "variable": "self.saver",
+        "line no": 149
+    },
+    {
+        "file": "darkflow/darkflow/net/build.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "graph": {
+                "value": "tfnet_pb.graph",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "tfnet_pb.graph": {}
+        },
+        "variable": "tfnet_pb.sess",
+        "line no": 168
+    },
+    {
+        "file": "darkflow/darkflow/net/ops/baseop.py",
+        "class": "tensorflow.constant_initializer",
+        "parameter": {
+            "value": {
+                "value": "val",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "val": {
+                "0": {
+                    "value": "self.lay.w.get(var, None)",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "self.lay.w[var]",
+                    "type": "Subscript"
+                },
+                "2": {
+                    "value": "np.random.normal(*args)",
+                    "type": "Call"
+                },
+                "3": {
+                    "value": "np.ones(shape)",
+                    "type": "Call"
+                },
+                "4": {
+                    "value": "self.lay.h[ph]",
+                    "type": "Subscript"
+                },
+                "5": {
+                    "value": "np.zeros(shape)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "self.lay.w[var]",
+        "line no": 68
+    },
+    {
+        "file": "darkflow/darkflow/net/ops/baseop.py",
+        "class": "tensorflow.compat.v1.variable_scope",
+        "parameter": {
+            "name_or_scope": {
+                "value": "self.scope",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.scope": {
+                "0": {
+                    "value": "'{}-{}'.format(str(self.num), self.lay.type)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 70
+    },
+    {
+        "file": "darkflow/darkflow/net/vanilla/train.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.ones([train_size, num_classes])",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.nu",
+        "line no": 44
+    },
+    {
+        "file": "darkflow/darkflow/utils/loader.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 88
+    },
+    {
+        "file": "darkflow/darkflow/utils/loader.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 87
+    }
+]

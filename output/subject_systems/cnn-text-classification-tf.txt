@@ -1,0 +1,347 @@
+[
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.random_uniform([vocab_size, embedding_size], -1.0, 1.0)",
+                "type": "Call"
+            },
+            "name": {
+                "value": "'W'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "self.W",
+        "line no": 24
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'embedding'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 23
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.truncated_normal(filter_shape, stddev=0.1)",
+                "type": "Call"
+            },
+            "name": {
+                "value": "'W'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "W",
+        "line no": 36
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.constant(0.1, shape=[num_filters])",
+                "type": "Call"
+            },
+            "name": {
+                "value": "'b'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "b",
+        "line no": 37
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'conv-maxpool-%s' % filter_size",
+                "type": "BinOp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 33
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'dropout'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 61
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.constant(0.1, shape=[num_classes])",
+                "type": "Call"
+            },
+            "name": {
+                "value": "'b'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "b",
+        "line no": 70
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'output'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 65
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'loss'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 77
+    },
+    {
+        "file": "cnn-text-classification-tf/text_cnn.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'accuracy'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 82
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.compat.v1.ConfigProto",
+        "parameter": {
+            "allow_soft_placement": {
+                "value": "FLAGS.allow_soft_placement",
+                "type": "Attribute"
+            },
+            "log_device_placement": {
+                "value": "FLAGS.log_device_placement",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "FLAGS.allow_soft_placement": {},
+            "FLAGS.log_device_placement": {}
+        },
+        "variable": "session_conf",
+        "line no": 80
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "session_conf",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "session_conf": {
+                "0": {
+                    "value": "tf.ConfigProto(allow_soft_placement=FLAGS.allow_soft_placement, log_device_placement=FLAGS.log_device_placement)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "sess",
+        "line no": 83
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "0",
+                "type": "Constant"
+            },
+            "name": {
+                "value": "'global_step'",
+                "type": "Constant"
+            },
+            "trainable": {
+                "value": "False",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "global_step",
+        "line no": 95
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.compat.v1.train.AdamOptimizer",
+        "parameter": {
+            "learning_rate": {
+                "value": "0.001",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "optimizer",
+        "line no": 96
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.compat.v1.summary.FileWriter",
+        "parameter": {
+            "logdir": {
+                "value": "train_summary_dir",
+                "type": "Name"
+            },
+            "graph": {
+                "value": "sess.graph",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "train_summary_dir": {
+                "0": {
+                    "value": "os.path.join(out_dir, 'summaries', 'train')",
+                    "type": "Call"
+                }
+            },
+            "sess.graph": {}
+        },
+        "variable": "train_summary_writer",
+        "line no": 122
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.compat.v1.summary.FileWriter",
+        "parameter": {
+            "logdir": {
+                "value": "dev_summary_dir",
+                "type": "Name"
+            },
+            "graph": {
+                "value": "sess.graph",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "dev_summary_dir": {
+                "0": {
+                    "value": "os.path.join(out_dir, 'summaries', 'dev')",
+                    "type": "Call"
+                }
+            },
+            "sess.graph": {}
+        },
+        "variable": "dev_summary_writer",
+        "line no": 127
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {
+            "var_list": {
+                "value": "tf.global_variables()",
+                "type": "Call"
+            },
+            "max_to_keep": {
+                "value": "FLAGS.num_checkpoints",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "FLAGS.num_checkpoints": {}
+        },
+        "variable": "saver",
+        "line no": 134
+    },
+    {
+        "file": "cnn-text-classification-tf/train.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 79
+    },
+    {
+        "file": "cnn-text-classification-tf/eval.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "graph",
+        "line no": 55
+    },
+    {
+        "file": "cnn-text-classification-tf/eval.py",
+        "class": "tensorflow.compat.v1.ConfigProto",
+        "parameter": {
+            "allow_soft_placement": {
+                "value": "FLAGS.allow_soft_placement",
+                "type": "Attribute"
+            },
+            "log_device_placement": {
+                "value": "FLAGS.log_device_placement",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "FLAGS.allow_soft_placement": {},
+            "FLAGS.log_device_placement": {}
+        },
+        "variable": "session_conf",
+        "line no": 57
+    },
+    {
+        "file": "cnn-text-classification-tf/eval.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "session_conf",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "session_conf": {
+                "0": {
+                    "value": "tf.ConfigProto(allow_soft_placement=FLAGS.allow_soft_placement, log_device_placement=FLAGS.log_device_placement)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "sess",
+        "line no": 60
+    }
+]

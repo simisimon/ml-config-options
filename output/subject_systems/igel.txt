@@ -1,0 +1,404 @@
+[
+    {
+        "file": "igel/igel/hyperparams.py",
+        "class": "sklearn.model_selection.GridSearchCV",
+        "parameter": {
+            "estimator": {
+                "value": "model",
+                "type": "Name"
+            },
+            "param_grid": {
+                "value": "params",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "model": {},
+            "params": {},
+            "kwargs": {}
+        },
+        "variable": "search",
+        "line no": 13
+    },
+    {
+        "file": "igel/igel/hyperparams.py",
+        "class": "sklearn.model_selection.RandomizedSearchCV",
+        "parameter": {
+            "estimator": {
+                "value": "model",
+                "type": "Name"
+            },
+            "param_distributions": {
+                "value": "params",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "model": {},
+            "params": {},
+            "kwargs": {}
+        },
+        "variable": "search",
+        "line no": 18
+    },
+    {
+        "file": "igel/igel/igel.py",
+        "class": "sklearn.multioutput.MultiOutputClassifier",
+        "parameter": {
+            "estimator": {
+                "value": "self.model",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.model": {
+                "0": {
+                    "value": "best_estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "MultiOutputClassifier(self.model) if self.model_type == 'classification' else MultiOutputRegressor(self.model)",
+                    "type": "IfExp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 477
+    },
+    {
+        "file": "igel/igel/igel.py",
+        "class": "sklearn.multioutput.MultiOutputRegressor",
+        "parameter": {
+            "estimator": {
+                "value": "self.model",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "self.model": {
+                "0": {
+                    "value": "best_estimator",
+                    "type": "Name"
+                },
+                "1": {
+                    "value": "MultiOutputClassifier(self.model) if self.model_type == 'classification' else MultiOutputRegressor(self.model)",
+                    "type": "IfExp"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 477
+    },
+    {
+        "file": "igel/igel/preprocessing.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "fill_value": {
+                "value": "fill_value",
+                "type": "Name"
+            },
+            "strategy": {
+                "value": "strategy",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "fill_value": {
+                "0": {
+                    "value": "np.nan",
+                    "type": "Attribute"
+                }
+            },
+            "strategy": {
+                "0": {
+                    "value": "'mean'",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "cleaner",
+        "line no": 70
+    },
+    {
+        "file": "igel/igel/preprocessing.py",
+        "class": "sklearn.preprocessing.LabelEncoder",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "encoder",
+        "line no": 93
+    },
+    {
+        "file": "igel/igel/preprocessing.py",
+        "class": "sklearn.preprocessing.MinMaxScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 120
+    },
+    {
+        "file": "igel/igel/preprocessing.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 120
+    },
+    {
+        "file": "igel/igel/extras/kmedians.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "n_clusters": {
+                "value": "n_clusters",
+                "type": "Name"
+            },
+            "metric": {
+                "value": "metric",
+                "type": "Name"
+            },
+            "method": {
+                "value": "method",
+                "type": "Name"
+            },
+            "init": {
+                "value": "init",
+                "type": "Name"
+            },
+            "max_iter": {
+                "value": "max_iter",
+                "type": "Name"
+            },
+            "tol": {
+                "value": "tol",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "random_state",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "n_clusters": {
+                "0": {
+                    "value": "4",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "self.n_clusters",
+                    "type": "Attribute"
+                }
+            },
+            "metric": {
+                "0": {
+                    "value": "'manhattan'",
+                    "type": "Constant"
+                }
+            },
+            "method": {
+                "0": {
+                    "value": "'per-axis'",
+                    "type": "Constant"
+                }
+            },
+            "init": {
+                "0": {
+                    "value": "'random'",
+                    "type": "Constant"
+                }
+            },
+            "max_iter": {
+                "0": {
+                    "value": "300",
+                    "type": "Constant"
+                }
+            },
+            "tol": {
+                "0": {
+                    "value": "0.0001",
+                    "type": "Constant"
+                }
+            },
+            "random_state": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 20
+    },
+    {
+        "file": "igel/igel/extras/kmedians.py",
+        "class": "sklearn.base.ClusterMixin",
+        "parameter": {
+            "n_clusters": {
+                "value": "n_clusters",
+                "type": "Name"
+            },
+            "metric": {
+                "value": "metric",
+                "type": "Name"
+            },
+            "method": {
+                "value": "method",
+                "type": "Name"
+            },
+            "init": {
+                "value": "init",
+                "type": "Name"
+            },
+            "max_iter": {
+                "value": "max_iter",
+                "type": "Name"
+            },
+            "tol": {
+                "value": "tol",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "random_state",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "n_clusters": {
+                "0": {
+                    "value": "4",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "self.n_clusters",
+                    "type": "Attribute"
+                }
+            },
+            "metric": {
+                "0": {
+                    "value": "'manhattan'",
+                    "type": "Constant"
+                }
+            },
+            "method": {
+                "0": {
+                    "value": "'per-axis'",
+                    "type": "Constant"
+                }
+            },
+            "init": {
+                "0": {
+                    "value": "'random'",
+                    "type": "Constant"
+                }
+            },
+            "max_iter": {
+                "0": {
+                    "value": "300",
+                    "type": "Constant"
+                }
+            },
+            "tol": {
+                "0": {
+                    "value": "0.0001",
+                    "type": "Constant"
+                }
+            },
+            "random_state": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 20
+    },
+    {
+        "file": "igel/igel/extras/kmedoids.py",
+        "class": "sklearn.base.BaseEstimator",
+        "parameter": {
+            "n_clusters": {
+                "value": "n_clusters",
+                "type": "Name"
+            },
+            "metric": {
+                "value": "metric",
+                "type": "Name"
+            },
+            "init": {
+                "value": "init",
+                "type": "Name"
+            },
+            "max_iter": {
+                "value": "max_iter",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "random_state",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "n_clusters": {
+                "0": {
+                    "value": "self.n_clusters",
+                    "type": "Attribute"
+                }
+            },
+            "metric": {},
+            "init": {},
+            "max_iter": {},
+            "random_state": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 20
+    },
+    {
+        "file": "igel/igel/extras/kmedoids.py",
+        "class": "sklearn.base.ClusterMixin",
+        "parameter": {
+            "n_clusters": {
+                "value": "n_clusters",
+                "type": "Name"
+            },
+            "metric": {
+                "value": "metric",
+                "type": "Name"
+            },
+            "init": {
+                "value": "init",
+                "type": "Name"
+            },
+            "max_iter": {
+                "value": "max_iter",
+                "type": "Name"
+            },
+            "random_state": {
+                "value": "random_state",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "n_clusters": {
+                "0": {
+                    "value": "self.n_clusters",
+                    "type": "Attribute"
+                }
+            },
+            "metric": {},
+            "init": {},
+            "max_iter": {},
+            "random_state": {
+                "0": {
+                    "value": "None",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 20
+    }
+]

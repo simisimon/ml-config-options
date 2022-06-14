@@ -1,0 +1,218 @@
+[
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "g",
+        "line no": 28
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.compat.v1.ConfigProto",
+        "parameter": {
+            "allow_soft_placement": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "soft_config",
+        "line no": 29
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "saver",
+        "line no": 38
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "soft_config",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "soft_config": {
+                "0": {
+                    "value": "tf.compat.v1.ConfigProto(allow_soft_placement=True)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 31
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "g",
+        "line no": 82
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.compat.v1.ConfigProto",
+        "parameter": {
+            "allow_soft_placement": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "soft_config",
+        "line no": 85
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "saver",
+        "line no": 94
+    },
+    {
+        "file": "fast-style-transfer/evaluate.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "soft_config",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "soft_config": {
+                "0": {
+                    "value": "tf.compat.v1.ConfigProto(allow_soft_placement=True)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 87
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 31
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 31
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.random.normal(X_content.get_shape()) * 0.256",
+                "type": "BinOp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "preds",
+        "line no": 52
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.compat.v1.train.AdamOptimizer",
+        "parameter": {
+            "learning_rate": {
+                "value": "learning_rate",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "learning_rate": {
+                "0": {
+                    "value": "0.001",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "train_step",
+        "line no": 91
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "saver",
+        "line no": 136
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.Graph",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 42
+    },
+    {
+        "file": "fast-style-transfer/src/optimize.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 42
+    },
+    {
+        "file": "fast-style-transfer/src/transform.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.zeros(var_shape)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "shift",
+        "line no": 53
+    },
+    {
+        "file": "fast-style-transfer/src/transform.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.ones(var_shape)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "scale",
+        "line no": 54
+    },
+    {
+        "file": "fast-style-transfer/src/transform.py",
+        "class": "tensorflow.Variable",
+        "parameter": {
+            "initial_value": {
+                "value": "tf.random.truncated_normal(weights_shape, stddev=WEIGHTS_INIT_STDEV, seed=1)",
+                "type": "Call"
+            },
+            "dtype": {
+                "value": "tf.float32",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "tf.float32": {}
+        },
+        "variable": "weights_init",
+        "line no": 66
+    }
+]

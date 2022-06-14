@@ -1,0 +1,268 @@
+[
+    {
+        "file": "kserve/python/sklearnserver/sklearnserver/test_model.py",
+        "class": "sklearn.svm.SVC",
+        "parameter": {
+            "gamma": {
+                "value": "'scale'",
+                "type": "Constant"
+            },
+            "probability": {
+                "value": "True",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "sklearn_model",
+        "line no": 36
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/moviesentiment/train.py",
+        "class": "sklearn.feature_extraction.text.CountVectorizer",
+        "parameter": {
+            "min_df": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "vectorizer",
+        "line no": 29
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/moviesentiment/train.py",
+        "class": "sklearn.linear_model.LogisticRegression",
+        "parameter": {
+            "solver": {
+                "value": "'liblinear'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "clf",
+        "line no": 30
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/moviesentiment/train.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('preprocess', vectorizer), ('clf', clf)]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 31
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "'median'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "ordinal_transformer",
+        "line no": 44
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "ordinal_transformer",
+        "line no": 44
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer(strategy='median')), ('scaler', StandardScaler())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "ordinal_transformer",
+        "line no": 44
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.impute.SimpleImputer",
+        "parameter": {
+            "strategy": {
+                "value": "'median'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "categorical_transformer",
+        "line no": 48
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.preprocessing.OneHotEncoder",
+        "parameter": {
+            "handle_unknown": {
+                "value": "'ignore'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "categorical_transformer",
+        "line no": 48
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('imputer', SimpleImputer(strategy='median')), ('onehot', OneHotEncoder(handle_unknown='ignore'))]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "categorical_transformer",
+        "line no": 48
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.compose.ColumnTransformer",
+        "parameter": {
+            "transformers": {
+                "value": "[('num', ordinal_transformer, ordinal_features), ('cat', categorical_transformer, categorical_features)]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "preprocessor",
+        "line no": 51
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.ensemble.RandomForestClassifier",
+        "parameter": {
+            "n_estimators": {
+                "value": "50",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "clf",
+        "line no": 57
+    },
+    {
+        "file": "kserve/docs/samples/explanation/alibi/income/train.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('preprocessor', preprocessor), ('clf', clf)]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "pipeline",
+        "line no": 58
+    },
+    {
+        "file": "kserve/docs/samples/explanation/art/mnist/train_model.py",
+        "class": "sklearn.neural_network.MLPClassifier",
+        "parameter": {
+            "hidden_layer_sizes": {
+                "value": "(500, 500, 500)",
+                "type": "Tuple"
+            },
+            "max_iter": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "alpha": {
+                "value": "0.0001",
+                "type": "Constant"
+            },
+            "solver": {
+                "value": "'sgd'",
+                "type": "Constant"
+            },
+            "verbose": {
+                "value": "10",
+                "type": "Constant"
+            },
+            "random_state": {
+                "value": "1",
+                "type": "Constant"
+            },
+            "learning_rate_init": {
+                "value": "0.1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "mlp",
+        "line no": 42
+    },
+    {
+        "file": "kserve/docs/samples/explanation/aif/germancredit/server/model.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "scale_orig",
+        "line no": 17
+    },
+    {
+        "file": "kserve/docs/samples/explanation/aif/germancredit/server/model.py",
+        "class": "sklearn.linear_model.LogisticRegression",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "lmod",
+        "line no": 21
+    },
+    {
+        "file": "kserve/docs/samples/explanation/aif/germancredit/server/model.py",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "scale_input",
+        "line no": 31
+    },
+    {
+        "file": "kserve/docs/samples/explanation/aix/mnist/train_rf.py",
+        "class": "sklearn.pipeline.Pipeline",
+        "parameter": {
+            "steps": {
+                "value": "[('RF', RandomForestClassifier())]",
+                "type": "List"
+            }
+        },
+        "variable parameters": {},
+        "variable": "simple_rf_pipeline",
+        "line no": 48
+    },
+    {
+        "file": "kserve/docs/samples/explanation/aix/mnist/train_rf.py",
+        "class": "sklearn.ensemble.RandomForestClassifier",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "simple_rf_pipeline",
+        "line no": 48
+    },
+    {
+        "file": "kserve/python/sklearnserver/custom_transformer/custom_transformer.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 19
+    },
+    {
+        "file": "kserve/docs/samples/v1beta1/sklearn/v1/sklearn-mixedtype-model/custom_transformer.py",
+        "class": "sklearn.base.TransformerMixin",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 5
+    }
+]

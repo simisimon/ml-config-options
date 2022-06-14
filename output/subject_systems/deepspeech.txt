@@ -1,0 +1,648 @@
+[
+    {
+        "file": "DeepSpeech/transcribe.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "Config.session_config",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "Config.session_config": {}
+        },
+        "variable": "",
+        "line no": 52
+    },
+    {
+        "file": "DeepSpeech/bin/graphdef_binary_to_text.py",
+        "class": "tensorflow.compat.v1.GraphDef",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "graph_def",
+        "line no": 13
+    },
+    {
+        "file": "DeepSpeech/bin/graphdef_binary_to_text.py",
+        "class": "tensorflow.compat.v1.gfile.FastGFile",
+        "parameter": {
+            "name": {
+                "value": "sys.argv[1] + 'txt'",
+                "type": "BinOp"
+            },
+            "mode": {
+                "value": "'w'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 16
+    },
+    {
+        "file": "DeepSpeech/bin/graphdef_binary_to_text.py",
+        "class": "tensorflow.compat.v1.gfile.FastGFile",
+        "parameter": {
+            "name": {
+                "value": "sys.argv[1]",
+                "type": "Subscript"
+            },
+            "mode": {
+                "value": "'rb'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 12
+    },
+    {
+        "file": "DeepSpeech/bin/ops_in_graph.py",
+        "class": "tensorflow.compat.v1.GraphDef",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "graph_def",
+        "line no": 11
+    },
+    {
+        "file": "DeepSpeech/bin/ops_in_graph.py",
+        "class": "tensorflow.compat.v1.gfile.FastGFile",
+        "parameter": {
+            "name": {
+                "value": "sys.argv[1]",
+                "type": "Subscript"
+            },
+            "mode": {
+                "value": "'rb'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 10
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.keras.initializers.VarianceScaling",
+        "parameter": {
+            "scale": {
+                "value": "1.0",
+                "type": "Constant"
+            },
+            "mode": {
+                "value": "'fan_avg'",
+                "type": "Constant"
+            },
+            "distribution": {
+                "value": "'uniform'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "weights",
+        "line no": 81
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.variable_scope",
+        "parameter": {
+            "name_or_scope": {
+                "value": "name",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "name": {
+                "0": {
+                    "value": "'layer_5'",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "'layer_6'",
+                    "type": "Constant"
+                },
+                "2": {
+                    "value": "'bias'",
+                    "type": "Constant"
+                },
+                "3": {
+                    "value": "'layer_2'",
+                    "type": "Constant"
+                },
+                "4": {
+                    "value": "'layer_1'",
+                    "type": "Constant"
+                },
+                "5": {
+                    "value": "variable.name.replace(':', '_')",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "'weights'",
+                    "type": "Constant"
+                },
+                "7": {
+                    "value": "'layer_3'",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 79
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.variable_scope",
+        "parameter": {
+            "name_or_scope": {
+                "value": "name",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "name": {
+                "0": {
+                    "value": "'layer_5'",
+                    "type": "Constant"
+                },
+                "1": {
+                    "value": "'layer_6'",
+                    "type": "Constant"
+                },
+                "2": {
+                    "value": "'bias'",
+                    "type": "Constant"
+                },
+                "3": {
+                    "value": "'layer_2'",
+                    "type": "Constant"
+                },
+                "4": {
+                    "value": "'layer_1'",
+                    "type": "Constant"
+                },
+                "5": {
+                    "value": "variable.name.replace(':', '_')",
+                    "type": "Call"
+                },
+                "6": {
+                    "value": "'weights'",
+                    "type": "Constant"
+                },
+                "7": {
+                    "value": "'layer_3'",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 89
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.variable_scope",
+        "parameter": {
+            "name_or_scope": {
+                "value": "'cudnn_lstm/rnn/multi_rnn_cell/cell_0'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 99
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.keras.layers.LSTMCell",
+        "parameter": {
+            "units": {
+                "value": "Config.n_cell_dim",
+                "type": "Attribute"
+            },
+            "**kwargs": {
+                "value": "'cudnn_compatible_lstm_cell'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "Config.n_cell_dim": {},
+            "reuse": {
+                "0": {
+                    "value": "i > 0",
+                    "type": "Compare"
+                },
+                "1": {
+                    "value": "False",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "fw_cell",
+        "line no": 143
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.nn.rnn_cell.LSTMCell",
+        "parameter": {
+            "num_units": {
+                "value": "Config.n_cell_dim",
+                "type": "Attribute"
+            },
+            "forget_bias": {
+                "value": "0",
+                "type": "Constant"
+            },
+            "reuse": {
+                "value": "reuse",
+                "type": "Name"
+            },
+            "name": {
+                "value": "'cudnn_compatible_lstm_cell'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {
+            "Config.n_cell_dim": {},
+            "reuse": {
+                "0": {
+                    "value": "i > 0",
+                    "type": "Compare"
+                },
+                "1": {
+                    "value": "False",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "fw_cell",
+        "line no": 143
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.variable_scope",
+        "parameter": {
+            "name_or_scope": {
+                "value": "'cudnn_lstm/rnn/multi_rnn_cell'",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 141
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.train.AdamOptimizer",
+        "parameter": {
+            "learning_rate": {
+                "value": "learning_rate_var",
+                "type": "Name"
+            },
+            "beta1": {
+                "value": "FLAGS.beta1",
+                "type": "Attribute"
+            },
+            "beta2": {
+                "value": "FLAGS.beta2",
+                "type": "Attribute"
+            },
+            "epsilon": {
+                "value": "FLAGS.epsilon",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "learning_rate_var": {
+                "0": {
+                    "value": "learning_rate_var * hvd.size()",
+                    "type": "BinOp"
+                },
+                "1": {
+                    "value": "tfv1.get_variable('learning_rate', initializer=FLAGS.learning_rate, trainable=False)",
+                    "type": "Call"
+                }
+            },
+            "FLAGS.beta1": {},
+            "FLAGS.beta2": {},
+            "FLAGS.epsilon": {}
+        },
+        "variable": "optimizer",
+        "line no": 269
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.name_scope",
+        "parameter": {
+            "name": {
+                "value": "'tower_%d' % i",
+                "type": "BinOp"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 314
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.variable_scope",
+        "parameter": {
+            "name_or_scope": {
+                "value": "tfv1.get_variable_scope()",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 307
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.summary.FileWriter",
+        "parameter": {
+            "logdir": {
+                "value": "os.path.join(FLAGS.summary_dir, 'metrics')",
+                "type": "Call"
+            },
+            "max_queue": {
+                "value": "120",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 1
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.summary.FileWriter",
+        "parameter": {
+            "logdir": {
+                "value": "os.path.join(FLAGS.summary_dir, 'dev')",
+                "type": "Call"
+            },
+            "max_queue": {
+                "value": "120",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 1
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.summary.FileWriter",
+        "parameter": {
+            "logdir": {
+                "value": "os.path.join(FLAGS.summary_dir, 'train')",
+                "type": "Call"
+            },
+            "max_queue": {
+                "value": "120",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "",
+        "line no": 1
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {
+            "max_to_keep": {
+                "value": "FLAGS.max_to_keep",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "FLAGS.max_to_keep": {}
+        },
+        "variable": "checkpoint_saver",
+        "line no": 534
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.train.Saver",
+        "parameter": {
+            "max_to_keep": {
+                "value": "1",
+                "type": "Constant"
+            }
+        },
+        "variable parameters": {},
+        "variable": "best_dev_saver",
+        "line no": 537
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "Config.session_config",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "Config.session_config": {}
+        },
+        "variable": "",
+        "line no": 550
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.nn.rnn_cell.LSTMStateTuple",
+        "parameter": {
+            "c": {
+                "value": "previous_state_c",
+                "type": "Name"
+            },
+            "h": {
+                "value": "previous_state_h",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "previous_state_c": {
+                "0": {
+                    "value": "tfv1.placeholder(tf.float32, [batch_size, Config.n_cell_dim], name='previous_state_c')",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "np.zeros([1, Config.n_cell_dim])",
+                    "type": "Call"
+                }
+            },
+            "previous_state_h": {
+                "0": {
+                    "value": "tfv1.placeholder(tf.float32, [batch_size, Config.n_cell_dim], name='previous_state_h')",
+                    "type": "Call"
+                },
+                "1": {
+                    "value": "np.zeros([1, Config.n_cell_dim])",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "previous_state",
+        "line no": 755
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.lite.TFLiteConverter",
+        "parameter": {
+            "funcs": {
+                "value": "frozen_graph",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "frozen_graph": {
+                "0": {
+                    "value": "tfv1.graph_util.extract_sub_graph(graph_def=frozen_graph, dest_nodes=output_names)",
+                    "type": "Call"
+                }
+            }
+        },
+        "variable": "converter",
+        "line no": 888
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 858
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/train.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "Config.session_config",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "Config.session_config": {}
+        },
+        "variable": "",
+        "line no": 940
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/evaluate.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {
+            "config": {
+                "value": "Config.session_config",
+                "type": "Attribute"
+            }
+        },
+        "variable parameters": {
+            "Config.session_config": {}
+        },
+        "variable": "",
+        "line no": 86
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/util/feeding.py",
+        "class": "tensorflow.sparse.SparseTensor",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "sparse_transcript",
+        "line no": 67
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/util/config.py",
+        "class": "tensorflow.compat.v1.ConfigProto",
+        "parameter": {
+            "allow_soft_placement": {
+                "value": "True",
+                "type": "Constant"
+            },
+            "log_device_placement": {
+                "value": "FLAGS.log_placement",
+                "type": "Attribute"
+            },
+            "inter_op_parallelism_threads": {
+                "value": "FLAGS.inter_op_parallelism_threads",
+                "type": "Attribute"
+            },
+            "intra_op_parallelism_threads": {
+                "value": "FLAGS.intra_op_parallelism_threads",
+                "type": "Attribute"
+            },
+            "gpu_options": {
+                "value": "tfv1.GPUOptions(allow_growth=FLAGS.use_allow_growth)",
+                "type": "Call"
+            }
+        },
+        "variable parameters": {
+            "FLAGS.log_placement": {},
+            "FLAGS.inter_op_parallelism_threads": {},
+            "FLAGS.intra_op_parallelism_threads": {}
+        },
+        "variable": "c.session_config",
+        "line no": 74
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/util/config.py",
+        "class": "tensorflow.compat.v1.GPUOptions",
+        "parameter": {},
+        "variable parameters": {
+            "FLAGS.use_allow_growth": {}
+        },
+        "variable": "c.session_config",
+        "line no": 74
+    },
+    {
+        "file": "DeepSpeech/training/deepspeech_training/util/io.py",
+        "class": "tensorflow.io.gfile.GFile",
+        "parameter": {
+            "name": {
+                "value": "path",
+                "type": "Name"
+            },
+            "mode": {
+                "value": "mode",
+                "type": "Name"
+            }
+        },
+        "variable parameters": {
+            "path": {},
+            "mode": {
+                "0": {
+                    "value": "'r'",
+                    "type": "Constant"
+                }
+            }
+        },
+        "variable": "",
+        "line no": 47
+    },
+    {
+        "file": "DeepSpeech/tests/test_value_range.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.session",
+        "line no": 63
+    },
+    {
+        "file": "DeepSpeech/tests/test_value_range.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "",
+        "line no": 67
+    },
+    {
+        "file": "DeepSpeech/tests/test_value_range.py",
+        "class": "tensorflow.compat.v1.Session",
+        "parameter": {},
+        "variable parameters": {},
+        "variable": "self.session",
+        "line no": 101
+    }
+]
