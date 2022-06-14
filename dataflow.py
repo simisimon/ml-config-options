@@ -2,21 +2,12 @@ from scalpel.SSA.const import SSA
 from scalpel.cfg import CFGBuilder
 import ast
 
-code_str= """
-class A:
-    def __init__(self, variable):
-        a = 1                               # Assignment 1
-        self.cls_variable = a               # Assignment 2
-        b, c = 2, 3                         # Assignment 3
-        a = 4                               # Assignment 4
-"""
-
 
 class DataFlowAnalysis:
     def __init__(self, obj, variable):
-        self.file = obj["file"] #obj["file"] #obj["file"]
+        self.file = obj["file"]
         self.object = obj["object"]
-        self.variables = [variable] #variable # "b"
+        self.variables = [variable]
         self.variable_value = []
         self.cfg_list = []
         self.possible_object_paths = {}
@@ -24,7 +15,6 @@ class DataFlowAnalysis:
         self.all_func_calls = []
 
     def get_parameter_value(self):
-        #cfg = CFGBuilder().build_from_src(name="test", src=code_str)
         cfg = CFGBuilder().build_from_file(name="test", filepath=self.file)
         self.cfg_list.append(cfg)
         self.get_cfgs(cfg)
@@ -54,13 +44,6 @@ class DataFlowAnalysis:
 
         self.variable_value = list(set(self.variable_value))
         self.get_parameter_type()
-
-        #print("file:    ", self.file)
-        #print("object:  ", ast.unparse(self.object))
-        #print("lineno:  ", self.object.lineno)
-        #print("variable:", self.variables)
-        #print("value:   ", self.variable_value)
-        #print(" ")
         return self.variable_value
 
     def get_cfgs(self, cfg):
@@ -230,7 +213,7 @@ class DataFlowAnalysis:
     def get_func_calls(self, func_def_arg):
         variable_values = []
         for func_call in self.all_func_calls:
-            if ast.unparse(func_call.func) in func_def_arg["function paths"]:   ## self?
+            if ast.unparse(func_call.func) in func_def_arg["function paths"]:
                 if func_def_arg["type"] == "arg":
                     found_keyword = False
                     for keyword in func_call.keywords:
