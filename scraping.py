@@ -10,7 +10,7 @@ class ClassScraper:
     def __init__(self):
         self.module_urls = []
         self.class_urls = []
-        self.classes = {}
+        self.classes = []
         self.library = ""
 
     def get_classes(self):
@@ -23,6 +23,8 @@ class ClassScraper:
         for e in elements:
             split = e.text.split("=", 1)
             param = split[0].split(":")[0]
+            if param == "*":
+                continue
             if param[0].isnumeric():
                 last_key = list(parameters)[-1]
                 parameters[last_key] += ", {0}".format(param)
@@ -34,7 +36,7 @@ class ClassScraper:
         return parameters
 
     def create_json(self):
-        with open("output/scraped_classes/{0}.txt".format(self.library), "w") as outfile:
+        with open("output/scraped_classes/{0}_default_values.json".format(self.library), "w") as outfile:
             json.dump(self.classes, outfile, indent=4)
 
 
@@ -50,32 +52,45 @@ class SklearnScraper(ClassScraper):
 
         table_rows = soup.body.findAll("tr")
         for row in table_rows:
-            text = row.find("a").text
-            text = text[text.rfind(".") + 1:]
-            if text[0].isupper():
-                url = row.find("a").attrs["href"]
-                self.class_urls.append(url)
+            #text = row.find("a").text
+            #text = text[text.rfind(".") + 1:]
+            #if text[0].isupper():
+            url = row.find("a").attrs["href"]
+            #print("url: ", url)
+            self.class_urls.append(url)
 
     def scrape_classes(self):
+        full_names = []
         for url in self.class_urls:
-            link = "https://scikit-learn.org/stable/modules/" + url
-            html = urlopen(link)
-            soup = BeautifulSoup(html, "html.parser")
+            try:
+                link = "https://scikit-learn.org/stable/modules/" + url
+                html = urlopen(link)
+                soup = BeautifulSoup(html, "html.parser")
 
-            data_table = soup.find("dt", {"class": "sig sig-object py"})
-            full_class_name = data_table.attrs["id"]
-            class_ = full_class_name[full_class_name.rfind(".") + 1:]
-            elements = data_table.findAll("em", {"class": "sig-param"})
+                data_table = soup.find("dt", {"class": "sig sig-object py"})
+                full_class_name = data_table.attrs["id"]
+                class_ = full_class_name[full_class_name.rfind(".") + 1:]
+                elements = data_table.findAll("em", {"class": "sig-param"})
 
-            parameters = self.scrape_parameters(elements)
-            self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
+                parameters = self.scrape_parameters(elements)
+
+                # params = list(key for key in parameters.keys() if key != "*")
+                if full_class_name not in full_names:
+                    self.classes.append({"full_name": full_class_name, "name": class_, "params": parameters})
+                    full_names.append(full_class_name)
+
+                #self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
+
+            except:
+                print("Could not crawl: ", url)
 
 
 class PyTorchScraper(ClassScraper):
     def __init__(self):
         ClassScraper.__init__(self)
         self.library = "torch"
-        self.desc_elements = []
+        self.desc_classes = []
+        self.desc_functions = []
 
     def get_classes(self):
         self.scrape_module_urls()
@@ -117,14 +132,14 @@ class PyTorchScraper(ClassScraper):
                     for row in table_rows:
                         a = row.find("a")
                         if a is not None and "title" in a.attrs:
-                            title = a.attrs["title"]
-                            title = title[title.rfind(".") + 1:]
-                            if title[0].isupper():
-                                url = row.find("a").attrs["href"]
-                                self.class_urls.append(url)
+                            #title = a.attrs["title"]
+                            #title = title[title.rfind(".") + 1:]
+                            #if title[0].isupper():
+                            url = row.find("a").attrs["href"]
+                            self.class_urls.append(url)
 
                     dl = soup.findAll("dl", {"class": "py class"})
-                    self.desc_elements.extend(dl)
+                    self.desc_classes.extend(dl)
             except:
                 continue
 
@@ -140,15 +155,22 @@ class PyTorchScraper(ClassScraper):
         for url in self.class_urls:
             link = "https://pytorch.org/docs/stable/" + url
             html = urlopen(link)
+            #print("Link: ", link)
             soup = BeautifulSoup(html, "html.parser")
-            dl = soup.findAll("dl", {"class": "py class"})
-            if len(dl) > 0:
-                for element in dl:
-                    self.desc_elements.append(element)
+            dl_classes = soup.findAll("dl", {"class": "py class"})
+            if len(dl_classes) > 0:
+                for element in dl_classes:
+                    self.desc_classes.append(element)
+            dl_functions = soup.findAll("dl", {"class": "py function"})
+            if len(dl_functions) > 0:
+                for element in dl_functions:
+                    self.desc_functions.append(element)
+
 
     def scrape_classes(self):
-        for desc_element in self.desc_elements:
-            data_table = desc_element.find("dt")
+        full_names = []
+        for desc_class in self.desc_classes:
+            data_table = desc_class.find("dt")
             if "id" in data_table.attrs:
                 class_path = data_table.attrs["id"]
                 class_ = class_path[class_path.rfind(".") + 1:]
@@ -156,7 +178,32 @@ class PyTorchScraper(ClassScraper):
                 parameters = self.scrape_parameters(elements)
                 if class_path == "torch.torch.device":
                     parameters = {"type": None, "index": None}
-                self.classes[class_path] = {"short name": class_, "parameters": parameters}
+
+                #params = list(key for key in parameters.keys() if key != "*")
+
+                if class_path not in full_names:
+                    self.classes.append({"full_name": class_path, "name": class_, "params": parameters})
+                    full_names.append(class_path)
+
+                #self.classes[class_path] = {"name": class_, "parameters": parameters}
+            
+
+        for desc_function in self.desc_functions:
+            data_table = desc_function.find("dt")
+            if "id" in data_table.attrs:
+                class_path = data_table.attrs["id"]
+                class_ = class_path[class_path.rfind(".") + 1:]
+                elements = data_table.findAll("em", {"class": "sig-param"})
+                parameters = self.scrape_parameters(elements)
+                if class_path == "torch.torch.device":
+                    parameters = {"type": None, "index": None}
+
+                #params = list(key for key in parameters.keys() if key != "*")
+                if class_path not in full_names:
+                    self.classes.append({"full_name": class_path, "name": class_, "params": parameters})
+                    full_names.append(class_path)
+
+                #self.classes[class_path] = {"short name": class_, "parameters": parameters}
 
 
 class MLflowScraper(ClassScraper):
@@ -223,6 +270,7 @@ class TensorFlowScraper(ClassScraper):
 
             self.scrape_urls(soup, "modules")
             self.scrape_urls(soup, "classes")
+            self.scrape_urls(soup, "functions")
 
     def scrape_urls(self, soup, type):
         element = soup.find("h2", {"id": type})
@@ -247,9 +295,15 @@ class TensorFlowScraper(ClassScraper):
                 elif type == "classes":
                     if url not in self.class_urls:
                         self.class_urls.append(url)
+                elif type == "functions":
+                    if url not in self.class_urls:
+                        self.class_urls.append(url)
 
     def scrape_classes(self):
+        full_names = []
+
         for url in self.class_urls:
+            #print("url: ", url)
             html = urlopen(url)
             soup = BeautifulSoup(html, "html.parser")
 
@@ -258,7 +312,14 @@ class TensorFlowScraper(ClassScraper):
             pre = soup.find("pre")
             parameters = self.scrape_parameters(pre, full_class_name)
             full_class_name = full_class_name.replace(full_class_name[:2], "tensorflow")
-            self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
+
+            #params = list(parameters.keys())
+
+            if full_class_name not in full_names:
+                self.classes.append({"full_name": full_class_name, "name": class_, "params": parameters})
+                full_names.append(full_class_name)
+
+            #self.classes[full_class_name] = {"short name": class_, "parameters": parameters}
 
     def scrape_parameters(self, pre, full_class_name):
         parameters = {}
